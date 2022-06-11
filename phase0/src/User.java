@@ -40,7 +40,7 @@ public abstract class User {
         this.loginHistory = loginHistory;
     }
 
-    public boolean isBanStatus() {
+    public boolean getBanStatus() {
         return banStatus;
     }
 
