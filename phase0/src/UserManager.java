@@ -1,7 +1,9 @@
+import java.util;
+
 public class UserManager {
+    private List<User> users = UserData.getAllUsers();
 
     public void deleteUser(User user){
-        users = UserData.getAllUsers();
         users.remove(user);
     }
 
@@ -23,8 +25,6 @@ public class UserManager {
     @return true if the User information is valid and the User.banStatus is false
      */
     public boolean validateUser(String username, String password){
-        List<User> users = UserData.getAllUsers();
-
         for (User user : users) {
             if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
                 if (!user.getBanStatus()) {
@@ -50,8 +50,6 @@ public class UserManager {
     @return true if new NonAdminUser was created successfully, false otherwise
      */
     public boolean createNonAdminUser(String username, String password) {
-        List<User> users = UserData.getAllUsers();
-
         for (User user : users) {
             if (user.getUserName().equals(username)) {
                 return false;
@@ -74,8 +72,6 @@ public class UserManager {
     @return true if new AdminUser was created successfully, false otherwise
      */
     public boolean createAdminUser(String username, String password) {
-        List<User> users = UserData.getAllUsers();
-
         for (User user : users) {
             if (user.getUserName().equals(username)) {
                 return false;
