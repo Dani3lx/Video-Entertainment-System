@@ -14,6 +14,7 @@ public abstract class User {
         this.password = password;
         this.banStatus = false;
         this.loginHistory = new ArrayList<>();
+        UserData.updateData(this);
     }
 
     public String getUserName() {
