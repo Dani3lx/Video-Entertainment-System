@@ -1,10 +1,10 @@
 
-public class createUser {
+public class CreateUser {
 
     private  String username;
     private  String password;
 
-    public createUser(String user, String pass)
+    public CreateUser(String user, String pass)
     {
         username = user;
         password=pass;
@@ -19,7 +19,7 @@ public class createUser {
     }
 
     public void create(String user, String pass){
-        createUser person = new createUser(user, pass);
+        //createUser person = new createUser(user, pass);
         UserManager.createUser(username, password);
     }
 }
