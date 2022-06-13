@@ -3,7 +3,7 @@ import java.util.*;
 
 public class UserData {
     // a list storing all User instances
-    private static List<User> allUsers;
+    private static ArrayList<User> allUsers;
     // people on the internet said that HashMap is generally preferred over HashTable
     // a dict (HashMap) mapping each User instance's username to its login history
     private static HashMap<String, ArrayList<LocalDateTime>> allLoginHistory;
@@ -23,7 +23,7 @@ public class UserData {
     }
 
     // a getter for allUsers
-    public static ArrayList<User> getAllUsers(){
+    public ArrayList<User> getAllUsers(){
         return allUsers;
     } //Akmar C: Changed to Arraylist
 
