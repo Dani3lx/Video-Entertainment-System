@@ -55,8 +55,8 @@ public class UserManager {
         for (User user : users) {
             if (user.getUserName().equals(username)) { return false; }
         }
-        User newUser = new NonAdminUser(username, password);
-        UserData.updateData(newUser);
+        NonAdminUser newUser = new NonAdminUser(username, password);
+        // UserData.updateData(newUser); removed since constructor already adds it
         return true;
     }
 
@@ -73,8 +73,8 @@ public class UserManager {
         for (User user : users) {
             if (user.getUserName().equals(username)) { return false; }
         }
-        User newUser = new AdminUser(username, password);
-        UserData.updateData(newUser);
+        AdminUser newUser = new AdminUser(username, password);
+        // UserData.updateData(newUser); removed since constructor already adds it
         return true;
     }
 
