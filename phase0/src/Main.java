@@ -48,7 +48,8 @@ public class Main {
     private void displayAfterCreateUser(){
 
     }
-    public void main(String[] args) {
-        displayBeforeLogin();
+    public static void main(String[] args) {
+        Main trialMain = new Main();
+        trialMain.displayBeforeLogin();
     }
 }
