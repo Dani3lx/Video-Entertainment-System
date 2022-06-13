@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class UserManager {
-    private List<User> users = UserData.getAllUsers();
+    private List<User> users = UserData.getAllUsers(); //todo: maybe change this cause I'm not sure if it works correct
 
     public void deleteUser(User user){
         users.remove(user);
