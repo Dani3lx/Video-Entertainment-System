@@ -26,15 +26,17 @@ public class UserManager {
     @return true if the User information is valid and the User.banStatus is false
      */
     public boolean validateUser(String username, String password){
-        for (User user : users) {
-            if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
-                if (!user.getBanStatus()) {
-                    user.addLoginHistory(LocalDateTime.now()); //todo: Added this to include log in history - A.C.
-                    return true;
+        if (users.isEmpty()){ return true; } // return true is UserData is empty since nothing to validate.
+        else {
+            for (User user : users) {
+                if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
+                    if (!user.getBanStatus()) {
+                        user.addLoginHistory(LocalDateTime.now()); //todo: Added this to include log in history - A.C.
+                        return true;
+                    }
                 }
             }
         }
-
         return false;
     }
 
@@ -62,7 +64,7 @@ public class UserManager {
 
     /*
     @param username: username of new User to be created
-    @param passowrd: password of new User to be created
+    @param password: password of new User to be created
 
     Check if UserData already contains a User with the same username.
     If not, create a new AdminUser instance and update UserData.
