@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class UserManager {
@@ -28,6 +29,7 @@ public class UserManager {
         for (User user : users) {
             if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
                 if (!user.getBanStatus()) {
+                    user.addLoginHistory(LocalDateTime.now()); //todo: Added this to include log in history - A.C.
                     return true;
                 }
             }

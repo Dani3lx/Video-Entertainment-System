@@ -48,4 +48,8 @@ public abstract class User {
     public void setBanStatus(boolean banStatus) {
         this.banStatus = banStatus;
     }
+
+    public void addLoginHistory(LocalDateTime loginHistory) { //todo: Added this to append loginhistory - A.C.
+        this.loginHistory.add(loginHistory);
+    }
 }
