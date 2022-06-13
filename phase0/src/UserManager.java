@@ -53,15 +53,11 @@ public class UserManager {
      */
     public boolean createNonAdminUser(String username, String password) {
         for (User user : users) {
-            if (user.getUserName().equals(username)) {
-                return false;
-            }
-            else {
-                User newUser = new NonAdminUser(username, password);
-                UserData.updateData(newUser);
-                return true;
-            }
+            if (user.getUserName().equals(username)) { return false; }
         }
+        User newUser = new NonAdminUser(username, password);
+        UserData.updateData(newUser);
+        return true;
     }
 
     /*
@@ -80,6 +76,6 @@ public class UserManager {
         User newUser = new AdminUser(username, password);
         UserData.updateData(newUser);
         return true;
-        }
+    }
 
 }
