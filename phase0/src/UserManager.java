@@ -75,15 +75,11 @@ public class UserManager {
      */
     public boolean createAdminUser(String username, String password) {
         for (User user : users) {
-            if (user.getUserName().equals(username)) {
-                return false;
-            }
-            else {
-                User newUser = new AdminUser(username, password);
-                UserData.updateData(newUser);
-                return true;
-            }
+            if (user.getUserName().equals(username)) { return false; }
         }
-    }
+        User newUser = new AdminUser(username, password);
+        UserData.updateData(newUser);
+        return true;
+        }
 
 }
