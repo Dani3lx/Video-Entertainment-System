@@ -1,39 +1,36 @@
+import java.util.List;
 
 public class CreateUser {
-    //cna take away constructor, if not necessary
-//    private  String username;
-//    private  String password;
-//    private boolean adminorNon;
-//
-//    public CreateUser(String user, String pass, boolean AdminNonAdmin)
-//    {
-//        username = user;
-//        password=pass;
-//        adminorNon = AdminNonAdmin;
-//    }
-//
-//    public String getUsername(){
-//        return username;
-//    }
-//
-//    public String getPassword(){
-//        return password;
-//    }
-//
-//    public boolean getadminorNon(){
-//        return adminorNon;
-//    }
 
-    public boolean create(String user, String pass, boolean adminOrNot){
-        //Calls appropriate method in UserManager to create account
-        //Returns whether creation was successful or not
-        boolean success = false;
-        if (adminOrNot){
-            success = UserManager.createAdminUser(user, pass);          //need fugure out if these createUser methods are isntance or static
+//    @param user: username of new User to be created
+//    @param pass: password of new User to be created
+//    @param admin: true/false whether the user to be created is admin or not
+
+//    Check if UserData already contains a User with the same username. If there is, return false
+//    If not, create a new AdminUser instance or NonAdminUser and update UserData.
+//
+//    @return true if new AdminUser or NonAdminUser was created successfully
+    public boolean createUser(String user, String pass, boolean admin){
+
+        List<User> all_users = UserData.getAllUsers();
+        for (User u: all_users) {
+            if (u.getUserName().equals(user)) {
+                return false;
+
+            }
         }
+        if (admin){
+            User newUser = new AdminUser(user, pass);
+            UserData.updateData(newUser);
+
+            }
         else{
-            success = UserManager.createNonAdminUser(user, pass);
-        }
-        return success;
+            User newUser = new NonAdminUser(user, pass);
+            UserData.updateData(newUser);
+
+            }
+        return true;
+
+
     }
 }
