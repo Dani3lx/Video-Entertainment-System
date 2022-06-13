@@ -23,8 +23,8 @@ public class UserData {
     }
 
     // a getter for allUsers
-    public static List<User> getAllUsers(){
+    public static ArrayList<User> getAllUsers(){
         return allUsers;
-    }
+    } //Akmar C: Changed to Arraylist
 
 }
