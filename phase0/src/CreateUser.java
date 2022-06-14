@@ -10,7 +10,7 @@ public class CreateUser {
 //    If not, create a new AdminUser instance or NonAdminUser and update UserData.
 //
 //    @return true if new AdminUser or NonAdminUser was created successfully
-    public boolean createUser(String user, String pass, boolean admin){
+    public static boolean createUser(String user, String pass, boolean admin){
 
         List<User> all_users = UserData.getAllUsers();
         for (User u: all_users) {
