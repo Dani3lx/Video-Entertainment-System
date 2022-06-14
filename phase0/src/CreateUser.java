@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class CreateUser {
 
@@ -10,27 +12,31 @@ public class CreateUser {
 //    If not, create a new AdminUser instance or NonAdminUser and update UserData.
 //
 //    @return true if new AdminUser or NonAdminUser was created successfully
-    public boolean createUser(String user, String pass, boolean admin){
+    public static User createUser(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter a username: ");
+        String userName = sc.nextLine();
+
+        System.out.println("Please enter a password: ");
+        String password = sc.nextLine();
 
         List<User> all_users = UserData.getAllUsers();
-        for (User u: all_users) {
-            if (u.getUserName().equals(user)) {
-                return false;
-
+        if (!(Objects.isNull(all_users))){
+            for (User u: all_users) {
+                if (u.getUserName().equals(userName)) {
+                    return null;
+                }
             }
         }
-        if (admin){
-            User newUser = new AdminUser(user, pass);
-            UserData.updateData(newUser);
+        User newUser = new NonAdminUser(userName, password);
 
-            }
-        else{
-            User newUser = new NonAdminUser(user, pass);
-            UserData.updateData(newUser);
+        // update to csv instead
+        UserData.updateData(newUser);
+        return newUser;
+    }
 
-            }
-        return true;
-
+    // Returns void because im assuming that we dont just log into the new account automatically when we create one.
+    public static void creatAdminUser(){
 
     }
 }

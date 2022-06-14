@@ -3,17 +3,11 @@ import java.util.*;
 
 public class UserData {
     // a list storing all User instances
-    private static List<User> allUsers;
+    private static List<User> allUsers = new ArrayList<>();
     // people on the internet said that HashMap is generally preferred over HashTable
     // a dict (HashMap) mapping each User instance's username to its login history
-    private static HashMap<String, ArrayList<LocalDateTime>> allLoginHistory;
+    private static HashMap<String, ArrayList<LocalDateTime>> allLoginHistory = new HashMap<>();
 
-    // constructor for UserData. it is possible we don't need this constructor and just instantiate the
-    // variables directly above, but this is open up for discussion
-    public UserData(){
-        allUsers = new ArrayList<>();
-        allLoginHistory = new HashMap<>();
-    }
 
     // this is called in the User class constructor so every time a User is created the data inside the UserData
     // class is updated correctly

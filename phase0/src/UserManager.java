@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class UserManager {
-    private List<User> users = UserData.getAllUsers(); //todo: maybe change this cause I'm not sure if it works correct
+    private List<User> users = UserData.getAllUsers(); // todo: maybe change this cause I'm not sure if it works correct
 
     public void deleteUser(User user){
         users.remove(user);
@@ -25,19 +25,19 @@ public class UserManager {
 
     @return true if the User information is valid and the User.banStatus is false
      */
-    public boolean validateUser(String username, String password){
-        if (users.isEmpty()){ return true; } // return true is UserData is empty since nothing to validate.
+    public User validateUser(String username, String password){
+        if (Objects.isNull(users)){ return null; }
         else {
             for (User user : users) {
                 if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
                     if (!user.getBanStatus()) {
-                        user.addLoginHistory(LocalDateTime.now()); //todo: Added this to include log in history - A.C.
-                        return true;
+                        user.addLoginHistory(LocalDateTime.now()); // todo: Added this to include log in history - A.C.
+                        return user;
                     }
                 }
             }
         }
-        return false;
+        return null;
     }
 
     public void changePassword(User user, String password){
