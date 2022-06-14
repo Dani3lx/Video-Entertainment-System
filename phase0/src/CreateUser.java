@@ -12,7 +12,7 @@ public class CreateUser {
 //    If not, create a new AdminUser instance or NonAdminUser and update UserData.
 //
 //    @return true if new AdminUser or NonAdminUser was created successfully
-    public static User createUser(){
+    public static User createUser() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter a username: ");
         String userName = sc.nextLine();
