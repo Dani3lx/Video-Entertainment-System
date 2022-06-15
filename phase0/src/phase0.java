@@ -37,6 +37,8 @@ public class phase0 {
                     } else {
                         displayAfterLogin((NonAdminUser) currentUser);
                     }
+                    UserData.writeData();
+                    displayAfterLogin();
                 }
 
             } else {
