@@ -17,9 +17,9 @@ public class LoginMenuDisplayer {
                 } else {
                     System.out.println("you are now logged in");
                     if (currentUser instanceof AdminUser) {
-                        displayAfterLogin((AdminUser) currentUser);
+                        AfterLoginMenu((AdminUser) currentUser);
                     } else {
-                        displayAfterLogin((NonAdminUser) currentUser);
+                        AfterLoginMenu((NonAdminUser) currentUser);
                     }
 
                 }
@@ -35,9 +35,9 @@ public class LoginMenuDisplayer {
                     UserData.writeData();
 
                     if (currentUser instanceof AdminUser) {
-                        displayAfterLogin((AdminUser) currentUser);
+                        AfterLoginMenu((AdminUser) currentUser);
                     } else {
-                        displayAfterLogin((NonAdminUser) currentUser);
+                        AfterLoginMenu((NonAdminUser) currentUser);
                     }
                 }
 
@@ -51,7 +51,7 @@ public class LoginMenuDisplayer {
         }
     }
 
-    private void displayAfterLogin(NonAdminUser user) {
+    private void AfterLoginMenu(NonAdminUser user) {
         System.out.println("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out");
         Scanner sc = new Scanner(System.in);
@@ -70,15 +70,15 @@ public class LoginMenuDisplayer {
                     break;
                 default:
                     System.out.println("Please enter a valid input");
-                    displayAfterLogin(user);
+                    AfterLoginMenu(user);
             }
         } else {
             System.out.println("Please enter a valid input");
-            displayAfterLogin(user);
+            AfterLoginMenu(user);
         }
     }
 
-    private void displayAfterLogin(AdminUser user) {
+    private void AfterLoginMenu(AdminUser user) {
         System.out.println("Here are some options for admin user ...");
     }
 
