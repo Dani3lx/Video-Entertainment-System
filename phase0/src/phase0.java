@@ -27,6 +27,7 @@ public class phase0 {
                     // When you create a new account you automatically log into it i think, so it should show the same
                     // menu.
                     System.out.println("you are now logged in");
+                    UserData.writeData();
                     displayAfterLogin();
                 }
 
