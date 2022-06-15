@@ -2,8 +2,8 @@ import java.util.Scanner;
 import java.util.Objects;
 
 // This class is a controller
-public class phase0 {
-    public static void run() {
+public class LoginMenuDisplayer {
+    public void startMenu() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Type 1 to login, type 2 to creat a new user account");
 
@@ -13,7 +13,7 @@ public class phase0 {
                 User currentUser = UserLogin.loginUser();
                 if (Objects.isNull(currentUser)) {
                     System.out.println("Failed to Login");
-                    phase0.run();
+                    this.startMenu();
                 } else {
                     System.out.println("you are now logged in");
                     if (currentUser instanceof AdminUser) {
@@ -27,32 +27,33 @@ public class phase0 {
                 User currentUser = CreateUser.createUser();
                 if (Objects.isNull(currentUser)) {
                     System.out.println("Failed to create a new account");
-                    phase0.run();
+                    this.startMenu();
                 } else {
                     // When you create a new account you automatically log into it i think, so it should show the same
                     // menu.
                     System.out.println("you are now logged in");
+                    UserData.writeData();
+
                     if (currentUser instanceof AdminUser) {
                         displayAfterLogin((AdminUser) currentUser);
                     } else {
                         displayAfterLogin((NonAdminUser) currentUser);
                     }
-                    UserData.writeData();
-                    displayAfterLogin();
                 }
 
             } else {
                 System.out.println("Please enter a valid response");
-                phase0.run();
+                startMenu();
             }
         } else {
             System.out.println("Please enter a valid response");
-            phase0.run();
+            startMenu();
         }
     }
 
-    private static void displayAfterLogin(NonAdminUser user) {
-        System.out.println("Please input one of the following number to proceed \n 1 - Change Password \n 2 - Check login history \n 3 - Log out");
+    private void displayAfterLogin(NonAdminUser user) {
+        System.out.println("Please input one of the following number to proceed " +
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out");
         Scanner sc = new Scanner(System.in);
 
         if (sc.hasNextInt()) {
@@ -77,7 +78,7 @@ public class phase0 {
         }
     }
 
-    private static void displayAfterLogin(AdminUser user) {
+    private void displayAfterLogin(AdminUser user) {
         System.out.println("Here are some options for admin user ...");
     }
 
