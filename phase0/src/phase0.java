@@ -16,7 +16,12 @@ public class phase0 {
                     phase0.run();
                 } else {
                     System.out.println("you are now logged in");
-                    displayAfterLogin();
+                    if (currentUser instanceof AdminUser) {
+                        displayAfterLogin((AdminUser) currentUser);
+                    } else {
+                        displayAfterLogin((NonAdminUser) currentUser);
+                    }
+
                 }
             } else if (input == 2) {
                 User currentUser = CreateUser.createUser();
@@ -27,7 +32,11 @@ public class phase0 {
                     // When you create a new account you automatically log into it i think, so it should show the same
                     // menu.
                     System.out.println("you are now logged in");
-                    displayAfterLogin();
+                    if (currentUser instanceof AdminUser) {
+                        displayAfterLogin((AdminUser) currentUser);
+                    } else {
+                        displayAfterLogin((NonAdminUser) currentUser);
+                    }
                 }
 
             } else {
@@ -40,8 +49,34 @@ public class phase0 {
         }
     }
 
-    private static void displayAfterLogin() {
-        System.out.println("Here are some options for when you are logged in ...");
+    private static void displayAfterLogin(NonAdminUser user) {
+        System.out.println("Please input one of the following number to proceed \n 1 - Change Password \n 2 - Check login history \n 3 - Log out");
+        Scanner sc = new Scanner(System.in);
+
+        if (sc.hasNextInt()) {
+            int result = sc.nextInt();
+            switch (result) {
+                case 1:
+                    System.out.println("Change password");
+                    break;
+                case 2:
+                    System.out.println("Checking history");
+                    break;
+                case 3:
+                    System.out.println("Log out");
+                    break;
+                default:
+                    System.out.println("Please enter a valid input");
+                    displayAfterLogin(user);
+            }
+        } else {
+            System.out.println("Please enter a valid input");
+            displayAfterLogin(user);
+        }
+    }
+
+    private static void displayAfterLogin(AdminUser user) {
+        System.out.println("Here are some options for admin user ...");
     }
 
 }
