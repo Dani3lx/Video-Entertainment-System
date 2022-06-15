@@ -13,8 +13,8 @@ public abstract class User {
         this.userName = userName;
         this.password = password;
         this.banStatus = false;
-        this.loginHistory = new ArrayList<>();
-        UserData.updateData(this);
+        // this.loginHistory = new ArrayList<>();
+        // UserData.updateData(this);
     }
 
     public String getUserName() {
@@ -51,5 +51,10 @@ public abstract class User {
 
     public void addLoginHistory(LocalDateTime loginHistory) { //todo: Added this to append loginhistory - A.C.
         this.loginHistory.add(loginHistory);
+    }
+
+    @Override
+    public String toString() {
+        return this.getUserName() + "," + this.getPassword() + "," + this.getBanStatus() + "," + this.getLoginHistory();
     }
 }
