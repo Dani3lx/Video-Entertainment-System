@@ -1,10 +1,16 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Objects;
 
-// This class is a controller
 public class LoginMenuDisplayer {
+
+    /**
+     * Display the start menu of the login system.
+     *
+     * @throws IOException if error reading from file
+     */
     public void startMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Type 1 to login, type 2 to creat a new user account");
@@ -31,8 +37,6 @@ public class LoginMenuDisplayer {
                     System.out.println("Failed to create a new account");
                     this.startMenu();
                 } else {
-                    // When you create a new account you automatically log into it i think, so it should show the same
-                    // menu.
                     System.out.println("you are now logged in");
                     //UserData.writeData();
                     List<User> ab = UserData.getAllUsers();
@@ -55,6 +59,9 @@ public class LoginMenuDisplayer {
         }
     }
 
+    /**
+     * Display the menu after NonAdminUser logs in.
+     */
     private void AfterLoginMenu(NonAdminUser user) {
         System.out.println("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out");
@@ -82,6 +89,9 @@ public class LoginMenuDisplayer {
         }
     }
 
+    /**
+     * Display the menu after AdminUser logs in.
+     */
     private void AfterLoginMenu(AdminUser user) {
         System.out.println("Here are some options for admin user ...");
     }
