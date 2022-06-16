@@ -14,6 +14,7 @@ public abstract class User {
         this.userName = userName;
         this.password = password;
         this.banStatus = false;
+        this.loginHistory = new ArrayList<>();
 
         // this.loginHistory = new ArrayList<>();
         // UserData.updateData(this);

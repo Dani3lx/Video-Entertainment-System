@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Objects;
@@ -24,6 +25,7 @@ public class LoginMenuDisplayer {
                     this.startMenu();
                 } else {
                     System.out.println("you are now logged in");
+                    currentUser.getLoginHistory().add(LocalDateTime.now());
                     if (currentUser instanceof AdminUser) {
                         AfterLoginMenu((AdminUser) currentUser);
                     } else {
@@ -38,6 +40,8 @@ public class LoginMenuDisplayer {
                     this.startMenu();
                 } else {
                     System.out.println("you are now logged in");
+                    currentUser.getLoginHistory().add(LocalDateTime.now());
+
                     //UserData.writeData();
                     List<User> ab = UserData.getAllUsers();
                     DataManager.writeCSV("Data.csv");
@@ -67,14 +71,19 @@ public class LoginMenuDisplayer {
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out");
         Scanner sc = new Scanner(System.in);
 
+        UserManager um = new UserManager();
+
         if (sc.hasNextInt()) {
             int result = sc.nextInt();
+            sc.nextLine();
             switch (result) {
                 case 1:
-                    System.out.println("Change password");
+                    System.out.println("Please enter a new password");
+                    String newPassword = sc.nextLine();
+                    um.changePassword(user, newPassword);
                     break;
                 case 2:
-                    System.out.println("Checking history");
+                    um.checkHistory(user);
                     break;
                 case 3:
                     System.out.println("Log out");
