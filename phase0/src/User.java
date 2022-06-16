@@ -14,14 +14,23 @@ public abstract class User {
         this.userName = userName;
         this.password = password;
         this.banStatus = false;
-        this.adminInd = false;
+
         // this.loginHistory = new ArrayList<>();
         // UserData.updateData(this);
     }
-
-    public User() {
-
+    public boolean isBanStatus() {
+        return banStatus;
     }
+
+    public boolean isAdminInd() {
+        return adminInd;
+    }
+
+    public void setAdminInd(boolean adminInd) {
+        this.adminInd = adminInd;
+    }
+
+
 
     public String getUserName() {
         return userName;
