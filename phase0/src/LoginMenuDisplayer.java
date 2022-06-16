@@ -6,6 +6,9 @@ import java.util.Scanner;
 import java.util.Objects;
 
 public class LoginMenuDisplayer {
+    UserManager um = new UserManager();
+    CreateUser cu = new CreateUser();
+    DeleteUser du = new DeleteUser();
 
     /**
      * Display the start menu of the login system.
@@ -34,7 +37,7 @@ public class LoginMenuDisplayer {
 
                 }
             } else if (input == 2) {
-                User currentUser = CreateUser.createUser();
+                User currentUser = cu.createUser();
                 if (Objects.isNull(currentUser)) {
                     System.out.println("Failed to create a new account");
                     this.startMenu();
@@ -66,12 +69,10 @@ public class LoginMenuDisplayer {
     /**
      * Display the menu after NonAdminUser logs in.
      */
-    private void AfterLoginMenu(NonAdminUser user) {
+    private void AfterLoginMenu(NonAdminUser user) throws IOException {
         System.out.println("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out");
         Scanner sc = new Scanner(System.in);
-
-        UserManager um = new UserManager();
 
         if (sc.hasNextInt()) {
             int result = sc.nextInt();
@@ -81,12 +82,14 @@ public class LoginMenuDisplayer {
                     System.out.println("Please enter a new password");
                     String newPassword = sc.nextLine();
                     um.changePassword(user, newPassword);
+                    AfterLoginMenu(user);
                     break;
                 case 2:
                     um.checkHistory(user);
+                    AfterLoginMenu(user);
                     break;
                 case 3:
-                    System.out.println("Log out");
+                    startMenu();
                     break;
                 default:
                     System.out.println("Please enter a valid input");
@@ -101,8 +104,41 @@ public class LoginMenuDisplayer {
     /**
      * Display the menu after AdminUser logs in.
      */
-    private void AfterLoginMenu(AdminUser user) {
-        System.out.println("Here are some options for admin user ...");
+    private void AfterLoginMenu(AdminUser user) throws IOException {
+        System.out.println("Please input one of the following number to proceed " +
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
+                "5 - Delete User \n 6 - Ban User \n UnBan User");
+        Scanner sc = new Scanner(System.in);
+        if (sc.hasNextInt()) {
+            int result = sc.nextInt();
+            sc.nextLine();
+            switch (result) {
+                case 1:
+                    System.out.println("Please enter a new password");
+                    String newPassword = sc.nextLine();
+                    um.changePassword(user, newPassword);
+                    AfterLoginMenu(user);
+                    break;
+                case 2:
+                    um.checkHistory(user);
+                    AfterLoginMenu(user);
+                    break;
+                case 3:
+                    startMenu();
+                    break;
+                case 4:
+                    cu.creatAdminUser();
+                    break;
+                case 5:
+                    du.deleteUser();
+                default:
+                    System.out.println("Please enter a valid input");
+                    AfterLoginMenu(user);
+            }
+        } else {
+            System.out.println("Please enter a valid input");
+            AfterLoginMenu(user);
+        }
     }
 
 }
