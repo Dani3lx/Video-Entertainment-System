@@ -1,9 +1,11 @@
+import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Objects;
 
 // This class is a controller
 public class LoginMenuDisplayer {
-    public void startMenu() {
+    public void startMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Type 1 to login, type 2 to creat a new user account");
 
@@ -32,7 +34,9 @@ public class LoginMenuDisplayer {
                     // When you create a new account you automatically log into it i think, so it should show the same
                     // menu.
                     System.out.println("you are now logged in");
-                    UserData.writeData();
+                    //UserData.writeData();
+                    List<User> ab = UserData.getAllUsers();
+                    DataManager.writeCSV("Data.csv");
 
                     if (currentUser instanceof AdminUser) {
                         AfterLoginMenu((AdminUser) currentUser);

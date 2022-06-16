@@ -1,10 +1,8 @@
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.FileReader;
+
 public class UserData {
     // a list storing all User instances
     private static List<User> allUsers = new ArrayList<>();
@@ -25,7 +23,9 @@ public class UserData {
     public static List<User> getAllUsers(){
         return allUsers;
     } //Akmar C: Changed to Arraylist
-
+    public static void setAllUsers(List<User> userdata){
+        allUsers = userdata;
+    }
     public static void readData() throws IOException {
        BufferedReader data = new BufferedReader(new FileReader("userData.txt"));
        String current;
