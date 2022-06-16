@@ -8,13 +8,19 @@ public abstract class User {
     // change this later.
     private ArrayList<LocalDateTime> loginHistory;
     private boolean banStatus;
+    private boolean adminInd;
 
     public User(String userName, String password){
         this.userName = userName;
         this.password = password;
         this.banStatus = false;
+        this.adminInd = false;
         // this.loginHistory = new ArrayList<>();
         // UserData.updateData(this);
+    }
+
+    public User() {
+
     }
 
     public String getUserName() {
@@ -53,6 +59,9 @@ public abstract class User {
         this.loginHistory.add(loginHistory);
     }
 
+    public void setAdmin(){
+        this.adminInd = true;
+    }
     @Override
     public String toString() {
         return this.getUserName() + "," + this.getPassword() + "," + this.getBanStatus() + "," + this.getLoginHistory();

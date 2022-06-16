@@ -20,6 +20,7 @@ public class CreateUser {
         System.out.println("Please enter a password: ");
         String password = sc.nextLine();
 
+
         List<User> all_users = UserData.getAllUsers();
         if (!(Objects.isNull(all_users))){
             for (User u: all_users) {
