@@ -9,6 +9,7 @@ public class LoginMenuDisplayer {
     UserManager um = new UserManager();
     CreateUser cu = new CreateUser();
     DeleteUser du = new DeleteUser();
+    Presenter p = new Presenter();
 
     /**
      * Display the start menu of the login system.
@@ -17,10 +18,7 @@ public class LoginMenuDisplayer {
      */
     public void startMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
-        System.out.println("----------------------------------------------------");
-        System.out.println("Type 1 to login, type 2 to create a new user account");
-        System.out.println("----------------------------------------------------\n");
-
+        System.out.println(p.startMenuOption("Type 1 to login, type 2 to create a new user account"));
         if (sc.hasNextInt()) {
             int input = (sc.nextInt());
             if (input == 1) {
@@ -32,14 +30,10 @@ public class LoginMenuDisplayer {
 
                     currentUser.getLoginHistory().add(LocalDateTime.now());
                     if (currentUser instanceof AdminUser) {
-                        System.out.println("****************************************" +
-                                "\n \nyou are now logged in to an admin account\n \n" +
-                                "****************************************");
+                        System.out.println(p.alertText("you are now logged in to an admin account"));
                         AfterLoginMenu((AdminUser) currentUser);
                     } else {
-                        System.out.println("****************************************" +
-                                "\n \nyou are now logged in to a non-admin account\n \n" +
-                                "****************************************");;
+                        System.out.println(p.alertText("you are now logged in to a non-admin account"));
                         AfterLoginMenu((NonAdminUser) currentUser);
                     }
 
@@ -77,8 +71,10 @@ public class LoginMenuDisplayer {
      * Display the menu after NonAdminUser logs in.
      */
     private void AfterLoginMenu(NonAdminUser user) throws IOException {
+
         System.out.println("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n\n\n");
+
         Scanner sc = new Scanner(System.in);
 
         if (sc.hasNextInt()) {
@@ -89,9 +85,12 @@ public class LoginMenuDisplayer {
                     System.out.println("Please enter a new password");
                     String newPassword = sc.nextLine();
                     um.changePassword(user, newPassword);
+                    System.out.println("Password change was successful\n");
                     break;
                 case 2:
+                    System.out.println("Checking history:");
                     um.checkHistory(user);
+                    System.out.println("\n");
                     break;
                 case 3:
                     startMenu();
@@ -119,13 +118,15 @@ public class LoginMenuDisplayer {
             sc.nextLine();
             switch (result) {
                 case 1:
-                    System.out.println("**************************\nPlease enter a new password\n" +
-                            "**************************");
+                    System.out.println("Please enter a new password");
                     String newPassword = sc.nextLine();
                     um.changePassword(user, newPassword);
+                    System.out.println("Password change was successful\n");
                     break;
                 case 2:
+                    System.out.println("Checking history:");
                     um.checkHistory(user);
+                    System.out.println("\n");
                     break;
                 case 3:
                     startMenu();
