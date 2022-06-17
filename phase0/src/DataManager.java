@@ -1,5 +1,6 @@
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.*;
 
@@ -75,12 +76,30 @@ public class DataManager implements Serializable {
         assert(outputFile.exists());
     }
 
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        for (User r : UserData.getAllUsers()) {
-            result.append(r.toString()).append("\n");
+    public static void writeLoginHistoryCSV(String filename) throws IOException {
+        File outputFile = new File(filename);
+        try (PrintWriter pw = new PrintWriter(outputFile)){
+            HashMap<String, HashSet<String>> allLoginHistory = UserData.getAllLoginHistory();
+            if (!(Objects.isNull(allLoginHistory))) {
+                StringBuilder sb = new StringBuilder();
+                for (String name: allLoginHistory.keySet()){
+                    String key = name;
+                    for (String value: allLoginHistory.get(name)){
+                        sb.append(new String(key + ", " + value + ", "));
+                    }
+                }
+                pw.write(sb.toString());
+            }
         }
-        return result.toString();
+        assert(outputFile.exists());
     }
+
+//   @Override
+//    public String toString() {
+//        StringBuilder result = new StringBuilder();
+//        for (User r : UserData.getAllUsers()) {
+//            result.append(r.toString()).append("\n");
+//        }
+//        return result.toString();
+//    }
 }

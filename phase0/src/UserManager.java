@@ -31,7 +31,6 @@ public class UserManager {
             for (User user : users) {
                 if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
                     if (!user.getBanStatus()) {
-                        user.addLoginHistory(LocalDateTime.now()); // todo: Added this to include log in history - A.C.
                         return user;
                     }
                 }
@@ -43,12 +42,12 @@ public class UserManager {
     // todo Will need to change the csv file accordingly as well
     public void changePassword(User user, String password){
         user.setPassword(password);
-        System.out.println("Password change was successful");
     }
 
     public void checkHistory(User user) {
-        System.out.println("Checking history:");
-        System.out.println(user.getLoginHistory());
+        List<String> history = new ArrayList<>(user.getLoginHistory());
+        Collections.sort(history);
+        System.out.println(history);
     }
 
 
