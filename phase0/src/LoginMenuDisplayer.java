@@ -17,7 +17,7 @@ public class LoginMenuDisplayer {
      */
     public void startMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Type 1 to login, type 2 to creat a new user account");
+        System.out.println("Type 1 to login, type 2 to create a new user account");
 
         if (sc.hasNextInt()) {
             int input = (sc.nextInt());
@@ -42,9 +42,8 @@ public class LoginMenuDisplayer {
                     System.out.println("Failed to create a new account");
                     this.startMenu();
                 } else {
-                    System.out.println("you are now logged in");
+                    System.out.println("New account has been created");
                     currentUser.getLoginHistory().add(LocalDateTime.now());
-
                     //UserData.writeData();
                     List<User> ab = UserData.getAllUsers();
                     DataManager.writeCSV("Data.csv");

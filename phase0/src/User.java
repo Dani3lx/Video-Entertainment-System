@@ -6,7 +6,7 @@ public abstract class User {
 
     // Stores A date-time without a time-zone in the ISO-8601 calendar system, such as 2007-12-03T10:15:30. We can
     // change this later.
-    private ArrayList<LocalDateTime> loginHistory;
+    private HashSet<LocalDateTime> loginHistory;
     private boolean banStatus;
     private boolean adminInd;
 
@@ -14,7 +14,7 @@ public abstract class User {
         this.userName = userName;
         this.password = password;
         this.banStatus = false;
-        this.loginHistory = new ArrayList<>();
+        this.loginHistory = new HashSet<>();
 
         // this.loginHistory = new ArrayList<>();
         // UserData.updateData(this);
@@ -49,11 +49,11 @@ public abstract class User {
         this.password = password;
     }
 
-    public ArrayList<LocalDateTime> getLoginHistory() {
+    public HashSet<LocalDateTime> getLoginHistory() {
         return loginHistory;
     }
 
-    public void setLoginHistory(ArrayList<LocalDateTime> loginHistory) {
+    public void setLoginHistory(HashSet<LocalDateTime> loginHistory) {
         this.loginHistory = loginHistory;
     }
 

@@ -8,7 +8,7 @@ public class UserData {
     private static List<User> allUsers = new ArrayList<>();
     // people on the internet said that HashMap is generally preferred over HashTable
     // a dict (HashMap) mapping each User instance's username to its login history
-    private static HashMap<String, ArrayList<LocalDateTime>> allLoginHistory = new HashMap<>();
+    private static HashMap<String, HashSet<LocalDateTime>> allLoginHistory = new HashMap<>();
     private static ArrayList<String> allUsers2 = new ArrayList<>();
 
 
