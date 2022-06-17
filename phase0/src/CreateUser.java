@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -44,7 +45,6 @@ public class CreateUser {
 
         System.out.println("Please enter a password: ");
         String password = sc.nextLine();
-
 
         List<User> all_users = UserData.getAllUsers();
         if (!(Objects.isNull(all_users))){

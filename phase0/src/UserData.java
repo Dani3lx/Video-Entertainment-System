@@ -9,7 +9,7 @@ public class UserData {
     private static List<User> allUsers = new ArrayList<>();
     // people on the internet said that HashMap is generally preferred over HashTable
     // a dict (HashMap) mapping each User instance's username to its login history
-    private static HashMap<String, HashSet<LocalDateTime>> allLoginHistory = new HashMap<>();
+    private static HashMap<String, HashSet<String>> allLoginHistory = new HashMap<>();
     private static ArrayList<String> allUsers2 = new ArrayList<>();
 
 
@@ -24,11 +24,8 @@ public class UserData {
     public static List<User> getAllUsers(){
         return allUsers;
     } //Akmar C: Changed to Arraylist
-    public static String loginHistoryToString(LocalDateTime DateTime){
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-        return DateTime.format(formatter); //https://howtodoinjava.com/java/date-time/format-localdatetime-to-string/
-    }
-    public static HashMap<String, HashSet<LocalDateTime>> getAllLoginHistory(){
+
+    public static HashMap<String, HashSet<String>> getAllLoginHistory(){
         return allLoginHistory;
     }
     public static void setAllUsers(List<User> userdata){
