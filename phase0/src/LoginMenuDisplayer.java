@@ -17,7 +17,9 @@ public class LoginMenuDisplayer {
      */
     public void startMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
+        System.out.println("----------------------------------------------------");
         System.out.println("Type 1 to login, type 2 to create a new user account");
+        System.out.println("----------------------------------------------------\n");
 
         if (sc.hasNextInt()) {
             int input = (sc.nextInt());
@@ -27,11 +29,17 @@ public class LoginMenuDisplayer {
                     System.out.println("Failed to Login");
                     this.startMenu();
                 } else {
-                    System.out.println("you are now logged in");
+
                     currentUser.getLoginHistory().add(LocalDateTime.now());
                     if (currentUser instanceof AdminUser) {
+                        System.out.println("****************************************" +
+                                "\n \nyou are now logged in to an admin account\n \n" +
+                                "****************************************");
                         AfterLoginMenu((AdminUser) currentUser);
                     } else {
+                        System.out.println("****************************************" +
+                                "\n \nyou are now logged in to a non-admin account\n \n" +
+                                "****************************************");;
                         AfterLoginMenu((NonAdminUser) currentUser);
                     }
 
@@ -70,7 +78,7 @@ public class LoginMenuDisplayer {
      */
     private void AfterLoginMenu(NonAdminUser user) throws IOException {
         System.out.println("Please input one of the following number to proceed " +
-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out");
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n\n\n");
         Scanner sc = new Scanner(System.in);
 
         if (sc.hasNextInt()) {
@@ -104,14 +112,15 @@ public class LoginMenuDisplayer {
     private void AfterLoginMenu(AdminUser user) throws IOException {
         System.out.println("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
-                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User");
+                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n");
         Scanner sc = new Scanner(System.in);
         if (sc.hasNextInt()) {
             int result = sc.nextInt();
             sc.nextLine();
             switch (result) {
                 case 1:
-                    System.out.println("Please enter a new password");
+                    System.out.println("**************************\nPlease enter a new password\n" +
+                            "**************************");
                     String newPassword = sc.nextLine();
                     um.changePassword(user, newPassword);
                     break;
