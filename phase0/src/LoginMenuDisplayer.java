@@ -55,6 +55,7 @@ public class LoginMenuDisplayer {
                     //UserData.writeData();
                     List<User> ab = UserData.getAllUsers();
                     DataManager.writeCSV("Data.csv");
+                    DataManager.writeLoginHistoryCSV("LoginData.csv");
                     if (currentUser instanceof AdminUser) {
                         AfterLoginMenu((AdminUser) currentUser);
                     } else {
