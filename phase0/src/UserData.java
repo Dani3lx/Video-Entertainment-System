@@ -24,11 +24,8 @@ public class UserData {
     public static List<User> getAllUsers(){
         return allUsers;
     } //Akmar C: Changed to Arraylist
-    public static String loginHistoryToString(LocalDateTime DateTime){
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
-        return DateTime.format(formatter); //https://howtodoinjava.com/java/date-time/format-localdatetime-to-string/
-    }
-    public static HashMap<String, HashSet<LocalDateTime>> getAllLoginHistory(){
+
+    public static HashMap<String, HashSet<String>> getAllLoginHistory(){
         return allLoginHistory;
     }
     public static void setAllUsers(List<User> userdata){
