@@ -31,7 +31,6 @@ public class UserManager {
             for (User user : users) {
                 if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
                     if (!user.getBanStatus()) {
-                        user.addLoginHistory(LocalDateTime.now()); // todo: Added this to include log in history - A.C.
                         return user;
                     }
                 }
@@ -46,9 +45,9 @@ public class UserManager {
     }
 
     public void checkHistory(User user) {
-
-        System.out.println(user.getLoginHistory());
-
+        List<String> history = new ArrayList<>(user.getLoginHistory());
+        Collections.sort(history);
+        System.out.println(history);
     }
 
 

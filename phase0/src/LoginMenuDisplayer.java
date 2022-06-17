@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Objects;
@@ -10,6 +11,7 @@ public class LoginMenuDisplayer {
     CreateUser cu = new CreateUser();
     DeleteUser du = new DeleteUser();
     Presenter p = new Presenter();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Display the start menu of the login system.
@@ -28,7 +30,7 @@ public class LoginMenuDisplayer {
                     this.startMenu();
                 } else {
 
-                    currentUser.getLoginHistory().add(LocalDateTime.now());
+                    currentUser.getLoginHistory().add(LocalDateTime.now().format(formatter));
                     if (currentUser instanceof AdminUser) {
                         System.out.println(p.alertText("you are now logged in to an admin account"));
                         AfterLoginMenu((AdminUser) currentUser);
@@ -44,15 +46,14 @@ public class LoginMenuDisplayer {
                     System.out.println("Failed to create a new account");
                     this.startMenu();
                 } else {
+                    currentUser.getLoginHistory().add(LocalDateTime.now().format(formatter));
                     System.out.println("New account has been created");
-
                     //UserData.writeData();
                     List<User> ab = UserData.getAllUsers();
                     DataManager.writeCSV("Data.csv");
                     if (currentUser instanceof AdminUser) {
                         AfterLoginMenu((AdminUser) currentUser);
                     } else {
-                        currentUser.getLoginHistory().add(LocalDateTime.now());
                         AfterLoginMenu((NonAdminUser) currentUser);
                     }
                 }
