@@ -43,14 +43,14 @@ public class LoginMenuDisplayer {
                     this.startMenu();
                 } else {
                     System.out.println("New account has been created");
-                    currentUser.getLoginHistory().add(LocalDateTime.now());
+
                     //UserData.writeData();
                     List<User> ab = UserData.getAllUsers();
                     DataManager.writeCSV("Data.csv");
-
                     if (currentUser instanceof AdminUser) {
                         AfterLoginMenu((AdminUser) currentUser);
                     } else {
+                        currentUser.getLoginHistory().add(LocalDateTime.now());
                         AfterLoginMenu((NonAdminUser) currentUser);
                     }
                 }
