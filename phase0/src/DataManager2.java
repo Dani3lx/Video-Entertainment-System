@@ -29,11 +29,13 @@ public class DataManager2 {
         }
     }
 
-    public void saveData(String filePath, User user) {
+    public void saveData(String filePath) {
         try {
-            FileWriter writer = new FileWriter(filePath);
+            FileWriter writer = new FileWriter(filePath, false);
 
-            writer.write(user.toString() + "\n");
+            for (User user : users) {
+                writer.write(user.toString() + "\n");
+            }
 
             writer.close();
         }
