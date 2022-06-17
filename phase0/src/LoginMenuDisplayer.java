@@ -13,6 +13,8 @@ public class LoginMenuDisplayer {
     Presenter p = new Presenter();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    BanUser bu = new BanUser();
+
     /**
      * Display the start menu of the login system.
      *
@@ -142,6 +144,12 @@ public class LoginMenuDisplayer {
                     } else {
                         AfterLoginMenu(user);
                     }
+                    break;
+                case 6:
+                    bu.banUser(user);
+                    break;
+                case 7:
+                    bu.unBanUser();
                     break;
                 default:
                     System.out.println("Please enter a valid input");
