@@ -26,10 +26,12 @@ public class DeleteUser {
                         System.out.println("You have successfully deleted your own account");
                         return true;
                     } else {
-                        all_users.remove(user);
-                        System.out.println("The user " + name + " has been successfully deleted");
                         return false;
                     }
+                } else {
+                    all_users.remove(user);
+                    System.out.println("The user " + name + " has been successfully deleted");
+                    return false;
                 }
             }
         }
