@@ -43,6 +43,21 @@ public class DataManager implements Serializable {
         }
         scanner.close();
     }
+    public static void readLoginHistoryCSV(String filePath) throws FileNotFoundException {
+
+        // FileInputStream can be used for reading raw bytes
+        Scanner scanner = new Scanner(new FileInputStream(filePath));
+        String[] record;
+        User user;
+
+        while (scanner.hasNextLine()) {
+            record = scanner.nextLine().split("\n"); //what char is used for the nextline, we can set maybe
+            user = new NonAdminUser (record[0], record[1]); //User toString method
+            //todo Since user is abstract, what we can do is just add admins and then non-admins
+            UserList.add(user);
+        }
+        scanner.close();
+    }
 
     public static List<User> getUserList() {
         return UserList;
