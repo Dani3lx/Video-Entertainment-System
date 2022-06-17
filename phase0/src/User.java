@@ -19,6 +19,17 @@ public abstract class User {
         // this.loginHistory = new ArrayList<>();
         // UserData.updateData(this);
     }
+
+    public User(String userName, String password, boolean banStatus){
+        this.userName = userName;
+        this.password = password;
+        this.banStatus = banStatus;
+        this.loginHistory = new HashSet<>();
+
+        // this.loginHistory = new ArrayList<>();
+        // UserData.updateData(this);
+    }
+
     public boolean isBanStatus() {
         return banStatus;
     }
@@ -72,8 +83,9 @@ public abstract class User {
     public void setAdmin(){
         this.adminInd = true;
     }
+
     @Override
     public String toString() {
-        return this.getUserName() + "," + this.getPassword() + "," + this.getBanStatus() + "," + this.getLoginHistory();
+        return this.getUserName() + "," + this.getPassword() + "," + this.getBanStatus() + "," + this.getLoginHistory() + "," + this.isAdminInd();
     }
 }

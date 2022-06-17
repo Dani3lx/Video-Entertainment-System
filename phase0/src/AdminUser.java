@@ -5,4 +5,9 @@ public class AdminUser extends User{
         this.setAdminInd(true);
     }
 
+    public AdminUser(String userName, String password, boolean banStatus){
+        super(userName, password, banStatus);
+        this.setAdminInd(true);
+    }
+
 }
