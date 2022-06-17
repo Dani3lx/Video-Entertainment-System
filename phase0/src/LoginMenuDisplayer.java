@@ -82,23 +82,21 @@ public class LoginMenuDisplayer {
                     System.out.println("Please enter a new password");
                     String newPassword = sc.nextLine();
                     um.changePassword(user, newPassword);
-                    AfterLoginMenu(user);
                     break;
                 case 2:
                     um.checkHistory(user);
-                    AfterLoginMenu(user);
                     break;
                 case 3:
                     startMenu();
                     break;
                 default:
                     System.out.println("Please enter a valid input");
-                    AfterLoginMenu(user);
             }
         } else {
             System.out.println("Please enter a valid input");
-            AfterLoginMenu(user);
         }
+        AfterLoginMenu(user);
+
     }
 
     /**
@@ -107,7 +105,7 @@ public class LoginMenuDisplayer {
     private void AfterLoginMenu(AdminUser user) throws IOException {
         System.out.println("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
-                "5 - Delete User \n 6 - Ban User \n UnBan User");
+                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User");
         Scanner sc = new Scanner(System.in);
         if (sc.hasNextInt()) {
             int result = sc.nextInt();
@@ -117,11 +115,9 @@ public class LoginMenuDisplayer {
                     System.out.println("Please enter a new password");
                     String newPassword = sc.nextLine();
                     um.changePassword(user, newPassword);
-                    AfterLoginMenu(user);
                     break;
                 case 2:
                     um.checkHistory(user);
-                    AfterLoginMenu(user);
                     break;
                 case 3:
                     startMenu();
@@ -130,15 +126,19 @@ public class LoginMenuDisplayer {
                     cu.creatAdminUser();
                     break;
                 case 5:
-                    du.deleteUser();
+                    if (du.deleteUser(user)) {
+                        startMenu();
+                    } else {
+                        AfterLoginMenu(user);
+                    }
+                    break;
                 default:
                     System.out.println("Please enter a valid input");
-                    AfterLoginMenu(user);
             }
         } else {
             System.out.println("Please enter a valid input");
-            AfterLoginMenu(user);
         }
+        AfterLoginMenu(user);
     }
 
 }
