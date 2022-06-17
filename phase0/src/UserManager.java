@@ -43,13 +43,12 @@ public class UserManager {
     // todo Will need to change the csv file accordingly as well
     public void changePassword(User user, String password){
         user.setPassword(password);
-        System.out.println("Password change was successful\n\n");
     }
 
     public void checkHistory(User user) {
-        System.out.println("Checking history:");
+
         System.out.println(user.getLoginHistory());
-        System.out.println("\n\n");
+
     }
 
 
