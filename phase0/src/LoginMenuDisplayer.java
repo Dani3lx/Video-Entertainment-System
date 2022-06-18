@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Objects;
@@ -13,6 +14,8 @@ public class LoginMenuDisplayer {
     Presenter p = new Presenter();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    BanUser bu = new BanUser();
+
     /**
      * Display the start menu of the login system.
      *
@@ -20,7 +23,8 @@ public class LoginMenuDisplayer {
      */
     public void startMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
-        System.out.println(p.startMenuOption("Type 1 to login, type 2 to create a new user account"));
+        System.out.println(p.startMenuOption("Type 1 to login, type 2 to create a new user account, type 3" +
+                " to exit program"));
         if (sc.hasNextInt()) {
             int input = (sc.nextInt());
             if (input == 1) {
@@ -48,10 +52,8 @@ public class LoginMenuDisplayer {
                 } else {
                     currentUser.getLoginHistory().add(LocalDateTime.now().format(formatter));
                     System.out.println("New account has been created");
-                    //UserData.writeData();
-                    List<User> ab = UserData.getAllUsers();
-                    DataManager.writeCSV("Data.csv");
-                    DataManager.writeLoginHistoryCSV("LoginData.csv");
+
+
                     if (currentUser instanceof AdminUser) {
                         AfterLoginMenu((AdminUser) currentUser);
                     } else {
@@ -59,6 +61,11 @@ public class LoginMenuDisplayer {
                     }
                 }
 
+            } else if (input == 3){
+                DataManager sm = new DataManager();
+                sm.setUsers((ArrayList<User>) UserData.getAllUsers()); //todo try to make a solution without casting, preferably choosing either datamanager or Userdata to hold onto the instanced data
+                sm.saveData("Data.csv");
+                System.exit(0);
             } else {
                 System.out.println("Please enter a valid response");
                 startMenu();
@@ -142,6 +149,12 @@ public class LoginMenuDisplayer {
                     } else {
                         AfterLoginMenu(user);
                     }
+                    break;
+                case 6:
+                    bu.banUser(user);
+                    break;
+                case 7:
+                    bu.unBanUser();
                     break;
                 default:
                     System.out.println("Please enter a valid input");

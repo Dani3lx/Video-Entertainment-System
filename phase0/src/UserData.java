@@ -15,44 +15,38 @@ public class UserData {
 
     // this is called in the User class constructor so every time a User is created the data.txt inside the UserData
     // class is updated correctly
-    public static void updateData(User user){
+    public static void updateData(User user) {
         allUsers.add(user);
         allLoginHistory.put(user.getUserName(), user.getLoginHistory());
     }
 
+
     // a getter for allUsers
-    public static List<User> getAllUsers(){
+    public static List<User> getAllUsers() {
         return allUsers;
     } //Akmar C: Changed to Arraylist
 
-    public static HashMap<String, HashSet<String>> getAllLoginHistory(){
+    public static HashMap<String, HashSet<String>> getAllLoginHistory() {
         return allLoginHistory;
     }
-    public static void setAllUsers(List<User> userdata){
+
+    public static void setAllUsers(List<User> userdata) {
         allUsers = userdata;
     }
-    public static void readData() throws IOException {
-       BufferedReader data = new BufferedReader(new FileReader("userData.txt"));
-       String current;
-       while ((current = data.readLine())!=null){
-           allUsers2.add(current);
-       }
+
+
+    public static void displayAllUsers(List<User> users, boolean displayBan) {
+        for (User user : users){
+            if ((displayBan == user.getBanStatus()) && !(user instanceof AdminUser)){
+                System.out.println("Username: " + user.getUserName());
+            }
+        }
     }
-//    public static void writeData()  {
-//        FileWriter data = null; //todo: make sure it still has all the data it had before program ran
-//        try {
-//            data = new FileWriter("userData.txt");
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        for(Object obj:allUsers){
-//            try {
-//                data.write(obj + System.lineSeparator()); //Source: https://stackoverflow.com/questions/6548157/how-to-write-an-arraylist-of-strings-into-a-text-file
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        //todo: for login history
-//    }
+
+    public static void displayAllUsers(List<User> users) {
+        for (User user : users) {
+            System.out.println("Username: " + user.getUserName());
+        }
+    }
 
 }
