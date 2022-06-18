@@ -52,7 +52,6 @@ public class LoginMenuDisplayer {
                     currentUser.getLoginHistory().add(LocalDateTime.now().format(formatter));
                     System.out.println("New account has been created");
 
-                    List<User> ab = UserData.getAllUsers();
 
                     if (currentUser instanceof AdminUser) {
                         AfterLoginMenu((AdminUser) currentUser);
@@ -62,7 +61,8 @@ public class LoginMenuDisplayer {
                 }
 
             } else if (input == 3){
-                // todo
+                DataManager dm = new DataManager();
+                dm.saveData("Data.csv");
                 System.exit(0);
             } else {
                 System.out.println("Please enter a valid response");
