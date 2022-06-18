@@ -90,6 +90,7 @@ public abstract class User {
         while (it.hasNext()) {
             s.append(it.next() + "/");
         }
+        // https://www.geeksforgeeks.org/how-to-iterate-hashset-in-java/#:~:text=First%2C%20we%20make%20an%20iterator,Next()%20method%20in%20Java.
         return this.getUserName() + "," + this.getPassword() + "," + this.getBanStatus() + "," + this.isAdminInd() + "," + s;
     }
 }
