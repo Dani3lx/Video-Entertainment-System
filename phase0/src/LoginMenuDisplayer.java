@@ -22,7 +22,8 @@ public class LoginMenuDisplayer {
      */
     public void startMenu() throws IOException {
         Scanner sc = new Scanner(System.in);
-        System.out.println(p.startMenuOption("Type 1 to login, type 2 to create a new user account"));
+        System.out.println(p.startMenuOption("Type 1 to login, type 2 to create a new user account, type 3" +
+                " to exit program"));
         if (sc.hasNextInt()) {
             int input = (sc.nextInt());
             if (input == 1) {
@@ -61,6 +62,9 @@ public class LoginMenuDisplayer {
                     }
                 }
 
+            } else if (input == 3){
+                // todo
+                System.exit(0);
             } else {
                 System.out.println("Please enter a valid response");
                 startMenu();
