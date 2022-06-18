@@ -7,8 +7,8 @@ public class NonAdminUser extends User{
         this.setAdminInd(false);
     }
 
-    public NonAdminUser(String userName, String password, boolean banStatus){
-        super(userName, password, banStatus);
+    public NonAdminUser(String userName, String password, boolean banStatus, HashSet<String> loginHistory){
+        super(userName, password, banStatus, loginHistory);
         this.setAdminInd(false);
     }
 

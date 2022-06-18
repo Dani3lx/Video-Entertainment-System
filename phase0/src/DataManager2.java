@@ -15,10 +15,12 @@ public class DataManager2 {
             while (scanner.hasNextLine()) {
                 record = scanner.nextLine().split(",");
                 if (record[4].equals("true")){
-                    user = new AdminUser(record[0], record[1], Boolean.parseBoolean(record[2]));
+                    user = new AdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), record[3]);
+                    //todo: how to convert record[3] (string representation of hashset into actual hashset?
                 }
                 else {
-                    user = new NonAdminUser(record[0], record[1], Boolean.parseBoolean(record[2]));
+                    user = new NonAdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), record[3]);
+                    //todo: how to convert record[3] (string representation of hashset into actual hashset?
                 }
                 users.add(user);
             }
