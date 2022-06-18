@@ -15,9 +15,6 @@ public class DataManager {
             while (scanner.hasNextLine()) {
                 record = scanner.nextLine().split(",");
                 if (record[3].equals("true")){
-//                    StringBuilder sbRecord4 = new StringBuilder(record[4]);
-//                    sbRecord4.deleteCharAt(sbRecord4.length()-1);
-//                    String record4 = sbRecord4.toString();
                     AdminUser adminUser = new AdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[4].split("/"))));
                     users.add(adminUser);
                 }
