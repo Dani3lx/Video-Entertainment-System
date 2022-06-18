@@ -85,6 +85,11 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return this.getUserName() + "," + this.getPassword() + "," + this.getBanStatus() + "," + this.getLoginHistory() + "," + this.isAdminInd();
+        Iterator<String> it = loginHistory.iterator();
+        StringBuilder s = new StringBuilder();
+        while (it.hasNext()) {
+            s.append(it.next() + "/");
+        }
+        return this.getUserName() + "," + this.getPassword() + "," + this.getBanStatus() + "," + this.isAdminInd() + "," + s;
     }
 }
