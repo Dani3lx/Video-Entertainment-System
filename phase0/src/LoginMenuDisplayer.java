@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Objects;
@@ -61,8 +62,9 @@ public class LoginMenuDisplayer {
                 }
 
             } else if (input == 3){
-                DataManager dm = new DataManager();
-                dm.saveData("Data.csv");
+                DataManager sm = new DataManager();
+                sm.setUsers((ArrayList<User>) UserData.getAllUsers()); //todo try to make a solution without casting, preferably choosing either datamanager or Userdata to hold onto the instanced data
+                sm.saveData("Data.csv");
                 System.exit(0);
             } else {
                 System.out.println("Please enter a valid response");

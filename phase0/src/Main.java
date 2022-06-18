@@ -6,6 +6,7 @@ public class Main {
 
         DataManager dm = new DataManager();
         dm.loadData("Data.csv"); //Read Data from Data.csv
+        UserData.setAllUsers(dm.getUsers()); // todo, same as todo in login menu display
         LoginMenuDisplayer lmd = new LoginMenuDisplayer();
 
         lmd.startMenu();

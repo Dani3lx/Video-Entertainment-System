@@ -34,30 +34,6 @@ public class UserData {
         allUsers = userdata;
     }
 
-    public static void readData() throws IOException {
-        BufferedReader data = new BufferedReader(new FileReader("userData.txt"));
-        String current;
-        while ((current = data.readLine()) != null) {
-            allUsers2.add(current);
-        }
-    }
-//    public static void writeData()  {
-//        FileWriter data = null; //todo: make sure it still has all the data it had before program ran
-//        try {
-//            data = new FileWriter("userData.txt");
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        for(Object obj:allUsers){
-//            try {
-//                data.write(obj + System.lineSeparator()); //Source: https://stackoverflow.com/questions/6548157/how-to-write-an-arraylist-of-strings-into-a-text-file
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        //todo: for login history
-//    }
-
 
     public static void displayAllUsers(List<User> users, boolean displayBan) {
         for (User user : users){

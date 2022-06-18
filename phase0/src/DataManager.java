@@ -5,6 +5,7 @@ public class DataManager {
 
     private ArrayList<User> users = new ArrayList<>();
 
+
     public void loadData(String filePath) {
 
         try {
@@ -48,4 +49,8 @@ public class DataManager {
         return users;
     }
 
+
+    public void setUsers(java.util.ArrayList<User> users) {
+        this.users = users;
+    }
 }
