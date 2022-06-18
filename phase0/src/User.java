@@ -20,9 +20,10 @@ public abstract class User {
         // UserData.updateData(this);
     }
 
-    public User(String userName, String password, boolean banStatus){
+    public User(String userName, String password, boolean banStatus, HashSet<String> loginHistory){
         this(userName, password);
         this.banStatus = banStatus;
+        this.loginHistory = loginHistory;
 
         // this.loginHistory = new ArrayList<>();
         // UserData.updateData(this);
