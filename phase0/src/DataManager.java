@@ -11,17 +11,18 @@ public class DataManager {
         try {
             Scanner scanner = new Scanner(new FileInputStream(filePath));
             String[] record;
-            User user;
 
             while (scanner.hasNextLine()) {
                 record = scanner.nextLine().split(",");
                 if (record[4].equals("true")){
-                    user = new AdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[3].split(","))));
+                    AdminUser Adminuser = new AdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[3].split(","))));
+                    users.add(Adminuser);
                 }
                 else {
-                    user = new NonAdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[3].split(","))));
+                    NonAdminUser NonAdminuser = new NonAdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[3].split(","))));
+                    users.add(NonAdminuser);
                 }
-                users.add(user);
+
             }
             scanner.close();
         }
@@ -53,4 +54,5 @@ public class DataManager {
     public void setUsers(java.util.ArrayList<User> users) {
         this.users = users;
     }
+    
 }
