@@ -54,5 +54,5 @@ public class DataManager {
     public void setUsers(java.util.ArrayList<User> users) {
         this.users = users;
     }
-    
+
 }
