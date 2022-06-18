@@ -15,12 +15,12 @@ public class DataManager {
             while (scanner.hasNextLine()) {
                 record = scanner.nextLine().split(",");
                 if (record[4].equals("true")){
-                    AdminUser Adminuser = new AdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[3].split(","))));
-                    users.add(Adminuser);
+                    AdminUser adminUser = new AdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[3].split(","))));
+                    users.add(adminUser);
                 }
                 else {
-                    NonAdminUser NonAdminuser = new NonAdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[3].split(","))));
-                    users.add(NonAdminuser);
+                    NonAdminUser nonAdminUser = new NonAdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[3].split(","))));
+                    users.add(nonAdminUser);
                 }
 
             }
