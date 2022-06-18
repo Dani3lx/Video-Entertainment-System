@@ -42,10 +42,10 @@ public class UserManagerTest {
     @Test(timeout=50)
     public void testvalidateuser(){
         UserManager UM = new UserManager();
-        NonAdminUser u1 = new NonAdminUser("a","b");
+        NonAdminUser u1 = new NonAdminUser("f","g");
         UserData.updateData(u1);
-        User u2 =  UM.validateUser("a","b");
-        assertEquals(u2, u1);
+        User u2 =  UM.validateUser("f","g");
+        assertEquals(u1, u2);
     }
 
     @Test(timeout=50)
