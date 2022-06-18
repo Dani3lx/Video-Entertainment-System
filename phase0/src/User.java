@@ -21,10 +21,8 @@ public abstract class User {
     }
 
     public User(String userName, String password, boolean banStatus){
-        this.userName = userName;
-        this.password = password;
+        this(userName, password);
         this.banStatus = banStatus;
-        this.loginHistory = new HashSet<>();
 
         // this.loginHistory = new ArrayList<>();
         // UserData.updateData(this);

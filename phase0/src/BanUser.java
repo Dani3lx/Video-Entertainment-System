@@ -7,9 +7,8 @@ public class BanUser {
     private List<User> all_users = UserData.getAllUsers();
 
     public void banUser(User currentUser){
-        System.out.println("Here are all the users\n\n");
-        System.out.println(all_users);
-
+        System.out.println("Here are all the users that are not banned");
+        UserData.displayAllUsers(all_users, false);
         System.out.println("\n\nPlease enter the name of the user that you wish to ban");
         String name = sc.nextLine();
 
@@ -32,9 +31,9 @@ public class BanUser {
     }
 
     public void unBanUser(){
-        System.out.println("Here are all the users\n\n");
-        System.out.println(all_users);
-        System.out.println("\n\nPlease enter the name of the user that you wish to unban");
+        System.out.println("Here are all the users that are banned");
+        UserData.displayAllUsers(all_users, true);
+        System.out.println("\nPlease enter the name of the user that you wish to unban");
         String name = sc.nextLine();
         for (User user : all_users) {
             if (user.getUserName().equals(name)){
@@ -47,4 +46,5 @@ public class BanUser {
         }
         System.out.println("User can not be found");
     }
+
 }
