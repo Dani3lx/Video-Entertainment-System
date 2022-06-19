@@ -18,8 +18,8 @@ public class DeleteUser {
         List<User> all_users = UserData.getAllUsers();
 
         for (User user : all_users) {
-            if (user.getUserName().equals(name)) {
-                if (currentUser.getUserName().equals(name)) {
+            if (um.validateUserName(user, name)) {
+                if (um.validateUserName(currentUser, name)) {
                     System.out.println("Are you sure you want to delete this account");
                     System.out.println("Type t to continue");
                     String result = sc.nextLine();

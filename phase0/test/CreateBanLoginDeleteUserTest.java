@@ -16,6 +16,7 @@ public class CreateBanLoginDeleteUserTest {
 
         //THIS ADMIN USER LEFT IN SYSTEM
         // creates a new admin user and adds it to a clone of allUsers
+        UserLogin ul = new UserLogin();
         AdminUser a1 = new AdminUser("admin", "123");
         List<User> clone = new ArrayList<>(UserData.getAllUsers());
         clone.add(a1);
@@ -36,19 +37,18 @@ public class CreateBanLoginDeleteUserTest {
         // CHECKING Login
         InputStream in_2 = new ByteArrayInputStream(("admin" + System.lineSeparator() + "123").getBytes());
         System.setIn(in_2);
-        User u2 = UserLogin.loginUser();
+        User u2 = ul.loginUser();
         assertEquals(a1.getUserName(), u2.getUserName());
         assertEquals(a1.getPassword(), u2.getPassword());
         assertEquals(a1.getBanStatus(), u2.getBanStatus());
         assertEquals(a1.isAdminInd(), u2.isAdminInd());
-
-
     }
 
     // test creating,banning, login, unbanning and then deleting a NonAdminUser
     @Test(timeout = 80)
     public void testCreateAndDeleteNonAdminUser() {
 
+        UserLogin ul = new UserLogin();
         // creates 2 non-admin users and adds them to a clone of allUsers
         NonAdminUser u1 = new NonAdminUser("nonadmin", "123");
         NonAdminUser u2 = new NonAdminUser("nonadmin2", "123");
@@ -84,7 +84,7 @@ public class CreateBanLoginDeleteUserTest {
         //CHECK UserLogin - should not be allowed since banned
         InputStream in_3 = new ByteArrayInputStream(("nonadmin" + System.lineSeparator() + "123").getBytes());
         System.setIn(in_3);
-        User u3 = UserLogin.loginUser();
+        User u3 = ul.loginUser();
         assertNull(u3);
 
         // CHECK BanUser-UNBAN
@@ -98,7 +98,7 @@ public class CreateBanLoginDeleteUserTest {
         //CHECK UserLogin - should be allowed since NOT banned
         in_3 = new ByteArrayInputStream(("nonadmin" + System.lineSeparator() + "123").getBytes());
         System.setIn(in_3);
-        User u4 = UserLogin.loginUser();
+        User u4 = ul.loginUser();
 
         assertEquals(u1.getUserName(), u4.getUserName());
         assertEquals(u1.getPassword(), u4.getPassword());

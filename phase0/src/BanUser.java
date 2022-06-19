@@ -13,8 +13,8 @@ public class BanUser {
         String name = sc.nextLine();
 
         for (User user : all_users) {
-            if (user.getUserName().equals(name)) {
-                if (currentUser.getUserName().equals(name)) {
+            if (um.validateUserName(user, name)) {
+                if (um.validateUserName(currentUser, name)) {
                     System.out.println("You can not ban your own account");
 
                 } else if (user instanceof AdminUser) {
@@ -36,8 +36,8 @@ public class BanUser {
         System.out.println("\nPlease enter the name of the user that you wish to unban");
         String name = sc.nextLine();
         for (User user : all_users) {
-            if (user.getUserName().equals(name)) {
-                if (user.getBanStatus()) {
+            if (um.validateUserName(user, name)) {
+                if (um.validateBanStatus(user)) {
                     System.out.println(name + " has been unbanned");
                     um.unbanUser(user);
                 }

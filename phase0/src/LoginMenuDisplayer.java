@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class LoginMenuDisplayer {
+    UserLogin ul = new UserLogin();
     UserManager um = new UserManager();
     CreateUser cu = new CreateUser();
     DeleteUser du = new DeleteUser();
@@ -26,7 +27,7 @@ public class LoginMenuDisplayer {
         if (sc.hasNextInt()) {
             int input = (sc.nextInt());
             if (input == 1) {
-                User currentUser = UserLogin.loginUser();
+                User currentUser = ul.loginUser();
                 if (Objects.isNull(currentUser)) {
                     System.out.println("Failed to Login");
                     this.startMenu();

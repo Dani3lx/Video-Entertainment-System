@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class UserManager {
     private final List<User> users = UserData.getAllUsers();
@@ -41,5 +38,30 @@ public class UserManager {
         List<String> history = new ArrayList<>(user.getLoginHistory());
         Collections.sort(history);
         System.out.println(history);
+    }
+
+    public User instantiateUser(String userName, String password, boolean banStatus, HashSet<String> history,
+                                boolean adminStatus){
+        if (adminStatus) {
+            return new AdminUser(userName, password, banStatus, history);
+        } else {
+            return new NonAdminUser(userName, password, banStatus, history);
+        }
+    }
+
+    public User instantiateUser(String userName, String password, boolean adminStatus){
+        if (adminStatus) {
+            return new AdminUser(userName, password);
+        } else {
+            return new NonAdminUser(userName, password);
+        }
+    }
+
+    public boolean validateUserName(User user, String name) {
+        return user.getUserName().equals(name);
+    }
+
+    public boolean validateBanStatus(User user) {
+        return user.getBanStatus();
     }
 }

@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class CreateUser {
     private final Scanner sc = new Scanner(System.in);
+    UserManager um = new UserManager();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public User createUser() {
@@ -24,7 +25,7 @@ public class CreateUser {
                 }
             }
         }
-        User newUser = new NonAdminUser(userName, password);
+        User newUser = um.instantiateUser(userName, password, false);
 
         UserData.updateData(newUser);
         return newUser;
@@ -46,9 +47,9 @@ public class CreateUser {
                 }
             }
         }
-        User newUser = new AdminUser(userName, password);
-        newUser.getLoginHistory().add(LocalDateTime.now().format(formatter));
 
+        User newUser = um.instantiateUser(userName, password, true);
+        newUser.getLoginHistory().add(LocalDateTime.now().format(formatter));
         UserData.updateData(newUser);
     }
 }

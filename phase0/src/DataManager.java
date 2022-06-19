@@ -4,6 +4,7 @@ import java.io.*;
 public class DataManager {
 
     private ArrayList<User> users = new ArrayList<>();
+    private final UserManager um = new UserManager();
 
 
     public void loadData(String filePath) {
@@ -15,15 +16,14 @@ public class DataManager {
             while (scanner.hasNextLine()) {
                 record = scanner.nextLine().split(",");
                 if (record[3].equals("true")) {
-                    AdminUser adminUser = new AdminUser(record[0], record[1], Boolean.parseBoolean(record[2]),
-                            new HashSet<>(Arrays.asList(record[4].split("/"))));
+                    User adminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
+                            new HashSet<>(Arrays.asList(record[4].split("/"))), true);
                     users.add(adminUser);
                 } else {
-                    NonAdminUser nonAdminUser = new NonAdminUser(record[0], record[1], Boolean.parseBoolean(record[2]),
-                            new HashSet<>(Arrays.asList(record[4].split("/"))));
+                    User nonAdminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
+                            new HashSet<>(Arrays.asList(record[4].split("/"))), false);
                     users.add(nonAdminUser);
                 }
-
             }
             scanner.close();
         } catch (FileNotFoundException e) {
