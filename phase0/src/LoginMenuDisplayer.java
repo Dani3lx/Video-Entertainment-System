@@ -79,14 +79,8 @@ public class LoginMenuDisplayer {
      */
     private void AfterLoginMenu(NonAdminUser user) throws IOException {
 
-        System.out.println("""
-                Please input one of the following number to proceed\s
-                 1 - Change Password\s
-                 2 - Check login history\s
-                 3 - Log out\s
-
-
-                """);
+        System.out.println("Please input one of the following number to proceed " +
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n\n\n");
 
         Scanner sc = new Scanner(System.in);
 
@@ -94,19 +88,22 @@ public class LoginMenuDisplayer {
             int result = sc.nextInt();
             sc.nextLine();
             switch (result) {
-                case 1 -> {
+                case 1:
                     System.out.println("Please enter a new password");
                     String newPassword = sc.nextLine();
                     um.changePassword(user, newPassword);
                     System.out.println("Password change was successful\n");
-                }
-                case 2 -> {
+                    break;
+                case 2:
                     System.out.println("Checking history:");
                     um.checkHistory(user);
                     System.out.println("\n");
-                }
-                case 3 -> startMenu();
-                default -> System.out.println("Please enter a valid input");
+                    break;
+                case 3:
+                    startMenu();
+                    break;
+                default:
+                    System.out.println("Please enter a valid input");
             }
         } else {
             System.out.println("Please enter a valid input");
@@ -119,16 +116,9 @@ public class LoginMenuDisplayer {
      * Display the menu after AdminUser logs in.
      */
     private void AfterLoginMenu(AdminUser user) throws IOException {
-        System.out.println("""
-                Please input one of the following number to proceed\s
-                 1 - Change Password\s
-                 2 - Check login history\s
-                 3 - Log out\s
-                 4 - Create AdminUser\s
-                 5 - Delete User\s
-                 6 - Ban User\s
-                 7 - UnBan User\s
-                """);
+        System.out.println("Please input one of the following number to proceed " +
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
+                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n");
         Scanner sc = new Scanner(System.in);
         if (sc.hasNextInt()) {
             int result = sc.nextInt();
