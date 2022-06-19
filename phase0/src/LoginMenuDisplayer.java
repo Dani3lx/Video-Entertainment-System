@@ -33,7 +33,7 @@ public class LoginMenuDisplayer {
                     this.startMenu();
                 } else {
 
-                    currentUser.getLoginHistory().add(LocalDateTime.now().format(formatter));
+                    um.updateHistory(currentUser, LocalDateTime.now().format(formatter));
                     if (currentUser instanceof AdminUser) {
                         System.out.println(p.alertText("you are now logged in to an admin account"));
                         AfterLoginMenu((AdminUser) currentUser);
@@ -49,9 +49,8 @@ public class LoginMenuDisplayer {
                     System.out.println("Failed to create a new account");
                     this.startMenu();
                 } else {
-                    currentUser.getLoginHistory().add(LocalDateTime.now().format(formatter));
+                    um.updateHistory(currentUser, LocalDateTime.now().format(formatter));
                     System.out.println("New account has been created");
-
 
                     if (currentUser instanceof AdminUser) {
                         AfterLoginMenu((AdminUser) currentUser);

@@ -40,6 +40,10 @@ public class UserManager {
         System.out.println(history);
     }
 
+    public void updateHistory(User user, String date) {
+        user.getLoginHistory().add(date);
+    }
+
     public User instantiateUser(String userName, String password, boolean banStatus, HashSet<String> history,
                                 boolean adminStatus){
         if (adminStatus) {

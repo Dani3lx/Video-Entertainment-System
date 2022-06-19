@@ -41,7 +41,7 @@ public class CreateUser {
         List<User> all_users = UserData.getAllUsers();
         if (!(Objects.isNull(all_users))) {
             for (User u : all_users) {
-                if (u.getUserName().equals(userName)) {
+                if (um.validateUserName(u, userName)) {
                     System.out.println("Failed to create a new account");
                     return;
                 }
@@ -49,7 +49,7 @@ public class CreateUser {
         }
 
         User newUser = um.instantiateUser(userName, password, true);
-        newUser.getLoginHistory().add(LocalDateTime.now().format(formatter));
+        um.updateHistory(newUser, LocalDateTime.now().format(formatter));
         UserData.updateData(newUser);
     }
 }
