@@ -59,9 +59,9 @@ public class LoginMenuDisplayer {
                     }
                 }
 
-            } else if (input == 3){
+            } else if (input == 3) {
                 DataManager sm = new DataManager();
-                sm.setUsers((ArrayList<User>) UserData.getAllUsers()); //todo try to make a solution without casting, preferably choosing either datamanager or Userdata to hold onto the instanced data
+                sm.setUsers((ArrayList<User>) UserData.getAllUsers());
                 sm.saveData("Data.csv");
                 System.exit(0);
             } else {

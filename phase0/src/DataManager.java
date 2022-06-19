@@ -14,19 +14,19 @@ public class DataManager {
 
             while (scanner.hasNextLine()) {
                 record = scanner.nextLine().split(",");
-                if (record[3].equals("true")){
-                    AdminUser adminUser = new AdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[4].split("/"))));
+                if (record[3].equals("true")) {
+                    AdminUser adminUser = new AdminUser(record[0], record[1], Boolean.parseBoolean(record[2]),
+                            new HashSet<>(Arrays.asList(record[4].split("/"))));
                     users.add(adminUser);
-                }
-                else {
-                    NonAdminUser nonAdminUser = new NonAdminUser(record[0], record[1], Boolean.parseBoolean(record[2]), new HashSet<>(Arrays.asList(record[4].split("/"))));
+                } else {
+                    NonAdminUser nonAdminUser = new NonAdminUser(record[0], record[1], Boolean.parseBoolean(record[2]),
+                            new HashSet<>(Arrays.asList(record[4].split("/"))));
                     users.add(nonAdminUser);
                 }
 
             }
             scanner.close();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
         }
     }
@@ -40,13 +40,12 @@ public class DataManager {
             }
 
             writer.close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred.");
         }
     }
 
-    public ArrayList<User> getUsers(){
+    public ArrayList<User> getUsers() {
         return users;
     }
 

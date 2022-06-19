@@ -2,19 +2,21 @@ import org.junit.*;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+
 import static org.junit.Assert.*;
+
 import java.io.ByteArrayInputStream;
 import java.util.List;
 
 public class CreateBanLoginDeleteUserTest {
 
     // test creating, logging in as AdminUser
-    @Test(timeout=80)
-    public void testCreateAdminUser(){
+    @Test(timeout = 80)
+    public void testCreateAdminUser() {
 
         //THIS ADMIN USER LEFT IN SYSTEM
         // creates a new admin user and adds it to a clone of allUsers
-        AdminUser a1 = new AdminUser("admin","123");
+        AdminUser a1 = new AdminUser("admin", "123");
         List<User> clone = new ArrayList<>(UserData.getAllUsers());
         clone.add(a1);
 
@@ -25,7 +27,7 @@ public class CreateBanLoginDeleteUserTest {
         CreateUser CU = new CreateUser();
         CU.creatAdminUser();
         // test to see that the content of both lists match
-        for(int i = 0; i < clone.size(); i++){
+        for (int i = 0; i < clone.size(); i++) {
             assertEquals(clone.get(i).getUserName(), UserData.getAllUsers().get(i).getUserName());
             assertEquals(clone.get(i).getPassword(), UserData.getAllUsers().get(i).getPassword());
             assertEquals(clone.get(i).getBanStatus(), UserData.getAllUsers().get(i).getBanStatus());
@@ -44,12 +46,12 @@ public class CreateBanLoginDeleteUserTest {
     }
 
     // test creating,banning, login, unbanning and then deleting a NonAdminUser
-    @Test(timeout=80)
-    public void testCreateAndDeleteNonAdminUser(){
+    @Test(timeout = 80)
+    public void testCreateAndDeleteNonAdminUser() {
 
         // creates 2 non-admin users and adds them to a clone of allUsers
-        NonAdminUser u1 = new NonAdminUser("nonadmin","123");
-        NonAdminUser u2 = new NonAdminUser("nonadmin2","123");
+        NonAdminUser u1 = new NonAdminUser("nonadmin", "123");
+        NonAdminUser u2 = new NonAdminUser("nonadmin2", "123");
 
         List<User> clone = new ArrayList<>(UserData.getAllUsers());
         clone.add(u2);
@@ -63,7 +65,7 @@ public class CreateBanLoginDeleteUserTest {
         CreateUser CU = new CreateUser();
         CU.createUser();
         // test to see that the content of both lists match
-        for(int i = 0; i < clone.size(); i++){
+        for (int i = 0; i < clone.size(); i++) {
             assertEquals(clone.get(i).getUserName(), UserData.getAllUsers().get(i).getUserName());
             assertEquals(clone.get(i).getPassword(), UserData.getAllUsers().get(i).getPassword());
             assertEquals(clone.get(i).getBanStatus(), UserData.getAllUsers().get(i).getBanStatus());
@@ -91,10 +93,10 @@ public class CreateBanLoginDeleteUserTest {
         BanUser BU_2 = new BanUser();
         BU_2.unBanUser();
         UserData.getAllUsers().get(1).setBanStatus(false);
-        assertFalse("You have successfully unbanned nonadmin",UserData.getAllUsers().get(1).getBanStatus()) ;
+        assertFalse("You have successfully unbanned nonadmin", UserData.getAllUsers().get(1).getBanStatus());
 
         //CHECK UserLogin - should be allowed since NOT banned
-        in_3 =  new ByteArrayInputStream(("nonadmin" + System.lineSeparator() + "123").getBytes());
+        in_3 = new ByteArrayInputStream(("nonadmin" + System.lineSeparator() + "123").getBytes());
         System.setIn(in_3);
         User u4 = UserLogin.loginUser();
 
@@ -119,7 +121,7 @@ public class CreateBanLoginDeleteUserTest {
         DeleteUser DU_2 = new DeleteUser();
         DU_2.deleteUser(u2);
         // test to see that the content of both lists match
-        for(int i = 0; i < clone.size(); i++){
+        for (int i = 0; i < clone.size(); i++) {
             assertEquals(clone.get(i).getUserName(), UserData.getAllUsers().get(i).getUserName());
             assertEquals(clone.get(i).getPassword(), UserData.getAllUsers().get(i).getPassword());
             assertEquals(clone.get(i).getBanStatus(), UserData.getAllUsers().get(i).getBanStatus());

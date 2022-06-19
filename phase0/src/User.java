@@ -1,16 +1,14 @@
 import java.util.HashSet;
 import java.util.Iterator;
+
 public abstract class User {
     private final String userName;
     private String password;
-
-    // Stores A date-time without a time-zone in the ISO-8601 calendar system, such as 2007-12-03T10:15:30. We can
-    // change this later.
     private HashSet<String> loginHistory;
     private boolean banStatus;
     private boolean adminInd;
 
-    public User(String userName, String password){
+    public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
         this.banStatus = false;
@@ -18,7 +16,7 @@ public abstract class User {
 
     }
 
-    public User(String userName, String password, boolean banStatus, HashSet<String> loginHistory){
+    public User(String userName, String password, boolean banStatus, HashSet<String> loginHistory) {
         this(userName, password);
         this.banStatus = banStatus;
         this.loginHistory = loginHistory;
@@ -33,7 +31,6 @@ public abstract class User {
     public void setAdminInd(boolean adminInd) {
         this.adminInd = adminInd;
     }
-
 
 
     public String getUserName() {
