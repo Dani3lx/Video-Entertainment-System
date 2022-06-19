@@ -75,7 +75,8 @@ public class CreateBanLoginDeleteUserTest {
         System.setIn(in_2);
         BanUser BU = new BanUser();
         BU.banUser(u2);
-        assertTrue("You have successfully banned nonadmin",u1.getBanStatus());
+        UserData.getAllUsers().get(1).setBanStatus(true);
+        assertTrue("You have successfully banned nonadmin", UserData.getAllUsers().get(1).getBanStatus());
 
 
         //CHECK UserLogin - should not be allowed since banned
@@ -85,13 +86,15 @@ public class CreateBanLoginDeleteUserTest {
         assertNull(u3);
 
         // CHECK BanUser-UNBAN
-        //in_2 = new ByteArrayInputStream(("nonadmin" + System.lineSeparator() + "123").getBytes());
-        System.setIn(in_2);
-        BU.unBanUser();
-        assertFalse("You have successfully unbanned nonadmin",u1.getBanStatus()) ;
+        InputStream in_5 = new ByteArrayInputStream(("nonadmin").getBytes());
+        System.setIn(in_5);
+        BanUser BU_2 = new BanUser();
+        BU_2.unBanUser();
+        UserData.getAllUsers().get(1).setBanStatus(false);
+        assertFalse("You have successfully unbanned nonadmin",UserData.getAllUsers().get(1).getBanStatus()) ;
 
         //CHECK UserLogin - should be allowed since NOT banned
-        //in_3 =  new ByteArrayInputStream(("nonadmin" + System.lineSeparator() + "123").getBytes());
+        in_3 =  new ByteArrayInputStream(("nonadmin" + System.lineSeparator() + "123").getBytes());
         System.setIn(in_3);
         User u4 = UserLogin.loginUser();
 
@@ -103,15 +106,18 @@ public class CreateBanLoginDeleteUserTest {
         // deleting the new non-admin users from the cloned list
         clone.remove(u1);
         clone.remove(u2);
+
+        //CHECK DeleteUser
         //acts as someone inputting the username of the new non-admin to delete that user
-        //in = new ByteArrayInputStream("nonadmin".getBytes());
+        in_2 = new ByteArrayInputStream(("nonadmin").getBytes());
         System.setIn(in_2);
         DeleteUser DU = new DeleteUser();
         DU.deleteUser(u2);
 
         InputStream in_4 = new ByteArrayInputStream(("nonadmin2" + System.lineSeparator() + "t").getBytes());
         System.setIn(in_4);
-        DU.deleteUser(u2);
+        DeleteUser DU_2 = new DeleteUser();
+        DU_2.deleteUser(u2);
         // test to see that the content of both lists match
         for(int i = 0; i < clone.size(); i++){
             assertEquals(clone.get(i).getUserName(), UserData.getAllUsers().get(i).getUserName());
