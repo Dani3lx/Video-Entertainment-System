@@ -1,11 +1,9 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class LoginMenuDisplayer {
     UserManager um = new UserManager();
@@ -81,8 +79,14 @@ public class LoginMenuDisplayer {
      */
     private void AfterLoginMenu(NonAdminUser user) throws IOException {
 
-        System.out.println("Please input one of the following number to proceed " +
-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n\n\n");
+        System.out.println("""
+                Please input one of the following number to proceed\s
+                 1 - Change Password\s
+                 2 - Check login history\s
+                 3 - Log out\s
+
+
+                """);
 
         Scanner sc = new Scanner(System.in);
 
@@ -90,22 +94,19 @@ public class LoginMenuDisplayer {
             int result = sc.nextInt();
             sc.nextLine();
             switch (result) {
-                case 1:
+                case 1 -> {
                     System.out.println("Please enter a new password");
                     String newPassword = sc.nextLine();
                     um.changePassword(user, newPassword);
                     System.out.println("Password change was successful\n");
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.println("Checking history:");
                     um.checkHistory(user);
                     System.out.println("\n");
-                    break;
-                case 3:
-                    startMenu();
-                    break;
-                default:
-                    System.out.println("Please enter a valid input");
+                }
+                case 3 -> startMenu();
+                default -> System.out.println("Please enter a valid input");
             }
         } else {
             System.out.println("Please enter a valid input");
@@ -118,9 +119,16 @@ public class LoginMenuDisplayer {
      * Display the menu after AdminUser logs in.
      */
     private void AfterLoginMenu(AdminUser user) throws IOException {
-        System.out.println("Please input one of the following number to proceed " +
-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
-                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n");
+        System.out.println("""
+                Please input one of the following number to proceed\s
+                 1 - Change Password\s
+                 2 - Check login history\s
+                 3 - Log out\s
+                 4 - Create AdminUser\s
+                 5 - Delete User\s
+                 6 - Ban User\s
+                 7 - UnBan User\s
+                """);
         Scanner sc = new Scanner(System.in);
         if (sc.hasNextInt()) {
             int result = sc.nextInt();

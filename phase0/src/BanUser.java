@@ -2,9 +2,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BanUser {
-    private UserManager um = new UserManager();
-    private Scanner sc = new Scanner(System.in);
-    private List<User> all_users = UserData.getAllUsers();
+    private final UserManager um = new UserManager();
+    private final Scanner sc = new Scanner(System.in);
+    private final List<User> all_users = UserData.getAllUsers();
 
     public void banUser(User currentUser){
         System.out.println("Here are all the users that are not banned");

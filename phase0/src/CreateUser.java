@@ -1,10 +1,9 @@
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class CreateUser {
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 //    @param user: username of new User to be created
 //    @param pass: password of new User to be created
 //    @param admin: true/false whether the user to be created is admin or not
@@ -36,7 +35,7 @@ public class CreateUser {
         return newUser;
     }
 
-    // Returns void because im assuming that we dont just log into the new account automatically when we create one.
+    // Returns void because im assuming that we don't just log into the new account automatically when we create one.
     public void creatAdminUser(){
         System.out.println("Please enter a username: ");
         String userName = sc.nextLine();

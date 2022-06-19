@@ -7,8 +7,8 @@ public class DeleteUser {
      * Delete a specific user.
      * Returns true if self is deleted.
      */
-    private Scanner sc = new Scanner(System.in);
-    private UserManager um = new UserManager();
+    private final Scanner sc = new Scanner(System.in);
+    private final UserManager um = new UserManager();
     public boolean deleteUser(User currentUser) {
         System.out.println("Here are all the users: \n");
         UserData.displayAllUsers(UserData.getAllUsers());

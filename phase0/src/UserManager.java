@@ -1,8 +1,10 @@
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class UserManager {
-    private List<User> users = UserData.getAllUsers(); // todo: maybe change this cause I'm not sure if it works correct
+    private final List<User> users = UserData.getAllUsers();
 
     public void deleteUser(User user){
         users.remove(user);

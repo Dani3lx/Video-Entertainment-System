@@ -1,7 +1,7 @@
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
 public abstract class User {
-    private String userName;
+    private final String userName;
     private String password;
 
     // Stores A date-time without a time-zone in the ISO-8601 calendar system, such as 2007-12-03T10:15:30. We can
@@ -16,8 +16,6 @@ public abstract class User {
         this.banStatus = false;
         this.loginHistory = new HashSet<>();
 
-        // this.loginHistory = new ArrayList<>();
-        // UserData.updateData(this);
     }
 
     public User(String userName, String password, boolean banStatus, HashSet<String> loginHistory){
@@ -25,13 +23,8 @@ public abstract class User {
         this.banStatus = banStatus;
         this.loginHistory = loginHistory;
 
-        // this.loginHistory = new ArrayList<>();
-        // UserData.updateData(this);
     }
 
-    public boolean isBanStatus() {
-        return banStatus;
-    }
 
     public boolean isAdminInd() {
         return adminInd;
@@ -47,10 +40,6 @@ public abstract class User {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -63,9 +52,6 @@ public abstract class User {
         return loginHistory;
     }
 
-    public void setLoginHistory(HashSet<String> loginHistory) {
-        this.loginHistory = loginHistory;
-    }
 
     public boolean getBanStatus() {
         return banStatus;
@@ -75,20 +61,12 @@ public abstract class User {
         this.banStatus = banStatus;
     }
 
-    public void addLoginHistory(String loginHistory) { //todo: Added this to append loginhistory - A.C.
-        this.loginHistory.add(loginHistory);
-    }
-
-    public void setAdmin(){
-        this.adminInd = true;
-    }
-
     @Override
     public String toString() {
         Iterator<String> it = loginHistory.iterator();
         StringBuilder s = new StringBuilder();
         while (it.hasNext()) {
-            s.append(it.next() + "/");
+            s.append(it.next()).append("/");
         }
         // https://www.geeksforgeeks.org/how-to-iterate-hashset-in-java/#:~:text=First%2C%20we%20make%20an%20iterator,Next()%20method%20in%20Java.
         return this.getUserName() + "," + this.getPassword() + "," + this.getBanStatus() + "," + this.isAdminInd() + "," + s;
