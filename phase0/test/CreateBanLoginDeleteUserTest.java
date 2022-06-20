@@ -14,14 +14,13 @@ public class CreateBanLoginDeleteUserTest {
     @Test(timeout = 80)
     public void testCreateAdminUser() {
 
-        //THIS ADMIN USER LEFT IN SYSTEM
         // creates a new admin user and adds it to a clone of allUsers
         UserLogin ul = new UserLogin();
         AdminUser a1 = new AdminUser("admin", "123");
         List<User> clone = new ArrayList<>(UserData.getAllUsers());
         clone.add(a1);
 
-        //CHECKING CreateUser
+        // CHECKING CreateUser
         // acts as someone inputting their username and password to create an admin user
         InputStream in = new ByteArrayInputStream(("admin" + System.lineSeparator() + "123").getBytes());       //https://stackoverflow.com/questions/31635698/junit-testing-for-user-input-using-scanner
         System.setIn(in);
@@ -58,7 +57,7 @@ public class CreateBanLoginDeleteUserTest {
         clone.add(u1);
         UserData.updateData(u2);
 
-        //CHECK CreateUser
+        // CHECK CreateUser
         // acts as someone inputting their username and password to create a non-admin user
         InputStream in = new ByteArrayInputStream(("nonadmin" + System.lineSeparator() + "123").getBytes());
         System.setIn(in);
@@ -81,7 +80,7 @@ public class CreateBanLoginDeleteUserTest {
         assertTrue("You have successfully banned nonadmin", UserData.getAllUsers().get(1).getBanStatus());
 
 
-        //CHECK UserLogin - should not be allowed since banned
+        // CHECK UserLogin - should not be allowed since banned
         InputStream in_3 = new ByteArrayInputStream(("nonadmin" + System.lineSeparator() + "123").getBytes());
         System.setIn(in_3);
         User u3 = ul.loginUser();
@@ -95,7 +94,7 @@ public class CreateBanLoginDeleteUserTest {
         UserData.getAllUsers().get(1).setBanStatus(false);
         assertFalse("You have successfully unbanned nonadmin", UserData.getAllUsers().get(1).getBanStatus());
 
-        //CHECK UserLogin - should be allowed since NOT banned
+        // CHECK UserLogin - should be allowed since NOT banned
         in_3 = new ByteArrayInputStream(("nonadmin" + System.lineSeparator() + "123").getBytes());
         System.setIn(in_3);
         User u4 = ul.loginUser();
@@ -109,7 +108,7 @@ public class CreateBanLoginDeleteUserTest {
         clone.remove(u1);
         clone.remove(u2);
 
-        //CHECK DeleteUser
+        // CHECK DeleteUser
         //acts as someone inputting the username of the new non-admin to delete that user
         in_2 = new ByteArrayInputStream(("nonadmin").getBytes());
         System.setIn(in_2);
