@@ -62,7 +62,7 @@ public class LoginMenuDisplayer {
             } else if (input == 3) {
                 DataManager sm = new DataManager();
                 sm.setUsers((ArrayList<User>) UserData.getAllUsers());
-                sm.saveData("Data.csv");
+                sm.saveData("phase0/Data.csv");
                 System.exit(0);
             } else {
                 System.out.println("Please enter a valid response");
