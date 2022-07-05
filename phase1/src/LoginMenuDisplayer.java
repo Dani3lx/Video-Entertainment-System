@@ -17,6 +17,7 @@ public class LoginMenuDisplayer {
      * @throws IOException if error reading from file
      */
     public void startMenu() throws IOException {
+        // test
         Scanner sc = new Scanner(System.in);
         System.out.println(p.startMenuOption("Type 1 to login, type 2 to create a new user account, type 3" +
                 " to exit program"));
