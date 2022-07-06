@@ -1,7 +1,16 @@
 import java.util.List;
 
 public class AdminManager extends UserManager{
-    private final List<User> users = UserData.getAllUsers();
+
+    private UserManager um;
+
+    private List<User> users;
+
+    public AdminManager(UserManager um){
+        this.um = um;
+        users = um.getAllUsers();
+    }
+
     public void banUser(User user) {
         user.setBanStatus(true);
     }

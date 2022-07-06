@@ -1,11 +1,11 @@
 import java.util.*;
 
 public class UserManager {
-    private final List<User> users;
+    private List<User> users;
 
-    public UserManager() {
-        users = UserData.getAllUsers();
-    }
+//    public UserManager() {
+//        users = UserData.getAllUsers();
+//    }
 
     public User validateUser(String username, String password) {
         if (Objects.isNull(users)) {
@@ -59,5 +59,33 @@ public class UserManager {
 
     public boolean validateBanStatus(User user) {
         return user.getBanStatus();
+    }
+
+    public void updateData(User user) {
+        users.add(user);
+    }
+
+    public List<User> getAllUsers() {
+        return users;
+    }
+
+
+    public void setAllUsers(List<User> allUsers) {
+        users = allUsers;
+    }
+
+
+    public void displayAllUsers(List<User> users, boolean displayBan) {
+        for (User user : users) {
+            if ((displayBan == user.getBanStatus()) && !(user instanceof AdminUser)) {
+                System.out.println("Username: " + user.getUserName());
+            }
+        }
+    }
+
+    public void displayAllUsers(List<User> users) {
+        for (User user : users) {
+            System.out.println("Username: " + user.getUserName());
+        }
     }
 }

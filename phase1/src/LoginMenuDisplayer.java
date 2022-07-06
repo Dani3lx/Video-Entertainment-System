@@ -6,10 +6,16 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class LoginMenuDisplayer {
-    UserManager um = new UserManager();
-    UserInterfaceHandler UIhandler = new UserInterfaceHandler();
+//    UserManager um = new UserManager();
+    private UserManager um;
+    UserInterfaceHandler UIhandler;
     Presenter p = new Presenter();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    public LoginMenuDisplayer(UserManager um){
+        this.um = um;
+        UIhandler = new UserInterfaceHandler(um);
+    }
 
     /**
      * Display the start menu of the login system.
@@ -51,12 +57,11 @@ public class LoginMenuDisplayer {
                     } else {
                         um.updateHistory(currentUser, LocalDateTime.now().format(formatter));
                         System.out.println("New account has been created");
-
                         AfterLoginMenu(currentUser);
                     }
                 case 3:
-                    DataManager sm = new DataManager();
-                    sm.setUsers((ArrayList<User>) UserData.getAllUsers());
+                    DataManager sm = new DataManager(um);
+                    sm.setUsers((ArrayList<User>) um.getAllUsers());
                     sm.saveData("phase1/Data.csv");
                     System.exit(0);
                 default:

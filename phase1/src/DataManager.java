@@ -4,7 +4,12 @@ import java.io.*;
 public class DataManager {
 
     private ArrayList<User> users = new ArrayList<>();
-    private final UserManager um = new UserManager();
+
+    private UserManager um;
+
+    public DataManager(UserManager um){
+        this.um = um;
+    }
 
 
     public void loadData(String filePath) {

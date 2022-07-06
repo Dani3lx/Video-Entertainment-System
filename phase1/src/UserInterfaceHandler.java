@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -5,12 +6,18 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class UserInterfaceHandler {
-
-    private final AdminManager am = new AdminManager();
+    private UserManager um;
+    private AdminManager am;
     private final Scanner sc = new Scanner(System.in);
-    private final List<User> all_users = UserData.getAllUsers();
+    private List<User> all_users;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    public UserInterfaceHandler(UserManager um){
+        this.um = um;
+        am = new AdminManager(um);
+        all_users = um.getAllUsers();
+    }
 
     public User loginUser() {
         Scanner sc = new Scanner(System.in);
@@ -18,16 +25,16 @@ public class UserInterfaceHandler {
         String username = sc.nextLine();
         System.out.println("Please enter your password: ");
         String password = sc.nextLine();
-        UserManager thisUserManager = new UserManager();
-        return thisUserManager.validateUser(username, password);
+//        UserManager thisUserManager = new UserManager();
+        return um.validateUser(username, password);
     }
 
     public boolean deleteUser(User currentUser) {
         System.out.println("Here are all the users: \n");
-        UserData.displayAllUsers(UserData.getAllUsers());
+        um.displayAllUsers(um.getAllUsers());
         System.out.println("Please enter the username of the user you wish to delete");
         String name = sc.nextLine();
-        List<User> all_users = UserData.getAllUsers();
+        List<User> all_users = um.getAllUsers();
 
         for (User user : all_users) {
             if (am.validateUserName(user, name)) {
@@ -61,7 +68,7 @@ public class UserInterfaceHandler {
         String password = sc.nextLine();
 
 
-        List<User> all_users = UserData.getAllUsers();
+        List<User> all_users = um.getAllUsers();
         if (!(Objects.isNull(all_users))) {
             for (User u : all_users) {
                 if (u.getUserName().equals(userName)) {
@@ -71,7 +78,7 @@ public class UserInterfaceHandler {
         }
         User newUser = am.instantiateUser(userName, password, false);
 
-        UserData.updateData(newUser);
+        um.updateData(newUser);
         return newUser;
     }
 
@@ -82,7 +89,7 @@ public class UserInterfaceHandler {
         System.out.println("Please enter a password: ");
         String password = sc.nextLine();
 
-        List<User> all_users = UserData.getAllUsers();
+        List<User> all_users = um.getAllUsers();
         if (!(Objects.isNull(all_users))) {
             for (User u : all_users) {
                 if (am.validateUserName(u, userName)) {
@@ -94,12 +101,12 @@ public class UserInterfaceHandler {
 
         User newUser = am.instantiateUser(userName, password, true);
         am.updateHistory(newUser, LocalDateTime.now().format(formatter));
-        UserData.updateData(newUser);
+        um.updateData(newUser);
     }
 
     public void banUser(User currentUser) {
         System.out.println("Here are all the users that are not banned");
-        UserData.displayAllUsers(all_users, false);
+        um.displayAllUsers(all_users, false);
         System.out.println("\n\nPlease enter the name of the user that you wish to ban");
         String name = sc.nextLine();
 
@@ -123,7 +130,7 @@ public class UserInterfaceHandler {
 
     public void unBanUser() {
         System.out.println("Here are all the users that are banned");
-        UserData.displayAllUsers(all_users, true);
+        um.displayAllUsers(all_users, true);
         System.out.println("\nPlease enter the name of the user that you wish to unban");
         String name = sc.nextLine();
         for (User user : all_users) {
@@ -137,7 +144,5 @@ public class UserInterfaceHandler {
         }
         System.out.println("User can not be found");
     }
-
-
 
 }
