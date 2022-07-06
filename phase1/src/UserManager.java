@@ -3,10 +3,6 @@ import java.util.*;
 public class UserManager {
     private List<User> users;
 
-//    public UserManager() {
-//        users = UserData.getAllUsers();
-//    }
-
     public User validateUser(String username, String password) {
         if (Objects.isNull(users)) {
             return null;
