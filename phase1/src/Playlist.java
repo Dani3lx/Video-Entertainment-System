@@ -1,17 +1,18 @@
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Playlist {
 
-    private String playlist_name;
+    private String name;
     private int likes, length;
-    private List<Video> videos;
+    private ArrayList<Video> videos = new ArrayList<>();
 
-    public String getPlaylist_name() {
-        return playlist_name;
+    public String getPlaylistName() {
+        return name;
     }
 
-    public void setPlaylist_name(String name) {
-        this.playlist_name = name;
+    public void setPlaylistName(String name) {
+        this.name = name;
     }
 
     public int getLikes() {
@@ -30,11 +31,20 @@ public class Playlist {
         this.length = length;
     }
 
-    public List<Video> getVideos() {
+    public ArrayList<Video> getVideos() {
         return videos;
     }
 
-    public void setVideos(List<Video> videos) {
+    public void setVideos(ArrayList<Video> videos) {
         this.videos = videos;
     }
+
+    public String toString() {
+        ArrayList<String> lst = new ArrayList<>();
+        for (Video v : videos) {
+            lst.add(v.getName());
+        }
+        return lst.toString();
+    }
+
 }

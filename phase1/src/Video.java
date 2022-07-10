@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Video {
+public class Video implements Comparable<Video> {
 
     private String content;
     private String uniqueID;
@@ -13,7 +13,8 @@ public class Video {
     private ArrayList<String> history; // datetime + description
     // private ratings
 
-    public Video(){
+    public Video(String name){
+        this.name = name;
         //need to decide how we initialize the video construct
         //it will heavily depend on upload video in videomanager
 
@@ -71,6 +72,20 @@ public class Video {
     //todo include append and remove categories as well since setCategories only adds a predetermined arraylist to replace the current one
     public void setCategories(ArrayList<String> categories) {
         this.categories = categories;
+    }
+
+    @Override
+    public int compareTo(Video v) {
+        int i = this.getName().compareTo(v.getName());
+        if (i == 0) {
+            return 0;
+        }
+        else if (i > 0) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
     }
 }
 
