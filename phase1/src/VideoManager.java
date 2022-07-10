@@ -85,7 +85,7 @@ public class VideoManager {
     public ArrayList<Video> getByName(String name) {
         ArrayList<Video> videoList = new ArrayList<>();
         for (Video vid : vids) {
-            if (vid.getName().contains(name)) {
+            if ((vid.getName().toLowerCase()).contains((name).toLowerCase())) {
                 videoList.add(vid);
             }
         }
