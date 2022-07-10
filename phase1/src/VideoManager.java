@@ -44,7 +44,7 @@ public class VideoManager {
     }
 
 
-    public List<Video> retrieveVideobyUploader(String uploader){
+    public ArrayList<Video> getByUploader(String uploader){
         ArrayList<Video> vid_list = new ArrayList<>();
         for (Video v: vids){
 
