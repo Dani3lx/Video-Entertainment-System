@@ -82,6 +82,28 @@ public class VideoManager {
         return vid_list;
     }
 
+    public ArrayList<Video> getByName(String name) {
+        ArrayList<Video> videoList = new ArrayList<>();
+        for (Video vid : vids) {
+            if (vid.getName().contains(name)) {
+                videoList.add(vid);
+            }
+        }
+
+        return videoList;
+    }
+
+    public ArrayList<Video> getByCategory(ArrayList<String> categories) {
+        ArrayList<Video> videoList = new ArrayList<>();
+        for (Video vid : vids) {
+            if (vid.getCategories().containsAll(categories)) {
+                videoList.add(vid);
+            }
+        }
+
+        return videoList;
+    }
+
 
 
 
