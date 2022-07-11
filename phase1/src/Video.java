@@ -3,18 +3,29 @@ import java.util.ArrayList;
 
 public class Video implements Comparable<Video> {
 
-    private String content;
-    private String uniqueID;
-    private String description;
-    private ArrayList<String> categories;
-    private String name;
-    private String uploader;
-    private LocalDateTime date_upload;
+    private String content; // This is the URL/Video
+    private String uniqueID; // This is a unique ID for every video
+    private String description; // This is the description of the video, it can be changed
+    private ArrayList<String> categories; // this is the categories for the video, used to browse
+    private String name; // this is the title of the video, does not have to be unique, can be changed
+    private String uploader; // this is the person who creates/uploads the video
+    private LocalDateTime date_upload; // this is the time of creation/upload
     private ArrayList<String> history; // datetime + description
     // private ratings
 
-    public Video(String name){
+    public Video(String name,String uploader, String description,ArrayList<String> categories,String content,
+                 LocalDateTime date_upload,String uniqueID, ArrayList<String> history){
+
+        //todo When creating/uploading video, we create a uniqueID and date_upload (localdatetime.now) on creation (history included)
+
         this.name = name;
+        this.uploader = uploader;
+        this.description = description;
+        this.categories = categories;
+        this.content = content;
+        this.date_upload = date_upload;
+        this.uniqueID = uniqueID;
+        this.history = history;
         //need to decide how we initialize the video construct
         //it will heavily depend on upload video in videomanager
 
