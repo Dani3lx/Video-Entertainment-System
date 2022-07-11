@@ -28,7 +28,8 @@ public class VideoManager {
 
         }
         String timeOfUpload = LocalDateTime.now().toString();
-        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, timeOfUpload);
+        Integer[] ratings = {0,0};
+        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, timeOfUpload);
         vids.add(v1);
         return true;
 //        if (!isInAllCateogries(categories)){
