@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class VideoManager {
     private List<Video> vids;
+    private List<String> allCategories;
     // Nicholas: I am thinking should we store uniqueID instead of Video,
     // wondering if storing Video in the collection cause any problem
 
@@ -21,6 +23,11 @@ public class VideoManager {
                 }
             }
         }
+        if (!isInAllCateogries(categories)){
+            return false; //TODO change this so that it can return correct which category
+        }
+        // TODO if vidLink exist, return false
+        // TODO update uploader's user profil to add an extra video onto it
         Video v1 = new Video(uploader, title, description, categories, vidLink);
         vids.add(v1);
         return true;
@@ -46,6 +53,19 @@ public class VideoManager {
 
             }
         }
+    }
+    public List<String> getAllCategories(){
+        return allCategories;
+    }
+
+    // https://stackoverflow.com/questions/22461470/if-x-in-array-in-java
+    public Boolean isInAllCateogries(ArrayList<String> categories){
+        for (String category: categories){
+            if (!Arrays.asList(allCategories).contains(category)){
+                 return false;
+            }
+        }
+        return true;
     }
 
 

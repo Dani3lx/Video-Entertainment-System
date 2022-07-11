@@ -22,8 +22,7 @@ public class Video implements Comparable<Video> {
         this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/");
         this.description = description;
         this.categories = categories;
-
-        // TODO this.unqiueID = ?    need to create a uniqueID.method
+        this.uniqueID = content;
         // TODO initialize ratings.
 
         //need to decide how we initialize the video construct
