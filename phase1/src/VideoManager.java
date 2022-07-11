@@ -53,18 +53,17 @@ public class VideoManager {
     //controller prompts user for t/f to change title, description, categories, need this order
     //Todo: get rid of the casting
     public <T> boolean editVideo(String vidLink, ArrayList<Boolean>wantToChange, ArrayList<T> itemsToChange){
-        VideoManager VM = new VideoManager();
         for (Video v: vids){
             if (vidLink.equalsIgnoreCase(v.getContent())){
                 if (wantToChange.get(0)){
-                    VM.editTitle(v, (String) itemsToChange.get(0));
+                    editTitle(v, (String) itemsToChange.get(0));
 
                 }
                 if (wantToChange.get(1)){
-                    VM.editDescription(v,  (String) itemsToChange.get(1));
+                    editDescription(v,  (String) itemsToChange.get(1));
                 }
                 if (wantToChange.get(2)){
-                    VM.editCategories(v, (ArrayList<String>) itemsToChange.get(2));
+                    editCategories(v, (ArrayList<String>) itemsToChange.get(2));
                 }
                 return true;
             }
