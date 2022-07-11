@@ -3,23 +3,19 @@ import java.util.*;
 public class PlaylistManager {
 
     public boolean addToPlaylist(Playlist playlist, Video video) {
-        ArrayList<Video> videos = playlist.getVideos();
-        for (Video v : videos) {
+        for (Video v : playlist) {
             if (v.getName().equals(video.getName())) {
                 return false;
             }
         }
-        videos.add(video);
-        playlist.setVideos(videos);
+        playlist.addVideo(video);
         return true;
     }
 
     public boolean deleteFromPlaylist(Playlist playlist, Video video) {
-        ArrayList<Video> videos = playlist.getVideos();
-        for (Video v : videos) {
+        for (Video v : playlist) {
             if (v.getName().equals(video.getName())) {
-                videos.remove(v);
-                playlist.setVideos(videos);
+                playlist.removeVideo(v);
                 return true;
             }
         }
