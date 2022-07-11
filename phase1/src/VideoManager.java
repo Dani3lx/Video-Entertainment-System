@@ -34,9 +34,9 @@ public class VideoManager {
 //        if (!isInAllCateogries(categories)){
 //            return false; //TODO change this so that it can return correct which category
 //        }
-        // TODO if vidLink exist, return false
-        // TODO update uploader's user profil to add an extra video onto it
-//        Video v1 = new Video(uploader, title, description, categories, vidLink);
+
+        // TODO update uploader's user profile to add an extra video onto it
+//        Video v1 = new Video(uploader, title, description, categories, vidLink, vidLink); // TODO change uniqueID later
 //        vids.add(v1);
 //        return true;
     }
