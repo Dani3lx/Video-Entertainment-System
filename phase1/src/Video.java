@@ -9,7 +9,7 @@ public class Video implements Comparable<Video> {
     private ArrayList<String> categories;
     private String name;
     private String uploader;
-    private LocalDateTime date_upload;
+    private String date_upload;
     private ArrayList<String> history; // datetime + description
     // private ratings
 
@@ -17,7 +17,7 @@ public class Video implements Comparable<Video> {
         this.name = name;
         this.uploader = uploader;
         this.content = content;
-        this.date_upload = LocalDateTime.now();
+        this.date_upload = LocalDateTime.now().toString();
         this.history = new ArrayList<String>();
         this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/");
         this.description = description;
@@ -59,7 +59,7 @@ public class Video implements Comparable<Video> {
         return uploader;
     }
 
-    public LocalDateTime getDate_upload() {
+    public String getDate_upload() {
         return date_upload;
     }
 
