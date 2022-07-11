@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 public class VideoManager {
     private List<Video> vids;
@@ -17,39 +16,28 @@ public class VideoManager {
     //maybe format so that if uploader already in system, append vidLink to ArrayList<Video>
     //returns if video upload successful
     public boolean uploadVideo(String uploader, String title, String description, ArrayList<String> categories,String vidLink){
-
-        ArrayList<String> vidID = new ArrayList<>();
-        for(Video v: vids){
-            vidID.add(v.getUniqueID());
+        if (!vids.isEmpty()){
+            for (Video v : vids) {
+                if (vidLink.equalsIgnoreCase(v.getContent())) {
+                    return false;
+                }
+            }
         }
-
-        String uniqueID = UUID.randomUUID().toString();
-
-
-        while(vidID.contains(uniqueID)){
-            uniqueID = UUID.randomUUID().toString();
-
+        if (!isInAllCateogries(categories)){
+            return false; //TODO change this so that it can return correct which category
         }
-        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID);
-        vids.add(v1);
-        return true;
-
-//Since allwoing duplicate urls, cna upload any video
-
-//        if (!isInAllCateogries(categories)){
-//            return false; //TODO change this so that it can return correct which category
-//        }
         // TODO if vidLink exist, return false
         // TODO update uploader's user profil to add an extra video onto it
-
-
-
+        Video v1 = new Video(uploader, title, description, categories, vidLink);
+        vids.add(v1);
+        return true;
     }
     // Nicholas: there is a difference in naming variables. In video class we use "name" instead of "title",
     // "content" instead of "vidLink". I think title and vidLink is better variable names, however
     // we already used name too much already in other classes.
 
-
+    //delete everything but uploader, same as how can create Youtube account but no vids
+    //returns deletion successful
     public boolean deleteVideo(String vidLink){
         for (Video v: vids){
             if (vidLink.equalsIgnoreCase(v.getContent())){
@@ -81,18 +69,6 @@ public class VideoManager {
             }
         }return false;
     }
-
-    public void editTitle(Video v, String newTitle){
-        v.setName(newTitle);
-    }
-
-    public void editCategories(Video v, ArrayList<String> newCate){
-        v.setCategories(newCate);
-    }
-
-    public void editDescription(Video v, String newDes){
-        v.setDescription(newDes);
-    }
     public List<String> getAllCategories(){
         return allCategories;
     }
@@ -107,7 +83,17 @@ public class VideoManager {
         return true;
     }
 
+    public void editTitle(Video v, String newTitle){
+        v.setName(newTitle);
+    }
 
+    public void editCategories(Video v, ArrayList<String> newCate){
+        v.setCategories(newCate);
+    }
+
+    public void editDescription(Video v, String newDes){
+        v.setDescription(newDes);
+    }
     public ArrayList<Video> getByUploader(String uploader){
         ArrayList<Video> vid_list = new ArrayList<>();
         for (Video v: vids){
