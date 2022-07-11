@@ -16,11 +16,11 @@ public class Video implements Comparable<Video> {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     // private ratings
 
-    public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID){
+    public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID, String upload_time){
         this.name = name;
         this.uploader = uploader;
         this.content = content;
-        this.date_upload = LocalDateTime.now().format(formatter);
+        this.date_upload = upload_time;
         this.history = new ArrayList<String>();
         this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/");
         this.description = description;
