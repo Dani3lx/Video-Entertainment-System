@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Video implements Comparable<Video> {
@@ -11,13 +12,15 @@ public class Video implements Comparable<Video> {
     private String uploader;
     private String date_upload;
     private ArrayList<String> history; // datetime + description
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     // private ratings
 
-    public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID, String date_upload){
+    public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID){
         this.name = name;
         this.uploader = uploader;
         this.content = content;
-        this.date_upload = date_upload;
+        this.date_upload = LocalDateTime.now().format(formatter);
         this.history = new ArrayList<String>();
         this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/");
         this.description = description;
@@ -27,10 +30,6 @@ public class Video implements Comparable<Video> {
 
         //need to decide how we initialize the video construct
         //it will heavily depend on upload video in videomanager
-        // Nicholas: why not just initialize all the compoenents? after you uplaod a video,
-        // you won't want to come back to edit... or if you want we can just create a few different versions
-        // of constructor if you like.
-
     }
     // getters - retrieve video information
 
