@@ -9,4 +9,8 @@ public class VideoPresenter {
             num++;
         }
     }
+
+    public void displayVideo(Video video) {
+        // todo need to wait for vids to fill up in videoManager
+    }
 }
