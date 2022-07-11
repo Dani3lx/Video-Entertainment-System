@@ -59,7 +59,7 @@ public class Video implements Comparable<Video> {
         return uploader;
     }
 
-    public LocalDateTime getDate_upload() {
+    public String getDate_upload() {
         return date_upload;
     }
 
