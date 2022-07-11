@@ -5,9 +5,6 @@ import java.util.List;
 public class VideoManager {
     private List<Video> vids;
     private List<String> allCategories;
-    // Nicholas: I am thinking should we store uniqueID instead of Video,
-    // wondering if storing Video in the collection cause any problem
-
     public void setAllVids(List<Video> vids) {
         this.vids = vids;
     }
@@ -32,9 +29,6 @@ public class VideoManager {
         vids.add(v1);
         return true;
     }
-    // Nicholas: there is a difference in naming variables. In video class we use "name" instead of "title",
-    // "content" instead of "vidLink". I think title and vidLink is better variable names, however
-    // we already used name too much already in other classes.
 
     //delete everything but uploader, same as how can create Youtube account but no vids
     //returns deletion successful
