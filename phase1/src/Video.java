@@ -12,20 +12,23 @@ public class Video implements Comparable<Video> {
     private String uploader;
     private String date_upload;
     private ArrayList<String> history; // datetime + description
-
+    private ArrayList<Integer> ratings;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     // private ratings
 
-    public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID, String upload_time){
+    public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID,
+                 ArrayList<Integer> ratings){
         this.name = name;
         this.uploader = uploader;
         this.content = content;
-        this.date_upload = upload_time;
-        this.history = new ArrayList<String>();
-        this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/");
+        this.date_upload = LocalDateTime.now().format(formatter);
+        this.history.add("We will add features later");
+        //this.history = new ArrayList<String>();
+        //this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/"); Remove and add to upload video
         this.description = description;
         this.categories = categories;
         this.uniqueID = uniqueID;
+        this.ratings = ratings;
         // TODO initialize ratings.
 
         //need to decide how we initialize the video construct
@@ -36,6 +39,10 @@ public class Video implements Comparable<Video> {
 
     public String getContent() {
         return content;
+    }
+
+    public ArrayList<Integer> getRatings() {
+        return ratings;
     }
 
     public String getUniqueID() {
