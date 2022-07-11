@@ -13,7 +13,7 @@ public class Video implements Comparable<Video> {
     private ArrayList<String> history; // datetime + description
     // private ratings
 
-    public Video(String uploader, String name, String description, ArrayList<String> categories, String content){
+    public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID){
         this.name = name;
         this.uploader = uploader;
         this.content = content;
@@ -22,7 +22,7 @@ public class Video implements Comparable<Video> {
         this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/");
         this.description = description;
         this.categories = categories;
-        this.uniqueID = content;
+        this.uniqueID = uniqueID;
         // TODO initialize ratings.
 
         //need to decide how we initialize the video construct
