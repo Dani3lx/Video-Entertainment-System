@@ -57,7 +57,7 @@ public class VideoManager {
             if (vidLink.equalsIgnoreCase(v.getContent())){
                 if (wantToChange.get(0)){
                     editTitle(v, (String) itemsToChange.get(0));
-
+                //test
                 }
                 if (wantToChange.get(1)){
                     editDescription(v,  (String) itemsToChange.get(1));
@@ -136,6 +136,10 @@ public class VideoManager {
         }
 
         return names;
+    }
+
+    public String[] displayVideo(Video vid) {
+        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent()};
     }
 
 }

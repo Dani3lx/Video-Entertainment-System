@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Video implements Comparable<Video> {
@@ -9,15 +10,17 @@ public class Video implements Comparable<Video> {
     private ArrayList<String> categories;
     private String name;
     private String uploader;
-    private LocalDateTime date_upload;
+    private String date_upload;
     private ArrayList<String> history; // datetime + description
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     // private ratings
 
     public Video(String uploader, String name, String description, ArrayList<String> categories, String content){
         this.name = name;
         this.uploader = uploader;
         this.content = content;
-        this.date_upload = LocalDateTime.now();
+        this.date_upload = LocalDateTime.now().format(formatter);
         this.history = new ArrayList<String>();
         this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/");
         this.description = description;
@@ -59,7 +62,7 @@ public class Video implements Comparable<Video> {
         return uploader;
     }
 
-    public LocalDateTime getDate_upload() {
+    public String getDate_upload() {
         return date_upload;
     }
 
