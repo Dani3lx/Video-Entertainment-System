@@ -28,7 +28,9 @@ public class VideoManager {
 
         }
         String timeOfUpload = LocalDateTime.now().toString();
-        Integer[] ratings = {0,0};
+        ArrayList<Integer> ratings = new ArrayList<>();
+        ratings.add(0);
+        ratings.add(0);
         Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, timeOfUpload);
         vids.add(v1);
         return true;
