@@ -27,6 +27,16 @@ public class Presenter {
         }
     }
 
+    public int basicMenuOptions(String text) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(startMenuOption(text));
+        if (sc.hasNextInt()) {
+            return (sc.nextInt());
+        } else {
+            return 0;
+        }
+    }
+
     public int afterLoginOptions(boolean isAdmin){
         if (isAdmin) {
             System.out.println("Please input one of the following number to proceed " +

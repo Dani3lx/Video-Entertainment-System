@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class LoginMenuDisplayer {
+    private VideoBrowser vm = new VideoBrowser();
+    private VideoPresenter vp = new VideoPresenter();
     private UserManager um;
     UserInterfaceHandler UIhandler;
     Presenter p = new Presenter();
@@ -112,6 +114,24 @@ public class LoginMenuDisplayer {
             }
 
         AfterLoginMenu(user);
+    }
+
+    public void browsingMenu(User user) throws IOException {
+        int result = p.basicMenuOptions("Type 1 to browse by name, type 2 to browse by categories, " +
+                "type 3 to browse by uploader, type 4 to return");
+        switch (result) {
+            case 1:
+                vp.listVideos(vm.browseByName());
+                break;
+            case 2:
+                vp.listVideos(vm.browseByCategory());
+                break;
+            case 3:
+                vp.listVideos(vm.browseByUploader());
+                break;
+            case 4:
+                AfterLoginMenu(user);
+        }
     }
 }
 
