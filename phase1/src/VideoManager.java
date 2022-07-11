@@ -28,7 +28,7 @@ public class VideoManager {
         }
 
         // TODO update uploader's user profile to add an extra video onto it
-        Video v1 = new Video(uploader, title, description, categories, vidLink);
+        Video v1 = new Video(uploader, title, description, categories, vidLink, vidLink); // TODO change uniqueID later
         vids.add(v1);
         return true;
     }
