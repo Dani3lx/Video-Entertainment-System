@@ -26,8 +26,8 @@ public class VideoManager {
         if (!isInAllCateogries(categories)){
             return false; //TODO change this so that it can return correct which category
         }
-        // TODO if vidLink exist, return false
-        // TODO update uploader's user profil to add an extra video onto it
+
+        // TODO update uploader's user profile to add an extra video onto it
         Video v1 = new Video(uploader, title, description, categories, vidLink);
         vids.add(v1);
         return true;
@@ -39,33 +39,38 @@ public class VideoManager {
     //delete everything but uploader, same as how can create Youtube account but no vids
     //returns deletion successful
     public boolean deleteVideo(String vidLink){
-        for (Video v: vids){
-            if (vidLink.equalsIgnoreCase(v.getContent())){
-                v.setCategories(null);
-                v.setName(null);
-                v.setDescription(null);
-                return true;
+        if (!vids.isEmpty()){
+            for (Video v: vids){
+                if (vidLink.equalsIgnoreCase(v.getContent())){
+                    v.setCategories(null);
+                    v.setName(null);
+                    v.setDescription(null);
+                    return true;
+                }
             }
-        }return false;
+        }
+        return false;
     }
 
     //need know what user wants to edit-title, description,categories
     //controller prompts user for t/f to change title, description, categories, need this order
     //Todo: get rid of the casting
     public <T> boolean editVideo(String vidLink, ArrayList<Boolean>wantToChange, ArrayList<T> itemsToChange){
-        for (Video v: vids){
-            if (vidLink.equalsIgnoreCase(v.getContent())){
-                if (wantToChange.get(0)){
-                    editTitle(v, (String) itemsToChange.get(0));
+        if (!vids.isEmpty()) {
+            for (Video v : vids) {
+                if (vidLink.equalsIgnoreCase(v.getContent())) {
+                    if (wantToChange.get(0)) {
+                        editTitle(v, (String) itemsToChange.get(0));
 
+                    }
+                    if (wantToChange.get(1)) {
+                        editDescription(v, (String) itemsToChange.get(1));
+                    }
+                    if (wantToChange.get(2)) {
+                        editCategories(v, (ArrayList<String>) itemsToChange.get(2));
+                    }
+                    return true;
                 }
-                if (wantToChange.get(1)){
-                    editDescription(v,  (String) itemsToChange.get(1));
-                }
-                if (wantToChange.get(2)){
-                    editCategories(v, (ArrayList<String>) itemsToChange.get(2));
-                }
-                return true;
             }
         }return false;
     }
