@@ -13,11 +13,11 @@ public class Video implements Comparable<Video> {
     private ArrayList<String> history; // datetime + description
     // private ratings
 
-    public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID){
+    public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID, String date_upload){
         this.name = name;
         this.uploader = uploader;
         this.content = content;
-        this.date_upload = LocalDateTime.now().toString();
+        this.date_upload = date_upload;
         this.history = new ArrayList<String>();
         this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/");
         this.description = description;

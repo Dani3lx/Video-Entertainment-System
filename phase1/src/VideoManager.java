@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +30,8 @@ public class VideoManager {
             uniqueID = UUID.randomUUID().toString();
 
         }
-        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID);
+        String timeOfUpload = LocalDateTime.now().toString();
+        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, timeOfUpload);
         vids.add(v1);
         return true;
 //        if (!isInAllCateogries(categories)){
@@ -81,6 +83,7 @@ public class VideoManager {
 
     public void editTitle(Video v, String newTitle){
         v.setName(newTitle);
+
     }
 
     public void editCategories(Video v, ArrayList<String> newCate){
