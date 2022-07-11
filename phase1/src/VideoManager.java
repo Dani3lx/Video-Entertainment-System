@@ -49,32 +49,7 @@ public class VideoManager {
     }
 
 
-    //return type allows for video with same title
-    public List<Video> retrieveVideobyTitle(String name){
-        ArrayList<Video> vid_list = new ArrayList<>();
-        for (Video v: vids){
-            if (name.equalsIgnoreCase(v.getName())){
-                vid_list.add(v);
-            }
-
-        }
-        return vid_list;
-    }
-
-    public List<Video> retrieveVideobyCategory(String category){
-        ArrayList<Video> vid_list = new ArrayList<>();
-        for (Video v: vids){
-            for (String cate: v.getCategories()){
-                if (category.equalsIgnoreCase(cate)){
-                    vid_list.add(v);
-                }
-            }
-
-        }
-        return vid_list;
-    }
-
-    public List<Video> retrieveVideobyUploader(String uploader){
+    public ArrayList<Video> getByUploader(String uploader){
         ArrayList<Video> vid_list = new ArrayList<>();
         for (Video v: vids){
 
@@ -107,6 +82,15 @@ public class VideoManager {
         }
 
         return videoList;
+    }
+
+    public ArrayList<String> getVideoNames(ArrayList<Video> videos) {
+        ArrayList<String> names = new ArrayList<>();
+        for (Video vid : videos) {
+            names.add(vid.getName());
+        }
+
+        return names;
     }
 
 }

@@ -10,6 +10,12 @@ public class VideoBrowser {
         return vm.getByName(name);
     }
 
+    public ArrayList<Video> browseByUploader() {
+        System.out.println("Please enter the name of the uploader");
+        String name = sc.nextLine();
+        return vm.getByUploader(name);
+    }
+
     public ArrayList<Video> browseByCategory() {
         System.out.println("Please enter the categories that you wish to include. Type CONTINUE to proceed.");
         ArrayList<String> categories = new ArrayList<>();
