@@ -30,10 +30,6 @@ public class Video implements Comparable<Video> {
 
         //need to decide how we initialize the video construct
         //it will heavily depend on upload video in videomanager
-        // Nicholas: why not just initialize all the compoenents? after you uplaod a video,
-        // you won't want to come back to edit... or if you want we can just create a few different versions
-        // of constructor if you like.
-
     }
     // getters - retrieve video information
 
