@@ -13,13 +13,26 @@ public class Video implements Comparable<Video> {
     private ArrayList<String> history; // datetime + description
     // private ratings
 
-    public Video(String name){
+    public Video(String uploader, String name, String description, ArrayList<String> categories, String content){
         this.name = name;
+        this.uploader = uploader;
+        this.content = content;
+        this.date_upload = LocalDateTime.now();
+        this.history = new ArrayList<String>();
+        this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/");
+        this.description = description;
+        this.categories = categories;
+
+        // TODO this.unqiueID = ?    need to create a uniqueID.method
+        // TODO initialize ratings.
+
         //need to decide how we initialize the video construct
         //it will heavily depend on upload video in videomanager
+        // Nicholas: why not just initialize all the compoenents? after you uplaod a video,
+        // you won't want to come back to edit... or if you want we can just create a few different versions
+        // of constructor if you like.
 
     }
-
     // getters - retrieve video information
 
 
@@ -30,6 +43,9 @@ public class Video implements Comparable<Video> {
     public String getUniqueID() {
         return uniqueID;
         //Todo check if it is wise to allow this to be public, maybe protected?
+        //Nicholas: yea I agree that it can be protected, but you know the link for now is just a hyprelink,
+        // which it doesn't have any meaning of being protected. We can just limit some other methods to be
+        // authorize by specific people, and that I think will be enough.
     }
 
     public String getDescription() {
@@ -55,6 +71,8 @@ public class Video implements Comparable<Video> {
     public ArrayList<String> getCategories() {
         return categories;
     }
+
+    // Todo Create getRatings() after working on ratings
 
     // Setters - We will allow users/programs change these data fields
     public void setContent(String content) {

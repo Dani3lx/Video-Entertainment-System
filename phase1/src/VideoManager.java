@@ -3,8 +3,8 @@ import java.util.List;
 
 public class VideoManager {
     private List<Video> vids;
-
-
+    // Nicholas: I am thinking should we store uniqueID instead of Video,
+    // wondering if storing Video in the collection cause any problem
 
     public void setAllVids(List<Video> vids) {
         this.vids = vids;
@@ -14,15 +14,20 @@ public class VideoManager {
     //maybe format so that if uploader already in system, append vidLink to ArrayList<Video>
     //returns if video upload successful
     public boolean uploadVideo(String uploader, String title, String description, ArrayList<String> categories,String vidLink){
-        for (Video v:vids){
-            if(vidLink.equalsIgnoreCase(v.getContent())){
-                return false;
+        if (!vids.isEmpty()){
+            for (Video v : vids) {
+                if (vidLink.equalsIgnoreCase(v.getContent())) {
+                    return false;
+                }
             }
         }
-
         Video v1 = new Video(uploader, title, description, categories, vidLink);
+        vids.add(v1);
         return true;
     }
+    // Nicholas: there is a difference in naming variables. In video class we use "name" instead of "title",
+    // "content" instead of "vidLink". I think title and vidLink is better variable names, however
+    // we already used name too much already in other classes.
 
 
     public boolean deleteVideo(String vidLink){
