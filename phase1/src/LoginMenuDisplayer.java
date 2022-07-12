@@ -6,12 +6,13 @@ public class LoginMenuDisplayer {
     private VideoPresenter vp = new VideoPresenter();
     UserInterfaceHandler UIhandler;
 
-    Gateway gateway;
+    DataManager sm;
+
     Presenter p = new Presenter();
 
-    public LoginMenuDisplayer(UserManager um, Gateway gw) {
+    public LoginMenuDisplayer(UserManager um) {
         UIhandler = new UserInterfaceHandler(um);
-        gateway = gw;
+        sm = new DataManager(um);
     }
 
     /**
@@ -52,7 +53,7 @@ public class LoginMenuDisplayer {
                     AfterLoginMenu(currentUser);
                 }
             case 3:
-                gateway.saveChanges();
+                sm.saveData("phase1/Data.csv");
                 System.exit(0);
             default:
                 p.displayErrorMessage("userInput");

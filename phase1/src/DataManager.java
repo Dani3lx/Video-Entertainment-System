@@ -37,6 +37,7 @@ public class DataManager {
     }
 
     public void saveData(String filePath) {
+        setUsers((ArrayList<User>) um.getAllUsers());
         try {
             FileWriter writer = new FileWriter(filePath, false);
 
