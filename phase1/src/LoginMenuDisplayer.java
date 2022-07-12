@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class LoginMenuDisplayer {
-    private VideoBrowser vm = new VideoBrowser();
+    private VideoBrowser vm;
     private VideoPresenter vp = new VideoPresenter();
     UserInterfaceHandler UIhandler;
 
@@ -111,6 +111,7 @@ public class LoginMenuDisplayer {
     }
 
     public void browsingMenu(User user) throws IOException {
+        vm = new VideoBrowser(user);
         int result = p.basicMenuOptions("Type 1 to browse by name, type 2 to browse by categories, " +
                 "type 3 to browse by uploader, type 4 to return");
         switch (result) {

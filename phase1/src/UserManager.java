@@ -84,4 +84,8 @@ public class UserManager {
             System.out.println("Username: " + user.getUserName());
         }
     }
+
+    public boolean getRole(User user) {
+        return user.isAdminInd();
+    }
 }

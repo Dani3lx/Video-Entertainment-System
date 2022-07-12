@@ -3,11 +3,22 @@ import java.util.Scanner;
 
 public class VideoBrowser {
     VideoManager vm = new VideoManager();
+    UserManager um;
     Scanner sc = new Scanner(System.in);
+
+    User user;
+
+    public VideoBrowser(User user) {
+        this.user = user;
+    }
     public ArrayList<Video> browseByName() {
         System.out.println("Please enter the name of the video");
         String name = sc.nextLine();
-        return vm.getByName(name);
+        if (um.getRole(user)) {
+            return vm.getByName(name);
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     public ArrayList<Video> browseByUploader() {
