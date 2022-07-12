@@ -9,9 +9,9 @@ public class LoginMenuDisplayer {
     Gateway gateway;
     Presenter p = new Presenter();
 
-    public LoginMenuDisplayer(UserManager um) {
+    public LoginMenuDisplayer(UserManager um, Gateway gw) {
         UIhandler = new UserInterfaceHandler(um);
-        gateway = new Gateway(um);
+        gateway = gw;
     }
 
     /**
