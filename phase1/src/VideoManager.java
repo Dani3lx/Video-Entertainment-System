@@ -5,35 +5,39 @@ import java.util.List;
 import java.util.UUID;
 
 public class VideoManager {
-    private List<Video> vids;
+    private ArrayList<Video> vids;
     private List<String> allCategories;
-    public void setAllVids(List<Video> vids) {
-        this.vids = vids;
+//    public void setAllVids(ArrayList<Video> vids) {
+//        this.vids = vids;
+//    }
+    public VideoManager(){
+        vids = new ArrayList<>();
     }
-
     //format of video file, url
     //maybe format so that if uploader already in system, append vidLink to ArrayList<Video>
     //returns if video upload successful
     public boolean uploadVideo(String uploader, String title, String description, ArrayList<String> categories,String vidLink){
+
         ArrayList<String> vidID = new ArrayList<>();
-        for(Video v: vids){
+
+        for (Video v : vids) {
             vidID.add(v.getUniqueID());
         }
 
         String uniqueID = UUID.randomUUID().toString();
 
 
-        while(vidID.contains(uniqueID)){
+        while (vidID.contains(uniqueID)) {
             uniqueID = UUID.randomUUID().toString();
 
         }
-        String timeOfUpload = LocalDateTime.now().toString();
         ArrayList<Integer> ratings = new ArrayList<>();
         ratings.add(0);
         ratings.add(0);
-        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, timeOfUpload);
+        Video v1 = new Video(uploader, title, description, categories, vidLink, "1", ratings, LocalDateTime.now().toString());
         vids.add(v1);
         return true;
+
 //        if (!isInAllCateogries(categories)){
 //            return false; //TODO change this so that it can return correct which category
 //        }
