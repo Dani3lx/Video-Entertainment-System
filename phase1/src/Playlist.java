@@ -76,7 +76,9 @@ public class Playlist implements Iterable<Video> {
         }
 
         public Video next() {
-            return videos.get(current);
+            Video video = videos.get(current);
+            current += 1;
+            return video;
         }
     }
 
