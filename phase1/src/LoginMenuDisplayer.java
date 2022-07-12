@@ -1,7 +1,4 @@
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class LoginMenuDisplayer {
@@ -11,7 +8,6 @@ public class LoginMenuDisplayer {
 
     Gateway gateway;
     Presenter p = new Presenter();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public LoginMenuDisplayer(UserManager um) {
         UIhandler = new UserInterfaceHandler(um);
