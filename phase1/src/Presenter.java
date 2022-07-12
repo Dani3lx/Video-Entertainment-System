@@ -56,12 +56,6 @@ public class Presenter {
         }
     }
 
-    public String getPassword() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Please enter a new password");
-        return sc.nextLine();
-    }
-
     public void displayErrorMessage(String error) {
         switch (error) {
             case "login":

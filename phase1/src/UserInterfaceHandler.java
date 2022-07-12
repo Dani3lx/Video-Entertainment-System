@@ -19,6 +19,15 @@ public class UserInterfaceHandler {
         all_users = um.getAllUsers();
     }
 
+    public void displayHistory(User user) {
+        System.out.println(um.getHistory(user));
+    }
+
+    public void updateUserHistory(User user) {
+        um.updateHistory(user, LocalDateTime.now().format(formatter));
+    }
+
+
     public User loginUser() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter your username: ");
@@ -143,6 +152,11 @@ public class UserInterfaceHandler {
             }
         }
         System.out.println("User can not be found");
+    }
+
+    public void changePassword(User user) {
+        System.out.println("Please enter a new password");
+        um.changePassword(user, sc.nextLine());
     }
 
 }

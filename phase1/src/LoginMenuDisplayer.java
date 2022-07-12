@@ -3,19 +3,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class LoginMenuDisplayer {
     private VideoBrowser vm = new VideoBrowser();
     private VideoPresenter vp = new VideoPresenter();
-    private UserManager um;
     UserInterfaceHandler UIhandler;
+
+    Gateway gateway;
     Presenter p = new Presenter();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public LoginMenuDisplayer(UserManager um) {
-        this.um = um;
         UIhandler = new UserInterfaceHandler(um);
+        gateway = new Gateway(um);
     }
 
     /**
@@ -36,7 +36,7 @@ public class LoginMenuDisplayer {
                     p.displayErrorMessage("login");
                     this.startMenu();
                 } else {
-                    um.updateHistory(currentUser, LocalDateTime.now().format(formatter));
+                    UIhandler.updateUserHistory(currentUser);
                     if (currentUser.isAdminInd()) {
                         p.displayAlertMessage("adminLogin");
                         AfterLoginMenu(currentUser);
@@ -51,14 +51,12 @@ public class LoginMenuDisplayer {
                     p.displayErrorMessage("accountCreation");
                     this.startMenu();
                 } else {
-                    um.updateHistory(currentUser, LocalDateTime.now().format(formatter));
+                    UIhandler.updateUserHistory(currentUser);
                     p.displayAlertMessage("accountCreation");
                     AfterLoginMenu(currentUser);
                 }
             case 3:
-                DataManager sm = new DataManager(um);
-                sm.setUsers((ArrayList<User>) um.getAllUsers());
-                sm.saveData("phase1/Data.csv");
+                gateway.saveChanges();
                 System.exit(0);
             default:
                 p.displayErrorMessage("userInput");
@@ -76,12 +74,12 @@ public class LoginMenuDisplayer {
         int result = p.afterLoginOptions(user.isAdminInd());
             switch (result) {
                 case 1:
-                    um.changePassword(user, p.getPassword());
+                    UIhandler.changePassword(user);
                     p.displayAlertMessage("passwordChange");
                     break;
                 case 2:
                     p.displayOptionMessages("checkHistory");
-                    um.checkHistory(user);
+                    UIhandler.displayHistory(user);
                     p.displayOptionMessages("lineBreak");
                     break;
                 case 3:

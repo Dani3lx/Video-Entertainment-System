@@ -22,10 +22,10 @@ public class UserManager {
         user.setPassword(password);
     }
 
-    public void checkHistory(User user) {
+    public List<String> getHistory(User user) {
         List<String> history = new ArrayList<>(user.getLoginHistory());
         Collections.sort(history);
-        System.out.println(history);
+        return history;
     }
 
     public void updateHistory(User user, String date) {
