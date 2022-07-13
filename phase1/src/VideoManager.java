@@ -46,32 +46,13 @@ public class VideoManager {
 
     /**
      *
-     * @param uniqueID A link to the video
+     * @param v Video object
      * @return Whether or not deletion was successful
      */
-    public boolean deleteVideo(String uniqueID){
-        if (!vids.isEmpty()){
-            for (Video v: vids){
-                if (v.getUniqueID().equalsIgnoreCase(uniqueID)){
-                    vids.remove(v);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+    public boolean deleteVideo(Video v){
 
-    // overloaded version for NonAdmin since they are not allowed to delete videos other than their own
-    public boolean deleteVideo(String uploader, String uniqueID){
-        if (!vids.isEmpty()){
-            for (Video v: vids){
-                if (v.getUploader().equals(uploader) && v.getUniqueID().equalsIgnoreCase(uniqueID)){
-                    vids.remove(v);
-                    return true;
-                }
-            }
-        }
-        return false;
+        vids.remove(v);
+        return true;
     }
 
     /**

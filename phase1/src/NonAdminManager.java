@@ -31,9 +31,4 @@ public class NonAdminManager extends UserManager{
     }
     // end of overloaded uploadVideo functions region
 
-    // todo: how will the user get the uniqueID of the video?
-    public boolean deleteVideo(User user, String uniqueID) {
-        return vm.deleteVideo(user.getUserName(), uniqueID);
-    }
-
 }
