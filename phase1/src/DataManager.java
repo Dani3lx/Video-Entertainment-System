@@ -81,22 +81,22 @@ public class DataManager {
         }
     }
 
-    public void loadVideoData(String filePath) {
-
-        try {
-            Scanner scanner = new Scanner(new FileInputStream(filePath));
-            String[] record;
-
-            while (scanner.hasNextLine()) {
-                record = scanner.nextLine().split(",");
-                Video video = new Video(record[0], record[1], record[2], new ArrayList<>(Arrays.asList(record[3].split(","))), record[4], record[5], new ArrayList<>(Arrays.asList((record[6]).split(","))), record[7]);
-                videos.add(video);
-                }
-            scanner.close();
-            }
-        catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-        }
-    }
+//    public void loadVideoData(String filePath) {
+//
+//        try {
+//            Scanner scanner = new Scanner(new FileInputStream(filePath));
+//            String[] record;
+//
+//            while (scanner.hasNextLine()) {
+//                record = scanner.nextLine().split(",");
+//                Video video = new Video(record[0], record[1], record[2], new ArrayList<>(Arrays.asList(record[3].split(","))), record[4], record[5], new ArrayList<>(Arrays.asList((record[6]).split(","))), record[7]);
+//                videos.add(video);
+//                }
+//            scanner.close();
+//            }
+//        catch (FileNotFoundException e) {
+//            System.out.println("An error occurred.");
+//        }
+//    }
 
 }

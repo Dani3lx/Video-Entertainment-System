@@ -1,12 +1,10 @@
 import java.util.ArrayList;
 
-public class AdminManager extends UserManager{
-    private UserManager um;
+public class AdminManager extends UserManager {
 
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
 
-    public AdminManager(UserManager um){
-        this.um = um;
+    public AdminManager(UserManager um) {
         users = um.getAllUsers();
     }
 

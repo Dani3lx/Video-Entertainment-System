@@ -10,6 +10,10 @@ public class UserActionHandler {
         this.um = um;
     }
 
+    public List<String> getHistory(User user) {
+        return um.getHistory(user);
+    }
+
     public User loginUser(String userName, String password) {
         return um.validateUser(userName, password);
     }
