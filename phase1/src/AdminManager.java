@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminManager extends UserManager{
 
     private UserManager um;
 
-    private List<User> users;
+    private ArrayList<User> users;
 
     public AdminManager(UserManager um){
         this.um = um;
