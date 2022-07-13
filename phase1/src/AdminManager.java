@@ -22,17 +22,21 @@ public class AdminManager extends UserManager{
         users.remove(user);
     }
 
-    public void displayAllUsers(ArrayList<User> users, boolean displayBan) {
+    public ArrayList<String> returnUsersByBan(ArrayList<User> users, boolean displayBan) {
+        ArrayList<String> newList = new ArrayList<>();
         for (User user : users) {
             if ((displayBan == user.getBanStatus()) && !(user instanceof AdminUser)) {
-                System.out.println("Username: " + user.getUserName());
+                newList.add("Username: " + user.getUserName());
             }
         }
+        return newList;
     }
 
-    public void displayAllUsers(ArrayList<User> users) {
+    public ArrayList<String> returnUsers(ArrayList<User> users) {
+        ArrayList<String> newList = new ArrayList<>();
         for (User user : users) {
-            System.out.println("Username: " + user.getUserName());
+            newList.add("Username: " + user.getUserName());
         }
+        return newList;
     }
 }

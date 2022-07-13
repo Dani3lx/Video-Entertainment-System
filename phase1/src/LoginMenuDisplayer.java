@@ -34,9 +34,9 @@ public class LoginMenuDisplayer {
                     this.startMenu();
                 } else {
                     UIhandler.updateUserHistory(currentUser);
-                    if (currentUser.isAdminInd()) {
+                    if (currentUser.isAdminInd()) {  // add a method to UIhandler that does this check instead
                         p.displayAlertMessage("adminLogin");
-                        AfterLoginMenu(currentUser);
+                        AfterLoginMenu(currentUser);  // Added a menu for non admin and admin. Make a basic menu for all users so that theres no repetiting code
                     } else {
                         p.displayAlertMessage("nonAdminLogin");
                         AfterLoginMenu(currentUser);
@@ -96,16 +96,16 @@ public class LoginMenuDisplayer {
                         }
                     }
                     break;
-                case 6:
-                    if (user.isAdminInd()) {
-                        UIhandler.banUser(user);
-                    }
-                    break;
-                case 7:
-                    if (user.isAdminInd()) {
-                        UIhandler.unBanUser();
-                    }
-                    break;
+//                case 6:
+//                    if (user.isAdminInd()) {
+//                        UIhandler.banUser(user);
+//                    }
+//                    break;
+//                case 7:
+//                    if (user.isAdminInd()) {
+//                        UIhandler.unBanUser();
+//                    }
+//                    break;
             }
 
         AfterLoginMenu(user);

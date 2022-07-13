@@ -41,7 +41,6 @@ public class UserInterfaceHandler {
 
     public boolean deleteUser(User currentUser) {
         System.out.println("Here are all the users: \n");
-        am.displayAllUsers(um.getAllUsers());
         System.out.println("Please enter the username of the user you wish to delete");
         String name = sc.nextLine();
         ArrayList<User> all_users = um.getAllUsers();
@@ -114,46 +113,46 @@ public class UserInterfaceHandler {
         um.updateData(newUser);
     }
 
-    public void banUser(User currentUser) {
-        System.out.println("Here are all the users that are not banned");
-        am.displayAllUsers(all_users, false);
-        System.out.println("\n\nPlease enter the name of the user that you wish to ban");
-        String name = sc.nextLine();
-
-        for (User user : all_users) {
-            if (am.validateUserName(user, name)) {
-                if (am.validateUserName(currentUser, name)) {
-                    System.out.println("You can not ban your own account");
-
-                } else if (user instanceof AdminUser) {
-                    System.out.println("You can not ban an admin account");
-
-                } else {
-                    am.banUser(user);
-                    System.out.println("You have successfully banned " + name);
-                }
-                return;
-            }
-        }
-        System.out.println("User can not be found");
-    }
-
-    public void unBanUser() {
-        System.out.println("Here are all the users that are banned");
-        am.displayAllUsers(all_users, true);
-        System.out.println("\nPlease enter the name of the user that you wish to unban");
-        String name = sc.nextLine();
-        for (User user : all_users) {
-            if (am.validateUserName(user, name)) {
-                if (am.validateBanStatus(user)) {
-                    System.out.println(name + " has been unbanned");
-                    am.unbanUser(user);
-                }
-                return;
-            }
-        }
-        System.out.println("User can not be found");
-    }
+//    public void banUser(User currentUser) {
+//        System.out.println("Here are all the users that are not banned");
+//        am.displayAllUsers(all_users, false);
+//        System.out.println("\n\nPlease enter the name of the user that you wish to ban");
+//        String name = sc.nextLine();
+//
+//        for (User user : all_users) {
+//            if (am.validateUserName(user, name)) {
+//                if (am.validateUserName(currentUser, name)) {
+//                    System.out.println("You can not ban your own account");
+//
+//                } else if (user instanceof AdminUser) {
+//                    System.out.println("You can not ban an admin account");
+//
+//                } else {
+//                    am.banUser(user);
+//                    System.out.println("You have successfully banned " + name);
+//                }
+//                return;
+//            }
+//        }
+//        System.out.println("User can not be found");
+//    }
+//
+//    public void unBanUser() {
+//        System.out.println("Here are all the users that are banned");
+//        am.displayAllUsers(all_users, true);
+//        System.out.println("\nPlease enter the name of the user that you wish to unban");
+//        String name = sc.nextLine();
+//        for (User user : all_users) {
+//            if (am.validateUserName(user, name)) {
+//                if (am.validateBanStatus(user)) {
+//                    System.out.println(name + " has been unbanned");
+//                    am.unbanUser(user);
+//                }
+//                return;
+//            }
+//        }
+//        System.out.println("User can not be found");
+//    }
 
     public void changePassword(User user) {
         System.out.println("Please enter a new password");
