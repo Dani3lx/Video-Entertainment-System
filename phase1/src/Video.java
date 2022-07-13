@@ -110,5 +110,10 @@ public class Video implements Comparable<Video> {
             return -1;
         }
     }
+
+    @Override
+    public String toString() {
+        return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," + this.getCategories() + "," + this.getContent() + "," + this.getUniqueID() + "," + this.getRatings() + "," + this.getDate_upload();
+    }
 }
 

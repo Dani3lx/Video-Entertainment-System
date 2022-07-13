@@ -15,6 +15,8 @@ public class VideoManager {
         return vids;
     }
 
+    public void setVids(ArrayList<Video> videos) { vids = videos; }
+
     /**
      *
      * @param uploader The name of the person uploading video

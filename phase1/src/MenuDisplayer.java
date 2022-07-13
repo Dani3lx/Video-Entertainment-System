@@ -9,10 +9,10 @@ public class MenuDisplayer {
 
     UserManager um;
 
-    public MenuDisplayer(UserManager um) {
+    public MenuDisplayer(UserManager um, VideoManager vm) {
         this.um = um;
         userActionhandler = new UserActionHandler(um);
-        dataManager = new DataManager(um);
+        dataManager = new DataManager(um, vm);
     }
 
     public void startMenu() {
@@ -43,6 +43,7 @@ public class MenuDisplayer {
                 break;
             case 3:
                 dataManager.saveData("phase1/Data.csv");
+                dataManager.saveVideoData("phase1/VideoData.csv");
                 System.exit(0);
                 break;
             default:

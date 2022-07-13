@@ -10,9 +10,9 @@ public class LoginMenuDisplayer {
 
     Presenter p = new Presenter();
 
-    public LoginMenuDisplayer(UserManager um) {
+    public LoginMenuDisplayer(UserManager um, VideoManager vm) {
         UIhandler = new UserInterfaceHandler(um);
-        sm = new DataManager(um);
+        sm = new DataManager(um, vm);
     }
 
     /**
@@ -54,6 +54,7 @@ public class LoginMenuDisplayer {
                 }
             case 3:
                 sm.saveData("phase1/Data.csv");
+                sm.saveVideoData("phase1/VideoData.csv");
                 System.exit(0);
             default:
                 p.displayErrorMessage("userInput");
