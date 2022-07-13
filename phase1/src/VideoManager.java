@@ -11,6 +11,10 @@ public class VideoManager {
         vids = new ArrayList<>();
     }
 
+    public ArrayList<Video> getVids(){
+        return vids;
+    }
+
     /**
      *
      * @param uploader The name of the person uploading video
@@ -50,7 +54,6 @@ public class VideoManager {
      * @return Whether or not deletion was successful
      */
     public boolean deleteVideo(Video v){
-
         vids.remove(v);
         return true;
     }

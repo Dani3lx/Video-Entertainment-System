@@ -31,4 +31,45 @@ public class NonAdminManager extends UserManager{
     }
     // end of overloaded uploadVideo functions region
 
+    public boolean deleteVideo(User user, String uniqueID){
+        for (Video video : vm.getVids()){
+            if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)){
+                return vm.deleteVideo(video);
+            }
+        }
+        return false;
+    }
+
+    public void editTitle(User user, String uniqueID, String newTitle){
+        for (Video video : vm.getVids()){
+            if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)){
+                vm.editTitle(video, newTitle);
+            }
+        }
+    }
+
+    public void editCategories(User user, String uniqueID, ArrayList<String> newCate){
+        for (Video video : vm.getVids()){
+            if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)){
+                vm.editCategories(video, newCate);
+            }
+        }
+    }
+
+    public void editDescription(User user, String uniqueID, String newDes){
+        for (Video video : vm.getVids()){
+            if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)){
+                vm.editDescription(video, newDes);
+            }
+        }
+    }
+
+    // for displaying all the videos uploaded by a user
+    public void displayAllVideos(User user, ArrayList<Video> vids){
+        for (Video video : vids){
+            if (user.getUserName().equals(video.getUploader())){
+                System.out.println("Title: " + video.getName() + " (ID: " + video.getUniqueID() + ")");
+            }
+        }
+    }
 }
