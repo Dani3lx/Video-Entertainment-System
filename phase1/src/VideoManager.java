@@ -46,21 +46,13 @@ public class VideoManager {
 
     /**
      *
-     * @param vidLink A link to the video
+     * @param v Video object
      * @return Whether or not deletion was successful
      */
-    public boolean deleteVideo(String vidLink){
-        if (!vids.isEmpty()){
-            for (Video v: vids){
-                if (vidLink.equalsIgnoreCase(v.getContent())){
-                    v.setCategories(null);
-                    v.setName(null);
-                    v.setDescription(null);
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean deleteVideo(Video v){
+
+        vids.remove(v);
+        return true;
     }
 
     /**
