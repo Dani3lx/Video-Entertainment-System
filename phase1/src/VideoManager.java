@@ -6,16 +6,20 @@ import java.util.UUID;
 
 public class VideoManager {
     private ArrayList<Video> vids;
-    private List<String> allCategories;
-//    public void setAllVids(ArrayList<Video> vids) {
-//        this.vids = vids;
-//    }
+
     public VideoManager(){
         vids = new ArrayList<>();
     }
-    //format of video file, url
-    //maybe format so that if uploader already in system, append vidLink to ArrayList<Video>
-    //returns if video upload successful
+
+    /**
+     *
+     * @param uploader The name of the person uploading video
+     * @param title The title of the video
+     * @param description What the video is about
+     * @param categories Categories video falls under
+     * @param vidLink A link to the video
+     * @return Whether or not upload was successful
+     */
     public boolean uploadVideo(String uploader, String title, String description, ArrayList<String> categories,String vidLink){
 
         ArrayList<String> vidID = new ArrayList<>();
@@ -34,22 +38,17 @@ public class VideoManager {
         ArrayList<Integer> ratings = new ArrayList<>();
         ratings.add(0);
         ratings.add(0);
-        Video v1 = new Video(uploader, title, description, categories, vidLink, "1", ratings, LocalDateTime.now().toString());
+        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString());
         vids.add(v1);
         return true;
 
-//        if (!isInAllCateogries(categories)){
-//            return false; //TODO change this so that it can return correct which category
-//        }
-
-        // TODO update uploader's user profile to add an extra video onto it
-//        Video v1 = new Video(uploader, title, description, categories, vidLink, vidLink); // TODO change uniqueID later
-//        vids.add(v1);
-//        return true;
     }
 
-    //delete everything but uploader, same as how can create Youtube account but no vids
-    //returns deletion successful
+    /**
+     *
+     * @param vidLink A link to the video
+     * @return Whether or not deletion was successful
+     */
     public boolean deleteVideo(String vidLink){
         if (!vids.isEmpty()){
             for (Video v: vids){
@@ -64,36 +63,40 @@ public class VideoManager {
         return false;
     }
 
-    //need know what user wants to edit-title, description,categories
-    //controller prompts user for t/f to change title, description, categories, need this order
-    //Todo: get rid of the casting
-
-    public List<String> getAllCategories(){
-        return allCategories;
-    }
-
-    // https://stackoverflow.com/questions/22461470/if-x-in-array-in-java
-    public Boolean isInAllCateogries(ArrayList<String> categories){
-        for (String category: categories){
-            if (!Arrays.asList(allCategories).contains(category)){
-                 return false;
-            }
-        }
-        return true;
-    }
+    /**
+     *
+     * @param v Video object
+     * @param newTitle The new title user wants their video to be
+     */
 
     public void editTitle(Video v, String newTitle){
         v.setName(newTitle);
 
     }
 
+    /**
+     *
+     * @param v Video object
+     * @param newCate The new categories user wants their video to be
+     */
     public void editCategories(Video v, ArrayList<String> newCate){
         v.setCategories(newCate);
     }
 
+    /**
+     *
+     * @param v Video object
+     * @param newDes The new description user wants their video to be
+     */
     public void editDescription(Video v, String newDes){
         v.setDescription(newDes);
     }
+
+    /**
+     *
+     * @param uploader The name of the person who uploaded video
+     * @return All the videos the uploader has uploaded
+     */
     public ArrayList<Video> getByUploader(String uploader){
         ArrayList<Video> vid_list = new ArrayList<>();
         for (Video v: vids){
@@ -107,6 +110,11 @@ public class VideoManager {
         return vid_list;
     }
 
+    /**
+     *
+     * @param name The title of the video
+     * @return All the videos that correspond to the title
+     */
     public ArrayList<Video> getByName(String name) {
         ArrayList<Video> videoList = new ArrayList<>();
         for (Video vid : vids) {
@@ -118,6 +126,11 @@ public class VideoManager {
         return videoList;
     }
 
+    /**
+     *
+     * @param categories The categories of the video
+     * @return All the videos belonging to the same categories
+     */
     public ArrayList<Video> getByCategory(ArrayList<String> categories) {
         ArrayList<Video> videoList = new ArrayList<>();
         for (Video vid : vids) {
@@ -129,6 +142,11 @@ public class VideoManager {
         return videoList;
     }
 
+    /**
+     *
+     * @param videos The list of videos
+     * @return Video names
+     */
     public ArrayList<String> getVideoNames(ArrayList<Video> videos) {
         ArrayList<String> names = new ArrayList<>();
         for (Video vid : videos) {
@@ -138,6 +156,11 @@ public class VideoManager {
         return names;
     }
 
+    /**
+     *
+     * @param vid Video object
+     * @return All attributes of the video
+     */
     public String[] displayVideo(Video vid) {
         return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent()};
     }
