@@ -1,6 +1,7 @@
 import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ public class UserInterfaceHandler {
     private UserManager um;
     private AdminManager am;
     private final Scanner sc = new Scanner(System.in);
-    private List<User> all_users;
+    private ArrayList<User> all_users;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -40,10 +41,10 @@ public class UserInterfaceHandler {
 
     public boolean deleteUser(User currentUser) {
         System.out.println("Here are all the users: \n");
-        um.displayAllUsers(um.getAllUsers());
+        am.displayAllUsers(um.getAllUsers());
         System.out.println("Please enter the username of the user you wish to delete");
         String name = sc.nextLine();
-        List<User> all_users = um.getAllUsers();
+        ArrayList<User> all_users = um.getAllUsers();
 
         for (User user : all_users) {
             if (am.validateUserName(user, name)) {
@@ -77,7 +78,7 @@ public class UserInterfaceHandler {
         String password = sc.nextLine();
 
 
-        List<User> all_users = um.getAllUsers();
+        ArrayList<User> all_users = um.getAllUsers();
         if (!(Objects.isNull(all_users))) {
             for (User u : all_users) {
                 if (u.getUserName().equals(userName)) {
@@ -98,7 +99,7 @@ public class UserInterfaceHandler {
         System.out.println("Please enter a password: ");
         String password = sc.nextLine();
 
-        List<User> all_users = um.getAllUsers();
+        ArrayList<User> all_users = um.getAllUsers();
         if (!(Objects.isNull(all_users))) {
             for (User u : all_users) {
                 if (am.validateUserName(u, userName)) {
@@ -115,7 +116,7 @@ public class UserInterfaceHandler {
 
     public void banUser(User currentUser) {
         System.out.println("Here are all the users that are not banned");
-        um.displayAllUsers(all_users, false);
+        am.displayAllUsers(all_users, false);
         System.out.println("\n\nPlease enter the name of the user that you wish to ban");
         String name = sc.nextLine();
 
@@ -139,7 +140,7 @@ public class UserInterfaceHandler {
 
     public void unBanUser() {
         System.out.println("Here are all the users that are banned");
-        um.displayAllUsers(all_users, true);
+        am.displayAllUsers(all_users, true);
         System.out.println("\nPlease enter the name of the user that you wish to unban");
         String name = sc.nextLine();
         for (User user : all_users) {
