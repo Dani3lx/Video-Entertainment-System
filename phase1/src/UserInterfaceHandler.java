@@ -41,7 +41,7 @@ public class UserInterfaceHandler {
 
     public boolean deleteUser(User currentUser) {
         System.out.println("Here are all the users: \n");
-        um.displayAllUsers(um.getAllUsers());
+        am.displayAllUsers(um.getAllUsers());
         System.out.println("Please enter the username of the user you wish to delete");
         String name = sc.nextLine();
         ArrayList<User> all_users = um.getAllUsers();
@@ -116,7 +116,7 @@ public class UserInterfaceHandler {
 
     public void banUser(User currentUser) {
         System.out.println("Here are all the users that are not banned");
-        um.displayAllUsers(all_users, false);
+        am.displayAllUsers(all_users, false);
         System.out.println("\n\nPlease enter the name of the user that you wish to ban");
         String name = sc.nextLine();
 
@@ -140,7 +140,7 @@ public class UserInterfaceHandler {
 
     public void unBanUser() {
         System.out.println("Here are all the users that are banned");
-        um.displayAllUsers(all_users, true);
+        am.displayAllUsers(all_users, true);
         System.out.println("\nPlease enter the name of the user that you wish to unban");
         String name = sc.nextLine();
         for (User user : all_users) {

@@ -70,21 +70,6 @@ public class UserManager {
         users = allUsers;
     }
 
-
-    public void displayAllUsers(ArrayList<User> users, boolean displayBan) {
-        for (User user : users) {
-            if ((displayBan == user.getBanStatus()) && !(user instanceof AdminUser)) {
-                System.out.println("Username: " + user.getUserName());
-            }
-        }
-    }
-
-    public void displayAllUsers(ArrayList<User> users) {
-        for (User user : users) {
-            System.out.println("Username: " + user.getUserName());
-        }
-    }
-
     public boolean getRole(User user) {
         return user.isAdminInd();
     }
