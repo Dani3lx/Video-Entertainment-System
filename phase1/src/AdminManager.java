@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class AdminManager extends UserManager{
-
     private UserManager um;
 
     private ArrayList<User> users;

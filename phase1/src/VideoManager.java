@@ -46,16 +46,27 @@ public class VideoManager {
 
     /**
      *
-     * @param vidLink A link to the video
+     * @param uniqueID A link to the video
      * @return Whether or not deletion was successful
      */
-    public boolean deleteVideo(String vidLink){
+    public boolean deleteVideo(String uniqueID){
         if (!vids.isEmpty()){
             for (Video v: vids){
-                if (vidLink.equalsIgnoreCase(v.getContent())){
-                    v.setCategories(null);
-                    v.setName(null);
-                    v.setDescription(null);
+                if (v.getUniqueID().equalsIgnoreCase(uniqueID)){
+                    vids.remove(v);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // overloaded version for NonAdmin since they are not allowed to delete videos other than their own
+    public boolean deleteVideo(String uploader, String uniqueID){
+        if (!vids.isEmpty()){
+            for (Video v: vids){
+                if (v.getUploader().equals(uploader) && v.getUniqueID().equalsIgnoreCase(uniqueID)){
+                    vids.remove(v);
                     return true;
                 }
             }
@@ -68,10 +79,8 @@ public class VideoManager {
      * @param v Video object
      * @param newTitle The new title user wants their video to be
      */
-
     public void editTitle(Video v, String newTitle){
         v.setName(newTitle);
-
     }
 
     /**
