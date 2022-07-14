@@ -28,7 +28,7 @@ public class VideoTest {
                 "VidNo1",ratings, "today");
     }
 
-    @Test(timeout = 300)
+    @Test
     public void uploadVideoTest(){
         VideoManager VM = new VideoManager();
         ArrayList<String> cates = new ArrayList<>();
