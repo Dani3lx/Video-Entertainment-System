@@ -160,4 +160,12 @@ public class VideoManager {
         return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent()};
     }
 
+
+    public static void main(String[] args) {
+        VideoManager VM = new VideoManager();
+        ArrayList<String> cates = new ArrayList<String>(Arrays.asList("energizing"));
+        ArrayList<Integer> ratings = new ArrayList<Integer>(Arrays.asList(10,0));
+        boolean b = VM.uploadVideo("a","aignw","j",cates, "naiwnow");
+        System.out.println(b);
+    }
 }
