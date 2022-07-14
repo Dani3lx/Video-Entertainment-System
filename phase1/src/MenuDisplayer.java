@@ -13,6 +13,12 @@ public class MenuDisplayer {
 
     VideoManagementMenuDisplayer vmmDisplayer;
 
+    /**
+     * Constructor for MenuDisplayer to initialize the object
+     *
+     * @param um The user manager for managing users
+     * @param vm The video manager for managing videos
+     */
     public MenuDisplayer(UserManager um, VideoManager vm) {
         this.um = um;
         this.vm = vm;
@@ -22,6 +28,9 @@ public class MenuDisplayer {
         vmmDisplayer = new VideoManagementMenuDisplayer(presenter, this);
     }
 
+    /**
+     * This menu navigates the user to login or create account
+     */
     public void startMenu() {
         User currentUser;
         String[] info;
@@ -59,6 +68,12 @@ public class MenuDisplayer {
         }
     }
 
+
+    /**
+     * This menu navigates the user to perform actions done by non admin users
+     *
+     * @param user The current user
+     */
     private void nonAdminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Browse Videos \n 5 - " +
@@ -76,6 +91,11 @@ public class MenuDisplayer {
         }
     }
 
+    /**
+     * This menu navigates the user to perform actions done by admin users
+     *
+     * @param user The current user
+     */
     private void adminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
@@ -130,6 +150,13 @@ public class MenuDisplayer {
         }
     }
 
+    /**
+     * This is a basic menu that navigates the user to perform actions done by all users
+     *
+     * @param user The current user
+     * @param choice The action that user wish to perform
+     * @param isAdmin The type of user
+     */
     void basicUserMenu(User user, int choice, boolean isAdmin) {
 
         switch (choice) {
@@ -150,6 +177,13 @@ public class MenuDisplayer {
         }
     }
 
+
+    /**
+     * This method decides which user menu to call
+     *
+     * @param user The current user
+     * @param isAdmin The user's type
+     */
     void callMenu(User user, boolean isAdmin) {
         if (isAdmin) {
             adminMenu(user);
@@ -158,6 +192,12 @@ public class MenuDisplayer {
         }
     }
 
+    /**
+     * This method takes in the user and return user's choice of action
+     *
+     * @param text
+     * @return
+     */
     int getUserActionChoice(String text) {
         Scanner sc = new Scanner(System.in);
         presenter.displayMenuOption(text);
@@ -168,6 +208,12 @@ public class MenuDisplayer {
         }
     }
 
+    /**
+     * This method checks whether a user is found
+     *
+     * @param currentUser
+     * @param message
+     */
     private void checkNoUserFound(User currentUser, String message) {
         if (Objects.isNull(currentUser)) {
             presenter.displayError(message);
@@ -175,6 +221,11 @@ public class MenuDisplayer {
         }
     }
 
+    /**
+     * This method takes in and returns the name and password
+     *
+     * @return
+     */
     String[] getLoginInfo() {
         presenter.displayRequest("Please enter a username: ");
         String username = sc.nextLine();
