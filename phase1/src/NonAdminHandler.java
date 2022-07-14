@@ -1,5 +1,11 @@
+import java.util.ArrayList;
+
 public class NonAdminHandler extends UserActionHandler{
-    public NonAdminHandler(UserManager um) {
+
+    NonAdminManager nm;
+    public NonAdminHandler(UserManager um, VideoManager vm) {
         super(um);
+        nm = new NonAdminManager(um, vm);
     }
+
 }

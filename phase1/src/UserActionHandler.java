@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +9,23 @@ public class UserActionHandler {
 
     public UserActionHandler(UserManager um) {
         this.um = um;
+    }
+
+    // These code can probably be optimized more. todo improve these implementations when have time
+    public ArrayList<Video> browseByName(String name) {
+        ArrayList<String> info = new ArrayList<>();
+        info.add(name);
+        return um.returnVideos(info, "name");
+    }
+
+    public ArrayList<Video> browseByCategories(ArrayList<String> categories) {
+        return um.returnVideos(categories, "category");
+    }
+
+    public ArrayList<Video> browseByUploader(String uploader) {
+        ArrayList<String> info = new ArrayList<>();
+        info.add(uploader);
+        return um.returnVideos(info, "uploader");
     }
 
     public List<String> getHistory(User user) {

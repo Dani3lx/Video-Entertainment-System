@@ -2,8 +2,11 @@ import java.util.List;
 
 public class Presenter {
     private final UserManager um;
-    public Presenter(UserManager um) {
+
+    private final VideoManager vm;
+    public Presenter(UserManager um, VideoManager vm) {
         this.um = um;
+        this.vm = vm;
     }
 
     public void displayLoginHistory(User user, UserActionHandler userActionHandler){
@@ -12,7 +15,7 @@ public class Presenter {
     }
 
     public void displayUsers(boolean banStatus) {
-        AdminManager am = new AdminManager(um);
+        AdminManager am = new AdminManager(um, vm);
         if (banStatus) {
             displayAlert("Here are all the banned users");
         } else {
@@ -23,7 +26,7 @@ public class Presenter {
 
     public void displayUsers() {
         displayAlert("Here are all the users");
-        AdminManager am = new AdminManager(um);
+        AdminManager am = new AdminManager(um, vm);
         displayList(am.returnUsers(um.getAllUsers()));
     }
 

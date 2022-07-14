@@ -1,6 +1,10 @@
 import java.util.*;
 
 public class UserManager {
+    VideoManager vm;
+    public UserManager(VideoManager vm){
+        this.vm = vm;
+    }
     private ArrayList<User> users;
 
     public User validateUser(String username, String password) {
@@ -72,5 +76,21 @@ public class UserManager {
 
     public boolean getRole(User user) {
         return user.isAdminInd();
+    }
+
+    public ArrayList<Video> returnVideos(ArrayList<String> info, String method) {
+        switch (method) {
+            case "name":
+                return vm.getByName(info.get(0));
+
+            case "category":
+                return vm.getByCategory(info);
+
+            case "uploader":
+                return vm.getByUploader(info.get(0));
+
+            default:
+                return new ArrayList<>();
+        }
     }
 }

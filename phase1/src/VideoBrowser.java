@@ -27,12 +27,12 @@ public class VideoBrowser {
         return vm.getByUploader(name);
     }
 
-    public ArrayList<Video> browseByCategory() {
-        System.out.println("Please enter the categories that you wish to include. Type CONTINUE to proceed.");
-        ArrayList<String> categories = new ArrayList<>();
-        while (!(sc.nextLine().equals("CONTINUE"))) {
-            categories.add(sc.nextLine());
-        }
-        return vm.getByCategory(categories);
-    }
+//    public ArrayList<Video> browseByCategory() {
+//        System.out.println("Please enter the categories that you wish to include. Type CONTINUE to proceed.");
+//        ArrayList<String> categories = new ArrayList<>();
+//        while (!(sc.nextLine().equals("CONTINUE"))) {
+//            categories.add(sc.nextLine());
+//        }
+//        return vm.getByCategory(categories);
+//    }
 }
