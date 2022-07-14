@@ -41,9 +41,9 @@ public class VideoManager {
             uniqueID = UUID.randomUUID().toString();
 
         }
-        ArrayList<Integer> ratings = new ArrayList<>();
-        ratings.add(0);
-        ratings.add(0);
+        ArrayList<String> ratings = new ArrayList<>();
+        ratings.add("0");
+        ratings.add("0");
         Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString());
         vids.add(v1);
         return true;
