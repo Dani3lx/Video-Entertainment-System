@@ -3,8 +3,9 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        UserManager um = new UserManager();
+
         VideoManager vm = new VideoManager();
+        UserManager um = new UserManager(vm);
 
         DataManager sm = new DataManager(um, vm);
         sm.loadData("phase1/Data.csv"); //Read Data from Data.csv

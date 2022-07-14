@@ -7,9 +7,9 @@ public class AdminHandler extends UserActionHandler {
 
     private final ArrayList<User> all_users;
 
-    public AdminHandler(UserManager um) {
+    public AdminHandler(UserManager um, VideoManager vm) {
         super(um);
-        am = new AdminManager(um);
+        am = new AdminManager(um, vm);
         all_users = um.getAllUsers();
     }
 

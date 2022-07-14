@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -6,13 +7,19 @@ public class MenuDisplayer {
     UserActionHandler userActionHandler;
     DataManager dataManager;
     UserManager um;
+
+    VideoManager vm;
     Presenter presenter;
+
+    VideoManagementMenuDisplayer vmmDisplayer;
 
     public MenuDisplayer(UserManager um, VideoManager vm) {
         this.um = um;
+        this.vm = vm;
         userActionHandler = new UserActionHandler(um);
         dataManager = new DataManager(um, vm);
-        presenter = new Presenter(um);
+        presenter = new Presenter(um, vm);
+        vmmDisplayer = new VideoManagementMenuDisplayer(presenter, this);
     }
 
     public void startMenu() {
@@ -54,12 +61,14 @@ public class MenuDisplayer {
 
     private void nonAdminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out");
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Browse Videos \n 5 - " +
+                "Upload videos \n 6 - View Playlists");
         switch (result) {
             case 4:
-                System.out.println("UploadVideo");
+                vmmDisplayer.videoBrowseMenu(user);
+                break;
             case 5:
-                System.out.println("BrowseVideos");
+                System.out.println("Uploadvideo");
             case 6:
                 System.out.println("View Playlist");
             default:
@@ -70,13 +79,13 @@ public class MenuDisplayer {
     private void adminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
-                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User");
-        AdminHandler adminHandler = new AdminHandler(um);
+                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n 8 - Browse Videos");
+        AdminHandler adminHandler = new AdminHandler(um, vm);
         String[] info;
         switch (result) {
             case 4:
                 info = getLoginInfo();
-                if (adminHandler.createAdminUser(info[0], info[1])){
+                if (adminHandler.createAdminUser(info[0], info[1])) {
                     presenter.displayAlert("Account has been successfully created");
                 } else {
                     presenter.displayAlert("Account creation was unsuccessful");
@@ -113,12 +122,15 @@ public class MenuDisplayer {
                 }
                 adminMenu(user);
                 break;
+            case 8:
+                vmmDisplayer.videoBrowseMenu(user);
+                break;
             default:
                 basicUserMenu(user, result, true);
         }
     }
 
-    private void basicUserMenu(User user, int choice, boolean isAdmin) {
+    void basicUserMenu(User user, int choice, boolean isAdmin) {
 
         switch (choice) {
             case 1:
@@ -138,7 +150,7 @@ public class MenuDisplayer {
         }
     }
 
-    private void callMenu(User user, boolean isAdmin) {
+    void callMenu(User user, boolean isAdmin) {
         if (isAdmin) {
             adminMenu(user);
         } else {
@@ -146,7 +158,7 @@ public class MenuDisplayer {
         }
     }
 
-    private int getUserActionChoice(String text) {
+    int getUserActionChoice(String text) {
         Scanner sc = new Scanner(System.in);
         presenter.displayMenuOption(text);
         if (sc.hasNextInt()) {
@@ -163,7 +175,7 @@ public class MenuDisplayer {
         }
     }
 
-    private String[] getLoginInfo() {
+    String[] getLoginInfo() {
         presenter.displayRequest("Please enter a username: ");
         String username = sc.nextLine();
         presenter.displayRequest("Please enter a password: ");
