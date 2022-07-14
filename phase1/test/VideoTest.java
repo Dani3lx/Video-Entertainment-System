@@ -42,7 +42,7 @@ public class VideoTest {
         ArrayList<String> cates = new ArrayList<>();
         cates.add("humour");
         VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
-        VM.deleteVideo(VM.getByName("hello"));
+//        VM.deleteVideo(VM.getByName("hello"));
     }
 
     public void editTitleTest(){
