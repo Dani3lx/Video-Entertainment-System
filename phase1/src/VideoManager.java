@@ -30,9 +30,12 @@ public class VideoManager {
 
         ArrayList<String> vidID = new ArrayList<>();
 
-        for (Video v : vids) {
-            vidID.add(v.getUniqueID());
+        if (!vids.isEmpty()){
+            for (Video v : vids) {
+                vidID.add(v.getUniqueID());
+            }
         }
+
 
         String uniqueID = UUID.randomUUID().toString();
 
@@ -41,14 +44,15 @@ public class VideoManager {
             uniqueID = UUID.randomUUID().toString();
 
         }
-        ArrayList<Integer> ratings = new ArrayList<>();
-        ratings.add(0);
-        ratings.add(0);
+        ArrayList<String> ratings = new ArrayList<>();
+        ratings.add("0");
+        ratings.add("0");
         Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString());
         vids.add(v1);
         return true;
 
     }
+
 
     /**
      *
@@ -86,6 +90,21 @@ public class VideoManager {
     public void editDescription(Video v, String newDes){
         v.setDescription(newDes);
     }
+
+    /**
+     *
+     * @param uniqueID The name of the person who uploaded video
+     * @return video with correspond UniqueID
+     */
+    public Video getByUniqueID(String uniqueID) throws Exception {
+        for (Video v : vids) {
+            if (uniqueID.equalsIgnoreCase(v.getUniqueID())) {
+                return v;
+            }
+        }
+        throw new Exception("Don't find video with the corresponding uniqueID");
+    }
+
 
     /**
      *
@@ -159,5 +178,6 @@ public class VideoManager {
     public String[] displayVideo(Video vid) {
         return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent()};
     }
+
 
 }

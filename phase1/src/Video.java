@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Video implements Comparable<Video> {
 
@@ -12,12 +13,12 @@ public class Video implements Comparable<Video> {
     private String uploader;
     private String date_upload;
     private ArrayList<String> history; // datetime + description
-    private ArrayList<Integer> ratings;
+    private ArrayList<String> ratings;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     // private ratings
 
     public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID,
-                 ArrayList<Integer> ratings,String date_upload){
+                 ArrayList<String> ratings,String date_upload){
         this.name = name;
         this.uploader = uploader;
         this.content = content;
@@ -41,7 +42,7 @@ public class Video implements Comparable<Video> {
         return content;
     }
 
-    public ArrayList<Integer> getRatings() {
+    public ArrayList<String> getRatings() {
         return ratings;
     }
 
@@ -113,7 +114,20 @@ public class Video implements Comparable<Video> {
 
     @Override
     public String toString() {
-        return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," + this.getCategories() + "," + this.getContent() + "," + this.getUniqueID() + "," + this.getRatings() + "," + this.getDate_upload();
+        Iterator<String> it1 = categories.iterator();
+        StringBuilder s1 = new StringBuilder();
+        while (it1.hasNext()) {
+            s1.append(it1.next()).append("/");
+        }
+
+        Iterator<String> it2 = ratings.iterator();
+        StringBuilder s2 = new StringBuilder();
+        while (it2.hasNext()) {
+            s2.append(it2.next()).append("/");
+        }
+
+
+        return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," + s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
     }
 }
 
