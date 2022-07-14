@@ -12,9 +12,10 @@ import java.util.UUID;
 
 
 public class VideoTest {
+
+
     @Test(timeout = 80)
     public void VidTest() {
-
         ArrayList<String> cates = new ArrayList<>();
         cates.add("N");
 
@@ -36,6 +37,25 @@ public class VideoTest {
         assertTrue(VM.uploadVideo("K", "hello", "greatvideo", cates, "url"));
     }
 
+    public void deleteVideoTest(){
+       VideoManager VM = new VideoManager();
+        ArrayList<String> cates = new ArrayList<>();
+        cates.add("humour");
+        VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
+        VM.deleteVideo(VM.getByName("hello"));
+    }
+
+    public void editTitleTest(){
+
+    }
+
+    public void editDescriptionTest(){
+
+    }
+
+    public void getByNameTest(){
+
+    }
 
 
 }
