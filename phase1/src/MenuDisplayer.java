@@ -4,9 +4,7 @@ import java.util.Scanner;
 public class MenuDisplayer {
     Scanner sc = new Scanner(System.in);
     UserActionHandler userActionhandler;
-
     DataManager dataManager;
-
     UserManager um;
 
     public MenuDisplayer(UserManager um, VideoManager vm) {
@@ -18,7 +16,7 @@ public class MenuDisplayer {
     public void startMenu() {
         User currentUser;
         String[] info;
-        switch (basicMenuOptions("Type 1 to login, type 2 to create a new user account, type 3" +
+        switch (getUserActionChoice("Type 1 to login, type 2 to create a new user account, type 3" +
                 " to exit program")) {
             case 1:
                 info = getLoginInfo();
@@ -53,7 +51,7 @@ public class MenuDisplayer {
     }
 
     private void nonAdminMenu(User user) {
-        int result = basicMenuOptions("Please input one of the following number to proceed " +
+        int result = getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n\n\n");
         switch (result) {
             case 4:
@@ -68,7 +66,7 @@ public class MenuDisplayer {
     }
 
     private void adminMenu(User user) {
-        int result = basicMenuOptions("Please input one of the following number to proceed " +
+        int result = getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
                 " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n");
         AdminHandler adminHandler = new AdminHandler(um);
@@ -114,6 +112,39 @@ public class MenuDisplayer {
         }
     }
 
+    private void basicUserMenu(User user, int choice, boolean isAdmin) {
+
+        switch (choice) {
+            case 1:
+                System.out.println("Please enter a new password");
+                userActionhandler.changePassword(user, sc.nextLine());
+                displayAlertMessage("passwordChange");
+                callMenu(user, isAdmin);
+                break;
+            case 2:
+                System.out.println("Checking history:");
+                System.out.println(userActionhandler.getHistory(user));
+                System.out.println("\n");
+                callMenu(user, isAdmin);
+                break;
+            case 3:
+                startMenu();
+                break;
+        }
+    }
+
+    private void callMenu(User user, boolean isAdmin) {
+        if (isAdmin) {
+            adminMenu(user);
+        } else {
+            nonAdminMenu(user);
+        }
+    }
+
+    public void displayAlert(String message) {
+        System.out.println(alertText(message));
+    }
+
     public void displayAlertMessage(String alert) {
         switch (alert) {
             case "adminLogin":
@@ -146,14 +177,6 @@ public class MenuDisplayer {
         }
     }
 
-    private void callMenu(User user, boolean isAdmin) {
-        if (isAdmin) {
-            adminMenu(user);
-        } else {
-            nonAdminMenu(user);
-        }
-    }
-
     private void displayUsers(boolean banStatus) {
         AdminManager am = new AdminManager(um);
         if (banStatus) {
@@ -174,29 +197,7 @@ public class MenuDisplayer {
         }
     }
 
-    private void basicUserMenu(User user, int choice, boolean isAdmin) {
-
-        switch (choice) {
-            case 1:
-                System.out.println("Please enter a new password");
-                userActionhandler.changePassword(user, sc.nextLine());
-                displayAlertMessage("passwordChange");
-                callMenu(user, isAdmin);
-                break;
-            case 2:
-                System.out.println("Checking history:");
-                System.out.println(userActionhandler.getHistory(user));
-                System.out.println("\n");
-                callMenu(user, isAdmin);
-                break;
-            case 3:
-                startMenu();
-                break;
-        }
-    }
-
-
-    private int basicMenuOptions(String text) {
+    private int getUserActionChoice(String text) {
         Scanner sc = new Scanner(System.in);
         System.out.println(menuOption(text));
         if (sc.hasNextInt()) {
@@ -205,8 +206,6 @@ public class MenuDisplayer {
             return 0;
         }
     }
-
-
 
     private void checkNoUserFound(User currentUser, String process) {
         if (Objects.isNull(currentUser)) {
