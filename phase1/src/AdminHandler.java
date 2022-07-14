@@ -13,19 +13,19 @@ public class AdminHandler extends UserActionHandler {
         all_users = um.getAllUsers();
     }
 
-    public void createAdminUser(String userName, String password) {
+    public boolean createAdminUser(String userName, String password) {
         ArrayList<User> all_users = um.getAllUsers();
         if (!(Objects.isNull(all_users))) {
             for (User u : all_users) {
                 if (am.validateUserName(u, userName)) {
-                    System.out.println("Failed to create a new account");
-                    return;
+                    return false;
                 }
             }
         }
         User newUser = am.instantiateUser(userName, password, true);
         updateUserHistory(newUser);
         um.updateData(newUser);
+        return true;
     }
 
     public boolean deleteUser(User currentUser, String name) {

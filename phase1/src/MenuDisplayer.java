@@ -3,14 +3,16 @@ import java.util.Scanner;
 
 public class MenuDisplayer {
     Scanner sc = new Scanner(System.in);
-    UserActionHandler userActionhandler;
+    UserActionHandler userActionHandler;
     DataManager dataManager;
     UserManager um;
+    Presenter presenter;
 
     public MenuDisplayer(UserManager um, VideoManager vm) {
         this.um = um;
-        userActionhandler = new UserActionHandler(um);
+        userActionHandler = new UserActionHandler(um);
         dataManager = new DataManager(um, vm);
+        presenter = new Presenter(um);
     }
 
     public void startMenu() {
@@ -20,23 +22,23 @@ public class MenuDisplayer {
                 " to exit program")) {
             case 1:
                 info = getLoginInfo();
-                currentUser = userActionhandler.loginUser(info[0], info[1]);
-                checkNoUserFound(currentUser, "login");
-                userActionhandler.updateUserHistory(currentUser);
-                if (userActionhandler.validateUserPermission(currentUser)) {
-                    displayAlertMessage("adminLogin");
+                currentUser = userActionHandler.loginUser(info[0], info[1]);
+                checkNoUserFound(currentUser, "Login was unsuccessful");
+                userActionHandler.updateUserHistory(currentUser);
+                if (userActionHandler.validateUserPermission(currentUser)) {
+                    presenter.displayAlert("you are now logged in to an admin account");
                     adminMenu(currentUser);
                 } else {
-                    displayAlertMessage("nonAdminLogin");
+                    presenter.displayAlert("you are now logged in to an non-admin account");
                     nonAdminMenu(currentUser);
                 }
                 break;
             case 2:
                 info = getLoginInfo();
-                currentUser = userActionhandler.createUser(info[0], info[1]);
-                checkNoUserFound(currentUser, "accountCreation");
-                userActionhandler.updateUserHistory(currentUser);
-                displayAlertMessage("accountCreation");
+                currentUser = userActionHandler.createUser(info[0], info[1]);
+                checkNoUserFound(currentUser, "Account creation was not successful");
+                userActionHandler.updateUserHistory(currentUser);
+                presenter.displayAlert("A new account has been successfully created");
                 nonAdminMenu(currentUser);
                 break;
             case 3:
@@ -45,14 +47,14 @@ public class MenuDisplayer {
                 System.exit(0);
                 break;
             default:
-                displayErrorMessage("userInput");
+                presenter.displayError("Please enter a valid input");
                 startMenu();
         }
     }
 
     private void nonAdminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n\n\n");
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out");
         switch (result) {
             case 4:
                 System.out.println("UploadVideo");
@@ -68,42 +70,46 @@ public class MenuDisplayer {
     private void adminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
-                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n");
+                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User");
         AdminHandler adminHandler = new AdminHandler(um);
         String[] info;
         switch (result) {
             case 4:
                 info = getLoginInfo();
-                adminHandler.createAdminUser(info[0], info[1]);
+                if (adminHandler.createAdminUser(info[0], info[1])){
+                    presenter.displayAlert("Account has been successfully created");
+                } else {
+                    presenter.displayAlert("Account creation was unsuccessful");
+                }
                 adminMenu(user);
                 break;
             case 5:
-                displayUsers();
-                System.out.println("Please enter the username of the user you wish to delete");
+                presenter.displayUsers();
+                presenter.displayRequest("Please enter the username of the user you wish to delete");
 
                 if (adminHandler.deleteUser(user, sc.nextLine())) {
                     startMenu();
                 }
-                displayAlertMessage("deleteUser");
+                presenter.displayAlert("Deletion was successful");
                 adminMenu(user);
                 break;
             case 6:
-                displayUsers(false);
-                System.out.println("\nPlease enter the name of the user that you wish to ban");
+                presenter.displayUsers(false);
+                presenter.displayRequest("Please enter the name of the user that you wish to ban");
                 if (adminHandler.banUser(user, sc.nextLine())) {
-                    displayAlertMessage("banUserFail");
+                    presenter.displayError("The ban operation was unsuccessful");
                 } else {
-                    displayAlertMessage("banUserSuccess");
+                    presenter.displayAlert("The ban operation was successful");
                 }
                 adminMenu(user);
                 break;
             case 7:
-                displayUsers(true);
-                System.out.println("\nPlease enter the name of the user that you wish to unban");
+                presenter.displayUsers(true);
+                presenter.displayRequest("Please enter the name of the user that you wish to unban");
                 if (adminHandler.unBanUser(sc.nextLine())) {
-                    displayAlertMessage("unbanSuccess");
+                    presenter.displayAlert("The account has been unbanned");
                 } else {
-                    displayAlertMessage("unbanFail");
+                    presenter.displayError("Unban was unsuccessful");
                 }
                 adminMenu(user);
                 break;
@@ -116,15 +122,14 @@ public class MenuDisplayer {
 
         switch (choice) {
             case 1:
-                System.out.println("Please enter a new password");
-                userActionhandler.changePassword(user, sc.nextLine());
-                displayAlertMessage("passwordChange");
+                presenter.displayRequest("Please enter a new password");
+                userActionHandler.changePassword(user, sc.nextLine());
+                presenter.displayAlert("Password change was successful");
                 callMenu(user, isAdmin);
                 break;
             case 2:
-                System.out.println("Checking history:");
-                System.out.println(userActionhandler.getHistory(user));
-                System.out.println("\n");
+                presenter.displayAlert("Checking history:");
+                presenter.displayLoginHistory(user, userActionHandler);
                 callMenu(user, isAdmin);
                 break;
             case 3:
@@ -141,65 +146,9 @@ public class MenuDisplayer {
         }
     }
 
-    public void displayAlert(String message) {
-        System.out.println(alertText(message));
-    }
-
-    public void displayAlertMessage(String alert) {
-        switch (alert) {
-            case "adminLogin":
-                System.out.println(alertText("you are now logged in to an admin account"));
-                break;
-            case "nonAdminLogin":
-                System.out.println(alertText("you are now logged in to an non-admin account"));
-                break;
-            case "accountCreation":
-                System.out.println(alertText("A new account has been successfully created"));
-                break;
-            case "passwordChange":
-                System.out.println("Password change was successful\n");
-                break;
-            case "banUserFail" :
-                System.out.println("The ban operation was unsuccessful");
-                break;
-            case "banUserSuccess" :
-                System.out.println("The ban operation was successful");
-                break;
-            case "deleteUser" :
-                System.out.println("This user is now removed");
-                break;
-            case "unbanSuccess":
-                System.out.println("The unban operation was successful");
-                break;
-            case "unbanFail":
-                System.out.println("The unban operation was unsuccessful");
-                break;
-        }
-    }
-
-    private void displayUsers(boolean banStatus) {
-        AdminManager am = new AdminManager(um);
-        if (banStatus) {
-            System.out.println("Here are all the banned users");
-        } else {
-            System.out.println("Here are all the unbanned users");
-        }
-        for (String item : am.returnUsersByBan(um.getAllUsers(), banStatus)) {
-            System.out.println(item);
-        }
-    }
-
-    private void displayUsers() {
-        System.out.println("Here are all the users");
-        AdminManager am = new AdminManager(um);
-        for (String item : am.returnUsers(um.getAllUsers())) {
-            System.out.println(item);
-        }
-    }
-
     private int getUserActionChoice(String text) {
         Scanner sc = new Scanner(System.in);
-        System.out.println(menuOption(text));
+        presenter.displayMenuOption(text);
         if (sc.hasNextInt()) {
             return (sc.nextInt());
         } else {
@@ -207,49 +156,19 @@ public class MenuDisplayer {
         }
     }
 
-    private void checkNoUserFound(User currentUser, String process) {
+    private void checkNoUserFound(User currentUser, String message) {
         if (Objects.isNull(currentUser)) {
-            displayErrorMessage(process);
+            presenter.displayError(message);
             startMenu();
         }
     }
 
-    private void displayErrorMessage(String error) {
-        switch (error) {
-            case "login":
-                System.out.println("Login was unsuccessful");
-                break;
-            case "accountCreation":
-                System.out.println("Account creation was unsuccessful");
-                break;
-            case "userInput":
-                System.out.println("Please enter a valid input");
-                break;
-            case "accountDeletion":
-                System.out.println("You have deleted your own account");
-        }
-    }
-
     private String[] getLoginInfo() {
-        System.out.println("Please enter a username: ");
+        presenter.displayRequest("Please enter a username: ");
         String username = sc.nextLine();
-        System.out.println("Please enter a password: ");
+        presenter.displayRequest("Please enter a password: ");
         String password = sc.nextLine();
         return new String[]{username, password};
     }
 
-
-    private String menuOption(String input) {
-        int num = input.length();
-        StringBuilder decorator = new StringBuilder();
-        decorator.append("*".repeat(num));
-        return decorator + "\n" + input + "\n" + decorator;
-    }
-
-    private String alertText(String input) {
-        int num = input.length();
-        StringBuilder decorator = new StringBuilder();
-        decorator.append("-".repeat(num));
-        return decorator + "\n" + input + "\n" + decorator;
-    }
 }

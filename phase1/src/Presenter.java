@@ -1,8 +1,61 @@
-import java.util.Scanner;
+import java.util.List;
 
 public class Presenter {
+    private final UserManager um;
+    public Presenter(UserManager um) {
+        this.um = um;
+    }
 
-    private String startMenuOption(String input) {
+    public void displayLoginHistory(User user, UserActionHandler userActionHandler){
+        System.out.println(userActionHandler.getHistory(user));
+        System.out.println("\n");
+    }
+
+    public void displayUsers(boolean banStatus) {
+        AdminManager am = new AdminManager(um);
+        if (banStatus) {
+            displayAlert("Here are all the banned users");
+        } else {
+            displayAlert("Here are all the unbanned users");
+        }
+        displayList(am.returnUsersByBan(um.getAllUsers(), banStatus));
+    }
+
+    public void displayUsers() {
+        displayAlert("Here are all the users");
+        AdminManager am = new AdminManager(um);
+        displayList(am.returnUsers(um.getAllUsers()));
+    }
+
+    public void displayAlert(String message) {
+        System.out.println(alertText(message));
+    }
+
+    public void displayError(String message) {
+        System.out.println(errorText(message));
+    }
+
+    public void displayRequest(String message) {
+        System.out.println(requestText(message));
+    }
+
+    public void displayMenuOption(String message) {
+        System.out.println(menuOption(message));
+    }
+
+    public void displayList(List<String> list) {
+        for (String str : list) {
+            System.out.println(str);
+        }
+    }
+
+    private String requestText(String input) {
+        String symbol = "=";
+        int num = input.length();
+        return "\n" + input + "\n" + symbol.repeat(num) + "\n";
+    }
+
+    private String menuOption(String input) {
         int num = input.length();
         StringBuilder decorator = new StringBuilder();
         decorator.append("*".repeat(num));
@@ -10,90 +63,14 @@ public class Presenter {
     }
 
     private String alertText(String input) {
+        String symbol = "-";
         int num = input.length();
-        StringBuilder decorator = new StringBuilder();
-        decorator.append("-".repeat(num));
-        return decorator + "\n" + input + "\n" + decorator;
+        return "\n" + symbol.repeat(num) + "\n" + input + "\n" + symbol.repeat(num) + "\n";
     }
 
-    public int startMenuOptions() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println(startMenuOption("Type 1 to login, type 2 to create a new user account, type 3" +
-                " to exit program"));
-        if (sc.hasNextInt()) {
-            return (sc.nextInt());
-        } else {
-            return 0;
-        }
-    }
-
-    public int basicMenuOptions(String text) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println(startMenuOption(text));
-        if (sc.hasNextInt()) {
-            return (sc.nextInt());
-        } else {
-            return 0;
-        }
-    }
-
-    public int afterLoginOptions(boolean isAdmin){
-        if (isAdmin) {
-            System.out.println("Please input one of the following number to proceed " +
-                    "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
-                    " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n");
-        } else {
-            System.out.println("Please input one of the following number to proceed " +
-                    "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n\n\n");
-        }
-
-        Scanner sc = new Scanner(System.in);
-
-        if (sc.hasNextInt()) {
-            return sc.nextInt();
-        } else {
-            return 0;
-        }
-    }
-
-    public void displayErrorMessage(String error) {
-        switch (error) {
-            case "login":
-                System.out.println("Login was unsuccessful");
-                break;
-            case "accountCreation" :
-                System.out.println("Account creation was unsuccessful");
-                break;
-            case "userInput":
-                System.out.println("Please enter a valid input");
-                break;
-        }
-    }
-
-    public void displayAlertMessage(String alert) {
-        switch (alert) {
-            case "adminLogin" :
-                System.out.println(alertText("you are now logged in to an admin account"));
-                break;
-            case "nonAdminLogin" :
-                System.out.println(alertText("you are now logged in to an non-admin account"));
-                break;
-            case "accountCreation":
-                System.out.println(alertText("A new account has been successfully created"));
-                break;
-            case "passwordChange":
-                System.out.println("Password change was successful\n");
-                break;
-        }
-    }
-
-    public void displayOptionMessages(String option) {
-        switch (option) {
-            case "checkHistory":
-                System.out.println("Checking history:");
-                break;
-            case "lineBreak":
-                System.out.println("\n");
-        }
+    private String errorText(String input) {
+        String symbol = "#";
+        int num = input.length();
+        return "\n" + symbol.repeat(num) + "\n" + input + "\n" + symbol.repeat(num) + "\n";
     }
 }
