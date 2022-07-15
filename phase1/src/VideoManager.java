@@ -1,7 +1,5 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 public class VideoManager {
@@ -62,6 +60,10 @@ public class VideoManager {
     public boolean deleteVideo(Video v){
         vids.remove(v);
         return true;
+    }
+
+    public void likeVideo(String userName, Video v){
+        v.addRatings(userName);
     }
 
     /**
