@@ -1,33 +1,61 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Responsible for performing admin users' actions.
+ *
+ * @author Daniel Xu
+ * @version 1.0
+ * @since 2022-07-15
+ */
 public class AdminHandler extends UserActionHandler {
 
     AdminManager am;
 
     private final ArrayList<User> all_users;
 
+    /**
+     * Constructs an admin handler with a record of all the users and videos.
+     *
+     * @param um this is the user manager which keep tracks of all the users
+     * @param vm this is the video manager which keep tracks of all the videos
+     */
     public AdminHandler(UserManager um, VideoManager vm) {
         super(um);
         am = new AdminManager(um, vm);
-        all_users = um.getAllUsers();
+        all_users = am.getAllUsers();
     }
 
-    public boolean createAdminUser(String userName, String password) {
-        ArrayList<User> all_users = um.getAllUsers();
+    /**
+     * Create a new admin user account if appropriate.
+     * Returns whether the creation of an admin user using username and password was successful.
+     *
+     * @param username the username of a user
+     * @param password the password of a user
+     * @return whether account creation was successful
+     */
+    public boolean createAdminUser(String username, String password) {
         if (!(Objects.isNull(all_users))) {
             for (User u : all_users) {
-                if (am.validateUserName(u, userName)) {
+                if (am.validateUserName(u, username)) {
                     return false;
                 }
             }
         }
-        User newUser = am.instantiateUser(userName, password, true);
+        User newUser = am.instantiateUser(username, password, true);
         updateUserHistory(newUser);
-        um.updateData(newUser);
+        am.updateData(newUser);
         return true;
     }
 
+    /**
+     * Deletes a user using name.
+     * Returns whether the user deleted was the current user.
+     *
+     * @param currentUser the user that is currently logged in
+     * @param name a name of the user to be deleted
+     * @return whether the user deleted was the current user
+     */
     public boolean deleteUser(User currentUser, String name) {
 
         for (User user : all_users) {
@@ -43,6 +71,14 @@ public class AdminHandler extends UserActionHandler {
         return false;
     }
 
+    /**
+     * Return whether the banning of a user using currentUser and name was successful.
+     * Bans the user with name if appropriate.
+     *
+     * @param currentUser the user that is currently logged in
+     * @param name a name of the user to be banned
+     * @return whether the banning of a user using currentUser and name was successful
+     */
     public boolean banUser(User currentUser, String name) {
 
         for (User user : all_users) {
@@ -58,6 +94,13 @@ public class AdminHandler extends UserActionHandler {
         return true;
     }
 
+    /**
+     * Return whether the unbanning of a user using name was successful.
+     * Unbans the user with name if appropriate.
+     *
+     * @param name the name of the user to be unbanned
+     * @return whether the unbanning process was successful
+     */
     public boolean unBanUser(String name) {
         for (User user : all_users) {
             if (am.validateUserName(user, name)) {
