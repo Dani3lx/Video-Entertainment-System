@@ -63,6 +63,21 @@ public class Playlist implements Iterable<Video> {
         return lst.toString();
     }
 
+    public boolean equals(Playlist p){
+        if (p.getLength()== this.getLength()){
+
+            for (Video v: p.getVideos()) {
+                if (!this.getVideos().contains(v)) {
+                    return false;
+                }
+            }
+            return true;
+
+        } else{
+            return false;
+        }
+
+    }
     @Override
     public Iterator<Video> iterator() {
         return new PlaylistIterator();
