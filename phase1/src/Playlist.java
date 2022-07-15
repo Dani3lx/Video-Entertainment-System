@@ -78,20 +78,6 @@ public class Playlist implements Iterable<Video> {
 
     }
 
-    public static void main(String[] args) {
-        Playlist play = new Playlist("Music", "k");
-        ArrayList<String> cates = new ArrayList<String>(Arrays.asList("energizing"));
-        ArrayList<String> ratings = new ArrayList<String>(Arrays.asList("10","0"));
-        Video v1 = new Video("k","popmusic","amazing music",cates, "url", "1",ratings,"today");
-        play.addVideo(v1);
-
-
-        Playlist play2 = new Playlist("Music", "k");
-
-        play2.addVideo(v1);
-        System.out.println(play.equals(play2));
-
-    }
 
     @Override
     public Iterator<Video> iterator() {
