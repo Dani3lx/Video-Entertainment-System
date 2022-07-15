@@ -4,7 +4,7 @@ public class PlaylistManager {
 
     public boolean addToPlaylist(Playlist playlist, Video video) {
         for (Video v : playlist) {
-            if (v.getName().equals(video.getName())) {
+            if (v.getUniqueID().equals(video.getUniqueID())) {
                 return false;
             }
         }
@@ -14,7 +14,7 @@ public class PlaylistManager {
 
     public boolean deleteFromPlaylist(Playlist playlist, Video video) {
         for (Video v : playlist) {
-            if (v.getName().equals(video.getName())) {
+            if (v.getUniqueID().equals(video.getUniqueID())) {
                 playlist.removeVideo(v);
                 return true;
             }
