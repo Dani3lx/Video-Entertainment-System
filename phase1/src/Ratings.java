@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Ratings {
-    ArrayList<String> likeUserName;
-    Integer totalLikes;
+    private ArrayList<String> likeUserName;
+    private Integer totalLikes;
 
     public Ratings(ArrayList<String> likeUserName){
         this.totalLikes = likeUserName.size();
@@ -13,7 +13,8 @@ public class Ratings {
         return totalLikes;
     }
 
-    public void addTotalLikes(){
+    public void addTotalLikes(String username){
+        likeUserName.add(username);
         totalLikes += 1;
     }
 

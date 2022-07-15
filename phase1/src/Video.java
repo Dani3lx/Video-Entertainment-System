@@ -93,8 +93,7 @@ public class Video implements Comparable<Video> {
     }
 
     public void addRatings(String userName){
-        ratings.likeUserName.add(userName);
-        ratings.addTotalLikes();
+        ratings.addTotalLikes(userName);
     }
 
     @Override
@@ -119,7 +118,7 @@ public class Video implements Comparable<Video> {
             s1.append(it1.next()).append("/");
         }
 
-        Iterator<String> it2 = ratings.likeUserName.iterator();
+        Iterator<String> it2 = ratings.getLikeUserName().iterator();
         StringBuilder s2 = new StringBuilder();
         while (it2.hasNext()) {
             s2.append(it2.next()).append("/");
