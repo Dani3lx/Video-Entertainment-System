@@ -16,6 +16,5 @@ public class Main {
         MenuDisplayer md = new MenuDisplayer(um, vm);
         md.startMenu();
 
-
     }
 }

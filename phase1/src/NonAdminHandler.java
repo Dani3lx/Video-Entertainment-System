@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class NonAdminHandler extends UserActionHandler{
 
     NonAdminManager nm;

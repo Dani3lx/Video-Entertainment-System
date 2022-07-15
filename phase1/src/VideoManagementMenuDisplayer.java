@@ -109,11 +109,12 @@ public class VideoManagementMenuDisplayer {
         }
         menuPresenter.displayError("Invalid input");
         videoBrowseMenu(user);
-
     }
 
     /**
      * This method is used for the user to interact with the video
+     *
+     * Only use controller methods to do stuff here
      *
      * @param video List of videos
      * @param user The current user

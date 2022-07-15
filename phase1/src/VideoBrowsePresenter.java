@@ -7,7 +7,6 @@ public class VideoBrowsePresenter {
         this.vm = vm;
     }
 
-
     public void listVideos(ArrayList<Video> videos) {
         int num = 0;
         for (String video : vm.getVideoNames(videos)) {
@@ -22,7 +21,9 @@ public class VideoBrowsePresenter {
         System.out.println("Uploader : " + information[1]);
         System.out.println("Description: " + information[2]);
         System.out.println("Date Uploaded : " + information[3]);
-        System.out.println("Content : " + information[4] + "\n");
+        System.out.println("Content : " + information[4]);
+        System.out.println("Likes : " + information[5]);
+        System.out.println("Dislikes : " + information[6] + "\n");
     }
 
 }
