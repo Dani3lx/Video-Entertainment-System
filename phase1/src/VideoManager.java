@@ -62,8 +62,15 @@ public class VideoManager {
         return true;
     }
 
-    public void likeVideo(String userName, Video v){
+    public boolean likeVideo(String userName, Video v) {
+        ArrayList<String> likeUserNames = v.getRatingsUsers();
+        for (String username : likeUserNames) {
+            if (username.equalsIgnoreCase(userName)){
+                return false;
+            }
+        }
         v.addRatings(userName);
+        return true;
     }
 
     /**
@@ -110,7 +117,6 @@ public class VideoManager {
                 videoList.add(vid);
             }
         }
-
         return videoList;
     }
 

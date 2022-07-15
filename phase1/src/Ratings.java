@@ -13,7 +13,7 @@ public class Ratings {
         return totalLikes;
     }
 
-    public void addTotalLikes(String username){
+    public void addLikes(String username){
         likeUserName.add(username);
         totalLikes += 1;
     }

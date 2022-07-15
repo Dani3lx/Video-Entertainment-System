@@ -42,6 +42,10 @@ public class Video implements Comparable<Video> {
         return ratings.getTotalLikes();
     }
 
+    public ArrayList<String> getRatingsUsers(){
+        return ratings.getLikeUserName();
+    }
+
     public String getUniqueID() {
         return uniqueID;
         //Todo check if it is wise to allow this to be public, maybe protected?
@@ -93,7 +97,7 @@ public class Video implements Comparable<Video> {
     }
 
     public void addRatings(String userName){
-        ratings.addTotalLikes(userName);
+        ratings.addLikes(userName);
     }
 
     @Override
