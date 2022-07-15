@@ -1,6 +1,8 @@
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Objects;
+
 public class Video implements Comparable<Video> {
 
     private String content;
@@ -100,6 +102,12 @@ public class Video implements Comparable<Video> {
         ratings.addLikes(userName);
     }
 
+    public boolean equals(Video v){
+        return (Objects.equals(v.getName(), this.getName())) && (Objects.equals(v.getUploader(), this.getUploader()))
+                && (Objects.equals(v.getDescription(), this.getDescription())) && (Objects.equals(v.getContent(), this.getContent())) &&
+                (v.getCategories() == this.getCategories()) && (Objects.equals(v.getUniqueID(), this.getUniqueID())) &&
+                (Objects.equals(v.getDate_upload(), this.getDate_upload())) && (v.getRatings() == this.getRatings());
+    }
     @Override
     public int compareTo(Video v) {
         int i = this.getName().compareTo(v.getName());

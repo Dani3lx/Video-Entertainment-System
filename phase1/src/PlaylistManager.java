@@ -9,6 +9,7 @@ public class PlaylistManager {
             }
         }
         playlist.addVideo(video);
+        playlist.setLength(playlist.getLength()+1);
         return true;
     }
 
@@ -16,6 +17,8 @@ public class PlaylistManager {
         for (Video v : playlist) {
             if (v.getUniqueID().equals(video.getUniqueID())) {
                 playlist.removeVideo(v);
+                playlist.setLength(playlist.getLength()-1);
+
                 return true;
             }
         }

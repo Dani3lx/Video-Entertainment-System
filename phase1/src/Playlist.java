@@ -62,6 +62,36 @@ public class Playlist implements Iterable<Video> {
         }
         return lst.toString();
     }
+    public boolean equals(Playlist p){
+        if (p.getLength()== this.getLength()){
+
+            for (Video v: p.getVideos()) {
+                if (!this.getVideos().contains(v)) {
+                    return false;
+                }
+            }
+            return true;
+
+        } else{
+            return false;
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Playlist play = new Playlist("Music", "k");
+        ArrayList<String> cates = new ArrayList<String>(Arrays.asList("energizing"));
+        ArrayList<String> ratings = new ArrayList<String>(Arrays.asList("10","0"));
+        Video v1 = new Video("k","popmusic","amazing music",cates, "url", "1",ratings,"today");
+        play.addVideo(v1);
+
+
+        Playlist play2 = new Playlist("Music", "k");
+
+        play2.addVideo(v1);
+        System.out.println(play.equals(play2));
+
+    }
 
     @Override
     public Iterator<Video> iterator() {
