@@ -1,8 +1,6 @@
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 public class Video implements Comparable<Video> {
 
     private String content;
@@ -13,9 +11,8 @@ public class Video implements Comparable<Video> {
     private String uploader;
     private String date_upload;
     private ArrayList<String> history; // datetime + description
-    private ArrayList<String> ratings;
+    private Ratings ratings;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    // private ratings
 
     public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID,
                  ArrayList<String> ratings,String date_upload){
@@ -29,8 +26,7 @@ public class Video implements Comparable<Video> {
         this.description = description;
         this.categories = categories;
         this.uniqueID = uniqueID;
-        this.ratings = ratings;
-        // TODO initialize ratings.
+        this.ratings = new Ratings(new ArrayList<>());
 
         //need to decide how we initialize the video construct
         //it will heavily depend on upload video in videomanager
@@ -42,8 +38,8 @@ public class Video implements Comparable<Video> {
         return content;
     }
 
-    public ArrayList<String> getRatings() {
-        return ratings;
+    public Integer getRatings() {
+        return ratings.getTotalLikes();
     }
 
     public String getUniqueID() {
@@ -78,8 +74,6 @@ public class Video implements Comparable<Video> {
         return categories;
     }
 
-    // Todo Create getRatings() after working on ratings
-
     // Setters - We will allow users/programs change these data fields
     public void setContent(String content) {
         this.content = content;
@@ -96,6 +90,11 @@ public class Video implements Comparable<Video> {
     //todo include append and remove categories as well since setCategories only adds a predetermined arraylist to replace the current one
     public void setCategories(ArrayList<String> categories) {
         this.categories = categories;
+    }
+
+    public void addRatings(String userName){
+        ratings.likeUserName.add(userName);
+        ratings.addTotalLikes();
     }
 
     @Override
@@ -120,7 +119,7 @@ public class Video implements Comparable<Video> {
             s1.append(it1.next()).append("/");
         }
 
-        Iterator<String> it2 = ratings.iterator();
+        Iterator<String> it2 = ratings.likeUserName.iterator();
         StringBuilder s2 = new StringBuilder();
         while (it2.hasNext()) {
             s2.append(it2.next()).append("/");
