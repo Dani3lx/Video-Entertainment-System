@@ -13,9 +13,6 @@ public class Main {
         um.setAllUsers(sm.getUsers());
         vm.setVids(sm.getVideos());
 
-//        LoginMenuDisplayer lmd = new LoginMenuDisplayer(um);
-//
-//        lmd.startMenu();
         MenuDisplayer md = new MenuDisplayer(um, vm);
         md.startMenu();
 

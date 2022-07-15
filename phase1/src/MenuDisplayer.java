@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -9,7 +8,7 @@ public class MenuDisplayer {
     UserManager um;
 
     VideoManager vm;
-    Presenter presenter;
+    MenuPresenter menuPresenter;
 
     VideoManagementMenuDisplayer vmmDisplayer;
 
@@ -24,8 +23,8 @@ public class MenuDisplayer {
         this.vm = vm;
         userActionHandler = new UserActionHandler(um);
         dataManager = new DataManager(um, vm);
-        presenter = new Presenter(um, vm);
-        vmmDisplayer = new VideoManagementMenuDisplayer(presenter, this);
+        menuPresenter = new MenuPresenter(um, vm);
+        vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm);
     }
 
     /**
@@ -42,10 +41,10 @@ public class MenuDisplayer {
                 checkNoUserFound(currentUser, "Login was unsuccessful");
                 userActionHandler.updateUserHistory(currentUser);
                 if (userActionHandler.validateUserPermission(currentUser)) {
-                    presenter.displayAlert("you are now logged in to an admin account");
+                    menuPresenter.displayAlert("you are now logged in to an admin account");
                     adminMenu(currentUser);
                 } else {
-                    presenter.displayAlert("you are now logged in to an non-admin account");
+                    menuPresenter.displayAlert("you are now logged in to an non-admin account");
                     nonAdminMenu(currentUser);
                 }
                 break;
@@ -54,7 +53,7 @@ public class MenuDisplayer {
                 currentUser = userActionHandler.createUser(info[0], info[1]);
                 checkNoUserFound(currentUser, "Account creation was not successful");
                 userActionHandler.updateUserHistory(currentUser);
-                presenter.displayAlert("A new account has been successfully created");
+                menuPresenter.displayAlert("A new account has been successfully created");
                 nonAdminMenu(currentUser);
                 break;
             case 3:
@@ -63,7 +62,7 @@ public class MenuDisplayer {
                 System.exit(0);
                 break;
             default:
-                presenter.displayError("Please enter a valid input");
+                menuPresenter.displayError("Please enter a valid input");
                 startMenu();
         }
     }
@@ -106,39 +105,39 @@ public class MenuDisplayer {
             case 4:
                 info = getLoginInfo();
                 if (adminHandler.createAdminUser(info[0], info[1])) {
-                    presenter.displayAlert("Account has been successfully created");
+                    menuPresenter.displayAlert("Account has been successfully created");
                 } else {
-                    presenter.displayAlert("Account creation was unsuccessful");
+                    menuPresenter.displayAlert("Account creation was unsuccessful");
                 }
                 adminMenu(user);
                 break;
             case 5:
-                presenter.displayUsers();
-                presenter.displayRequest("Please enter the username of the user you wish to delete");
+                menuPresenter.displayUsers();
+                menuPresenter.displayRequest("Please enter the username of the user you wish to delete");
 
                 if (adminHandler.deleteUser(user, sc.nextLine())) {
                     startMenu();
                 }
-                presenter.displayAlert("Deletion was successful");
+                menuPresenter.displayAlert("Deletion was successful");
                 adminMenu(user);
                 break;
             case 6:
-                presenter.displayUsers(false);
-                presenter.displayRequest("Please enter the name of the user that you wish to ban");
+                menuPresenter.displayUsers(false);
+                menuPresenter.displayRequest("Please enter the name of the user that you wish to ban");
                 if (adminHandler.banUser(user, sc.nextLine())) {
-                    presenter.displayError("The ban operation was unsuccessful");
+                    menuPresenter.displayError("The ban operation was unsuccessful");
                 } else {
-                    presenter.displayAlert("The ban operation was successful");
+                    menuPresenter.displayAlert("The ban operation was successful");
                 }
                 adminMenu(user);
                 break;
             case 7:
-                presenter.displayUsers(true);
-                presenter.displayRequest("Please enter the name of the user that you wish to unban");
+                menuPresenter.displayUsers(true);
+                menuPresenter.displayRequest("Please enter the name of the user that you wish to unban");
                 if (adminHandler.unBanUser(sc.nextLine())) {
-                    presenter.displayAlert("The account has been unbanned");
+                    menuPresenter.displayAlert("The account has been unbanned");
                 } else {
-                    presenter.displayError("Unban was unsuccessful");
+                    menuPresenter.displayError("Unban was unsuccessful");
                 }
                 adminMenu(user);
                 break;
@@ -161,14 +160,14 @@ public class MenuDisplayer {
 
         switch (choice) {
             case 1:
-                presenter.displayRequest("Please enter a new password");
+                menuPresenter.displayRequest("Please enter a new password");
                 userActionHandler.changePassword(user, sc.nextLine());
-                presenter.displayAlert("Password change was successful");
+                menuPresenter.displayAlert("Password change was successful");
                 callMenu(user, isAdmin);
                 break;
             case 2:
-                presenter.displayAlert("Checking history:");
-                presenter.displayLoginHistory(user, userActionHandler);
+                menuPresenter.displayAlert("Checking history:");
+                menuPresenter.displayLoginHistory(user, userActionHandler);
                 callMenu(user, isAdmin);
                 break;
             case 3:
@@ -200,7 +199,7 @@ public class MenuDisplayer {
      */
     int getUserActionChoice(String text) {
         Scanner sc = new Scanner(System.in);
-        presenter.displayMenuOption(text);
+        menuPresenter.displayMenuOption(text);
         if (sc.hasNextInt()) {
             return (sc.nextInt());
         } else {
@@ -216,7 +215,7 @@ public class MenuDisplayer {
      */
     private void checkNoUserFound(User currentUser, String message) {
         if (Objects.isNull(currentUser)) {
-            presenter.displayError(message);
+            menuPresenter.displayError(message);
             startMenu();
         }
     }
@@ -227,9 +226,9 @@ public class MenuDisplayer {
      * @return
      */
     String[] getLoginInfo() {
-        presenter.displayRequest("Please enter a username: ");
+        menuPresenter.displayRequest("Please enter a username: ");
         String username = sc.nextLine();
-        presenter.displayRequest("Please enter a password: ");
+        menuPresenter.displayRequest("Please enter a password: ");
         String password = sc.nextLine();
         return new String[]{username, password};
     }

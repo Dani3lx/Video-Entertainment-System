@@ -1,10 +1,10 @@
 import java.util.List;
 
-public class Presenter {
+public class MenuPresenter {
     private final UserManager um;
 
     private final VideoManager vm;
-    public Presenter(UserManager um, VideoManager vm) {
+    public MenuPresenter(UserManager um, VideoManager vm) {
         this.um = um;
         this.vm = vm;
     }

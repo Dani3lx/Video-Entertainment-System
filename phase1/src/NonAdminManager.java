@@ -4,11 +4,14 @@ public class NonAdminManager extends UserManager {
     private UserManager um;
     private ArrayList<User> users;
 
+    private VideoEditor ve;
+
     // we need to make sure that there only exists one VideoManager object during runtime
     public NonAdminManager(UserManager um, VideoManager vm) {
         super(vm);
         this.um = um;
         users = um.getAllUsers();
+        ve = new VideoEditor();
     }
 
     // start of overloaded uploadVideo functions region
@@ -41,7 +44,7 @@ public class NonAdminManager extends UserManager {
     public void editTitle(User user, String uniqueID, String newTitle) {
         for (Video video : vm.getVids()) {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
-                vm.editTitle(video, newTitle);
+                ve.editTitle(video, newTitle);
             }
         }
     }
@@ -49,7 +52,7 @@ public class NonAdminManager extends UserManager {
     public void editCategories(User user, String uniqueID, ArrayList<String> newCate) {
         for (Video video : vm.getVids()) {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
-                vm.editCategories(video, newCate);
+                ve.editCategories(video, newCate);
             }
         }
     }
@@ -57,7 +60,7 @@ public class NonAdminManager extends UserManager {
     public void editDescription(User user, String uniqueID, String newDes) {
         for (Video video : vm.getVids()) {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
-                vm.editDescription(video, newDes);
+                ve.editDescription(video, newDes);
             }
         }
     }

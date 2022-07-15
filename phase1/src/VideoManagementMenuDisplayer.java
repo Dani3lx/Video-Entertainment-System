@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class VideoManagementMenuDisplayer {
-    VideoPresenter vp = new VideoPresenter();
-    Presenter presenter;
+    VideoBrowsePresenter vp;
+    MenuPresenter menuPresenter;
     MenuDisplayer menuDisplayer;
 
     Scanner sc = new Scanner(System.in);
@@ -35,12 +35,13 @@ public class VideoManagementMenuDisplayer {
     /**
      * VideoManagementMenuDisplayer Constructor to initialize the object
      *
-     * @param presenter The Presenter class that format and displays information to the user
+     * @param menuPresenter The Presenter class that format and displays information to the user
      * @param menuDisplayer The main menu that this menu will interact with
      */
-    public VideoManagementMenuDisplayer(Presenter presenter, MenuDisplayer menuDisplayer){
-        this.presenter = presenter;
+    public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm){
+        this.menuPresenter = menuPresenter;
         this.menuDisplayer = menuDisplayer;
+        vp = new VideoBrowsePresenter(vm);
     }
 
     /**
@@ -55,13 +56,13 @@ public class VideoManagementMenuDisplayer {
         ArrayList<Video> videos;
         switch (result) {
             case 1:
-                presenter.displayRequest("Please enter the name of the video");
+                menuPresenter.displayRequest("Please enter the name of the video");
                 videos = menuDisplayer.userActionHandler.browseByName(sc.nextLine());
                 vp.listVideos(videos);
                 viewVideo(videos, user);
                 break;
             case 2:
-                presenter.displayRequest("Please enter the name of the user, type CONTINUE to proceed");
+                menuPresenter.displayRequest("Please enter the name of the user, type CONTINUE to proceed");
                 ArrayList<String> categories = new ArrayList<>();
                 while (true) {
                     String item = sc.nextLine();
@@ -75,7 +76,7 @@ public class VideoManagementMenuDisplayer {
                 viewVideo(videos, user);
                 break;
             case 3:
-                presenter.displayRequest("Please enter the name of the uploader");
+                menuPresenter.displayRequest("Please enter the name of the uploader");
                 videos = menuDisplayer.userActionHandler.browseByUploader(sc.nextLine());
                 vp.listVideos(videos);
                 viewVideo(videos, user);
@@ -94,11 +95,11 @@ public class VideoManagementMenuDisplayer {
      */
     public void viewVideo(ArrayList<Video> videos, User user) {
         if (videos.size() == 0) {
-            presenter.displayAlert("No video can be found, try again");
+            menuPresenter.displayAlert("No video can be found, try again");
             videoBrowseMenu(user);
         }
         Scanner sc = new Scanner(System.in);
-        presenter.displayRequest("Please enter a number to choose video you want to view");
+        menuPresenter.displayRequest("Please enter a number to choose video you want to view");
         if (sc.hasNextInt()) {
             int choice = sc.nextInt();
             if (choice >= 0 && choice < videos.size()) {
@@ -106,7 +107,7 @@ public class VideoManagementMenuDisplayer {
                 userVideoInteraction(videos.get(choice), user);
             }
         }
-        presenter.displayError("Invalid input");
+        menuPresenter.displayError("Invalid input");
         videoBrowseMenu(user);
 
     }
@@ -118,7 +119,7 @@ public class VideoManagementMenuDisplayer {
      * @param user The current user
      */
     public void userVideoInteraction(Video video, User user) {
-        System.out.println("video");
+        // todo do the liking and rating and stuff here. Maybe if the user name matches the name of the current user, you can edit the title and categories and stuff.
         menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.validateUserPermission(user));
     }
 }
