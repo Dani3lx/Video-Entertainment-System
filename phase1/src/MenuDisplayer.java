@@ -2,7 +2,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Responsible for displaying the different menus and interacting with users
+ * Responsible for displaying the different menus and interacting with users.
  *
  * @author Daniel Xu
  * @version 1.0
@@ -45,7 +45,7 @@ public class MenuDisplayer {
                 currentUser = userActionHandler.loginUser(info[0], info[1]);
                 checkNoUserFound(currentUser, "Login was unsuccessful");
                 userActionHandler.updateUserHistory(currentUser);
-                if (userActionHandler.validateUserPermission(currentUser)) {
+                if (userActionHandler.isAdmin(currentUser)) {
                     menuPresenter.displayAlert("you are now logged in to an admin account");
                     adminMenu(currentUser);
                 } else {
@@ -157,8 +157,8 @@ public class MenuDisplayer {
     /**
      * This is a basic menu that navigates the user to perform actions done by all users
      *
-     * @param user the current user
-     * @param choice the action that user wish to perform
+     * @param user    the current user
+     * @param choice  the action that user wish to perform
      * @param isAdmin the type of user
      */
     void basicUserMenu(User user, int choice, boolean isAdmin) {
@@ -185,7 +185,7 @@ public class MenuDisplayer {
     /**
      * This method decides which user menu to call
      *
-     * @param user the current user
+     * @param user    the current user
      * @param isAdmin the user's type
      */
     void callMenu(User user, boolean isAdmin) {
@@ -216,7 +216,7 @@ public class MenuDisplayer {
      * This method checks whether a user is found
      *
      * @param currentUser the current user
-     * @param message the message to be displayed
+     * @param message     the message to be displayed
      */
     private void checkNoUserFound(User currentUser, String message) {
         if (Objects.isNull(currentUser)) {

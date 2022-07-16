@@ -1,11 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Responsible for displaying different menu and interacting with user to perform actions related to video.
+ *
+ * @author Daniel Xu
+ * @version 1.0
+ * @since 2022-07-15
+ */
 public class VideoManagementMenuDisplayer {
     VideoBrowsePresenter vp;
     MenuPresenter menuPresenter;
     MenuDisplayer menuDisplayer;
-
     Scanner sc = new Scanner(System.in);
 
     /**
@@ -33,10 +39,10 @@ public class VideoManagementMenuDisplayer {
 
 
     /**
-     * VideoManagementMenuDisplayer Constructor to initialize the object
+     * Constructs a VideoManagementMenuDisplayer
      *
-     * @param menuPresenter The Presenter class that format and displays information to the user
-     * @param menuDisplayer The main menu that this menu will interact with
+     * @param menuPresenter the Presenter class that format and displays information to the user
+     * @param menuDisplayer the main menu that this menu will interact with
      */
     public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm){
         this.menuPresenter = menuPresenter;
@@ -47,7 +53,7 @@ public class VideoManagementMenuDisplayer {
     /**
      * This menu navigates the user to perform actions related to video browsing
      *
-     * @param user The current user using the menu
+     * @param user the current user using the menu
      */
     public void videoBrowseMenu(User user) {
         int result = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
@@ -82,7 +88,7 @@ public class VideoManagementMenuDisplayer {
                 viewVideo(videos, user);
                 break;
             case 4:
-                menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.validateUserPermission(user));
+                menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.isAdmin(user));
                 break;
         }
     }
@@ -90,8 +96,8 @@ public class VideoManagementMenuDisplayer {
     /**
      * This method is used to choose and display the video that the user selects
      *
-     * @param videos List of videos
-     * @param user The current user
+     * @param videos list of videos
+     * @param user the current user
      */
     public void viewVideo(ArrayList<Video> videos, User user) {
         if (videos.size() == 0) {
@@ -116,11 +122,11 @@ public class VideoManagementMenuDisplayer {
      *
      * Only use controller methods to do stuff here
      *
-     * @param video List of videos
-     * @param user The current user
+     * @param video list of videos
+     * @param user the current user
      */
     public void userVideoInteraction(Video video, User user) {
         // todo do the liking and rating and stuff here. Maybe if the user name matches the name of the current user, you can edit the title and categories and stuff.
-        menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.validateUserPermission(user));
+        menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.isAdmin(user));
     }
 }

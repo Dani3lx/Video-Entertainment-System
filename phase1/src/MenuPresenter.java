@@ -25,7 +25,7 @@ public class MenuPresenter {
     /**
      * Displays the user's login history.
      *
-     * @param user the target user
+     * @param user              the target user
      * @param userActionHandler the handler that handle user actions
      */
     public void displayLoginHistory(User user, UserActionHandler userActionHandler) {

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * Responsible for performing admin users' actions.
+ * Responsible for handling admin users' actions.
  *
  * @author Daniel Xu
  * @version 1.0
@@ -53,7 +53,7 @@ public class AdminHandler extends UserActionHandler {
      * Returns whether the user deleted was the current user.
      *
      * @param currentUser the user that is currently logged in
-     * @param name a name of the user to be deleted
+     * @param name        a name of the user to be deleted
      * @return whether the user deleted was the current user
      */
     public boolean deleteUser(User currentUser, String name) {
@@ -76,7 +76,7 @@ public class AdminHandler extends UserActionHandler {
      * Bans the user with name if appropriate.
      *
      * @param currentUser the user that is currently logged in
-     * @param name a name of the user to be banned
+     * @param name        a name of the user to be banned
      * @return whether the banning of a user using currentUser and name was successful
      */
     public boolean banUser(User currentUser, String name) {
