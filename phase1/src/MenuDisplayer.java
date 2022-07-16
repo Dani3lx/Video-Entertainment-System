@@ -18,7 +18,7 @@ public class MenuDisplayer {
     VideoManagementMenuDisplayer vmmDisplayer;
 
     /**
-     * Constructor for MenuDisplayer to initialize the object
+     * Constructs a menu displayer with a record of all the users and videos.
      *
      * @param um the user manager for managing users
      * @param vm the video manager for managing videos
