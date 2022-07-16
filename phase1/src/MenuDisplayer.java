@@ -1,22 +1,27 @@
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Responsible for displaying the different menus and interacting with users
+ *
+ * @author Daniel Xu
+ * @version 1.0
+ * @since 2022-07-15
+ */
 public class MenuDisplayer {
     Scanner sc = new Scanner(System.in);
     UserActionHandler userActionHandler;
     DataManager dataManager;
     UserManager um;
-
     VideoManager vm;
     MenuPresenter menuPresenter;
-
     VideoManagementMenuDisplayer vmmDisplayer;
 
     /**
      * Constructor for MenuDisplayer to initialize the object
      *
-     * @param um The user manager for managing users
-     * @param vm The video manager for managing videos
+     * @param um the user manager for managing users
+     * @param vm the video manager for managing videos
      */
     public MenuDisplayer(UserManager um, VideoManager vm) {
         this.um = um;
@@ -71,7 +76,7 @@ public class MenuDisplayer {
     /**
      * This menu navigates the user to perform actions done by non admin users
      *
-     * @param user The current user
+     * @param user the current user
      */
     private void nonAdminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
@@ -93,7 +98,7 @@ public class MenuDisplayer {
     /**
      * This menu navigates the user to perform actions done by admin users
      *
-     * @param user The current user
+     * @param user the current user
      */
     private void adminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
@@ -152,9 +157,9 @@ public class MenuDisplayer {
     /**
      * This is a basic menu that navigates the user to perform actions done by all users
      *
-     * @param user The current user
-     * @param choice The action that user wish to perform
-     * @param isAdmin The type of user
+     * @param user the current user
+     * @param choice the action that user wish to perform
+     * @param isAdmin the type of user
      */
     void basicUserMenu(User user, int choice, boolean isAdmin) {
 
@@ -180,8 +185,8 @@ public class MenuDisplayer {
     /**
      * This method decides which user menu to call
      *
-     * @param user The current user
-     * @param isAdmin The user's type
+     * @param user the current user
+     * @param isAdmin the user's type
      */
     void callMenu(User user, boolean isAdmin) {
         if (isAdmin) {
@@ -194,8 +199,8 @@ public class MenuDisplayer {
     /**
      * This method takes in the user and return user's choice of action
      *
-     * @param text
-     * @return
+     * @param text the text to be displayed
+     * @return the choice that the user made
      */
     int getUserActionChoice(String text) {
         Scanner sc = new Scanner(System.in);
@@ -210,8 +215,8 @@ public class MenuDisplayer {
     /**
      * This method checks whether a user is found
      *
-     * @param currentUser
-     * @param message
+     * @param currentUser the current user
+     * @param message the message to be displayed
      */
     private void checkNoUserFound(User currentUser, String message) {
         if (Objects.isNull(currentUser)) {
@@ -223,7 +228,7 @@ public class MenuDisplayer {
     /**
      * This method takes in and returns the name and password
      *
-     * @return
+     * @return the username and password
      */
     String[] getLoginInfo() {
         menuPresenter.displayRequest("Please enter a username: ");
