@@ -22,9 +22,7 @@ public class Video implements Comparable<Video> {
         this.uploader = uploader;
         this.content = content;
         this.date_upload = date_upload;
-//        this.history.add("We will add features later");
-        //this.history = new ArrayList<String>();
-        //this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/"); Remove and add to upload video
+
         this.description = description;
         this.categories = categories;
         this.uniqueID = uniqueID;
@@ -34,7 +32,9 @@ public class Video implements Comparable<Video> {
         //it will heavily depend on upload video in videomanager
     }
     // getters - retrieve video information
-
+//        this.history.add("We will add features later");
+    //this.history = new ArrayList<String>();
+    //this.history.add(LocalDateTime.now().toString() + "/" + "upload video" + "/"); Remove and add to upload video
 
     public String getContent() {
         return content;
