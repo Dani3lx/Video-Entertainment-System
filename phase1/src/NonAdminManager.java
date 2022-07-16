@@ -66,11 +66,13 @@ public class NonAdminManager extends UserManager {
     }
 
     // for displaying all the videos uploaded by a user
-    public void displayAllVideos(User user, ArrayList<Video> vids) {
+    public ArrayList<String> displayAllVideos(User user, ArrayList<Video> vids) {
+        ArrayList<String> newList = new ArrayList<>();
         for (Video video : vids) {
             if (user.getUserName().equals(video.getUploader())) {
-                System.out.println("Title: " + video.getName() + " (ID: " + video.getUniqueID() + ")");
+                newList.add("Title: " + video.getName() + " (ID: " + video.getUniqueID() + ")");
             }
         }
+        return newList;
     }
 }
