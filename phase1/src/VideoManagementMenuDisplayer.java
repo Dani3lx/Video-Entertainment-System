@@ -146,11 +146,18 @@ public class VideoManagementMenuDisplayer {
     public void playlistBrowseMenu(User user){
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Search Playlist by name \n 2 - Create New Playlist \n 2 -  Return ");
-        ArrayList<Playlist> pl;
+        String plname;
         switch (option) {
             case 1:
                 menuPresenter.displayRequest("Enter the name of the playlist: ");
-                // TODO: 7/17/2022: CREATE METHOD TO SEARCH FOR PLAYLIST
+
+                plname = menuDisplayer.sc.nextLine();
+                try {
+                    Playlist pl = pmm.getPlaylistByName(plname);
+                    playlistManageMenu(user,pl);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
 
                 break;
             case 2:
@@ -220,7 +227,13 @@ public class VideoManagementMenuDisplayer {
 
         switch (option){
             case 1:
-                //todo Display Video names in Playlist
+                //todo move logic to a different class
+                ArrayList<String> vidname = pmm.namesInPlaylist(pl,vmm);
+                int num = 0;
+                for (String video : vidname) {
+                    System.out.println(num + ". " + video);
+                    num++;
+                }
                 break;
             case 2:
                 int numlike = pl.getLikes(); //todo entity and controller interaction -> change logic
