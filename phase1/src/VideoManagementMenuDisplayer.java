@@ -60,7 +60,7 @@ public class VideoManagementMenuDisplayer {
 
     public void playlistMenu(User user, NonAdminHandler nonAdminHandler){
 
-        int result = menuDisplayer.getUserActionChoice("1 - Select a playlist \n 2 - Add playlist \n 3 - Delete playlist");
+        int result = menuDisplayer.getUserActionChoice("1 - Select a playlist \n2 - Add playlist \n3 - Delete playlist");
 
         ArrayList<Playlist> userPlaylists = nonAdminHandler.getPlaylists();
 
@@ -68,7 +68,7 @@ public class VideoManagementMenuDisplayer {
 
         switch (result) {
             case 1:
-                viewPlaylist(userPlaylists, user);
+                selectPlaylist(userPlaylists, user, nonAdminHandler);
                 break;
             case 2:
                 // todo add a playlist to the user using non admin handler
@@ -82,17 +82,17 @@ public class VideoManagementMenuDisplayer {
         }
     }
 
-    public void viewPlaylist(ArrayList<Playlist> playlists, User user) {
+    public void selectPlaylist(ArrayList<Playlist> playlists, User user, NonAdminHandler nonAdminHandler) {
         if (playlists.size() == 0) {
             menuPresenter.displayAlert("No playlists can be found, try again");
-            videoBrowseMenu(user);
+            playlistMenu(user, nonAdminHandler);
         }
         Scanner sc = new Scanner(System.in);
         menuPresenter.displayRequest("Please enter a number to choose playlist you want to view");
         if (sc.hasNextInt()) {
             int choice = sc.nextInt();
             if (choice >= 0 && choice < playlists.size()) {
-                int result = menuDisplayer.getUserActionChoice("1 - View playlist \n 2 - Edit playlist");
+                int result = menuDisplayer.getUserActionChoice("1 - View playlist \n2 - Edit playlist");
                 switch (result) {
                     case 1:
                         // todo figure out a way to transform the playlist into an arraylist of videos then call the viewVideo method with it.
@@ -106,7 +106,7 @@ public class VideoManagementMenuDisplayer {
             }
         }
         menuPresenter.displayError("Invalid input");
-        videoBrowseMenu(user);
+        playlistMenu(user, nonAdminHandler);
     }
 
     /**
@@ -173,7 +173,7 @@ public class VideoManagementMenuDisplayer {
     public void viewVideo(ArrayList<Video> videos, User user) {
         if (videos.size() == 0) {
             menuPresenter.displayAlert("No video can be found, try again");
-            videoBrowseMenu(user);
+            menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
         }
         Scanner sc = new Scanner(System.in);
         menuPresenter.displayRequest("Please enter a number to choose video you want to view");
@@ -185,7 +185,7 @@ public class VideoManagementMenuDisplayer {
             }
         }
         menuPresenter.displayError("Invalid input");
-        videoBrowseMenu(user);
+        menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
     }
 
     /**
