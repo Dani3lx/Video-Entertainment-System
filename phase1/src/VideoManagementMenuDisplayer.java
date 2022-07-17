@@ -14,6 +14,7 @@ public class VideoManagementMenuDisplayer {
     PlaylistManager pmm;
     MenuPresenter menuPresenter;
     MenuDisplayer menuDisplayer;
+    UserActionHandler userActionHandler;
     Scanner sc = new Scanner(System.in);
 
     /**
@@ -46,11 +47,78 @@ public class VideoManagementMenuDisplayer {
      * @param menuPresenter the Presenter class that format and displays information to the user
      * @param menuDisplayer the main menu that this menu will interact with
      */
-    public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm){
+    public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm, UserActionHandler userActionHandler){
         this.menuPresenter = menuPresenter;
         this.menuDisplayer = menuDisplayer;
+        this.userActionHandler = userActionHandler;
         vp = new VideoBrowsePresenter(vm);
     }
+
+    /**
+     *
+     * THESE ARE FOR THE PLAY LIST STUFFS
+     *
+     */
+
+    public void playlistMenu(User user, NonAdminHandler nonAdminHandler){
+
+        int result = menuDisplayer.getUserActionChoice("1 - Select a playlist \n2 - Add playlist \n3 - Delete playlist");
+
+        ArrayList<Playlist> userPlaylists = nonAdminHandler.getPlaylists();
+
+        vp.displayPlaylist(userPlaylists);
+
+        switch (result) {
+            case 1:
+                selectPlaylist(userPlaylists, user, nonAdminHandler);
+                break;
+            case 2:
+                // todo add a playlist to the user using non admin handler
+                break;
+            case 3:
+                // todo Remove a playlist to the user using non admin handler
+                break;
+            default:
+                menuPresenter.displayError("Invalid input, try again");
+                playlistMenu(user, nonAdminHandler);
+        }
+    }
+
+    public void selectPlaylist(ArrayList<Playlist> playlists, User user, NonAdminHandler nonAdminHandler) {
+        if (playlists.size() == 0) {
+            menuPresenter.displayAlert("No playlists can be found, try again");
+            playlistMenu(user, nonAdminHandler);
+        }
+        Scanner sc = new Scanner(System.in);
+        menuPresenter.displayRequest("Please enter a number to choose playlist you want to view");
+        if (sc.hasNextInt()) {
+            int choice = sc.nextInt();
+            if (choice >= 0 && choice < playlists.size()) {
+                int result = menuDisplayer.getUserActionChoice("1 - View playlist \n2 - Edit playlist");
+                switch (result) {
+                    case 1:
+                        // todo figure out a way to transform the playlist into an arraylist of videos then call the viewVideo method with it.
+
+                        ArrayList<Video> videos = new ArrayList<>(); // place holder
+                        viewVideo(videos, user);
+                    case 2:
+                        editPlaylist();
+                }
+
+            }
+        }
+        menuPresenter.displayError("Invalid input");
+        playlistMenu(user, nonAdminHandler);
+    }
+
+    /**
+     * Allows the user to add or delete from playlist. (This can get fairly technical so good luck).
+     */
+    public void editPlaylist(){
+        // todo
+    }
+
+
 
     /**
      * This menu navigates the user to perform actions related to video browsing
@@ -65,7 +133,7 @@ public class VideoManagementMenuDisplayer {
         switch (result) {
             case 1:
                 menuPresenter.displayRequest("Please enter the name of the video");
-                videos = menuDisplayer.userActionHandler.browseByName(sc.nextLine());
+                videos = userActionHandler.browseByName(sc.nextLine());
                 vp.listVideos(videos);
                 viewVideo(videos, user);
                 break;
@@ -79,19 +147,22 @@ public class VideoManagementMenuDisplayer {
                     }
                     categories.add(item);
                 }
-                videos = menuDisplayer.userActionHandler.browseByCategories(categories);
+                videos = userActionHandler.browseByCategories(categories);
                 vp.listVideos(videos);
                 viewVideo(videos, user);
                 break;
             case 3:
                 menuPresenter.displayRequest("Please enter the name of the uploader");
-                videos = menuDisplayer.userActionHandler.browseByUploader(sc.nextLine());
+                videos = userActionHandler.browseByUploader(sc.nextLine());
                 vp.listVideos(videos);
                 viewVideo(videos, user);
                 break;
             case 4:
-                menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.isAdmin(user));
+                menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
                 break;
+            default:
+                menuPresenter.displayError("Invalid input, try again");
+                videoBrowseMenu(user);
         }
     }
 
@@ -104,7 +175,7 @@ public class VideoManagementMenuDisplayer {
     public void viewVideo(ArrayList<Video> videos, User user) {
         if (videos.size() == 0) {
             menuPresenter.displayAlert("No video can be found, try again");
-            videoBrowseMenu(user);
+            menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
         }
         Scanner sc = new Scanner(System.in);
         menuPresenter.displayRequest("Please enter a number to choose video you want to view");
@@ -116,7 +187,7 @@ public class VideoManagementMenuDisplayer {
             }
         }
         menuPresenter.displayError("Invalid input");
-        videoBrowseMenu(user);
+        menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
     }
 
     /**
@@ -129,7 +200,7 @@ public class VideoManagementMenuDisplayer {
      */
     public void userVideoInteraction(Video video, User user) {
         // todo do the liking and rating and stuff here. Maybe if the user name matches the name of the current user, you can edit the title and categories and stuff.
-        menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.isAdmin(user));
+        menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
     }
 
     /*
