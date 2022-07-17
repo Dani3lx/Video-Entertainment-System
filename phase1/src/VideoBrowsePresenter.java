@@ -21,6 +21,7 @@ public class VideoBrowsePresenter {
         ve = new VideoEditor();
     }
 
+
     /**
      * Formats and displays list of videos to the user.
      *

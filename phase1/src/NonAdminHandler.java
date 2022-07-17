@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Responsible for handling non admin users' actions.
  *

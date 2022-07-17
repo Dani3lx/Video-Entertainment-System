@@ -10,8 +10,11 @@ import java.util.Scanner;
  */
 public class VideoManagementMenuDisplayer {
     VideoBrowsePresenter vp;
+    VideoManager vmm; // May need to add the VM usage into VBP
+    PlaylistManager pmm;
     MenuPresenter menuPresenter;
     MenuDisplayer menuDisplayer;
+    UserActionHandler userActionHandler;
     Scanner sc = new Scanner(System.in);
 
     /**
@@ -44,9 +47,10 @@ public class VideoManagementMenuDisplayer {
      * @param menuPresenter the Presenter class that format and displays information to the user
      * @param menuDisplayer the main menu that this menu will interact with
      */
-    public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm){
+    public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm, UserActionHandler userActionHandler){
         this.menuPresenter = menuPresenter;
         this.menuDisplayer = menuDisplayer;
+        this.userActionHandler = userActionHandler;
         vp = new VideoBrowsePresenter(vm);
     }
 
@@ -63,7 +67,7 @@ public class VideoManagementMenuDisplayer {
         switch (result) {
             case 1:
                 menuPresenter.displayRequest("Please enter the name of the video");
-                videos = menuDisplayer.userActionHandler.browseByName(sc.nextLine());
+                videos = userActionHandler.browseByName(sc.nextLine());
                 vp.listVideos(videos);
                 viewVideo(videos, user);
                 break;
@@ -77,19 +81,22 @@ public class VideoManagementMenuDisplayer {
                     }
                     categories.add(item);
                 }
-                videos = menuDisplayer.userActionHandler.browseByCategories(categories);
+                videos = userActionHandler.browseByCategories(categories);
                 vp.listVideos(videos);
                 viewVideo(videos, user);
                 break;
             case 3:
                 menuPresenter.displayRequest("Please enter the name of the uploader");
-                videos = menuDisplayer.userActionHandler.browseByUploader(sc.nextLine());
+                videos = userActionHandler.browseByUploader(sc.nextLine());
                 vp.listVideos(videos);
                 viewVideo(videos, user);
                 break;
             case 4:
-                menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.isAdmin(user));
+                menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
                 break;
+            default:
+                menuPresenter.displayError("Invalid input, try again");
+                videoBrowseMenu(user);
         }
     }
 
@@ -102,7 +109,7 @@ public class VideoManagementMenuDisplayer {
     public void viewVideo(ArrayList<Video> videos, User user) {
         if (videos.size() == 0) {
             menuPresenter.displayAlert("No video can be found, try again");
-            videoBrowseMenu(user);
+            menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
         }
         Scanner sc = new Scanner(System.in);
         menuPresenter.displayRequest("Please enter a number to choose video you want to view");
@@ -114,7 +121,7 @@ public class VideoManagementMenuDisplayer {
             }
         }
         menuPresenter.displayError("Invalid input");
-        videoBrowseMenu(user);
+        menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
     }
 
     /**
@@ -127,6 +134,91 @@ public class VideoManagementMenuDisplayer {
      */
     public void userVideoInteraction(Video video, User user) {
         // todo do the liking and rating and stuff here. Maybe if the user name matches the name of the current user, you can edit the title and categories and stuff.
-        menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.isAdmin(user));
+        menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
+    }
+
+    /*
+    * This is used for the user to interact with playlists and associated methods
+    * will use VMM displayer/presenter for this unless otherwise necessary
+    * Need to create way to #todo select and view playlist (not just get uniqueID)
+    * */
+
+    public void playlistBrowseMenu(User user){
+        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+                "\n 1 - Search Playlist by name \n 2 - Create New Playlist \n 2 -  Return ");
+        ArrayList<Playlist> pl;
+        switch (option) {
+            case 1:
+                menuPresenter.displayRequest("Enter the name of the playlist: ");
+                // TODO: 7/17/2022: CREATE METHOD TO SEARCH FOR PLAYLIST
+
+                break;
+            case 2:
+                //TODO create new playlist method here
+                break;
+            case 3:
+                menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.isAdmin(user));
+                break;
+        }
+    }
+
+    /*
+    * This is used for user to interact with a specific playlist after they have selected a playlist
+    * Need to create a cleaner select playlist
+    * */
+
+    public void playlistManageMenu(User user,Playlist pl){
+        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+                "\n 1 - View Playlist \n 2 - Add Video to Playlist \n 3 - Remove Video from Playlist \n 4 - Reorder Playlist " +
+                "\n 5 - Like Playlist \n 6 -  Return");
+        String VidName;
+        ArrayList <Video> videos;
+        switch(option){
+            case 1:
+                viewPlaylist(user,pl);
+                break;
+            case 2:
+                menuPresenter.displayRequest("Please enter the name of the video you would like to add to the playlist "); // todo does it make more sense to have UniqueID search rather than name?
+                VidName = menuDisplayer.sc.nextLine();
+                videos = vmm.getByName(VidName); //todo Include logic in another class similar to VideoBrowsePresenter.java
+                for (Video vid: videos){         //todo perhaps make it so we can create a list of videos and then add them (won't have to reuse code)
+                    pmm.addToPlaylist(pl,vid);   //todo will need a cache of videos to input though
+                }
+                break;
+            case 3:
+                menuPresenter.displayRequest("Please enter the name of the video you would like to remove from the playlist ");
+                VidName = menuDisplayer.sc.nextLine();
+                videos = vmm.getByName(VidName);
+                for (Video vid: videos){
+                    pmm.deleteFromPlaylist(pl,vid);
+                }
+                break;
+            case 4:
+                ReorderPlaylist(user, pl);
+                break;
+            case 5:
+                int option2 = menuDisplayer.getUserActionChoice("Do you want to like this playlist: "+ pl.getPlaylistName()
+                        + " \n 1 - Yes \n 2 - No");
+                switch (option2){
+                    case 1:
+                        pmm.likePlaylist(pl);
+                        menuPresenter.displayAlert("You have successfully liked " + pl.getPlaylistName());
+                        break;
+                    case 2:
+                        menuPresenter.displayAlert("You did not like " + pl.getPlaylistName());
+                        playlistManageMenu(user, pl); //todo do I need to break this?
+                }
+            case 6:
+                playlistBrowseMenu(user);
+        }
+
+    }
+
+    public void viewPlaylist(User user,Playlist pl){
+
+    }
+
+    public void ReorderPlaylist(User user, Playlist pl){ //todo user needs authority to change the playlist
+
     }
 }

@@ -29,7 +29,7 @@ public class MenuDisplayer {
         userActionHandler = new UserActionHandler(um);
         dataManager = new DataManager(um, vm);
         menuPresenter = new MenuPresenter(um, vm);
-        vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm);
+        vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm, userActionHandler);
     }
 
     /**
@@ -82,14 +82,19 @@ public class MenuDisplayer {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Browse Videos \n 5 - " +
                 "Upload videos \n 6 - View Playlists");
+
+        NonAdminHandler nonAdminHandler = new NonAdminHandler(um, vm);
+
         switch (result) {
             case 4:
                 vmmDisplayer.videoBrowseMenu(user);
                 break;
             case 5:
                 System.out.println("Uploadvideo");
+                break;
             case 6:
-                System.out.println("View Playlist");
+                vmmDisplayer.playlistBrowseMenu(user);
+                break;
             default:
                 basicUserMenu(user, result, false);
         }
