@@ -49,13 +49,13 @@ public class PlaylistManager {
     }
 
 
-    public Playlist getByPlaylistName(String playlistName) throws Exception{
+    public Playlist getPlaylistByName(String playlistName) throws Exception{
         for (int i = 0; i < playlists.size(); i++){
             if (playlists.get(i).getPlaylistName().equalsIgnoreCase(playlistName)){
                 return playlists.get(i);
             }
         }
-        throw new Exception("Don't find match Playlist Name");
+        throw new Exception("Didn't find matching Playlist Name");
     }
 
     public boolean deleteFromPlaylist(Playlist playlist, Video video) {

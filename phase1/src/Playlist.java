@@ -42,6 +42,10 @@ public class Playlist implements Iterable<String> {
         return uniqueIDs;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     public void setUniqueIDs(ArrayList<String> uniqueIDs) {
         this.uniqueIDs = uniqueIDs;
     }

@@ -146,11 +146,18 @@ public class VideoManagementMenuDisplayer {
     public void playlistBrowseMenu(User user){
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Search Playlist by name \n 2 - Create New Playlist \n 2 -  Return ");
-        ArrayList<Playlist> pl;
+        String plname;
         switch (option) {
             case 1:
                 menuPresenter.displayRequest("Enter the name of the playlist: ");
-                // TODO: 7/17/2022: CREATE METHOD TO SEARCH FOR PLAYLIST
+
+                plname = menuDisplayer.sc.nextLine();
+                try {
+                    Playlist pl = pmm.getPlaylistByName(plname);
+                    playlistManageMenu(user,pl);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
 
                 break;
             case 2:
@@ -205,7 +212,7 @@ public class VideoManagementMenuDisplayer {
                         menuPresenter.displayAlert("You have successfully liked " + pl.getPlaylistName());
                         break;
                     case 2:
-                        menuPresenter.displayAlert("You did not like " + pl.getPlaylistName());
+                        menuPresenter.displayAlert("You did not like " + pl.getPlaylistName()); //todo pl.getplaylistname also entity and controller interaction
                         playlistManageMenu(user, pl); //todo do I need to break this?
                 }
             case 6:
@@ -215,10 +222,66 @@ public class VideoManagementMenuDisplayer {
     }
 
     public void viewPlaylist(User user,Playlist pl){
+        int option = menuDisplayer.getUserActionChoice("Which Action would you like to perform " +
+                "\n 1 - View Video Names in Playlist \n 2 - View How Many Likes "+pl.getPlaylistName()+" has"+  "\n 3 - Change Playlist Name \n 4 -  Return ");
+
+        switch (option){
+            case 1:
+                //todo move logic to a different class
+                ArrayList<String> vidname = pmm.namesInPlaylist(pl,vmm);
+                int num = 0;
+                for (String video : vidname) {
+                    System.out.println(num + ". " + video);
+                    num++;
+                }
+                break;
+            case 2:
+                int numlike = pl.getLikes(); //todo entity and controller interaction -> change logic
+                menuPresenter.displayAlert(pl.getPlaylistName() + " has " + numlike + " likes! ");
+                break;
+            case 3:
+                if (user.getUserName() == pl.getUserName()){ //checks if current user also created the playlist
+                    menuPresenter.displayRequest("Please enter the name you would like to change " + pl.getPlaylistName() + " to: " );
+                    String PlName = menuDisplayer.sc.nextLine();
+                    pl.setPlaylistName(PlName);
+                }
+                else menuPresenter.displayError("You do not have permission to change this Playlist's name");
+                break;
+            case 4:
+                playlistManageMenu(user,pl);
+                break;
+        }
 
     }
 
     public void ReorderPlaylist(User user, Playlist pl){ //todo user needs authority to change the playlist
+        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+                "\n 1 - Reorder Playlist Alphabetically \n 2 - Reorder Playlist by Video Rating \n 3 - Shuffle Playlist  \n 4 -  Return");
 
+        if (user.getUserName() != pl.getUserName()){
+            menuPresenter.displayError("You do not have permission to change the order");
+            playlistManageMenu(user,pl);
+        }
+        else {
+
+            switch (option){
+                case 1:
+                    pmm.reorderPlaylistByName(pl);
+                    menuPresenter.displayAlert("You have successfully ordered "+ pl.getPlaylistName() +" by alphabetical order!");
+                    break;
+                case 2:
+                    pmm.reorderPlaylistByRating(pl,vmm);
+                    menuPresenter.displayAlert("You have successfully ordered "+ pl.getPlaylistName() +" by descending ratings order!");
+                    break;
+                case 3:
+                    pmm.shufflePlaylist(pl,vmm);
+                    menuPresenter.displayAlert("You have successfully shuffled "+ pl.getPlaylistName());
+                    break;
+                case 4:
+                    playlistManageMenu(user,pl);
+                    break;
+
+            }
+        }
     }
 }
