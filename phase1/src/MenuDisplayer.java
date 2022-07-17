@@ -91,9 +91,10 @@ public class MenuDisplayer {
                 break;
             case 5:
                 System.out.println("Uploadvideo");
+                break;
             case 6:
-
-                vmmDisplayer.playlistMenu(user, nonAdminHandler);
+                vmmDisplayer.playlistBrowseMenu(user);
+                break;
             default:
                 basicUserMenu(user, result, false);
         }

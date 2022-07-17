@@ -24,21 +24,4 @@ public class NonAdminHandler extends UserActionHandler {
 
     // todo add the controller methods required for user interaction with playlist, and uploading videos and stuff
 
-    /**
-     *
-     *
-     * This is for the playlist stuff
-     *
-     */
-
-    /**
-     * Returns the user's playlist
-     *
-     * @return the user's playlist
-     */
-    public ArrayList<Playlist> getPlaylists(){
-        // todo
-        return new ArrayList<>(); // place holder
-    }
-
 }
