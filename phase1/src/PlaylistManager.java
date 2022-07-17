@@ -4,9 +4,9 @@ import java.util.*;
 
 public class PlaylistManager {
     private ArrayList<Playlist> playlists;
-    public PlaylistManager(){
-        playlists = new ArrayList<>();
-    }
+//    public PlaylistManager(){
+//        playlists = new ArrayList<>();
+//    }
     public void setPlaylists(ArrayList<Playlist> playlists) {
         this.playlists = playlists;
     }
@@ -16,7 +16,7 @@ public class PlaylistManager {
     }
 
 
-    public ArrayList<Playlist> playlists;
+//    public ArrayList<Playlist> playlists;
 
     public PlaylistManager(){
         this.playlists = new ArrayList<Playlist>();
