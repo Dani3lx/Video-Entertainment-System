@@ -72,9 +72,13 @@ public class VideoManagementMenuDisplayer {
                 break;
             case 2:
                 // todo add a playlist to the user using non admin handler
+                System.out.println("ADD PLAYLIST"); // place holder
+                playlistMenu(user, nonAdminHandler);
                 break;
             case 3:
                 // todo Remove a playlist to the user using non admin handler
+                System.out.println("REMOVE PLAYLIST"); // place holder
+                playlistMenu(user, nonAdminHandler);
                 break;
             default:
                 menuPresenter.displayError("Invalid input, try again");
