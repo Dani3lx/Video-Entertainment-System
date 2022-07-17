@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -14,6 +15,12 @@ public class PlaylistManager {
         return playlists;
     }
 
+
+    public ArrayList<Playlist> playlists;
+
+    public PlaylistManager(){
+        this.playlists = new ArrayList<Playlist>();
+    }
 
     public boolean addToPlaylist(Playlist playlist, Video video) {
         for (String uniqueID : playlist) {
@@ -41,9 +48,15 @@ public class PlaylistManager {
         }
     }
 
-//    public Playlist getByPlaylistName(String playlistName){
-//
-//    }
+
+    public Playlist getByPlaylistName(String playlistName) throws Exception{
+        for (int i = 0; i < playlists.size(); i++){
+            if (playlists.get(i).getPlaylistName().equalsIgnoreCase(playlistName)){
+                return playlists.get(i);
+            }
+        }
+        throw new Exception("Don't find match Playlist Name");
+    }
 
     public boolean deleteFromPlaylist(Playlist playlist, Video video) {
         for (String uniqueID : playlist) {
