@@ -21,6 +21,29 @@ public class VideoBrowsePresenter {
         ve = new VideoEditor();
     }
 
+
+    /**
+     *
+     * THIS IS FOR THE PLAYLIST STUFF
+     *
+     */
+
+    /**
+     * Formats and displays list of playlists to the user. ** follow similar format to listVideos **
+     *
+     * @param playlists the playlists being listed
+     */
+    public void displayPlaylist(ArrayList<Playlist> playlists) {
+        // todo
+    }
+
+
+
+
+
+
+
+
     /**
      * Formats and displays list of videos to the user.
      *
