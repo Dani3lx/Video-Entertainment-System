@@ -1,6 +1,19 @@
 import java.util.*;
 
+
 public class PlaylistManager {
+    private ArrayList<Playlist> playlists;
+    public PlaylistManager(){
+        playlists = new ArrayList<>();
+    }
+    public void setPlaylists(ArrayList<Playlist> playlists) {
+        this.playlists = playlists;
+    }
+
+    public ArrayList<Playlist> getPlaylists(){
+        return playlists;
+    }
+
 
     public boolean addToPlaylist(Playlist playlist, Video video) {
         for (String uniqueID : playlist) {
