@@ -1,5 +1,4 @@
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Responsible for displaying the different menus and interacting with users.
@@ -90,7 +89,15 @@ public class MenuDisplayer {
                 vmmDisplayer.videoBrowseMenu(user);
                 break;
             case 5:
-                System.out.println("Uploadvideo");
+                String[] info = getUploadVidInfo();
+                ArrayList<String> cates = getCates();
+                if (nonAdminHandler.uploadVideo(user, info[0],info[1],cates, info[2])){
+                    menuPresenter.displayAlert("Video upload successful");
+                }else{
+                    menuPresenter.displayAlert("Video upload unsuccessful");
+
+                }
+
                 break;
             case 6:
                 vmmDisplayer.playlistBrowseMenu(user);
@@ -243,4 +250,29 @@ public class MenuDisplayer {
         return new String[]{username, password};
     }
 
+    String[] getUploadVidInfo(){
+        menuPresenter.displayRequest("Please enter title of video: ");
+        String title = sc.nextLine();
+        menuPresenter.displayRequest("Please enter description of video: ");
+        String description = sc.nextLine();
+        menuPresenter.displayRequest("Please enter number of categories you wish to input:all categories of video: ");
+        int numCates = sc.nextInt();
+        ArrayList<String> cates = new ArrayList<>();
+        menuPresenter.displayRequest("Please enter all categories of video: ");
+        for (int i=0; i<numCates;i++){
+            cates.add(sc.nextLine());
+        }
+        menuPresenter.displayRequest("Please enter video link: ");
+        String vidLink = sc.nextLine();
+        return new String[]{title, description, vidLink};
+    }
+    ArrayList<String> getCates(){
+        menuPresenter.displayRequest("Please enter number of categories you wish to input: ");
+        int numCates = sc.nextInt();
+        ArrayList<String> cates = new ArrayList<>();
+        menuPresenter.displayRequest("Please enter all categories of video: ");
+        for (int i=0; i<numCates;i++){
+            cates.add(sc.nextLine());
+        }return cates;
+    }
 }

@@ -23,5 +23,15 @@ public class NonAdminHandler extends UserActionHandler {
     }
 
     // todo add the controller methods required for user interaction with playlist, and uploading videos and stuff
-
+    public boolean uploadVideo(User currentUser,String title, String description, ArrayList<String> categories, String vidLink){
+        if (description.equals("") && categories.isEmpty()){
+            return nm.uploadVideo(currentUser,title, vidLink);
+        }else if (description.equals("") ) {
+            return nm.uploadVideo(currentUser, title, categories, vidLink);
+        } else if (categories.isEmpty())   {
+            return nm.uploadVideo(currentUser,title,description,vidLink);
+        }else{
+            return nm.uploadVideo(currentUser,title, description,categories,vidLink);
+        }
+    }
 }
