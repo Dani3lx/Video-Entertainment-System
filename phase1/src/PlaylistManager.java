@@ -13,6 +13,25 @@ public class PlaylistManager {
         return true;
     }
 
+    public ArrayList<String> namesInPlaylist(Playlist playlist, VideoManager vm){
+        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+        ArrayList<String> videoName = new ArrayList<>();
+        try {
+            for (String uniqueID : uniqueIDs) {
+                videoName.add(vm.getByUniqueID(uniqueID).getName());
+            }
+            return videoName;
+        }
+        catch(Exception e){
+            System.out.println("uniqueID not find in VideoManager, will be returning the old playlist");
+            return videoName;
+        }
+    }
+
+//    public Playlist getByPlaylistName(String playlistName){
+//
+//    }
+
     public boolean deleteFromPlaylist(Playlist playlist, Video video) {
         for (String uniqueID : playlist) {
             if (uniqueID.equals(video.getUniqueID())) {
