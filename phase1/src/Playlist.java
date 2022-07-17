@@ -1,17 +1,17 @@
 import java.util.*;
 
-public class Playlist implements Iterable<Video> {
+public class Playlist implements Iterable<String> {
 
     private String name;
     private int likes, length;
-    private ArrayList<Video> videos;
+    private ArrayList<String> uniqueIDs;
     private String userName;  // the name of the user who made the playlist
 
     public Playlist(String playlistName, String userName){
         this.name = playlistName;
         likes = 0;
         length = 0;
-        videos = new ArrayList<>();
+        uniqueIDs = new ArrayList<>();
         this.userName = userName;
     }
 
@@ -39,35 +39,36 @@ public class Playlist implements Iterable<Video> {
         this.length = length;
     }
 
-    public ArrayList<Video> getVideos() {
-        return videos;
+    public ArrayList<String> getUniqueIDs() {
+        return uniqueIDs;
     }
 
-    public void setVideos(ArrayList<Video> videos) {
-        this.videos = videos;
+    public void setUniqueIDs(ArrayList<String> uniqueIDs) {
+        this.uniqueIDs = uniqueIDs;
     }
 
-    public void addVideo(Video video) {
-        videos.add(video);
+    public void addUniqueID(String uniqueID) {
+        uniqueIDs.add(uniqueID);
     }
 
-    public void removeVideo(Video video) {
-        videos.remove(video);
+    public void removeUniqueID(String uniqueID) {
+        uniqueIDs.remove(uniqueID);
     }
 
     public String toString() {
-        ArrayList<String> lst = new ArrayList<>();
-        for (Video v : videos) {
-            lst.add(v.getName());
-        }
-        return lst.toString();
+//        ArrayList<String> lst = new ArrayList<>();
+//        for (String v : uniqueIDs) {
+//            lst.add(v.getName());
+//        }
+//        return lst.toString();
+        return uniqueIDs.toString();
     }
 
     public boolean equals(Playlist p){
         if (p.getLength()== this.getLength()){
 
-            for (Video v: p.getVideos()) {
-                if (!this.getVideos().contains(v)) {
+            for (String uniqueID: p.getUniqueIDs()) {
+                if (!this.getUniqueIDs().contains(uniqueID)) {
                     return false;
                 }
             }
@@ -79,21 +80,21 @@ public class Playlist implements Iterable<Video> {
 
     }
     @Override
-    public Iterator<Video> iterator() {
+    public Iterator<String> iterator() {
         return new PlaylistIterator();
     }
 
-    private class PlaylistIterator implements Iterator<Video> {
+    private class PlaylistIterator implements Iterator<String> {
         private int current = 0;
 
         public boolean hasNext() {
-            return current < videos.size();
+            return current < uniqueIDs.size();
         }
 
-        public Video next() {
-            Video video = videos.get(current);
+        public String next() {
+            String uniqueID = uniqueIDs.get(current);
             current += 1;
-            return video;
+            return uniqueID;
         }
     }
 

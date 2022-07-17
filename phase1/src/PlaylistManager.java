@@ -3,20 +3,20 @@ import java.util.*;
 public class PlaylistManager {
 
     public boolean addToPlaylist(Playlist playlist, Video video) {
-        for (Video v : playlist) {
-            if (v.getUniqueID().equals(video.getUniqueID())) {
+        for (String uniqueID : playlist) {
+            if (uniqueID.equals(video.getUniqueID())) {
                 return false;
             }
         }
-        playlist.addVideo(video);
+        playlist.addUniqueID(video.getUniqueID());
         playlist.setLength(playlist.getLength()+1);
         return true;
     }
 
     public boolean deleteFromPlaylist(Playlist playlist, Video video) {
-        for (Video v : playlist) {
-            if (v.getUniqueID().equals(video.getUniqueID())) {
-                playlist.removeVideo(v);
+        for (String uniqueID : playlist) {
+            if (uniqueID.equals(video.getUniqueID())) {
+                playlist.removeUniqueID(uniqueID);
                 playlist.setLength(playlist.getLength()-1);
                 return true;
             }
@@ -24,25 +24,53 @@ public class PlaylistManager {
         return false;
     }
 
-    public Playlist reorderPlaylistByRating(Playlist playlist) {
-        ArrayList<Video> videos = playlist.getVideos();
-        Collections.sort(videos, new VideoRatingComparator());
-        playlist.setVideos(videos);
-        return playlist;
+    public Playlist reorderPlaylistByRating(Playlist playlist, VideoManager vm) {
+        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+        ArrayList<Video> videos = new ArrayList<>();
+        try {
+            for (String uniqueID : uniqueIDs) {
+                videos.add(vm.getByUniqueID(uniqueID));
+            }
+            Collections.sort(videos, new VideoRatingComparator());
+
+            ArrayList<String> newUniqueIDs = new ArrayList<>();
+            for (Video video: videos){
+                newUniqueIDs.add(video.getUniqueID());
+            }
+            playlist.setUniqueIDs(newUniqueIDs);
+            return playlist;
+        }
+        catch(Exception e){
+            System.out.println("uniqueID not find in VideoManager, will be returning the old playlist");
+            return playlist;
+        }
     }
 
     public Playlist reorderPlaylistByName(Playlist playlist) {
-        ArrayList<Video> videos = playlist.getVideos();
-        Collections.sort(videos);
-        playlist.setVideos(videos);
+        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+        Collections.sort(uniqueIDs);
+        playlist.setUniqueIDs(uniqueIDs);
         return playlist;
     }
 
-    public Playlist shufflePlaylist(Playlist playlist) {
-        ArrayList<Video> videos = playlist.getVideos();
-        Collections.sort(videos, new RandomComparator());
-        playlist.setVideos(videos);
-        return playlist;
+    public Playlist shufflePlaylist(Playlist playlist, VideoManager vm) {
+        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+        ArrayList<Video> videos = new ArrayList<>();
+        try {
+            for (String uniqueID : uniqueIDs) {
+                videos.add(vm.getByUniqueID(uniqueID));
+            }
+            ArrayList<String> newUniqueIDs = new ArrayList<>();
+            for (Video video: videos){
+                newUniqueIDs.add(video.getUniqueID());
+            }
+            playlist.setUniqueIDs(newUniqueIDs);
+            return playlist;
+        }
+        catch(Exception e){
+            System.out.println("uniqueID not find in VideoManager, will be returning the old playlist");
+            return playlist;
+        }
     }
 
     public void likePlaylist(Playlist playlist){
