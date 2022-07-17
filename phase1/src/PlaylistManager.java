@@ -1,6 +1,26 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
+
 public class PlaylistManager {
+    private ArrayList<Playlist> playlists;
+    public PlaylistManager(){
+        playlists = new ArrayList<>();
+    }
+    public void setPlaylists(ArrayList<Playlist> playlists) {
+        this.playlists = playlists;
+    }
+
+    public ArrayList<Playlist> getPlaylists(){
+        return playlists;
+    }
+
+
+    public ArrayList<Playlist> playlists;
+
+    public PlaylistManager(){
+        this.playlists = new ArrayList<Playlist>();
+    }
 
     public boolean addToPlaylist(Playlist playlist, Video video) {
         for (String uniqueID : playlist) {
@@ -11,6 +31,31 @@ public class PlaylistManager {
         playlist.addUniqueID(video.getUniqueID());
 //        playlist.setLength(playlist.getLength()+1);
         return true;
+    }
+
+    public ArrayList<String> namesInPlaylist(Playlist playlist, VideoManager vm){
+        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+        ArrayList<String> videoName = new ArrayList<>();
+        try {
+            for (String uniqueID : uniqueIDs) {
+                videoName.add(vm.getByUniqueID(uniqueID).getName());
+            }
+            return videoName;
+        }
+        catch(Exception e){
+            System.out.println("uniqueID not find in VideoManager, will be returning the old playlist");
+            return videoName;
+        }
+    }
+
+
+    public Playlist getByPlaylistName(String playlistName) throws Exception{
+        for (int i = 0; i < playlists.size(); i++){
+            if (playlists.get(i).getPlaylistName().equalsIgnoreCase(playlistName)){
+                return playlists.get(i);
+            }
+        }
+        throw new Exception("Don't find match Playlist Name");
     }
 
     public boolean deleteFromPlaylist(Playlist playlist, Video video) {
