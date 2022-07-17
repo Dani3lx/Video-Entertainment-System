@@ -1,11 +1,10 @@
 import org.junit.Test;
-import org.junit.*;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 public class PlaylistTest {
 
     @Test
@@ -56,7 +55,7 @@ public class PlaylistTest {
 //        PM.addToPlaylist(play, v2);
 
         Playlist play_dup = new Playlist("Music1","k1");
-        play_dup.addVideo(v1);
+        play_dup.addUniqueID(v1.getUniqueID());
 //        play_dup.addVideo(v2);
 
         assertTrue(play_dup.equals(PM.reorderPlaylistByName(play)));
