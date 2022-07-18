@@ -32,6 +32,6 @@ public class VideoEditor {
      * @return All attributes of the video
      */
     public String[] returnVideoInformation(Video vid) {
-        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent(), vid.getRatings().toString(), "0"};
+        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent(), vid.getRatings().toString()};
     }
 }
