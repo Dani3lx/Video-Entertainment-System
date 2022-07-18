@@ -23,7 +23,7 @@ public class AdminHandler extends UserActionHandler {
     public AdminHandler(UserManager um, VideoManager vm) {
         super(um);
         am = new AdminManager(um, vm);
-        all_users = am.getAllUsers();
+        all_users = um.getAllUsers();
     }
 
     /**
@@ -44,7 +44,7 @@ public class AdminHandler extends UserActionHandler {
         }
         User newUser = am.instantiateUser(username, password, true);
         updateUserHistory(newUser);
-        am.updateData(newUser);
+        um.updateData(newUser);
         return true;
     }
 

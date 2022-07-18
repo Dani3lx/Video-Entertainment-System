@@ -46,7 +46,7 @@ public class MenuPresenter {
         } else {
             displayAlert("Here are all the unbanned users");
         }
-        displayList(am.returnUsersByBan(am.getAllUsers(), banStatus));
+        displayList(am.returnUsersByBan(um.getAllUsers(), banStatus));
     }
 
     /**
@@ -55,7 +55,7 @@ public class MenuPresenter {
     public void displayUsers() {
         displayAlert("Here are all the users");
         AdminManager am = new AdminManager(um, vm);
-        displayList(am.returnUsers(am.getAllUsers()));
+        displayList(am.returnUsers(um.getAllUsers()));
     }
 
     /**
