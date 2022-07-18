@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//todo remove this for phase 1, try to incorporate in phase 2
 public class Ratings {
     private ArrayList<String> likeUserName;
     private Integer totalLikes;
@@ -14,6 +14,10 @@ public class Ratings {
     }
 
     public void addLikes(String username){
+        likeUserName.add(username);
+        totalLikes += 1;
+    }
+    public void addDislikes(String username){
         likeUserName.add(username);
         totalLikes += 1;
     }

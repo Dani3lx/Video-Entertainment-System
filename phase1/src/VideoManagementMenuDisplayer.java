@@ -163,7 +163,10 @@ public class VideoManagementMenuDisplayer {
 
                 break;
             case 2:
-                //TODO create new playlist method here
+                menuPresenter.displayRequest("Enter the name of the playlist you want to create: ");
+                plname = menuDisplayer.sc.nextLine();
+                Playlist pl = new Playlist(plname,user.toString()); //todo Does it make sense for User to be string?
+                menuPresenter.displayAlert("Successfully created: " + pl.getPlaylistName());
                 break;
             case 3:
                 menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.isAdmin(user));
@@ -309,7 +312,7 @@ public class VideoManagementMenuDisplayer {
                 menuPresenter.displayAlert(pl.getPlaylistName() + " has " + numlike + " likes! ");
                 break;
             case 3:
-                if (user.getUserName() == pl.getUserName()){ //checks if current user also created the playlist
+                if (user.getUserName().equals(pl.getUserName())){ //checks if current user also created the playlist
                     menuPresenter.displayRequest("Please enter the name you would like to change " + pl.getPlaylistName() + " to: " );
                     String PlName = menuDisplayer.sc.nextLine();
                     pl.setPlaylistName(PlName);
