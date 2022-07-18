@@ -132,4 +132,8 @@ public class UserActionHandler {
     public void changePassword(User user, String newPassword) {
         um.changePassword(user, newPassword);
     }
+
+    public void rateVideo(Video v, boolean like){
+        um.rateVideo(v, like);
+    }
 }

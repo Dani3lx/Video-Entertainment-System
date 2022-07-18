@@ -19,7 +19,7 @@ public class VideoManager {
      * @param categories Categories video falls under
      * @param vidLink A link to the video
      */
-    public void uploadVideo(String uploader, String title, String description, ArrayList<String> categories,String vidLink){
+    public void uploadVideo(String uploader, String title, String description, ArrayList<String> categories, String vidLink){
 
         ArrayList<String> vidID = new ArrayList<>();
 
@@ -52,17 +52,6 @@ public class VideoManager {
      */
     public boolean deleteVideo(Video v){
         vids.remove(v);
-        return true;
-    }
-
-    public boolean likeVideo(String userName, Video v) {
-        ArrayList<String> likeUserNames = v.getRatingsUsers();
-        for (String username : likeUserNames) {
-            if (username.equalsIgnoreCase(userName)){
-                return false;
-            }
-        }
-        v.addRatings(userName);
         return true;
     }
 

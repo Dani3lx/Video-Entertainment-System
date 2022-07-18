@@ -13,8 +13,7 @@ public class Video implements Comparable<Video> {
     private String uploader;
     private String date_upload;
     private ArrayList<String> history; // datetime + description
-    private Ratings ratings;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private ArrayList<String> ratings;
 
     public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID,
                  ArrayList<String> ratings,String date_upload){
@@ -26,7 +25,7 @@ public class Video implements Comparable<Video> {
         this.description = description;
         this.categories = categories;
         this.uniqueID = uniqueID;
-        this.ratings = new Ratings(new ArrayList<>());
+        this.ratings = ratings;
 
         //need to decide how we initialize the video construct
         //it will heavily depend on upload video in videomanager
@@ -40,12 +39,8 @@ public class Video implements Comparable<Video> {
         return content;
     }
 
-    public Integer getRatings() {
-        return ratings.getTotalLikes();
-    }
-
-    public ArrayList<String> getRatingsUsers(){
-        return ratings.getLikeUserName();
+    public ArrayList<String> getRatings() {
+        return ratings;
     }
 
     public String getUniqueID() {
@@ -98,8 +93,12 @@ public class Video implements Comparable<Video> {
         this.categories = categories;
     }
 
-    public void addRatings(String userName){
-        ratings.addLikes(userName);
+    public void addLikes(){
+        ratings.set(0, String.valueOf(Integer.parseInt(ratings.get(0)) + 1));
+    }
+
+    public void addDislikes(){
+        ratings.set(1, String.valueOf(Integer.parseInt(ratings.get(1)) + 1));
     }
 
     public boolean equals(Video v){
@@ -130,14 +129,8 @@ public class Video implements Comparable<Video> {
             s1.append(it1.next()).append("/");
         }
 
-        Iterator<String> it2 = ratings.getLikeUserName().iterator();
-        StringBuilder s2 = new StringBuilder();
-        while (it2.hasNext()) {
-            s2.append(it2.next()).append("/");
-        }
 
-
-        return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," + s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
+        return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," + s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + this.getRatings() + "," + this.getDate_upload();
     }
 }
 

@@ -135,7 +135,21 @@ public class VideoManagementMenuDisplayer {
      * @param user the current user
      */
     public void userVideoInteraction(Video video, User user) {
-        // todo do the liking and rating and stuff here. Maybe if the user name matches the name of the current user, you can edit the title and categories and stuff.
+        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+                "\n 1 - Like the video \n 2 - Dislike the video");
+
+        switch (option) {
+            case 1:
+                userActionHandler.rateVideo(video, true);
+                menuPresenter.displayAlert("You have liked the video");
+                break;
+            case 2:
+                userActionHandler.rateVideo(video, false);
+                menuPresenter.displayAlert("You have disliked the video");
+                break;
+            default:
+                menuPresenter.displayError("Invalid input");
+        }
         menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
     }
 
@@ -147,13 +161,13 @@ public class VideoManagementMenuDisplayer {
 
     public void playlistBrowseMenu(User user){
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Search Playlist by name \n 2 - Create New Playlist \n 2 -  Return ");
+                "\n1 - Search Playlist by name \n2 - Create New Playlist \n3 - Return");
         String plname;
         switch (option) {
             case 1:
                 menuPresenter.displayRequest("Enter the name of the playlist: ");
 
-                plname = menuDisplayer.sc.nextLine();
+                plname = sc.nextLine();
                 try {
                     Playlist pl = pmm.getPlaylistByName(plname);
                     playlistManageMenu(user,pl);
@@ -164,12 +178,12 @@ public class VideoManagementMenuDisplayer {
                 break;
             case 2:
                 menuPresenter.displayRequest("Enter the name of the playlist you want to create: ");
-                plname = menuDisplayer.sc.nextLine();
+                plname = sc.nextLine();
                 Playlist pl = new Playlist(plname,user.toString()); //todo Does it make sense for User to be string?
                 menuPresenter.displayAlert("Successfully created: " + pl.getPlaylistName());
                 break;
             case 3:
-                menuDisplayer.callMenu(user, menuDisplayer.userActionHandler.isAdmin(user));
+                menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
                 break;
         }
     }

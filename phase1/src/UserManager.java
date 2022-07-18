@@ -2,6 +2,7 @@ import java.util.*;
 
 public class UserManager {
     VideoManager vm;
+    private final VideoEditor ve = new VideoEditor();
     public UserManager(VideoManager vm){
         this.vm = vm;
     }
@@ -76,6 +77,14 @@ public class UserManager {
 
     public boolean getRole(User user) {
         return user.isAdminInd();
+    }
+
+    public void rateVideo(Video v, boolean like) {
+        if (like) {
+            ve.likeVideo(v);
+        } else {
+            ve.dislikeVideo(v);
+        }
     }
 
     public ArrayList<Video> returnVideos(ArrayList<String> info, String method) {

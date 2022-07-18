@@ -47,7 +47,8 @@ public class VideoBrowsePresenter {
         System.out.println("Description: " + information[2]);
         System.out.println("Date Uploaded : " + information[3]);
         System.out.println("Content : " + information[4]);
-        System.out.println("Likes : " + information[5] + "\n");
+        System.out.println("Likes : " + information[5]);
+        System.out.println("Dislikes : " + information[6] + "\n");
     }
 
 }

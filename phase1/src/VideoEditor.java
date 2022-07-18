@@ -26,12 +26,20 @@ public class VideoEditor {
         v.setDescription(newDes);
     }
 
+    public void likeVideo(Video v){
+        v.addLikes();
+    }
+
+    public void dislikeVideo(Video v){
+        v.addDislikes();
+    }
+
 
     /**
      * @param vid Video object
      * @return All attributes of the video
      */
     public String[] returnVideoInformation(Video vid) {
-        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent(), vid.getRatings().toString()};
+        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent(), vid.getRatings().get(0), vid.getRatings().get(1)};
     }
 }
