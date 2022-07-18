@@ -2,6 +2,7 @@ import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 import static org.junit.Assert.*;
@@ -13,6 +14,7 @@ public class UserManagerTest {
         VideoManager VM = new VideoManager();
         UserManager UM = new UserManager(VM);
         NonAdminUser u1 = new NonAdminUser("k","1");
+        UM.updateData(u1);
         assertEquals(u1, UM.validateUser("k","1"));
 
     }
@@ -32,7 +34,7 @@ public class UserManagerTest {
         VideoManager VM = new VideoManager();
         UserManager UM = new UserManager(VM);
         NonAdminUser u1 = new NonAdminUser("a","b");
-        assertEquals(u1, UM.instantiateUser("a","b",false));
+        assertTrue(u1.equals(UM.instantiateUser("a","b",false)));
     }
 
     @Test
@@ -71,10 +73,13 @@ public class UserManagerTest {
     public void testReturnVids(){
         VideoManager VM = new VideoManager();
         UserManager UM = new UserManager(VM);
-        ArrayList<String> cates = new ArrayList<>(Arrays.asList("serious"));
-        ArrayList<String> ratings = new ArrayList<String>(Arrays.asList("10","0"));
+        ArrayList<String> cates = new ArrayList<>(List.of("serious"));
+        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("10","0"));
+        ArrayList<Video> vids = new ArrayList<>();
         Video v1 = new Video("k","popmusic","amazing music",cates, "url", "1",ratings,"today");
-        ArrayList<String> names = new ArrayList<>(Arrays.asList("k"));
+        vids.add(v1);
+        VM.setVids(vids);
+        ArrayList<String> names = new ArrayList<>(List.of("popmusic"));
         assertEquals(v1, UM.returnVideos(names,"name").get(0));
     }
 }
