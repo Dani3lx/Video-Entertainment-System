@@ -4,6 +4,8 @@ public class UserManager {
     VideoManager vm;
     public UserManager(VideoManager vm){
         this.vm = vm;
+        users = new ArrayList<>();
+
     }
     private ArrayList<User> users;
 
