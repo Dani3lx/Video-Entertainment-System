@@ -14,6 +14,13 @@ public class Playlist implements Iterable<String> {
         this.userName = userName;
     }
 
+    public Playlist(String playlistName, int likes, ArrayList<String> uniqueIDs, String userName){
+        this.name = playlistName;
+        this.likes = likes;
+        this.uniqueIDs = uniqueIDs;
+        this.userName = userName;
+    }
+
     public String getPlaylistName() {
         return name;
     }

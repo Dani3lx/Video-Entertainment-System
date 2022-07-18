@@ -22,11 +22,11 @@ public class MenuDisplayer {
      * @param um the user manager for managing users
      * @param vm the video manager for managing videos
      */
-    public MenuDisplayer(UserManager um, VideoManager vm) {
+    public MenuDisplayer(UserManager um, VideoManager vm, PlaylistManager pm) {
         this.um = um;
         this.vm = vm;
         userActionHandler = new UserActionHandler(um);
-        dataManager = new DataManager(um, vm);
+        dataManager = new DataManager(um, vm, pm);
         menuPresenter = new MenuPresenter(um, vm);
         vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm, userActionHandler);
     }
@@ -63,6 +63,7 @@ public class MenuDisplayer {
             case 3:
                 dataManager.saveData("phase1/Data.csv");
                 dataManager.saveVideoData("phase1/VideoData.csv");
+                dataManager.savePlayListData("phase1/PlaylistData.csv");
                 System.exit(0);
                 break;
             default:

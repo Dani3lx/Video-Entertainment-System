@@ -133,6 +133,23 @@ public class DataManager {
         }
     }
 
+    public void loadPlaylistData(String filePath) {
+
+        try {
+            Scanner scanner = new Scanner(new FileInputStream(filePath));
+            String[] record;
+
+            while (scanner.hasNextLine()) {
+                record = scanner.nextLine().split(",");
+                Playlist p = new Playlist(record[0], Integer.parseInt(record[1]), new ArrayList<>(Arrays.asList(record[2].split("/"))), record[3]);
+                playlists.add(p);
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+        }
+    }
+
     public List<Integer> stringToListInt(String stringType) {
         List<String> listString = Arrays.asList(stringType.split("/"));
         List<Integer> listInt = new ArrayList<Integer>();
