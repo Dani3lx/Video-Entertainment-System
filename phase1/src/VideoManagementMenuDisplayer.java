@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -51,6 +52,7 @@ public class VideoManagementMenuDisplayer {
         this.menuPresenter = menuPresenter;
         this.menuDisplayer = menuDisplayer;
         this.userActionHandler = userActionHandler;
+        this.vmm = vm;
         vp = new VideoBrowsePresenter(vm);
     }
 
@@ -219,6 +221,73 @@ public class VideoManagementMenuDisplayer {
                 playlistBrowseMenu(user);
         }
 
+    }
+
+    /**
+     * This menu navigates the user to perform actions on specific videos
+     *
+     * @param user the current user using the menu
+     * @param nonAdminHandler controller that dictates what happens when a video action is performed
+     */
+    public void videoActionMenu(User user, NonAdminHandler nonAdminHandler){
+
+        int result = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+                "\n 1 - View all the videos uploaded by " + user.getUserName() + " \n 2 - Upload a video " +
+                "\n 3 - Delete a video \n 4 - Edit the title of a video " +
+                "\n 5 - Edit the categories of a video \n 6 - Edit the description of a video");
+        String uniqueID;
+
+        switch (result) {
+            case 1:
+                menuPresenter.displayVideos(user, vmm.getVids());
+                break;
+            case 2:
+                menuPresenter.displayRequest("Enter video title: ");
+                String title = menuDisplayer.sc.nextLine();
+                menuPresenter.displayRequest("Enter video description (optional): ");
+                String description = menuDisplayer.sc.nextLine();
+                menuPresenter.displayRequest("Enter video categories seperated by commas (optional): ");
+                ArrayList<String> categories = new ArrayList<>(Arrays.asList(menuDisplayer.sc.nextLine().split(",")));
+                menuPresenter.displayRequest("Enter video path: ");
+                String vidlink = menuDisplayer.sc.nextLine();
+                nonAdminHandler.uploadVideo(user, title, description, categories, vidlink);
+                menuPresenter.displayAlert("Upload successful");
+                break;
+            case 3:
+                menuPresenter.displayRequest("Enter uniqueID of the video you want to be deleted: ");
+                uniqueID = menuDisplayer.sc.nextLine();
+                if (nonAdminHandler.deleteVideo(user, uniqueID)){
+                    menuPresenter.displayAlert("Delete successful");
+                } else {
+                    menuPresenter.displayError("Delete unsuccessful");
+                }
+                break;
+            case 4:
+                menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
+                uniqueID = menuDisplayer.sc.nextLine();
+                menuPresenter.displayRequest("Enter new title: ");
+                String newTitle = menuDisplayer.sc.nextLine();
+                nonAdminHandler.editTitle(user, uniqueID, newTitle);
+                break;
+            case 5:
+                menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
+                uniqueID = menuDisplayer.sc.nextLine();
+                menuPresenter.displayRequest("Enter new categories seperated by commas: ");
+                ArrayList<String> newCate = new ArrayList<>(Arrays.asList(menuDisplayer.sc.nextLine().split(",")));
+                nonAdminHandler.editCategories(user, uniqueID, newCate);
+                break;
+            case 6:
+                menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
+                uniqueID = menuDisplayer.sc.nextLine();
+                menuPresenter.displayRequest("Enter new description: ");
+                String newDes = menuDisplayer.sc.nextLine();
+                nonAdminHandler.editDescription(user, uniqueID, newDes);
+                break;
+            default:
+                menuPresenter.displayError("Invalid input, try again");
+                videoActionMenu(user, nonAdminHandler);
+        }
+        menuDisplayer.callMenu(user, user.isAdminInd());
     }
 
     public void viewPlaylist(User user,Playlist pl){

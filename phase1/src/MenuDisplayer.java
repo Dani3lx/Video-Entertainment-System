@@ -80,7 +80,7 @@ public class MenuDisplayer {
     private void nonAdminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Browse Videos \n 5 - " +
-                "Upload videos \n 6 - View Playlists");
+                "Upload/delete/edit videos \n 6 - View Playlists");
 
         NonAdminHandler nonAdminHandler = new NonAdminHandler(um, vm);
 
@@ -89,15 +89,7 @@ public class MenuDisplayer {
                 vmmDisplayer.videoBrowseMenu(user);
                 break;
             case 5:
-                String[] info = getUploadVidInfo();
-                ArrayList<String> cates = getCates();
-                if (nonAdminHandler.uploadVideo(user, info[0],info[1],cates, info[2])){
-                    menuPresenter.displayAlert("Video upload successful");
-                }else{
-                    menuPresenter.displayAlert("Video upload unsuccessful");
-
-                }
-
+                vmmDisplayer.videoActionMenu(user, nonAdminHandler);
                 break;
             case 6:
                 vmmDisplayer.playlistBrowseMenu(user);

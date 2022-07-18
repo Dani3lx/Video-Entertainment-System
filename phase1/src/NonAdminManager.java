@@ -15,20 +15,20 @@ public class NonAdminManager extends UserManager {
     }
 
     // start of overloaded uploadVideo functions region
-    public boolean uploadVideo(User user, String title, String vidlink) {
-        return vm.uploadVideo(user.getUserName(), title, "", new ArrayList<>(), vidlink);
+    public void uploadVideo(User user, String title, String vidlink) {
+        vm.uploadVideo(user.getUserName(), title, "", new ArrayList<>(), vidlink);
     }
 
-    public boolean uploadVideo(User user, String title, String description, String vidlink) {
-        return vm.uploadVideo(user.getUserName(), title, description, new ArrayList<>(), vidlink);
+    public void uploadVideo(User user, String title, String description, String vidlink) {
+        vm.uploadVideo(user.getUserName(), title, description, new ArrayList<>(), vidlink);
     }
 
-    public boolean uploadVideo(User user, String title, ArrayList<String> categories, String vidlink) {
-        return vm.uploadVideo(user.getUserName(), title, "", categories, vidlink);
+    public void uploadVideo(User user, String title, ArrayList<String> categories, String vidlink) {
+        vm.uploadVideo(user.getUserName(), title, "", categories, vidlink);
     }
 
-    public boolean uploadVideo(User user, String title, String description, ArrayList<String> categories, String vidLink) {
-        return vm.uploadVideo(user.getUserName(), title, description, categories, vidLink);
+    public void uploadVideo(User user, String title, String description, ArrayList<String> categories, String vidLink) {
+        vm.uploadVideo(user.getUserName(), title, description, categories, vidLink);
     }
     // end of overloaded uploadVideo functions region
 

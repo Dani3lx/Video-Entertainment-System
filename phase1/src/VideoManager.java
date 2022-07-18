@@ -3,11 +3,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class VideoManager {
-    private ArrayList<Video> vids;
-
-    public VideoManager(){
-        vids = new ArrayList<>();
-    }
+    private ArrayList<Video> vids = new ArrayList<>();
 
     public ArrayList<Video> getVids(){
         return vids;
@@ -22,9 +18,8 @@ public class VideoManager {
      * @param description What the video is about
      * @param categories Categories video falls under
      * @param vidLink A link to the video
-     * @return Whether or not upload was successful
      */
-    public boolean uploadVideo(String uploader, String title, String description, ArrayList<String> categories,String vidLink){
+    public void uploadVideo(String uploader, String title, String description, ArrayList<String> categories,String vidLink){
 
         ArrayList<String> vidID = new ArrayList<>();
 
@@ -47,8 +42,6 @@ public class VideoManager {
         ratings.add("0");
         Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString());
         vids.add(v1);
-        return true;
-
     }
 
 

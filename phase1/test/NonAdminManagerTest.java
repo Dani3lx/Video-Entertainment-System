@@ -4,6 +4,7 @@ import org.junit.*;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
@@ -13,8 +14,8 @@ public class NonAdminManagerTest {
         VideoManager VM = new VideoManager();
         UserManager UM = new UserManager(VM);
         NonAdminUser u1 = new NonAdminUser("k","1");
-        NonAdminManager NAM = new NonAdminManager(UM, VM);
-        assertTrue(NAM.uploadVideo(u1, "vid","url"));
+        NonAdminHandler NAH = new NonAdminHandler(UM, VM);
+//        assertTrue(NAM.uploadVideo(u1, "vid","url"));
 
     }
 

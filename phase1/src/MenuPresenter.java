@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,6 +56,16 @@ public class MenuPresenter {
         displayAlert("Here are all the users");
         AdminManager am = new AdminManager(um, vm);
         displayList(am.returnUsers(am.getAllUsers()));
+    }
+
+    /**
+     * Displays all the videos uploaded by user.
+     */
+    public void displayVideos(User user, ArrayList<Video> vids) {
+        displayAlert("Here are all the videos uploaded by " + user.getUserName());
+        NonAdminManager nam = new NonAdminManager(um, vm);
+        displayList(nam.displayAllVideos(user, vids));
+
     }
 
     /**
