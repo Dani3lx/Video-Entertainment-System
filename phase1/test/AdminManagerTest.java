@@ -1,9 +1,6 @@
 import org.junit.Test;
-import org.junit.*;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -35,6 +32,7 @@ public class AdminManagerTest {
         UserManager UM = new UserManager(VM);
         NonAdminUser u1 = new NonAdminUser("k","1");
         AdminManager AM = new AdminManager(UM, VM);
+        UM.updateData(u1);
         AM.deleteUser(u1);
         assertTrue(UM.getAllUsers().isEmpty());
     }
@@ -51,7 +49,7 @@ public class AdminManagerTest {
         users.add(u2);
         AdminManager AM = new AdminManager(UM, VM);
         ArrayList<String> usersReturned = new ArrayList<>();
-        usersReturned.add("k");
+        usersReturned.add("Username: k");
         assertEquals(usersReturned, AM.returnUsersByBan(users, true));
     }
 
@@ -66,8 +64,8 @@ public class AdminManagerTest {
         users.add(u2);
         AdminManager AM = new AdminManager(UM, VM);
         ArrayList<String> usersReturned = new ArrayList<>();
-        usersReturned.add("k");
-        usersReturned.add("a");
+        usersReturned.add("Username: k");
+        usersReturned.add("Username: a");
         assertEquals(usersReturned, AM.returnUsers(users));
     }
 

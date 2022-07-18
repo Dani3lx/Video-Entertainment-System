@@ -58,7 +58,7 @@ public class NonAdminManagerTest {
         NAM.uploadVideo(u1, "vid","url");
         ArrayList<String> newCates= new ArrayList<String>(Arrays.asList("newCate"));
         NAM.editCategories(u1,VM.getVids().get(0).getUniqueID(),newCates);
-        assertEquals("newCate",VM.getVids().get(0).getCategories().toString());
+        assertEquals(newCates,VM.getVids().get(0).getCategories());
 
     }
 

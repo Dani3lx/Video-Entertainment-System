@@ -5,6 +5,8 @@ public class UserManager {
     private final VideoEditor ve = new VideoEditor();
     public UserManager(VideoManager vm){
         this.vm = vm;
+        users = new ArrayList<>();
+
     }
     private ArrayList<User> users;
 
