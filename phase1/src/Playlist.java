@@ -58,13 +58,15 @@ public class Playlist implements Iterable<String> {
         uniqueIDs.remove(uniqueID);
     }
 
+    @Override
     public String toString() {
-//        ArrayList<String> lst = new ArrayList<>();
-//        for (String v : uniqueIDs) {
-//            lst.add(v.getName());
-//        }
-//        return lst.toString();
-        return uniqueIDs.toString();
+        Iterator<String> it1 = uniqueIDs.iterator();
+        StringBuilder s1 = new StringBuilder();
+        while (it1.hasNext()) {
+            s1.append(it1.next()).append("/");
+        }
+
+        return this.getPlaylistName() + "," + this.getLikes() + "," + s1 + "," +  this.getUserName() ;
     }
 
     public boolean equals(Playlist p){
