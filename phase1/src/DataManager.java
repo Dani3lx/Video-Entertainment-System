@@ -5,13 +5,16 @@ public class DataManager {
 
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<Video> videos = new ArrayList<>();
+    private ArrayList<Playlist> playlists = new ArrayList<>();
 
     private UserManager um;
     private VideoManager vm;
+    private PlaylistManager pm;
 
-    public DataManager(UserManager um, VideoManager vm) {
+    public DataManager(UserManager um, VideoManager vm, PlaylistManager pm) {
         this.um = um;
         this.vm = vm;
+        this.pm = pm;
     }
 
     public void loadData(String filePath) {
@@ -76,6 +79,13 @@ public class DataManager {
         this.videos = videos;
     }
 
+    public ArrayList<Playlist> getPlaylists() {
+        return playlists;
+    }
+    public void setPlaylists(ArrayList<Playlist> playlists){
+        this.playlists = playlists;
+    }
+
     public void saveVideoData(String filePath) {
         this.setVideos(vm.getVids());
         try {
@@ -104,6 +114,21 @@ public class DataManager {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+        }
+    }
+
+    public void savePlayListData(String filePath) {
+        this.setPlaylists(pm.getPlaylists());
+        try {
+            FileWriter writer = new FileWriter(filePath, false);
+
+            for (Playlist playlist : playlists) {
+                writer.write(playlist.toString() + "\n");
+            }
+
+            writer.close();
+        } catch (IOException e) {
             System.out.println("An error occurred.");
         }
     }
