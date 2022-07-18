@@ -58,6 +58,10 @@ public abstract class User {
         this.banStatus = banStatus;
     }
 
+    public boolean equals(User user){
+    return (user.userName.equals(this.userName) && (user.password.equals(this.password) && (user.banStatus==this.banStatus) &&
+            (user.loginHistory.equals(this.loginHistory)) && (user.isAdminInd() == this.isAdminInd())));
+    }
     @Override
     public String toString() {
         Iterator<String> it = loginHistory.iterator();
