@@ -188,7 +188,7 @@ public class VideoManagementMenuDisplayer {
                 break;
             case 2:
                 menuPresenter.displayRequest("Please enter the name of the video you would like to add to the playlist "); // todo does it make more sense to have UniqueID search rather than name?
-                VidName = menuDisplayer.sc.nextLine();
+                VidName = sc.nextLine();
                 videos = vmm.getByName(VidName); //todo Include logic in another class similar to VideoBrowsePresenter.java
                 for (Video vid: videos){         //todo perhaps make it so we can create a list of videos and then add them (won't have to reuse code)
                     pmm.addToPlaylist(pl,vid);   //todo will need a cache of videos to input though
@@ -196,7 +196,7 @@ public class VideoManagementMenuDisplayer {
                 break;
             case 3:
                 menuPresenter.displayRequest("Please enter the name of the video you would like to remove from the playlist ");
-                VidName = menuDisplayer.sc.nextLine();
+                VidName = sc.nextLine();
                 videos = vmm.getByName(VidName);
                 for (Video vid: videos){
                     pmm.deleteFromPlaylist(pl,vid);
@@ -243,19 +243,19 @@ public class VideoManagementMenuDisplayer {
                 break;
             case 2:
                 menuPresenter.displayRequest("Enter video title: ");
-                String title = menuDisplayer.sc.nextLine();
+                String title = sc.nextLine();
                 menuPresenter.displayRequest("Enter video description (optional): ");
-                String description = menuDisplayer.sc.nextLine();
+                String description = sc.nextLine();
                 menuPresenter.displayRequest("Enter video categories seperated by commas (optional): ");
-                ArrayList<String> categories = new ArrayList<>(Arrays.asList(menuDisplayer.sc.nextLine().split(",")));
+                ArrayList<String> categories = new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
                 menuPresenter.displayRequest("Enter video path: ");
-                String vidlink = menuDisplayer.sc.nextLine();
+                String vidlink = sc.nextLine();
                 nonAdminHandler.uploadVideo(user, title, description, categories, vidlink);
                 menuPresenter.displayAlert("Upload successful");
                 break;
             case 3:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to be deleted: ");
-                uniqueID = menuDisplayer.sc.nextLine();
+                uniqueID = sc.nextLine();
                 if (nonAdminHandler.deleteVideo(user, uniqueID)){
                     menuPresenter.displayAlert("Delete successful");
                 } else {
@@ -264,23 +264,23 @@ public class VideoManagementMenuDisplayer {
                 break;
             case 4:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
-                uniqueID = menuDisplayer.sc.nextLine();
+                uniqueID = sc.nextLine();
                 menuPresenter.displayRequest("Enter new title: ");
-                String newTitle = menuDisplayer.sc.nextLine();
+                String newTitle = sc.nextLine();
                 nonAdminHandler.editTitle(user, uniqueID, newTitle);
                 break;
             case 5:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
-                uniqueID = menuDisplayer.sc.nextLine();
+                uniqueID = sc.nextLine();
                 menuPresenter.displayRequest("Enter new categories seperated by commas: ");
-                ArrayList<String> newCate = new ArrayList<>(Arrays.asList(menuDisplayer.sc.nextLine().split(",")));
+                ArrayList<String> newCate = new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
                 nonAdminHandler.editCategories(user, uniqueID, newCate);
                 break;
             case 6:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
-                uniqueID = menuDisplayer.sc.nextLine();
+                uniqueID = sc.nextLine();
                 menuPresenter.displayRequest("Enter new description: ");
-                String newDes = menuDisplayer.sc.nextLine();
+                String newDes = sc.nextLine();
                 nonAdminHandler.editDescription(user, uniqueID, newDes);
                 break;
             default:
