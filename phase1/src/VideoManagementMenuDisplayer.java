@@ -74,7 +74,7 @@ public class VideoManagementMenuDisplayer {
                 viewVideo(videos, user);
                 break;
             case 2:
-                menuPresenter.displayRequest("Please enter the name of the user, type CONTINUE to proceed");
+                menuPresenter.displayRequest("Please enter the name of the categories, type CONTINUE to proceed");
                 ArrayList<String> categories = new ArrayList<>();
                 while (true) {
                     String item = sc.nextLine();
