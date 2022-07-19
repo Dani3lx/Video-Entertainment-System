@@ -28,7 +28,7 @@ public class MenuDisplayer {
         userActionHandler = new UserActionHandler(um);
         dataManager = new DataManager(um, vm, pm);
         menuPresenter = new MenuPresenter(um, vm);
-        vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm, userActionHandler);
+        vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm, userActionHandler, pm);
     }
 
     /**
