@@ -7,6 +7,10 @@ public class PlaylistManager {
 //    public PlaylistManager(){
 //        playlists = new ArrayList<>();
 //    }
+
+    public void addPlaylist(Playlist pl){
+        playlists.add(pl);
+    }
     public void setPlaylists(ArrayList<Playlist> playlists) {
         this.playlists = playlists;
     }

@@ -48,11 +48,12 @@ public class VideoManagementMenuDisplayer {
      * @param menuPresenter the Presenter class that format and displays information to the user
      * @param menuDisplayer the main menu that this menu will interact with
      */
-    public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm, UserActionHandler userActionHandler){
+    public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm, UserActionHandler userActionHandler, PlaylistManager pmm){
         this.menuPresenter = menuPresenter;
         this.menuDisplayer = menuDisplayer;
         this.userActionHandler = userActionHandler;
         this.vmm = vm;
+        this.pmm = pmm;
         vp = new VideoBrowsePresenter(vm);
     }
 
@@ -179,8 +180,10 @@ public class VideoManagementMenuDisplayer {
             case 2:
                 menuPresenter.displayRequest("Enter the name of the playlist you want to create: ");
                 plname = sc.nextLine();
-                Playlist pl = new Playlist(plname,user.toString()); //todo Does it make sense for User to be string?
+                Playlist pl = new Playlist(plname, user.getUserName()); //todo Does it make sense for User to be string?
                 menuPresenter.displayAlert("Successfully created: " + pl.getPlaylistName());
+                pmm.addPlaylist(pl);
+                menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
                 break;
             case 3:
                 menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
