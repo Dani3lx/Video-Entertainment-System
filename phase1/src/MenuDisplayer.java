@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.*;
 
 /**
@@ -15,6 +16,7 @@ public class MenuDisplayer {
     VideoManager vm;
     MenuPresenter menuPresenter;
     VideoManagementMenuDisplayer vmmDisplayer;
+    PlaylistMenu pm;
 
     /**
      * Constructs a menu displayer with a record of all the users and videos.
@@ -93,7 +95,11 @@ public class MenuDisplayer {
                 vmmDisplayer.videoActionMenu(user, nonAdminHandler);
                 break;
             case 6:
-                vmmDisplayer.playlistBrowseMenu(user);
+                try {
+                    pm.playlistBrowseMenu(user);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             default:
                 basicUserMenu(user, result, false);
@@ -155,7 +161,11 @@ public class MenuDisplayer {
                 vmmDisplayer.videoBrowseMenu(user);
                 break;
             case 9:
-                vmmDisplayer.playlistBrowseMenu(user);
+                try {
+                    pm.playlistBrowseMenu(user);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             default:
                 basicUserMenu(user, result, true);

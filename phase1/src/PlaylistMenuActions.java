@@ -6,7 +6,7 @@ public class PlaylistMenuActions {
     VideoManager vm;
 
 
-    public Playlist SearchPlaylist(PlaylistManager pmm,User user,String plname){
+    public Playlist SearchPlaylist(PlaylistManager pmm,User user,String plname) {
         try {
             Playlist pl = pmm.getPlaylistByName(plname);
             return pl;
