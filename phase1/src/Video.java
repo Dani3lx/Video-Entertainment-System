@@ -129,8 +129,13 @@ public class Video implements Comparable<Video> {
             s1.append(it1.next()).append("/");
         }
 
+        Iterator<String> it2 = ratings.iterator();
+        StringBuilder s2 = new StringBuilder();
+        while (it2.hasNext()) {
+            s2.append(it2.next()).append("/");
+        }
 
-        return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," + s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + this.getRatings() + "," + this.getDate_upload();
+        return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," + s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
     }
 }
 
