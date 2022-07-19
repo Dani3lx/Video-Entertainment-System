@@ -108,7 +108,7 @@ public class MenuDisplayer {
     private void adminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
-                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n 8 - Browse Videos");
+                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n 8 - Browse Videos \n 9 - View Playlists");
         AdminHandler adminHandler = new AdminHandler(um, vm);
         String[] info;
         switch (result) {
@@ -153,6 +153,9 @@ public class MenuDisplayer {
                 break;
             case 8:
                 vmmDisplayer.videoBrowseMenu(user);
+                break;
+            case 9:
+                vmmDisplayer.playlistBrowseMenu(user);
                 break;
             default:
                 basicUserMenu(user, result, true);

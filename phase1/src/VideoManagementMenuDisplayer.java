@@ -109,7 +109,7 @@ public class VideoManagementMenuDisplayer {
      * @param videos list of videos
      * @param user the current user
      */
-    public void viewVideo(ArrayList<Video> videos, User user) {
+    public void viewVideo(ArrayList<Video> videos, User user)  {
         if (videos.size() == 0) {
             menuPresenter.displayAlert("No video can be found, try again");
             menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
@@ -135,9 +135,9 @@ public class VideoManagementMenuDisplayer {
      * @param video list of videos
      * @param user the current user
      */
-    public void userVideoInteraction(Video video, User user) {
+    public void userVideoInteraction(Video video, User user)  {
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Like the video \n 2 - Dislike the video");
+                "\n 1 - Like the video \n 2 - Dislike the video \n 3 - Add to playlist");
 
         switch (option) {
             case 1:
@@ -147,6 +147,12 @@ public class VideoManagementMenuDisplayer {
             case 2:
                 userActionHandler.rateVideo(video, false);
                 menuPresenter.displayAlert("You have disliked the video");
+                break;
+            case 3:
+                // NEW
+                menuPresenter.displayRequest("Please enter a playlist name");
+                String name = sc.nextLine();
+                pmm.addToPlaylist(name, video.getUniqueID()); // using entity directly
                 break;
             default:
                 menuPresenter.displayError("Invalid input");
@@ -160,7 +166,7 @@ public class VideoManagementMenuDisplayer {
     * Need to create way to #todo select and view playlist (not just get uniqueID)
     * */
 
-    public void playlistBrowseMenu(User user){
+    public void playlistBrowseMenu(User user)  {
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n1 - Search Playlist by name \n2 - Create New Playlist \n3 - Return");
         String plname;
@@ -207,12 +213,12 @@ public class VideoManagementMenuDisplayer {
                 viewPlaylist(user,pl);
                 break;
             case 2:
-                menuPresenter.displayRequest("Please enter the name of the video you would like to add to the playlist "); // todo does it make more sense to have UniqueID search rather than name?
-                VidName = sc.nextLine();
-                videos = vmm.getByName(VidName); //todo Include logic in another class similar to VideoBrowsePresenter.java
-                for (Video vid: videos){         //todo perhaps make it so we can create a list of videos and then add them (won't have to reuse code)
-                    pmm.addToPlaylist(pl,vid);   //todo will need a cache of videos to input though
-                }
+//                menuPresenter.displayRequest("Please enter the name of the video you would like to add to the playlist "); // todo does it make more sense to have UniqueID search rather than name?
+//                VidName = sc.nextLine();
+//                videos = vmm.getByName(VidName); //todo Include logic in another class similar to VideoBrowsePresenter.java
+//                for (Video vid: videos){         //todo perhaps make it so we can create a list of videos and then add them (won't have to reuse code)
+//                    pmm.addToPlaylist(pl,vid);   //todo will need a cache of videos to input though
+//                }
                 break;
             case 3:
                 menuPresenter.displayRequest("Please enter the name of the video you would like to remove from the playlist ");
@@ -347,7 +353,7 @@ public class VideoManagementMenuDisplayer {
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Reorder Playlist Alphabetically \n 2 - Reorder Playlist by Video Rating \n 3 - Shuffle Playlist  \n 4 -  Return");
 
-        if (user.getUserName() != pl.getUserName()){
+        if (user.getUserName().equals(pl.getUserName())){
             menuPresenter.displayError("You do not have permission to change the order");
             playlistManageMenu(user,pl);
         }

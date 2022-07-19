@@ -26,13 +26,14 @@ public class PlaylistManager {
         this.playlists = new ArrayList<Playlist>();
     }
 
-    public boolean addToPlaylist(Playlist playlist, Video video) {
+    public boolean addToPlaylist(String playlistName, String videoID){
+        Playlist playlist = getPlaylistByName(playlistName);
         for (String uniqueID : playlist) {
-            if (uniqueID.equals(video.getUniqueID())) {
+            if (uniqueID.equals(videoID)) {
                 return false;
             }
         }
-        playlist.addUniqueID(video.getUniqueID());
+        playlist.addUniqueID(videoID);
 //        playlist.setLength(playlist.getLength()+1);
         return true;
     }
@@ -47,19 +48,18 @@ public class PlaylistManager {
             return videoName;
         }
         catch(Exception e){
-            System.out.println("uniqueID not find in VideoManager, will be returning the old playlist");
             return videoName;
         }
     }
 
 
-    public Playlist getPlaylistByName(String playlistName) throws Exception{
+    public Playlist getPlaylistByName(String playlistName){
         for (int i = 0; i < playlists.size(); i++){
             if (playlists.get(i).getPlaylistName().equalsIgnoreCase(playlistName)){
                 return playlists.get(i);
             }
         }
-        throw new Exception("Didn't find matching Playlist Name");
+        return null;
     }
 
     public boolean deleteFromPlaylist(Playlist playlist, Video video) {
@@ -90,7 +90,6 @@ public class PlaylistManager {
             return playlist;
         }
         catch(Exception e){
-            System.out.println("uniqueID not find in VideoManager, will be returning the old playlist");
             return playlist;
         }
     }
@@ -117,7 +116,6 @@ public class PlaylistManager {
             return playlist;
         }
         catch(Exception e){
-            System.out.println("uniqueID not find in VideoManager, will be returning the old playlist");
             return playlist;
         }
     }
