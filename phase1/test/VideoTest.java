@@ -22,7 +22,7 @@ public class VideoTest {
         assertEquals("March 23, 2021", v1.getDate_upload());
         assertEquals("VidNo1", v1.getUniqueID());
         assertEquals("C://Users/Akmar/Videos/NBAhighlights2022.mp4", v1.getContent());
-        assertEquals(Integer.valueOf(2), v1.getRatings());
+        assertEquals(new ArrayList<>(Arrays.asList("35", "10")), v1.getRatings());
         assertEquals(new ArrayList<>(Arrays.asList("NBA", "Basketball", "2022")), v1.getCategories());
 
     }

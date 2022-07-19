@@ -102,10 +102,9 @@ public class Video implements Comparable<Video> {
     }
 
     public boolean equals(Video v){
-        return (Objects.equals(v.getName(), this.getName())) && (Objects.equals(v.getUploader(), this.getUploader()))
-                && (Objects.equals(v.getDescription(), this.getDescription())) && (Objects.equals(v.getContent(), this.getContent())) &&
-                (v.getCategories() == this.getCategories()) && (Objects.equals(v.getUniqueID(), this.getUniqueID())) &&
-                (Objects.equals(v.getDate_upload(), this.getDate_upload())) && (v.getRatings() == this.getRatings());
+        return (v.getUploader().equals(this.getUploader()) && v.getName().equals(this.getName()) && v.getContent().equals(this.getContent())&&
+                v.getCategories().equals(this.getCategories())&& v.getUniqueID().equals(this.getUniqueID()) && v.getDescription().equals(this.description)&&
+                v.getDate_upload().equals(this.date_upload) && v.getRatings().equals(this.getRatings()));
     }
     @Override
     public int compareTo(Video v) {
