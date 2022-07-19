@@ -36,7 +36,7 @@ public class PlaylistTest {
 
         assertEquals(2, play.getUniqueIDs().size());
 
-        assertTrue(PM.deleteFromPlaylist(play, v2));
+        assertTrue(PM.deleteFromPlaylist(play.getPlaylistName(), v2.getUniqueID()));
         assertEquals(1, play.getUniqueIDs().size());
 
 
@@ -81,6 +81,7 @@ public class PlaylistTest {
         PM.addToPlaylist(play.getPlaylistName(), v1.getUniqueID());
 
         Playlist play_dup = new Playlist("Music1","k1");
+        PM.addPlaylist(play_dup);
         PM.addToPlaylist(play_dup.getPlaylistName(), v1.getUniqueID());
         PM.addToPlaylist(play_dup.getPlaylistName(), v2.getUniqueID());
 
