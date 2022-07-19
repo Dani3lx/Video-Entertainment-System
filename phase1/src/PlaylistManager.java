@@ -38,7 +38,8 @@ public class PlaylistManager {
         return true;
     }
 
-    public ArrayList<String> namesInPlaylist(Playlist playlist, VideoManager vm){
+    public ArrayList<String> namesInPlaylist(String playlistName, VideoManager vm){
+        Playlist playlist = getPlaylistByName(playlistName);
         ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
         ArrayList<String> videoName = new ArrayList<>();
         try {
@@ -62,9 +63,10 @@ public class PlaylistManager {
         return null;
     }
 
-    public boolean deleteFromPlaylist(Playlist playlist, Video video) {
+    public boolean deleteFromPlaylist(String playlistName, String videoID) {
+        Playlist playlist = getPlaylistByName(playlistName);
         for (String uniqueID : playlist) {
-            if (uniqueID.equals(video.getUniqueID())) {
+            if (uniqueID.equals(videoID)) {
                 playlist.removeUniqueID(uniqueID);
 //                playlist.setLength(playlist.getLength()-1);
                 return true;

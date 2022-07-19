@@ -225,7 +225,7 @@ public class VideoManagementMenuDisplayer {
                 VidName = sc.nextLine();
                 videos = vmm.getByName(VidName);
                 for (Video vid: videos){
-                    pmm.deleteFromPlaylist(pl,vid);
+                    pmm.deleteFromPlaylist(pl.getPlaylistName(),vid.getUniqueID());
                 }
                 break;
             case 4:
@@ -323,7 +323,7 @@ public class VideoManagementMenuDisplayer {
         switch (option){
             case 1:
                 //todo move logic to a different class
-                ArrayList<String> vidname = pmm.namesInPlaylist(pl,vmm);
+                ArrayList<String> vidname = pmm.namesInPlaylist(pl.getPlaylistName(),vmm);
                 int num = 0;
                 for (String video : vidname) {
                     System.out.println(num + ". " + video);
