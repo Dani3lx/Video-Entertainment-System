@@ -160,102 +160,14 @@ public class VideoManagementMenuDisplayer {
         menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
     }
 
-    /*
-    * This is used for the user to interact with playlists and associated methods
-    * will use VMM displayer/presenter for this unless otherwise necessary
-    * Need to create way to #todo select and view playlist (not just get uniqueID)
-    * */
-
-    public void playlistBrowseMenu(User user)  {
-        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
-                "\n1 - Search Playlist by name \n2 - Create New Playlist \n3 - Return");
-        String plname;
-        switch (option) {
-            case 1:
-                menuPresenter.displayRequest("Enter the name of the playlist: ");
-
-                plname = sc.nextLine();
-                try {
-                    Playlist pl = pmm.getPlaylistByName(plname);
-                    playlistManageMenu(user,pl);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-
-                break;
-            case 2:
-                menuPresenter.displayRequest("Enter the name of the playlist you want to create: ");
-                plname = sc.nextLine();
-                Playlist pl = new Playlist(plname, user.getUserName()); //todo Does it make sense for User to be string?
-                menuPresenter.displayAlert("Successfully created: " + pl.getPlaylistName());
-                pmm.addPlaylist(pl);
-                menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
-                break;
-            case 3:
-                menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
-                break;
-        }
-    }
-
-    /*
-    * This is used for user to interact with a specific playlist after they have selected a playlist
-    * Need to create a cleaner select playlist
-    * */
-
-    public void playlistManageMenu(User user,Playlist pl){
-        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - View Playlist \n 2 - Add Video to Playlist \n 3 - Remove Video from Playlist \n 4 - Reorder Playlist " +
-                "\n 5 - Like Playlist \n 6 -  Return");
-        String VidName;
-        ArrayList <Video> videos;
-        switch(option){
-            case 1:
-                viewPlaylist(user,pl);
-                break;
-            case 2:
-//                menuPresenter.displayRequest("Please enter the name of the video you would like to add to the playlist "); // todo does it make more sense to have UniqueID search rather than name?
-//                VidName = sc.nextLine();
-//                videos = vmm.getByName(VidName); //todo Include logic in another class similar to VideoBrowsePresenter.java
-//                for (Video vid: videos){         //todo perhaps make it so we can create a list of videos and then add them (won't have to reuse code)
-//                    pmm.addToPlaylist(pl,vid);   //todo will need a cache of videos to input though
-//                }
-                break;
-            case 3:
-                menuPresenter.displayRequest("Please enter the name of the video you would like to remove from the playlist ");
-                VidName = sc.nextLine();
-                videos = vmm.getByName(VidName);
-                for (Video vid: videos){
-                    pmm.deleteFromPlaylist(pl.getPlaylistName(),vid.getUniqueID());
-                }
-                break;
-            case 4:
-                ReorderPlaylist(user, pl);
-                break;
-            case 5:
-                int option2 = menuDisplayer.getUserActionChoice("Do you want to like this playlist: "+ pl.getPlaylistName()
-                        + " \n 1 - Yes \n 2 - No");
-                switch (option2){
-                    case 1:
-                        pmm.likePlaylist(pl);
-                        menuPresenter.displayAlert("You have successfully liked " + pl.getPlaylistName());
-                        break;
-                    case 2:
-                        menuPresenter.displayAlert("You did not like " + pl.getPlaylistName()); //todo pl.getplaylistname also entity and controller interaction
-                        playlistManageMenu(user, pl); //todo do I need to break this?
-                }
-            case 6:
-                playlistBrowseMenu(user);
-        }
-// hello
-    }
-
     /**
      * This menu navigates the user to perform actions on specific videos
      *
      * @param user the current user using the menu
      * @param nonAdminHandler controller that dictates what happens when a video action is performed
      */
-    public void videoActionMenu(User user, NonAdminHandler nonAdminHandler){
+
+    public void videoActionMenu(User user, NonAdminHandler nonAdminHandler) {
 
         int result = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - View all the videos uploaded by " + user.getUserName() + " \n 2 - Upload a video " +
@@ -282,7 +194,7 @@ public class VideoManagementMenuDisplayer {
             case 3:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to be deleted: ");
                 uniqueID = sc.nextLine();
-                if (nonAdminHandler.deleteVideo(user, uniqueID)){
+                if (nonAdminHandler.deleteVideo(user, uniqueID)) {
                     menuPresenter.displayAlert("Delete successful");
                 } else {
                     menuPresenter.displayError("Delete unsuccessful");
@@ -314,69 +226,5 @@ public class VideoManagementMenuDisplayer {
                 videoActionMenu(user, nonAdminHandler);
         }
         menuDisplayer.callMenu(user, user.isAdminInd());
-    }
-
-    public void viewPlaylist(User user,Playlist pl){
-        int option = menuDisplayer.getUserActionChoice("Which Action would you like to perform " +
-                "\n 1 - View Video Names in Playlist \n 2 - View How Many Likes "+pl.getPlaylistName()+" has"+  "\n 3 - Change Playlist Name \n 4 -  Return ");
-
-        switch (option){
-            case 1:
-                //todo move logic to a different class
-                ArrayList<String> vidname = pmm.namesInPlaylist(pl.getPlaylistName(),vmm);
-                int num = 0;
-                for (String video : vidname) {
-                    System.out.println(num + ". " + video);
-                    num++;
-                }
-                break;
-            case 2:
-                int numlike = pl.getLikes(); //todo entity and controller interaction -> change logic
-                menuPresenter.displayAlert(pl.getPlaylistName() + " has " + numlike + " likes! ");
-                break;
-            case 3:
-                if (user.getUserName().equals(pl.getUserName())){ //checks if current user also created the playlist
-                    menuPresenter.displayRequest("Please enter the name you would like to change " + pl.getPlaylistName() + " to: " );
-                    String PlName = menuDisplayer.sc.nextLine();
-                    pl.setPlaylistName(PlName);
-                }
-                else menuPresenter.displayError("You do not have permission to change this Playlist's name");
-                break;
-            case 4:
-                playlistManageMenu(user,pl);
-                break;
-        }
-
-    }
-
-    public void ReorderPlaylist(User user, Playlist pl){ //todo user needs authority to change the playlist
-        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Reorder Playlist Alphabetically \n 2 - Reorder Playlist by Video Rating \n 3 - Shuffle Playlist  \n 4 -  Return");
-
-        if (user.getUserName().equals(pl.getUserName())){
-            menuPresenter.displayError("You do not have permission to change the order");
-            playlistManageMenu(user,pl);
-        }
-        else {
-
-            switch (option){
-                case 1:
-                    pmm.reorderPlaylistByName(pl);
-                    menuPresenter.displayAlert("You have successfully ordered "+ pl.getPlaylistName() +" by alphabetical order!");
-                    break;
-                case 2:
-                    pmm.reorderPlaylistByRating(pl,vmm);
-                    menuPresenter.displayAlert("You have successfully ordered "+ pl.getPlaylistName() +" by descending ratings order!");
-                    break;
-                case 3:
-                    pmm.shufflePlaylist(pl,vmm);
-                    menuPresenter.displayAlert("You have successfully shuffled "+ pl.getPlaylistName());
-                    break;
-                case 4:
-                    playlistManageMenu(user,pl);
-                    break;
-
-            }
-        }
     }
 }
