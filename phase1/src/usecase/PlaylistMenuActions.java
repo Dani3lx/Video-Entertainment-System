@@ -28,7 +28,7 @@ public class PlaylistMenuActions {
             pm.addPlaylist(new_playlist);
             return new_playlist;
         }
-        else throw new RuntimeException("entities.Playlist already exists"); //Is this correct?
+        else throw new RuntimeException("Playlist already exists"); //Is this correct?
     }
 
     public Boolean AddDeleteFromPlaylist(String Vidname, User user, Playlist pl, boolean Add) throws Exception {

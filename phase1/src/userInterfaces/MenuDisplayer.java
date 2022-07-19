@@ -10,6 +10,7 @@ import usecase.PlaylistManager;
 import usecase.UserManager;
 import usecase.VideoManager;
 
+import java.awt.*;
 import java.util.*;
 
 /**
@@ -27,6 +28,7 @@ public class MenuDisplayer {
     VideoManager vm;
     MenuPresenter menuPresenter;
     VideoManagementMenuDisplayer vmmDisplayer;
+    PlaylistMenu pm;
 
     /**
      * Constructs a menu displayer with a record of all the users and videos.
@@ -105,7 +107,11 @@ public class MenuDisplayer {
                 vmmDisplayer.videoActionMenu(user, nonAdminHandler);
                 break;
             case 6:
-                vmmDisplayer.playlistBrowseMenu(user);
+                try {
+                    pm.playlistBrowseMenu(user);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             default:
                 basicUserMenu(user, result, false);
@@ -119,8 +125,8 @@ public class MenuDisplayer {
      */
     private void adminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create entities.AdminUser \n" +
-                " 5 - Delete entities.User \n 6 - Ban entities.User \n 7 - UnBan entities.User \n 8 - Browse Videos \n 9 - View Playlists");
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
+                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n 8 - Browse Videos \n 9 - View Playlists");
         AdminHandler adminHandler = new AdminHandler(um, vm);
         String[] info;
         switch (result) {
@@ -167,7 +173,11 @@ public class MenuDisplayer {
                 vmmDisplayer.videoBrowseMenu(user);
                 break;
             case 9:
-                vmmDisplayer.playlistBrowseMenu(user);
+                try {
+                    pm.playlistBrowseMenu(user);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             default:
                 basicUserMenu(user, result, true);
