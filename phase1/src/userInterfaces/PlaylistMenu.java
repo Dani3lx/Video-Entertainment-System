@@ -37,7 +37,7 @@ public class PlaylistMenu {
      * Need to create way to #todo select and view playlist (not just get uniqueID)
      * */
 
-    public void playlistBrowseMenu(User user) throws Exception {
+    public void playlistBrowseMenu(User user){
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n1 - Search entities.Playlist by name \n2 - Create New entities.Playlist \n3 - Return");
         String plname;
@@ -66,7 +66,7 @@ public class PlaylistMenu {
      * Need to create a cleaner select playlist
      * */
 
-    public void playlistManageMenu(User user, Playlist pl) throws Exception {
+    public void playlistManageMenu(User user, Playlist pl){
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - View entities.Playlist \n 2 - Add entities.Video to entities.Playlist \n 3 - Remove entities.Video from entities.Playlist \n 4 - Reorder entities.Playlist " +
                 "\n 5 - Like entities.Playlist \n 6 -  Return");
@@ -122,7 +122,7 @@ public class PlaylistMenu {
     }
 
 
-    public void viewPlaylist(User user,Playlist pl) throws Exception {
+    public void viewPlaylist(User user,Playlist pl) {
         int option = menuDisplayer.getUserActionChoice("Which Action would you like to perform " +
                 "\n 1 - View entities.Video Names in entities.Playlist \n 2 - View How Many Likes "+pl.getPlaylistName()+" has"+  "\n 3 - Change entities.Playlist Name \n 4 -  Return ");
 
@@ -154,7 +154,7 @@ public class PlaylistMenu {
 
     }
 
-    public void ReorderPlaylist(User user, Playlist pl) throws Exception { //todo user needs authority to change the playlist
+    public void ReorderPlaylist(User user, Playlist pl) { //todo user needs authority to change the playlist
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Reorder entities.Playlist Alphabetically \n 2 - Reorder entities.Playlist by entities.Video Rating \n 3 - Shuffle entities.Playlist  \n 4 -  Return");
 

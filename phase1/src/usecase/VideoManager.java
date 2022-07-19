@@ -64,13 +64,13 @@ public class VideoManager {
      * @param uniqueID The name of the person who uploaded video
      * @return video with correspond UniqueID
      */
-    public Video getByUniqueID(String uniqueID) throws Exception {
+    public Video getByUniqueID(String uniqueID){
         for (Video v : vids) {
             if (uniqueID.equalsIgnoreCase(v.getUniqueID())) {
                 return v;
             }
         }
-        throw new Exception("Don't find video with the corresponding uniqueID");
+        return null; // todo fix later
     }
 
     /**

@@ -28,7 +28,7 @@ public class MenuDisplayer {
     VideoManager vm;
     MenuPresenter menuPresenter;
     VideoManagementMenuDisplayer vmmDisplayer;
-    PlaylistMenu pm;
+    PlaylistMenu pmd;
 
     /**
      * Constructs a menu displayer with a record of all the users and videos.
@@ -39,10 +39,12 @@ public class MenuDisplayer {
     public MenuDisplayer(UserManager um, VideoManager vm, PlaylistManager pm) {
         this.um = um;
         this.vm = vm;
+
         userActionHandler = new UserActionHandler(um);
         dataManager = new DataManager(um, vm, pm);
         menuPresenter = new MenuPresenter(um, vm);
         vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm, userActionHandler, pm);
+        pmd = new PlaylistMenu();
     }
 
     /**
@@ -107,11 +109,9 @@ public class MenuDisplayer {
                 vmmDisplayer.videoActionMenu(user, nonAdminHandler);
                 break;
             case 6:
-                try {
-                    pm.playlistBrowseMenu(user);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+
+                    pmd.playlistBrowseMenu(user);
+
                 break;
             default:
                 basicUserMenu(user, result, false);
@@ -174,7 +174,7 @@ public class MenuDisplayer {
                 break;
             case 9:
                 try {
-                    pm.playlistBrowseMenu(user);
+                    pmd.playlistBrowseMenu(user);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
