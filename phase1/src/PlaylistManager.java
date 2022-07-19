@@ -8,6 +8,8 @@ public class PlaylistManager {
 //        playlists = new ArrayList<>();
 //    }
 
+    // hello
+
     public void addPlaylist(Playlist pl){
         playlists.add(pl);
     }
