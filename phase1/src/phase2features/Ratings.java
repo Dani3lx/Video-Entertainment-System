@@ -1,3 +1,5 @@
+package phase2features;
+
 import java.util.ArrayList;
 //todo remove this for phase 1, try to incorporate in phase 2
 public class Ratings {

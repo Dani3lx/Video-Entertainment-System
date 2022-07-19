@@ -1,3 +1,15 @@
+package userInterfaces;
+
+import controllers.AdminHandler;
+import controllers.NonAdminHandler;
+import controllers.UserActionHandler;
+import entities.User;
+import gateways.DataManager;
+import presenters.MenuPresenter;
+import usecase.PlaylistManager;
+import usecase.UserManager;
+import usecase.VideoManager;
+
 import java.util.*;
 
 /**
@@ -107,8 +119,8 @@ public class MenuDisplayer {
      */
     private void adminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
-                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n 8 - Browse Videos \n 9 - View Playlists");
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create entities.AdminUser \n" +
+                " 5 - Delete entities.User \n 6 - Ban entities.User \n 7 - UnBan entities.User \n 8 - Browse Videos \n 9 - View Playlists");
         AdminHandler adminHandler = new AdminHandler(um, vm);
         String[] info;
         switch (result) {

@@ -1,3 +1,11 @@
+package controllers;
+
+import entities.AdminUser;
+import entities.User;
+import usecase.AdminManager;
+import usecase.UserManager;
+import usecase.VideoManager;
+
 import java.util.ArrayList;
 import java.util.Objects;
 

@@ -1,3 +1,9 @@
+package presenters;
+
+import entities.Video;
+import usecase.VideoEditor;
+import usecase.VideoManager;
+
 import java.util.ArrayList;
 
 /**

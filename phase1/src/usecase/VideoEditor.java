@@ -1,9 +1,13 @@
+package usecase;
+
+import entities.Video;
+
 import java.util.ArrayList;
 
 public class VideoEditor {
 
     /**
-     * @param v        Video object
+     * @param v        entities.Video object
      * @param newTitle The new title user wants their video to be
      */
     public void editTitle(Video v, String newTitle) {
@@ -11,7 +15,7 @@ public class VideoEditor {
     }
 
     /**
-     * @param v       Video object
+     * @param v       entities.Video object
      * @param newCate The new categories user wants their video to be
      */
     public void editCategories(Video v, ArrayList<String> newCate) {
@@ -19,7 +23,7 @@ public class VideoEditor {
     }
 
     /**
-     * @param v      Video object
+     * @param v      entities.Video object
      * @param newDes The new description user wants their video to be
      */
     public void editDescription(Video v, String newDes) {
@@ -36,7 +40,7 @@ public class VideoEditor {
 
 
     /**
-     * @param vid Video object
+     * @param vid entities.Video object
      * @return All attributes of the video
      */
     public String[] returnVideoInformation(Video vid) {

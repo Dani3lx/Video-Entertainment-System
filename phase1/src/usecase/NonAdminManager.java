@@ -1,3 +1,8 @@
+package usecase;
+
+import entities.User;
+import entities.Video;
+
 import java.util.ArrayList;
 
 public class NonAdminManager extends UserManager {
@@ -6,7 +11,7 @@ public class NonAdminManager extends UserManager {
 
     private VideoEditor ve;
 
-    // we need to make sure that there only exists one VideoManager object during runtime
+    // we need to make sure that there only exists one usecase.VideoManager object during runtime
     public NonAdminManager(UserManager um, VideoManager vm) {
         super(vm);
         this.um = um;

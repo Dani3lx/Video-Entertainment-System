@@ -1,3 +1,12 @@
+package gateways;
+
+import entities.Playlist;
+import entities.User;
+import entities.Video;
+import usecase.PlaylistManager;
+import usecase.UserManager;
+import usecase.VideoManager;
+
 import java.util.*;
 import java.io.*;
 
@@ -27,14 +36,14 @@ public class DataManager {
                 record = scanner.nextLine().split(",");
                 if (record[3].equals("true")) {
 //                  List<Integer> loginTimeInt = stringToListInt(record[4]);
-//                  User adminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
+//                  entities.User adminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
 //                            new HashSet<>(loginTimeInt), true);
                     User adminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
                             new HashSet<>(Arrays.asList(record[4].split("/"))), true);
                     users.add(adminUser);
                 } else {
 //                  List<Integer> loginTimeInt = stringToListInt(record[4]);
-//                  User adminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
+//                  entities.User adminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
 //                            new HashSet<>(loginTimeInt), true);
                     User nonAdminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
                             new HashSet<>(Arrays.asList(record[4].split("/"))), false);

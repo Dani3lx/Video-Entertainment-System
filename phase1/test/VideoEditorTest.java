@@ -1,4 +1,6 @@
+import entities.Video;
 import org.junit.Test;
+import usecase.VideoEditor;
 
 import java.util.ArrayList;
 

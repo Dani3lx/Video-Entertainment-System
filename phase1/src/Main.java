@@ -1,5 +1,10 @@
+import gateways.DataManager;
+import usecase.PlaylistManager;
+import usecase.UserManager;
+import usecase.VideoManager;
+import userInterfaces.MenuDisplayer;
+
 import java.io.IOException;
-import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {

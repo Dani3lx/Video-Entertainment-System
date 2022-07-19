@@ -1,4 +1,10 @@
-import java.util.Scanner;
+package usecase;
+
+import entities.Playlist;
+import entities.User;
+import entities.Video;
+import usecase.PlaylistManager;
+import usecase.VideoManager;
 
 public class PlaylistMenuActions {
 
@@ -6,7 +12,7 @@ public class PlaylistMenuActions {
     VideoManager vm;
 
 
-    public Playlist SearchPlaylist(PlaylistManager pmm,User user,String plname){
+    public Playlist SearchPlaylist(PlaylistManager pmm, User user, String plname){
         try {
             Playlist pl = pmm.getPlaylistByName(plname);
             return pl;
@@ -22,10 +28,10 @@ public class PlaylistMenuActions {
             pm.addPlaylist(new_playlist);
             return new_playlist;
         }
-        else throw new RuntimeException("Playlist already exists"); //Is this correct?
+        else throw new RuntimeException("entities.Playlist already exists"); //Is this correct?
     }
 
-    public Boolean AddDeleteFromPlaylist(String Vidname,User user, Playlist pl,boolean Add) throws Exception {
+    public Boolean AddDeleteFromPlaylist(String Vidname, User user, Playlist pl, boolean Add) throws Exception {
 
         Video vid = vm.getByUniqueID(Vidname); //todo think we need to extend this to video name
         Boolean result;

@@ -1,3 +1,10 @@
+package usecase;
+
+import entities.AdminUser;
+import entities.NonAdminUser;
+import entities.User;
+import entities.Video;
+
 import java.util.*;
 
 public class UserManager {

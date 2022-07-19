@@ -1,3 +1,5 @@
+package entities;
+
 import java.util.HashSet;
 
 public class AdminUser extends User {

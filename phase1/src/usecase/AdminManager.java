@@ -1,3 +1,8 @@
+package usecase;
+
+import entities.AdminUser;
+import entities.User;
+
 import java.util.ArrayList;
 
 public class AdminManager extends UserManager {

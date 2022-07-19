@@ -1,3 +1,7 @@
+package usecase;
+
+import entities.Video;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -47,7 +51,7 @@ public class VideoManager {
 
     /**
      *
-     * @param v Video object
+     * @param v entities.Video object
      * @return Whether or not deletion was successful
      */
     public boolean deleteVideo(Video v){
@@ -123,7 +127,7 @@ public class VideoManager {
     /**
      *
      * @param videos The list of videos
-     * @return Video names
+     * @return entities.Video names
      */
     public ArrayList<String> getVideoNames(ArrayList<Video> videos) {
         ArrayList<String> names = new ArrayList<>();

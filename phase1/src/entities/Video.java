@@ -1,7 +1,7 @@
-import java.time.format.DateTimeFormatter;
+package entities;
+
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Objects;
 
 public class Video implements Comparable<Video> {
 

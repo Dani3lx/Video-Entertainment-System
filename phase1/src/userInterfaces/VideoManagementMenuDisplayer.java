@@ -1,3 +1,15 @@
+package userInterfaces;
+
+import controllers.NonAdminHandler;
+import controllers.UserActionHandler;
+import entities.User;
+import entities.Video;
+import presenters.MenuPresenter;
+import presenters.VideoBrowsePresenter;
+import usecase.PlaylistManager;
+import usecase.VideoManager;
+import userInterfaces.MenuDisplayer;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -43,7 +55,7 @@ public class VideoManagementMenuDisplayer {
 
 
     /**
-     * Constructs a VideoManagementMenuDisplayer
+     * Constructs a userInterfaces.VideoManagementMenuDisplayer
      *
      * @param menuPresenter the Presenter class that format and displays information to the user
      * @param menuDisplayer the main menu that this menu will interact with

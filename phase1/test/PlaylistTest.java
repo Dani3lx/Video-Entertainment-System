@@ -1,4 +1,7 @@
+import entities.Playlist;
+import entities.Video;
 import org.junit.Test;
+import usecase.PlaylistManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +44,7 @@ public class PlaylistTest {
 
 
     }
-    //Ratings not implemented yet
+    //phase2features.Ratings not implemented yet
     @Test
     public void reorderPlaylistByRatingTest(){
         Playlist play = new Playlist("Music","k");
@@ -54,7 +57,7 @@ public class PlaylistTest {
 
 //        ArrayList<String> cates2 = new ArrayList<String>(Arrays.asList("fun"));
 //        ArrayList<String> ratings2 = new ArrayList<String>(Arrays.asList("2","0"));
-//        Video v2 = new Video("t","rockmusic","amazing music",cates2, "url", "2",ratings2,"today");
+//        entities.Video v2 = new entities.Video("t","rockmusic","amazing music",cates2, "url", "2",ratings2,"today");
 //        PM.addToPlaylist(play, v2);
 
         Playlist play_dup = new Playlist("Music1","k1");

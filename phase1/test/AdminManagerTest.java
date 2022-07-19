@@ -1,4 +1,9 @@
+import entities.NonAdminUser;
+import entities.User;
 import org.junit.Test;
+import usecase.AdminManager;
+import usecase.UserManager;
+import usecase.VideoManager;
 
 import java.util.ArrayList;
 

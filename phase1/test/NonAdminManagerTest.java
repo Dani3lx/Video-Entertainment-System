@@ -1,10 +1,12 @@
+import controllers.NonAdminHandler;
+import entities.NonAdminUser;
 import org.junit.Test;
-import org.junit.*;
+import usecase.NonAdminManager;
+import usecase.UserManager;
+import usecase.VideoManager;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
@@ -32,7 +34,7 @@ public class NonAdminManagerTest {
         NAM.uploadVideo(u1, "vid","url");
 
         assertTrue(NAM.deleteVideo(u1, VM.getVids().get(0).getUniqueID()));
-        //Video vid = new Video("k","hello", "greatvideo", cates, "url" ,"ID",ratings,"today");
+        //entities.Video vid = new entities.Video("k","hello", "greatvideo", cates, "url" ,"ID",ratings,"today");
 
 
     }

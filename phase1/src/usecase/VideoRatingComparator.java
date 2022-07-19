@@ -1,3 +1,7 @@
+package usecase;
+
+import entities.Video;
+
 import java.util.*;
 
 public class VideoRatingComparator implements Comparator<Video> {

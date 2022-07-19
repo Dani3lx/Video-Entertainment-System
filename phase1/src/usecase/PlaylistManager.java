@@ -1,10 +1,14 @@
-import java.lang.reflect.Array;
+package usecase;
+
+import entities.Playlist;
+import entities.Video;
+
 import java.util.*;
 
 
 public class PlaylistManager {
     private ArrayList<Playlist> playlists;
-//    public PlaylistManager(){
+//    public usecase.PlaylistManager(){
 //        playlists = new ArrayList<>();
 //    }
 
@@ -22,7 +26,7 @@ public class PlaylistManager {
     }
 
 
-//    public ArrayList<Playlist> playlists;
+//    public ArrayList<entities.Playlist> playlists;
 
     public PlaylistManager(){
         this.playlists = new ArrayList<Playlist>();
