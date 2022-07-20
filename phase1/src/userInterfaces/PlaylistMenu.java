@@ -53,20 +53,31 @@ public class PlaylistMenu {
                 menuPresenter.displayRequest("Enter the name of the playlist: ");
                 plname = sc.nextLine();
                 Playlist pl = pma.SearchPlaylist(pmm,user,plname);
+                if(pl==null){
+                    menuPresenter.displayAlert("No playlists can be found with that name, try again");
+                    menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
+                }
                 playlistManageMenu(user,pl);
                 break;
             case 2:
                 menuPresenter.displayRequest("Enter the name of the playlist you want to create: ");
                 plname = sc.nextLine();
                 pl = pma.CreateNewPlaylist(user,plname);
-                menuPresenter.displayAlert("Successfully created: " + pl.getPlaylistName());
-                playlistManageMenu(user,pl);
+                if(pl==null){
+                    menuPresenter.displayAlert("Playlist Already Exists");
+                    menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
+                }
+                else {
+                    menuPresenter.displayAlert("Successfully created: " + pl.getPlaylistName());
+                    playlistManageMenu(user, pl);
+                }
                 break;
             case 3:
                 ArrayList<Playlist> pl_list = pmm.getPlaylists();
                 pma.listPLaylistNames(pl_list);
                 break;
             case 4:
+                menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
                 break; //todo
         }
     }
