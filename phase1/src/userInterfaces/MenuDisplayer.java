@@ -173,11 +173,8 @@ public class MenuDisplayer {
                 vmmDisplayer.videoBrowseMenu(user);
                 break;
             case 9:
-                try {
-                    pmd.playlistBrowseMenu(user);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
+                //todo
+                pmd.playlistBrowseMenu(user);
                 break;
             default:
                 basicUserMenu(user, result, true);

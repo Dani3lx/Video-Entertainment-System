@@ -6,6 +6,8 @@ import entities.Video;
 import usecase.PlaylistManager;
 import usecase.VideoManager;
 
+import java.util.ArrayList;
+
 public class PlaylistMenuActions {
 
     PlaylistManager pm;
@@ -15,6 +17,14 @@ public class PlaylistMenuActions {
     public Playlist SearchPlaylist(PlaylistManager pmm, User user, String plname) {
         Playlist pl = pmm.getPlaylistByName(plname);
         return pl;
+    }
+
+    public void listPLaylistNames(ArrayList<Playlist> playlists) {
+        int num = 0;
+        for (Playlist playlist : playlists) {
+            System.out.println("\n" + num + ". " + playlist.getPlaylistName());
+            num++;
+        }
     }
 
     public Playlist CreateNewPlaylist(User user, String plname) {

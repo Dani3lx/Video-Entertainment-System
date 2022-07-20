@@ -1,5 +1,6 @@
 package presenters;
 
+import entities.Playlist;
 import entities.Video;
 import usecase.VideoEditor;
 import usecase.VideoManager;
@@ -41,13 +42,7 @@ public class VideoBrowsePresenter {
         }
     }
 
-    public void listVideoNames(ArrayList<String> videos) {
-        int num = 0;
-        for (String video : videos) {
-            System.out.println(num + ". " + video);
-            num++;
-        }
-    }
+
     /**
      * Displays the video to the user.
      *
