@@ -57,7 +57,6 @@ public class PlaylistMenu {
                 Playlist pl = pma.SearchPlaylist(pmm,user,plname);
                 if(Objects.isNull(pl)){ //todo helper function
                     menuPresenter.displayAlert("No playlists can be found with that name, try again");
-                    System.out.println("test");
                     menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
                 }
                 playlistManageMenu(user,pl);
@@ -66,7 +65,7 @@ public class PlaylistMenu {
                 menuPresenter.displayRequest("Enter the name of the playlist you want to create: ");
                 plname = sc.nextLine();
                 pl = pma.CreateNewPlaylist(user,plname);
-                if(pl==null){
+                if(Objects.isNull(pl)){ //todo helper function
                     menuPresenter.displayAlert("Playlist Already Exists");
                     menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
                 }
@@ -78,6 +77,10 @@ public class PlaylistMenu {
             case 3:
                 ArrayList<Playlist> pl_list = pmm.getPlaylists();
                 pma.listPLaylistNames(pl_list);
+                menuPresenter.displayAlert("Choose playlist based on number: ");
+                int i = sc.nextInt();
+                pl = pmm.getPlaylists().get(i);
+                playlistManageMenu(user, pl);
                 break;
             case 4:
                 menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
