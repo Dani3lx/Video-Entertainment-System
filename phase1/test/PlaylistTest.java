@@ -1,103 +1,97 @@
 import entities.Playlist;
 import entities.Video;
 import org.junit.Test;
+import org.junit.BeforeClass;
 import usecase.PlaylistManager;
+import usecase.VideoManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 public class PlaylistTest {
+
+    private static final PlaylistManager PM = new PlaylistManager();
+    private static final Playlist play = new Playlist("Music", "k");
+    private static final Playlist play_dup = new Playlist("Music1", "k1");
+    private static final VideoManager VM = new VideoManager();
+
+
+    @BeforeClass
+    public static void setUp() {
+        PM.addPlaylist(play);
+        PM.addPlaylist(play_dup);
+
+        ArrayList<String> cates = new ArrayList<>(List.of("energizing"));
+        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("10", "0"));
+        Video v1 = new Video("k", "popmusic", "amazing music", cates, "url", "1", ratings, "today");
+
+        ArrayList<String> ratings3 = new ArrayList<>(Arrays.asList("1", "0"));
+        Video v3 = new Video("k", "moremusic", "amazing music", cates, "url", "3", ratings3, "today");
+
+        ArrayList<String> cates2 = new ArrayList<>(List.of("fun"));
+        ArrayList<String> ratings2 = new ArrayList<>(Arrays.asList("2", "0"));
+        Video v2 = new Video("t", "rockmusic", "amazing music", cates2, "url", "2", ratings2, "today");
+
+        PM.addToPlaylist(play.getPlaylistName(), v2.getUniqueID());
+        PM.addToPlaylist(play.getPlaylistName(), v1.getUniqueID());
+        PM.addToPlaylist(play.getPlaylistName(), v3.getUniqueID());
+
+
+        PM.addToPlaylist(play_dup.getPlaylistName(), v1.getUniqueID());
+        PM.addToPlaylist(play_dup.getPlaylistName(), v3.getUniqueID());
+
+    }
 
     @Test
     public void addToPlaylistTest() {
-        Playlist play = new Playlist("Music","k");
-        ArrayList<String> cates = new ArrayList<String>(Arrays.asList("energizing"));
-        ArrayList<String> ratings = new ArrayList<String>(Arrays.asList("0","0"));
-        Video v = new Video("k","popmusic","amazing music",cates, "url", "1",ratings,"today");
+        Playlist play = new Playlist("Music", "k");
+        ArrayList<String> cates = new ArrayList<>(List.of("energizing"));
+        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("0", "0"));
+        Video v = new Video("k", "popmusic", "amazing music", cates, "url", "1", ratings, "today");
         PlaylistManager PM = new PlaylistManager();
         PM.addPlaylist(play);
         assertTrue(PM.addToPlaylist(play.getPlaylistName(), v.getUniqueID()));
         assertEquals(1, play.getUniqueIDs().size());
 
     }
+
     @Test
-    public void deleteFromPlaylistTest(){
-        Playlist play = new Playlist("Music","k");
-        ArrayList<String> cates = new ArrayList<String>(Arrays.asList("energizing"));
-        ArrayList<String> ratings = new ArrayList<String>(Arrays.asList("0","0"));
-        Video v1 = new Video("k","popmusic","amazing music",cates, "url", "1",ratings,"today");
-        PlaylistManager PM = new PlaylistManager();
-        PM.addPlaylist(play);
-        assertTrue(PM.addToPlaylist(play.getPlaylistName(), v1.getUniqueID()));
+    public void deleteFromPlaylistTest() {
 
-        ArrayList<String> cates2 = new ArrayList<String>(Arrays.asList("fun"));
-        ArrayList<String> ratings2 = new ArrayList<String>(Arrays.asList("0","0"));
-        Video v2 = new Video("t","rockmusic","amazing music",cates2, "url", "2",ratings2,"today");
-        assertTrue(PM.addToPlaylist(play.getPlaylistName(), v2.getUniqueID()));
 
+        assertEquals(3, play.getUniqueIDs().size());
+
+        assertTrue(PM.deleteFromPlaylist(play.getPlaylistName(), play.getUniqueIDs().get(0)));
         assertEquals(2, play.getUniqueIDs().size());
 
-        assertTrue(PM.deleteFromPlaylist(play.getPlaylistName(), v2.getUniqueID()));
-        assertEquals(1, play.getUniqueIDs().size());
-
 
     }
-    //phase2features.Ratings not implemented yet
+
+
     @Test
-    public void reorderPlaylistByRatingTest(){
-        Playlist play = new Playlist("Music","k");
-        ArrayList<String> cates = new ArrayList<String>(Arrays.asList("energizing"));
-        ArrayList<String> ratings = new ArrayList<String>(Arrays.asList("10","0"));
-        Video v1 = new Video("k","popmusic","amazing music",cates, "url", "1",ratings,"today");
-        PlaylistManager PM = new PlaylistManager();
-        PM.addPlaylist(play);
-        PM.addToPlaylist(play.getPlaylistName(), v1.getUniqueID());
+    public void reorderPlaylistByRatingTest() {
 
-//        ArrayList<String> cates2 = new ArrayList<String>(Arrays.asList("fun"));
-//        ArrayList<String> ratings2 = new ArrayList<String>(Arrays.asList("2","0"));
-//        entities.Video v2 = new entities.Video("t","rockmusic","amazing music",cates2, "url", "2",ratings2,"today");
-//        PM.addToPlaylist(play, v2);
 
-        Playlist play_dup = new Playlist("Music1","k1");
-        play_dup.addUniqueID(v1.getUniqueID());
-//        play_dup.addVideo(v2);
-
-        assertTrue(play_dup.equals(PM.reorderPlaylistByName(play)));
+        assertTrue(PM.reorderPlaylistByRating(play, VM).equals(play_dup));
     }
 
     @Test
-    public void reorderPlaylistByNameTest(){
-        Playlist play = new Playlist("Music","k");
-        ArrayList<String> cates = new ArrayList<String>(Arrays.asList("energizing"));
-        ArrayList<String> ratings = new ArrayList<String>(Arrays.asList("10","0"));
-        Video v1 = new Video("k","popmusic","amazing music",cates, "url", "1",ratings,"today");
-        PlaylistManager PM = new PlaylistManager();
-        PM.addPlaylist(play);
-
-        ArrayList<String> cates2 = new ArrayList<String>(Arrays.asList("fun"));
-        ArrayList<String> ratings2 = new ArrayList<String>(Arrays.asList("2","0"));
-        Video v2 = new Video("t","rockmusic","amazing music",cates2, "url", "2",ratings2,"today");
-
-        PM.addToPlaylist(play.getPlaylistName(), v2.getUniqueID());
-        PM.addToPlaylist(play.getPlaylistName(), v1.getUniqueID());
-
-        Playlist play_dup = new Playlist("Music1","k1");
-        PM.addPlaylist(play_dup);
-        PM.addToPlaylist(play_dup.getPlaylistName(), v1.getUniqueID());
-        PM.addToPlaylist(play_dup.getPlaylistName(), v2.getUniqueID());
+    public void reorderPlaylistByNameTest() {
 
         assertTrue(play_dup.equals(PM.reorderPlaylistByName(play)));
     }
 
 
-    @Test(timeout = 80)
-    public void likePlaylistTest(){
+    @Test
+    public void likePlaylistTest() {
         PlaylistManager PM = new PlaylistManager();
-        Playlist play = new Playlist("Music","k");
+        Playlist play = new Playlist("Music", "k");
         PM.likePlaylist(play);
-        assertEquals(1,play.getLikes());
+        assertEquals(1, play.getLikes());
     }
 }
 

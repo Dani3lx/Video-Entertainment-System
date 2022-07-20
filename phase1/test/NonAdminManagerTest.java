@@ -1,78 +1,67 @@
-import controllers.NonAdminHandler;
 import entities.NonAdminUser;
+import entities.Video;
 import org.junit.Test;
 import usecase.NonAdminManager;
 import usecase.UserManager;
 import usecase.VideoManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class NonAdminManagerTest {
-    @Test
-    public void uploadVideoTest(){
-        VideoManager VM = new VideoManager();
-        UserManager UM = new UserManager(VM);
-        NonAdminUser u1 = new NonAdminUser("k","1");
-        NonAdminHandler NAH = new NonAdminHandler(UM, VM);
-//        assertTrue(NAM.uploadVideo(u1, "vid","url"));
+import org.junit.BeforeClass;
 
+public class NonAdminManagerTest {
+    private static final VideoManager VM = new VideoManager();
+    private static final UserManager UM = new UserManager(VM);
+    private static final NonAdminManager NAM = new NonAdminManager(UM, VM);
+    private static final NonAdminUser u1 = new NonAdminUser("k", "1");
+
+    @BeforeClass
+    public static void setUp_UploadVid() {
+
+        NAM.uploadVideo(u1, "vid", "url");
+        ArrayList<String> ratings = new ArrayList<>();
+        ratings.add("0");
+        ratings.add("0");
+        Video v1 = new Video("k", "vid", "", new ArrayList<>(), "url", VM.getVids().get(0).getUniqueID(),
+                ratings, VM.getVids().get(0).getDate_upload());
+        assertTrue(VM.getVids().get(0).equals(v1));
     }
 
+
     @Test
-    public void deleteVideoTest(){
-        VideoManager VM = new VideoManager();
-        UserManager UM = new UserManager(VM);
-        NonAdminUser u1 = new NonAdminUser("k","1");
-        NonAdminManager NAM = new NonAdminManager(UM, VM);
-        ArrayList<String> cates = new ArrayList<>();
-        cates.add("humour");
-        ArrayList<String> ratings = new ArrayList<>();
-        new ArrayList<String>(Arrays.asList("10","0"));
-        NAM.uploadVideo(u1, "vid","url");
+    public void deleteVideoTest() {
+
 
         assertTrue(NAM.deleteVideo(u1, VM.getVids().get(0).getUniqueID()));
-        //entities.Video vid = new entities.Video("k","hello", "greatvideo", cates, "url" ,"ID",ratings,"today");
 
 
     }
 
     @Test
-    public void editTitleTest(){
-        VideoManager VM = new VideoManager();
-        UserManager UM = new UserManager(VM);
-        NonAdminUser u1 = new NonAdminUser("k","1");
-        NonAdminManager NAM = new NonAdminManager(UM, VM);
-        NAM.uploadVideo(u1, "vid","url");
-        NAM.editTitle(u1,VM.getVids().get(0).getUniqueID(),"new");
-        assertEquals("new",VM.getVids().get(0).getName());
+    public void editTitleTest() {
+
+        NAM.editTitle(u1, VM.getVids().get(0).getUniqueID(), "new");
+        assertEquals("new", VM.getVids().get(0).getName());
 
     }
 
     @Test
-    public void editCategoriesTest(){
-        VideoManager VM = new VideoManager();
-        UserManager UM = new UserManager(VM);
-        NonAdminUser u1 = new NonAdminUser("k","1");
-        NonAdminManager NAM = new NonAdminManager(UM, VM);
-        NAM.uploadVideo(u1, "vid","url");
-        ArrayList<String> newCates= new ArrayList<String>(Arrays.asList("newCate"));
-        NAM.editCategories(u1,VM.getVids().get(0).getUniqueID(),newCates);
-        assertEquals(newCates,VM.getVids().get(0).getCategories());
+    public void editCategoriesTest() {
+
+        ArrayList<String> newCates = new ArrayList<>(List.of("newCate"));
+        NAM.editCategories(u1, VM.getVids().get(0).getUniqueID(), newCates);
+        assertEquals(newCates, VM.getVids().get(0).getCategories());
 
     }
 
     @Test
-    public void editDescriptionTest(){
-        VideoManager VM = new VideoManager();
-        UserManager UM = new UserManager(VM);
-        NonAdminUser u1 = new NonAdminUser("k","1");
-        NonAdminManager NAM = new NonAdminManager(UM, VM);
-        NAM.uploadVideo(u1, "vid","url");
-        NAM.editDescription(u1,VM.getVids().get(0).getUniqueID(),"newDescrip");
-        assertEquals("newDescrip",VM.getVids().get(0).getDescription());
+    public void editDescriptionTest() {
+
+        NAM.editDescription(u1, VM.getVids().get(0).getUniqueID(), "newDescrip");
+        assertEquals("newDescrip", VM.getVids().get(0).getDescription());
 
     }
 }
