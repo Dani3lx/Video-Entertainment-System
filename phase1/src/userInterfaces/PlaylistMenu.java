@@ -29,8 +29,14 @@ public class PlaylistMenu {
     UserActionHandler userActionHandler;
     Scanner sc = new Scanner(System.in);
 
+    public PlaylistMenu(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm, PlaylistMenuActions pma, PlaylistManager pmm){
+        this.menuPresenter = menuPresenter;
+        this.menuDisplayer = menuDisplayer;
+        this.pma = pma;
+        this.vmm = vm;
+        this.pmm = pmm;
 
-
+    }
     /*
      * This is used for the user to interact with playlists and associated methods
      * will use VMM displayer/presenter for this unless otherwise necessary

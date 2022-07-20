@@ -7,6 +7,7 @@ import entities.User;
 import gateways.DataManager;
 import presenters.MenuPresenter;
 import usecase.PlaylistManager;
+import usecase.PlaylistMenuActions;
 import usecase.UserManager;
 import usecase.VideoManager;
 
@@ -29,6 +30,7 @@ public class MenuDisplayer {
     MenuPresenter menuPresenter;
     VideoManagementMenuDisplayer vmmDisplayer;
     PlaylistMenu pmd;
+    PlaylistMenuActions pma;
 
     /**
      * Constructs a menu displayer with a record of all the users and videos.
@@ -39,12 +41,12 @@ public class MenuDisplayer {
     public MenuDisplayer(UserManager um, VideoManager vm, PlaylistManager pm) {
         this.um = um;
         this.vm = vm;
-
+        pma = new PlaylistMenuActions();
         userActionHandler = new UserActionHandler(um);
         dataManager = new DataManager(um, vm, pm);
         menuPresenter = new MenuPresenter(um, vm);
         vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm, userActionHandler, pm);
-        pmd = new PlaylistMenu();
+        pmd = new PlaylistMenu(menuPresenter,this,vm,pma,pm);
     }
 
     /**
@@ -109,9 +111,7 @@ public class MenuDisplayer {
                 vmmDisplayer.videoActionMenu(user, nonAdminHandler);
                 break;
             case 6:
-
-                    pmd.playlistBrowseMenu(user);
-
+                pmd.playlistBrowseMenu(user);
                 break;
             default:
                 basicUserMenu(user, result, false);
