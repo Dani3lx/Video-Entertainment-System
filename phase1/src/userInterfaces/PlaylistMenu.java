@@ -13,6 +13,7 @@ import userInterfaces.MenuDisplayer;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class PlaylistMenu {
@@ -30,9 +31,10 @@ public class PlaylistMenu {
     UserActionHandler userActionHandler;
     Scanner sc = new Scanner(System.in);
 
-    public PlaylistMenu(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm, PlaylistMenuActions pma, PlaylistManager pmm){
+    public PlaylistMenu(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm, PlaylistMenuActions pma, PlaylistManager pmm, UserActionHandler userActionHandler){
         this.menuPresenter = menuPresenter;
         this.menuDisplayer = menuDisplayer;
+        this.userActionHandler = userActionHandler;
         this.pma = pma;
         this.vmm = vm;
         this.pmm = pmm;
@@ -53,8 +55,9 @@ public class PlaylistMenu {
                 menuPresenter.displayRequest("Enter the name of the playlist: ");
                 plname = sc.nextLine();
                 Playlist pl = pma.SearchPlaylist(pmm,user,plname);
-                if(pl==null){
+                if(Objects.isNull(pl)){ //todo helper function
                     menuPresenter.displayAlert("No playlists can be found with that name, try again");
+                    System.out.println("test");
                     menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
                 }
                 playlistManageMenu(user,pl);
