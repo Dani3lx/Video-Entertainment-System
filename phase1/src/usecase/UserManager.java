@@ -1,9 +1,6 @@
 package usecase;
 
-import entities.AdminUser;
-import entities.NonAdminUser;
-import entities.User;
-import entities.Video;
+import entities.*;
 
 import java.util.*;
 
@@ -172,5 +169,9 @@ public class UserManager {
             default:
                 return new ArrayList<>();
         }
+    }
+
+    public String getUserName(User user){
+        return user.getUserName();
     }
 }

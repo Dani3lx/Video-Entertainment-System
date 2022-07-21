@@ -164,7 +164,7 @@ public class VideoManagementMenuDisplayer {
                 // NEW
                 menuPresenter.displayRequest("Please enter a playlist name");
                 String name = sc.nextLine();
-                pmm.addToPlaylist(name, video.getUniqueID()); // using entity directly
+                pmm.addToPlaylist(pmm.getPlaylistByName(name), video); // using entity directly
                 break;
             default:
                 menuPresenter.displayError("Invalid input");
