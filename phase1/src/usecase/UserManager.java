@@ -7,6 +7,10 @@ import entities.Video;
 
 import java.util.*;
 
+/**
+ * This class is responsible for performing all direct interactions with the User entity classes.
+ * @author Benedek Balla,
+ */
 public class UserManager {
     VideoManager vm;
     private final VideoEditor ve = new VideoEditor();

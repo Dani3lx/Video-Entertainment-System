@@ -10,6 +10,10 @@ import usecase.VideoManager;
 import java.util.*;
 import java.io.*;
 
+/**
+ * This class is responsible for reading and writing data from and to the csv files contained in phase1/datasets
+ * @author Benedek Balla,
+ */
 public class DataManager {
 
     private UserManager um;
@@ -22,6 +26,11 @@ public class DataManager {
         this.pm = pm;
     }
 
+    /**
+     * Reads User data from phase1/datasets/Data.csv into the program by instantiating Users and adding them
+     * into the list of all Users within UserManager.
+     * @param filePath the path to Data.csv
+     */
     public void loadData(String filePath) {
         ArrayList<User> users = um.getAllUsers();
         try {
@@ -31,16 +40,10 @@ public class DataManager {
             while (scanner.hasNextLine()) {
                 record = scanner.nextLine().split(",");
                 if (record[3].equals("true")) {
-//                  List<Integer> loginTimeInt = stringToListInt(record[4]);
-//                  entities.User adminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
-//                            new HashSet<>(loginTimeInt), true);
                     User adminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
                             new HashSet<>(Arrays.asList(record[4].split("/"))), true);
                     users.add(adminUser);
                 } else {
-//                  List<Integer> loginTimeInt = stringToListInt(record[4]);
-//                  entities.User adminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
-//                            new HashSet<>(loginTimeInt), true);
                     User nonAdminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
                             new HashSet<>(Arrays.asList(record[4].split("/"))), false);
                     users.add(nonAdminUser);
@@ -52,6 +55,10 @@ public class DataManager {
         }
     }
 
+    /**
+     * Writes User data from the list of all users within UserManager to phase1/datasets/Data.csv
+     * @param filePath the path to Data.csv
+     */
     public void saveData(String filePath) {
         ArrayList<User> users = um.getAllUsers();
         try {
@@ -67,6 +74,10 @@ public class DataManager {
         }
     }
 
+    /**
+     * Writes Video data from the list of all videos within VideoManager to phase1/datasets/VideoData.csv
+     * @param filePath the path to VideoData.csv
+     */
     public void saveVideoData(String filePath) {
         ArrayList<Video> videos = vm.getVids();
         try {
@@ -82,6 +93,11 @@ public class DataManager {
         }
     }
 
+    /**
+     * Reads Video data from phase1/datasets/VideoData.csv into the program by instantiating Videos and adding them
+     * into the list of all Videos within VideoManager.
+     * @param filePath the path to VideoData.csv
+     */
     public void loadVideoData(String filePath) {
         ArrayList<Video> videos = vm.getVids();
         try {
@@ -99,6 +115,10 @@ public class DataManager {
         }
     }
 
+    /**
+     * Writes Playlist data from the list of all playlists within PlaylistManager to phase1/datasets/PlaylistData.csv
+     * @param filePath the path to PlaylistData.csv
+     */
     public void savePlayListData(String filePath) {
         ArrayList<Playlist> playlists = pm.getPlaylists();
         try {
@@ -114,6 +134,11 @@ public class DataManager {
         }
     }
 
+    /**
+     * Reads Playlist data from phase1/datasets/PlaylistData.csv into the program by instantiating Playlists and adding
+     * them into the list of all Playlists within PlaylistManager.
+     * @param filePath the path to PlaylistData.csv
+     */
     public void loadPlaylistData(String filePath) {
         ArrayList<Playlist> playlists = pm.getPlaylists();
         try {
@@ -131,13 +156,13 @@ public class DataManager {
         }
     }
 
-    public List<Integer> stringToListInt(String stringType) {
-        List<String> listString = Arrays.asList(stringType.split("/"));
-        List<Integer> listInt = new ArrayList<Integer>();
-        for (int i = 0; i < listString.size(); i++) {
-            listInt.add(i, Integer.parseInt(listString.get(i)));
-        }
-        return listInt;
-    }
+//    public List<Integer> stringToListInt(String stringType) {
+//        List<String> listString = Arrays.asList(stringType.split("/"));
+//        List<Integer> listInt = new ArrayList<Integer>();
+//        for (int i = 0; i < listString.size(); i++) {
+//            listInt.add(i, Integer.parseInt(listString.get(i)));
+//        }
+//        return listInt;
+//    }
 
 }

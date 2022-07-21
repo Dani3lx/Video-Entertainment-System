@@ -134,7 +134,8 @@ public class Video implements Comparable<Video> {
             s2.append(it2.next()).append("/");
         }
 
-        return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," + s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
+        return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," +
+                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
     }
 }
 
