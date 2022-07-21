@@ -31,7 +31,7 @@ public class PlaylistMenu {
     MenuDisplayer menuDisplayer;
     UserActionHandler userActionHandler;
     Scanner sc = new Scanner(System.in);
-
+    // todo Code smell -> too many inputs
     public PlaylistMenu(MenuPresenter menuPresenter, VideoManager vm, PlaylistMenuActions pma, PlaylistManager pmm, UserManager um, UserActionHandler userActionHandler, MenuDisplayer menuDisplayer) {
         this.vmm = vm;
         this.pmm = pmm;
@@ -50,7 +50,7 @@ public class PlaylistMenu {
 
 
     public void playlistBrowseMenu(User user) {
-        int option = getPlaylistChoice("Please input one of the following number to proceed " +
+        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n1 - Search Playlist by name \n2 - Create New Playlist \n3 - Display All Playlists \n4 - Return");
 
         switch (option) {
@@ -72,7 +72,7 @@ public class PlaylistMenu {
             case 3:
                 ArrayList<Playlist> pl_list = pmm.getPlaylists();
                 pp.listPlaylistNames(pl_list, pmm);
-                int sub_option = getPlaylistChoice("Do you want to " + "\n1 - Choose Playlist from list" +
+                int sub_option = menuDisplayer.getUserActionChoice("Do you want to " + "\n1 - Choose Playlist from list" +
                         "\n2 - Return");
                 switch (sub_option) {
                     case 1:
@@ -98,7 +98,7 @@ public class PlaylistMenu {
      * */
 
     public void playlistManageMenu(User user, Playlist pl) {
-        int option = getPlaylistChoice("Please input one of the following number to proceed " +
+        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - View Playlist \n 2 - Add Video to Playlist \n 3 - Remove Video from Playlist \n 4 - Reorder Playlist " +
                 "\n 5 - Like Playlist \n 6 -  Return");
         String VidName;
@@ -133,7 +133,7 @@ public class PlaylistMenu {
                 ReorderPlaylist(user, pl);
                 break;
             case 5:
-                int option2 = getPlaylistChoice("Do you want to like this playlist? "
+                int option2 = menuDisplayer.getUserActionChoice("Do you want to like this playlist? "
                         + " \n 1 - Yes \n 2 - No");
                 switch (option2) {
                     case 1:
@@ -154,7 +154,7 @@ public class PlaylistMenu {
 
 
     public void viewPlaylist(User user, Playlist pl) {
-        int option = getPlaylistChoice("Which Action would you like to perform " +
+        int option = menuDisplayer.getUserActionChoice("Which Action would you like to perform " +
                 "\n1 - View Video Names in Playlist \n2 - View How Many Likes " + pmm.getPlName(pl) + " has" +
                 "\n3 - Change Playlist Name \n4 -  Return ");
 
@@ -186,7 +186,7 @@ public class PlaylistMenu {
 
     //todo last menu
     public void ReorderPlaylist(User user, Playlist pl) { //todo user needs authority to change the playlist
-        int option = getPlaylistChoice("Please input one of the following number to proceed " +
+        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Reorder Playlist Alphabetically \n 2 - Reorder Playlist by Video Rating \n 3 - Shuffle Playlist  \n 4 -  Return");
 
         if (user.getUserName().equals(pl.getUserName())) {
@@ -222,14 +222,7 @@ public class PlaylistMenu {
         }
     }
 
-    int getPlaylistChoice(String text) {
-        menuPresenter.displayMenuOption(text);
-        if (sc.hasNextInt()) {
-            return (sc.nextInt());
-        } else {
-            return 0;
-        }
-    }
+
 
 
 }
