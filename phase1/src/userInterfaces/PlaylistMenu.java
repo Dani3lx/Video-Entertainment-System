@@ -32,13 +32,14 @@ public class PlaylistMenu {
     UserActionHandler userActionHandler;
     Scanner sc = new Scanner(System.in);
 
-    public PlaylistMenu(MenuPresenter menuPresenter, VideoManager vm, PlaylistMenuActions pma, PlaylistManager pmm,UserManager um, UserActionHandler userActionHandler){
+    public PlaylistMenu(MenuPresenter menuPresenter ,VideoManager vm, PlaylistMenuActions pma, PlaylistManager pmm,UserManager um, UserActionHandler userActionHandler){
         this.vmm = vm;
         this.pmm = pmm;
         this.um = um;
         this.menuPresenter = menuPresenter;
         this.userActionHandler = userActionHandler;
-        this.pma = new PlaylistMenuActions(pmm,vm);
+        this.pma = pma;
+        this.pp = new PlaylistPresenter();
 
 
     }
@@ -55,11 +56,11 @@ public class PlaylistMenu {
     public void playlistBrowseMenu(User user){
         int option = getPlaylistChoice("Please input one of the following number to proceed " +
                 "\n1 - Search Playlist by name \n2 - Create New Playlist \n3 - Display All Playlists \n4 - Return");
-        String plname;
+
         switch (option) {
             case 1:
                 menuPresenter.displayRequest("Enter the name of the playlist: ");
-                plname = sc.nextLine();
+                String plname = sc.nextLine();
                 Playlist pl = pma.SearchPlaylist(user,plname);
                 checkPlaylist(pl,user,menuPresenter,userActionHandler,"No playlists can be found with that name, try again");
                 playlistManageMenu(user,pl);
@@ -74,7 +75,7 @@ public class PlaylistMenu {
                 break;
             case 3:
                 ArrayList<Playlist> pl_list = pmm.getPlaylists();
-                pp.listPlaylistNames(pl_list);
+                pp.listPlaylistNames(pl_list,pmm);
                 int sub_option = getPlaylistChoice("Do you want to "+"\n1 - Choose Playlist from list"+
                         "\n2 - Return");
                 switch (sub_option){
@@ -90,7 +91,7 @@ public class PlaylistMenu {
                 }
                 break;
             case 4:
-                menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
+                menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));//todo need help with this
                 break;
         }
     }
@@ -159,13 +160,13 @@ public class PlaylistMenu {
 
 
     public void viewPlaylist(User user,Playlist pl) {
-        int option = menuDisplayer.getUserActionChoice("Which Action would you like to perform " +
+        int option = getPlaylistChoice("Which Action would you like to perform " +
                 "\n1 - View Video Names in Playlist \n2 - View How Many Likes "+ pmm.getPlName(pl) +" has"+
                 "\n3 - Change Playlist Name \n4 -  Return ");
 
         switch (option){
             case 1:
-                ArrayList<String> vidname = pmm.namesInPlaylist(pl.getPlaylistName(),vmm);
+                ArrayList<String> vidname = pmm.namesInPlaylist(pmm.getPlName(pl),vmm);
                 pp.listStringNames(vidname);
                 viewPlaylist(user,pl);
                 break;
@@ -174,17 +175,14 @@ public class PlaylistMenu {
                 viewPlaylist(user,pl);
                 break;
             case 3:
-                // TODO
-                // TODO
-                // TODO Finish after meeting w/ john
-                // TODO
-                // TODO
+
                 if ((um.getUserName(user)).equals(pmm.getPlName(pl))){ //checks if current user also created the playlist
-                    menuPresenter.displayRequest("Please enter the name you would like to change " + pl.getPlaylistName() + " to: " );
-                    String PlName = menuDisplayer.sc.nextLine();
+                    menuPresenter.displayRequest("Please enter the name you would like to change " + pmm.getPlName(pl) + " to: " );
+                    String PlName = sc.nextLine();
                     pl.setPlaylistName(PlName);
                 }
                 else menuPresenter.displayError("You do not have permission to change this Playlist's name");
+                viewPlaylist(user,pl);
                 break;
             case 4:
                 playlistManageMenu(user,pl);
@@ -192,9 +190,9 @@ public class PlaylistMenu {
         }
 
     }
-
+//todo last menu
     public void ReorderPlaylist(User user, Playlist pl) { //todo user needs authority to change the playlist
-        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+        int option = getPlaylistChoice("Please input one of the following number to proceed " +
                 "\n 1 - Reorder Playlist Alphabetically \n 2 - Reorder Playlist by Video Rating \n 3 - Shuffle Playlist  \n 4 -  Return");
 
         if (user.getUserName().equals(pl.getUserName())){
@@ -223,7 +221,7 @@ public class PlaylistMenu {
             }
         }
     }
-    public void checkPlaylist(Playlist pl,User user, MenuPresenter mp, UserActionHandler ua,String errorMsg){
+    void checkPlaylist(Playlist pl,User user, MenuPresenter mp, UserActionHandler ua,String errorMsg){
         if(Objects.isNull(pl)){
             mp.displayAlert(errorMsg);
             playlistBrowseMenu(user);

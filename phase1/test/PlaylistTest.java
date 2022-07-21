@@ -60,7 +60,7 @@ public class PlaylistTest {
     }
 
     /*@Test
-    todo user needs to match to delete
+    todo user needs to have made the playlist to delete vids from it
     public void deleteFromPlaylistTest() {
 
 

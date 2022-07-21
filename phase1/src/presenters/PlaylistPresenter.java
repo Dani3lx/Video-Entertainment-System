@@ -9,7 +9,7 @@ public class PlaylistPresenter {
 
     PlaylistManager pm;
 
-    public void listPlaylistNames(ArrayList<Playlist> playlists) {
+    public void listPlaylistNames(ArrayList<Playlist> playlists,PlaylistManager pm) {
         int num = 0;
         for (Playlist playlist : playlists) {
             System.out.println("\n" + num + ". " + pm.getPlName(playlist));
