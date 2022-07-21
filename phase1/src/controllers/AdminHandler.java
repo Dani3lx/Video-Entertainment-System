@@ -20,8 +20,6 @@ public class AdminHandler extends UserActionHandler {
 
     AdminManager am;
 
-    private final ArrayList<User> all_users;
-
     /**
      * Constructs an admin handler with a record of all the users and videos.
      *
@@ -31,7 +29,6 @@ public class AdminHandler extends UserActionHandler {
     public AdminHandler(UserManager um, VideoManager vm) {
         super(um);
         am = new AdminManager(um, vm);
-        all_users = um.getAllUsers();
     }
 
     /**
@@ -43,6 +40,7 @@ public class AdminHandler extends UserActionHandler {
      * @return whether account creation was successful
      */
     public boolean createAdminUser(String username, String password) {
+        ArrayList<User> all_users = um.getAllUsers();
         if (!(Objects.isNull(all_users))) {
             for (User u : all_users) {
                 if (am.validateUserName(u, username)) {
@@ -65,7 +63,7 @@ public class AdminHandler extends UserActionHandler {
      * @return whether the user deleted was the current user
      */
     public boolean deleteUser(User currentUser, String name) {
-
+        ArrayList<User> all_users = um.getAllUsers();
         for (User user : all_users) {
             if (am.validateUserName(user, name)) {
                 if (am.validateUserName(currentUser, name)) {
@@ -88,7 +86,7 @@ public class AdminHandler extends UserActionHandler {
      * @return whether the banning of a user using currentUser and name was successful
      */
     public boolean banUser(User currentUser, String name) {
-
+        ArrayList<User> all_users = um.getAllUsers();
         for (User user : all_users) {
             if (am.validateUserName(user, name)) {
                 if (am.validateUserName(currentUser, name) || (user instanceof AdminUser)) {
@@ -110,6 +108,7 @@ public class AdminHandler extends UserActionHandler {
      * @return whether the unbanning process was successful
      */
     public boolean unBanUser(String name) {
+        ArrayList<User> all_users = um.getAllUsers();
         for (User user : all_users) {
             if (am.validateUserName(user, name)) {
                 if (am.validateBanStatus(user)) {

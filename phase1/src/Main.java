@@ -17,9 +17,6 @@ public class Main {
         sm.loadData("phase1/datasets/Data.csv"); //Read data from Data.csv
         sm.loadVideoData("phase1/datasets/VideoData.csv"); //Read data from VideoData.csv
         sm.loadPlaylistData("phase1/datasets/PlaylistData.csv"); //Read data from PlaylistData.csv
-        um.setAllUsers(sm.getUsers());
-        vm.setVids(sm.getVideos());
-        pm.setPlaylists(sm.getPlaylists());
 
         MenuDisplayer md = new MenuDisplayer(um, vm, pm);
         md.startMenu();

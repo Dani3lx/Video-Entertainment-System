@@ -12,10 +12,6 @@ import java.io.*;
 
 public class DataManager {
 
-    private ArrayList<User> users = new ArrayList<>();
-    private ArrayList<Video> videos = new ArrayList<>();
-    private ArrayList<Playlist> playlists = new ArrayList<>();
-
     private UserManager um;
     private VideoManager vm;
     private PlaylistManager pm;
@@ -27,7 +23,7 @@ public class DataManager {
     }
 
     public void loadData(String filePath) {
-
+        ArrayList<User> users = um.getAllUsers();
         try {
             Scanner scanner = new Scanner(new FileInputStream(filePath));
             String[] record;
@@ -57,7 +53,7 @@ public class DataManager {
     }
 
     public void saveData(String filePath) {
-        setUsers((ArrayList<User>) um.getAllUsers());
+        ArrayList<User> users = um.getAllUsers();
         try {
             FileWriter writer = new FileWriter(filePath, false);
 
@@ -71,32 +67,8 @@ public class DataManager {
         }
     }
 
-    public ArrayList<User> getUsers() {
-        return users;
-    }
-
-
-    public void setUsers(java.util.ArrayList<User> users) {
-        this.users = users;
-    }
-
-    public ArrayList<Video> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(ArrayList<Video> videos) {
-        this.videos = videos;
-    }
-
-    public ArrayList<Playlist> getPlaylists() {
-        return playlists;
-    }
-    public void setPlaylists(ArrayList<Playlist> playlists){
-        this.playlists = playlists;
-    }
-
     public void saveVideoData(String filePath) {
-        this.setVideos(vm.getVids());
+        ArrayList<Video> videos = vm.getVids();
         try {
             FileWriter writer = new FileWriter(filePath, false);
 
@@ -111,7 +83,7 @@ public class DataManager {
     }
 
     public void loadVideoData(String filePath) {
-
+        ArrayList<Video> videos = vm.getVids();
         try {
             Scanner scanner = new Scanner(new FileInputStream(filePath));
             String[] record;
@@ -128,7 +100,7 @@ public class DataManager {
     }
 
     public void savePlayListData(String filePath) {
-        this.setPlaylists(pm.getPlaylists());
+        ArrayList<Playlist> playlists = pm.getPlaylists();
         try {
             FileWriter writer = new FileWriter(filePath, false);
 
@@ -143,7 +115,7 @@ public class DataManager {
     }
 
     public void loadPlaylistData(String filePath) {
-
+        ArrayList<Playlist> playlists = pm.getPlaylists();
         try {
             Scanner scanner = new Scanner(new FileInputStream(filePath));
             String[] record;
