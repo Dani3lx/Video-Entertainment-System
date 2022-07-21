@@ -15,7 +15,7 @@ import java.util.Objects;
  *
  * @author Daniel Xu
  * @version 1.0
- * @since 2022-07-15
+ * @since 2022-07-21
  */
 public class UserActionHandler {
     UserManager um;
@@ -28,8 +28,6 @@ public class UserActionHandler {
     public UserActionHandler(UserManager um) {
         this.um = um;
     }
-
-    // These code can probably be optimized more. todo improve these implementations when have time
 
     /**
      * Returns a list of videos that contains name in their title.
@@ -98,7 +96,7 @@ public class UserActionHandler {
         List<User> all_users = um.getAllUsers();
         if (!(Objects.isNull(all_users))) {
             for (User u : all_users) {
-                if (u.getUserName().equals(userName)) {
+                if (um.validateUserName(u, userName)) {
                     return null;
                 }
             }
