@@ -7,11 +7,10 @@ import entities.User;
 import gateways.DataManager;
 import presenters.MenuPresenter;
 import usecase.PlaylistManager;
-import usecase.PlaylistMenuActions;
+import controllers.PlaylistMenuActions;
 import usecase.UserManager;
 import usecase.VideoManager;
 
-import java.awt.*;
 import java.util.*;
 
 /**
@@ -27,6 +26,7 @@ public class MenuDisplayer {
     DataManager dataManager;
     UserManager um;
     VideoManager vm;
+    PlaylistManager pm;
     MenuPresenter menuPresenter;
     VideoManagementMenuDisplayer vmmDisplayer;
     PlaylistMenu pmd;
@@ -41,7 +41,8 @@ public class MenuDisplayer {
     public MenuDisplayer(UserManager um, VideoManager vm, PlaylistManager pm) {
         this.um = um;
         this.vm = vm;
-        pma = new PlaylistMenuActions();
+        this.pm = pm;
+        pma = new PlaylistMenuActions(pm,vm);
         userActionHandler = new UserActionHandler(um);
         dataManager = new DataManager(um, vm, pm);
         menuPresenter = new MenuPresenter(um, vm);

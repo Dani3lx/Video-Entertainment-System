@@ -1,6 +1,7 @@
 package usecase;
 
 import entities.Playlist;
+import entities.User;
 import entities.Video;
 
 import java.util.*;
@@ -28,23 +29,33 @@ public class PlaylistManager {
         return playlists;
     }
 
-    /**
-     * Add a specified video to a specified playlist. If a video already exists in the playlist,
-     * it cannot be added again.
-     * @param playlistName the name of the playlist to be modified
-     * @param videoID the uniqueID of the video to be added
-     * @return boolean indicates if the video was successfully added to the playlist
-     */
-    public boolean addToPlaylist(String playlistName, String videoID) {
-        Playlist playlist = getPlaylistByName(playlistName);
-        for (String uniqueID : playlist) {
-            if (uniqueID.equals(videoID)) {
+
+    public boolean addToPlaylist(Playlist pl, Video vid) {
+
+        ArrayList<String> videos = pl.getUniqueIDs();
+        for (String uniqueID : videos) {
+            if (uniqueID.equals(vid.getUniqueID())) {
                 return false;
             }
         }
-        playlist.addUniqueID(videoID);
+        pl.addUniqueID(vid.getUniqueID());
         return true;
     }
+    public boolean deleteFromPlaylist(User user, Playlist pl, Video vid) {
+
+        ArrayList<String> videos = pl.getUniqueIDs();
+        for (String uniqueID : videos) {
+            if (uniqueID.equals(vid.getUniqueID())) {
+                if((user.getUserName()).equals(pl.getUserName())) {
+                    pl.removeUniqueID(vid.getUniqueID());
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Return the name of each video within the specified playlist.
@@ -86,16 +97,7 @@ public class PlaylistManager {
      * @param videoID uniqueID of video to be deleted from playlist
      * @return boolean to indicate if the deletion was successful
      */
-    public boolean deleteFromPlaylist(String playlistName, String videoID) {
-        Playlist playlist = getPlaylistByName(playlistName);
-        for (String uniqueID : playlist) {
-            if (uniqueID.equals(videoID)) {
-                playlist.removeUniqueID(uniqueID);
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     /**
      * Reorder the specified playlist using the VideoRatingComparator and return the new Playlist object.
@@ -161,6 +163,16 @@ public class PlaylistManager {
 
     public void likePlaylist(Playlist playlist) {
         playlist.setLikes(playlist.getLikes() + 1);
+    }
+
+    public String getPlName(Playlist pl){
+        return pl.getPlaylistName();
+    }
+
+    public String getRatings(Playlist pl) {
+        int numlike = pl.getLikes();
+        String outline = pl.getPlaylistName() + " has " + numlike + " likes! ";
+        return outline;
     }
 
 }

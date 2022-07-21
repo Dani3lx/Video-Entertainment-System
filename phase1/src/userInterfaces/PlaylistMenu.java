@@ -5,13 +5,12 @@ import entities.Playlist;
 import entities.User;
 import entities.Video;
 import presenters.MenuPresenter;
+import presenters.PlaylistPresenter;
 import presenters.VideoBrowsePresenter;
 import usecase.PlaylistManager;
-import usecase.PlaylistMenuActions;
+import controllers.PlaylistMenuActions;
 import usecase.VideoManager;
-import userInterfaces.MenuDisplayer;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -25,19 +24,20 @@ public class PlaylistMenu {
     VideoManager vmm; // May need to add the VM usage into VBP
     PlaylistManager pmm;
     PlaylistMenuActions pma;
-    VideoBrowsePresenter vbp;
+    PlaylistPresenter pp;
     MenuPresenter menuPresenter;
     MenuDisplayer menuDisplayer;
     UserActionHandler userActionHandler;
     Scanner sc = new Scanner(System.in);
 
     public PlaylistMenu(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm, PlaylistMenuActions pma, PlaylistManager pmm, UserActionHandler userActionHandler){
+        this.vmm = vm;
+        this.pmm = pmm;
         this.menuPresenter = menuPresenter;
         this.menuDisplayer = menuDisplayer;
         this.userActionHandler = userActionHandler;
-        this.pma = pma;
-        this.vmm = vm;
-        this.pmm = pmm;
+        this.pma = new PlaylistMenuActions(pmm,vm);
+
 
     }
     /*
@@ -58,7 +58,7 @@ public class PlaylistMenu {
             case 1:
                 menuPresenter.displayRequest("Enter the name of the playlist: ");
                 plname = sc.nextLine();
-                Playlist pl = pma.SearchPlaylist(pmm,user,plname);
+                Playlist pl = pma.SearchPlaylist(user,plname);
                 checkPlaylist(pl,user,menuPresenter,menuDisplayer,userActionHandler,"No playlists can be found with that name, try again");
                 playlistManageMenu(user,pl);
                 break;
@@ -72,7 +72,7 @@ public class PlaylistMenu {
                 break;
             case 3:
                 ArrayList<Playlist> pl_list = pmm.getPlaylists();
-                pma.listPLaylistNames(pl_list); //todo give return option
+                pp.listPlaylistNames(pl_list);//todo PlaylistPresenter
                 int sub_option = menuDisplayer.getUserActionChoice("Do you want to "+"\n1 - Choose Playlist from list"+
                         "\n2 - Return to user menu");
                 switch (sub_option){
@@ -104,7 +104,6 @@ public class PlaylistMenu {
                 "\n 5 - Like Playlist \n 6 -  Return");
         String VidName;
         boolean result;
-        ArrayList<Video> videos;
         switch(option){
             case 1:
                 viewPlaylist(user,pl);
@@ -114,11 +113,12 @@ public class PlaylistMenu {
                 VidName = sc.nextLine();
                 result = pma.AddDeleteFromPlaylist(VidName,user,pl,true);
                 if(result){
-                    menuPresenter.displayAlert("Successfully added "+VidName+" to "+pl.getPlaylistName());
+                    menuPresenter.displayAlert("Successfully added "+VidName+" to playlist");
                 }
                 else {
-                    menuPresenter.displayAlert("Unsuccessful in adding "+VidName+" to "+pl.getPlaylistName());
+                    menuPresenter.displayAlert("Unsuccessful in adding "+VidName+" to playlist");
                 }
+                playlistManageMenu(user, pl);
                 break;
             case 3:
                 menuPresenter.displayRequest("Please enter the name of the video you would like to remove from the playlist "); //todo is this now videoID?
@@ -130,20 +130,22 @@ public class PlaylistMenu {
                 else {
                     menuPresenter.displayAlert("Unsuccessful in removing "+VidName+" to "+pl.getPlaylistName());
                 }
+                playlistManageMenu(user, pl);
                 break;
             case 4:
                 ReorderPlaylist(user, pl);
                 break;
             case 5:
-                int option2 = menuDisplayer.getUserActionChoice("Do you want to like this playlist: "+ pl.getPlaylistName()
+                int option2 = menuDisplayer.getUserActionChoice("Do you want to like this playlist? "
                         + " \n 1 - Yes \n 2 - No");
                 switch (option2){
                     case 1:
                         pmm.likePlaylist(pl);
-                        menuPresenter.displayAlert("You have successfully liked " + pl.getPlaylistName());
+                        menuPresenter.displayAlert("You have successfully liked the playlist");
+                        playlistManageMenu(user, pl);
                         break;
                     case 2:
-                        menuPresenter.displayAlert("You did not like " + pl.getPlaylistName());
+                        menuPresenter.displayAlert("You did not like this playlist");
                         playlistManageMenu(user, pl);
                         break;
                 }
@@ -156,15 +158,18 @@ public class PlaylistMenu {
 
     public void viewPlaylist(User user,Playlist pl) {
         int option = menuDisplayer.getUserActionChoice("Which Action would you like to perform " +
-                "\n 1 - View Video Names in Playlist \n 2 - View How Many Likes "+pl.getPlaylistName()+" has"+  "\n 3 - Change Playlist Name \n 4 -  Return ");
+                "\n1 - View Video Names in Playlist \n2 - View How Many Likes "+ pmm.getPlName(pl) +" has"+
+                "\n3 - Change Playlist Name \n4 -  Return ");
 
         switch (option){
             case 1:
                 ArrayList<String> vidname = pmm.namesInPlaylist(pl.getPlaylistName(),vmm);
                 //todo vbp.listVideoNames(vidname);
+                viewPlaylist(user,pl);
                 break;
             case 2:
-                menuPresenter.displayAlert(pma.GetRatings(pl));
+                menuPresenter.displayAlert(pmm.getRatings(pl));
+                viewPlaylist(user,pl);
                 break;
             case 3:
                 // TODO
