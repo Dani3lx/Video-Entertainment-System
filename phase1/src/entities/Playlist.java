@@ -7,16 +7,16 @@ public class Playlist implements Iterable<String> {
     private String name;
     private int likes;
     private ArrayList<String> uniqueIDs;
-    private String userName;  // the name of the user who made the playlist
+    private final String userName;
 
-    public Playlist(String playlistName, String userName){
+    public Playlist(String playlistName, String userName) {
         this.name = playlistName;
         likes = 0;
         uniqueIDs = new ArrayList<>();
         this.userName = userName;
     }
 
-    public Playlist(String playlistName, int likes, ArrayList<String> uniqueIDs, String userName){
+    public Playlist(String playlistName, int likes, ArrayList<String> uniqueIDs, String userName) {
         this.name = playlistName;
         this.likes = likes;
         this.uniqueIDs = uniqueIDs;
@@ -38,14 +38,6 @@ public class Playlist implements Iterable<String> {
     public void setLikes(int likes) {
         this.likes = likes;
     }
-
-//    public int getLength() {
-//        return length;
-//    }
-
-//    public void setLength(int length) {
-//        this.length = length;
-//    }
 
     public ArrayList<String> getUniqueIDs() {
         return uniqueIDs;
@@ -75,24 +67,25 @@ public class Playlist implements Iterable<String> {
             s1.append(it1.next()).append("/");
         }
 
-        return this.getPlaylistName() + "," + this.getLikes() + "," + s1 + "," +  this.getUserName() ;
+        return this.getPlaylistName() + "," + this.getLikes() + "," + s1 + "," + this.getUserName();
     }
 
-    public boolean equals(Playlist p){
-        if (p.getUniqueIDs().size() == this.getUniqueIDs().size()){
+    public boolean equals(Playlist p) {
+        if (p.getUniqueIDs().size() == this.getUniqueIDs().size()) {
 
-            for (String uniqueID: p.getUniqueIDs()) {
+            for (String uniqueID : p.getUniqueIDs()) {
                 if (!this.getUniqueIDs().contains(uniqueID)) {
                     return false;
                 }
             }
             return true;
 
-        } else{
+        } else {
             return false;
         }
 
     }
+
     @Override
     public Iterator<String> iterator() {
         return new PlaylistIterator();

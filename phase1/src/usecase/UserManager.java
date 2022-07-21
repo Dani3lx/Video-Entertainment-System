@@ -10,13 +10,20 @@ import java.util.*;
 public class UserManager {
     VideoManager vm;
     private final VideoEditor ve = new VideoEditor();
-    public UserManager(VideoManager vm){
+
+    public UserManager(VideoManager vm) {
         this.vm = vm;
         users = new ArrayList<>();
 
     }
+
     private ArrayList<User> users;
 
+    /**
+     * @param username of the user
+     * @param password of the user
+     * @return the entire User object of the user
+     */
     public User validateUser(String username, String password) {
         if (Objects.isNull(users)) {
             return null;
@@ -32,22 +39,44 @@ public class UserManager {
         return null;
     }
 
+    /**
+     * @param user     of type User
+     * @param password the new password user wants to change to
+     */
     public void changePassword(User user, String password) {
         user.setPassword(password);
     }
 
+    /**
+     * @param user of type User
+     * @return login history of user
+     */
     public List<String> getHistory(User user) {
         List<String> history = new ArrayList<>(user.getLoginHistory());
         Collections.sort(history);
         return history;
     }
 
+    /**
+     * @param user of type User
+     * @param date new login date to add
+     */
     public void updateHistory(User user, String date) {
         user.getLoginHistory().add(date);
     }
 
+    // Overloaded instantiateUser methods
+
+    /**
+     * @param userName    of the user
+     * @param password    of the user
+     * @param banStatus   of the user
+     * @param history     of the user
+     * @param adminStatus of the user
+     * @return User object for the new user
+     */
     public User instantiateUser(String userName, String password, boolean banStatus, HashSet<String> history,
-                                boolean adminStatus){
+                                boolean adminStatus) {
         if (adminStatus) {
             return new AdminUser(userName, password, banStatus, history);
         } else {
@@ -55,7 +84,13 @@ public class UserManager {
         }
     }
 
-    public User instantiateUser(String userName, String password, boolean adminStatus){
+    /**
+     * @param userName    of the user
+     * @param password    of the user
+     * @param adminStatus of the user
+     * @return User object for the new user
+     */
+    public User instantiateUser(String userName, String password, boolean adminStatus) {
         if (adminStatus) {
             return new AdminUser(userName, password);
         } else {
@@ -63,14 +98,28 @@ public class UserManager {
         }
     }
 
+    /**
+     * @param user of type User
+     * @param name of the user
+     * @return if the username of user matches name
+     */
     public boolean validateUserName(User user, String name) {
         return user.getUserName().equals(name);
     }
 
+    /**
+     * @param user of type User
+     * @return the ban status of the user
+     */
     public boolean validateBanStatus(User user) {
         return user.getBanStatus();
     }
 
+    /**
+     * Adds user to the list of all users
+     *
+     * @param user of type User
+     */
     public void updateData(User user) {
         users.add(user);
     }
@@ -88,6 +137,10 @@ public class UserManager {
         return user.isAdminInd();
     }
 
+    /**
+     * @param v    Video object
+     * @param like if want to like the video or not
+     */
     public void rateVideo(Video v, boolean like) {
         if (like) {
             ve.likeVideo(v);
@@ -96,6 +149,11 @@ public class UserManager {
         }
     }
 
+    /**
+     * @param info   list of names/category/uploader
+     * @param method collect videos by name/category/uploader
+     * @return list of videos corresponding to the name/category/uploader
+     */
     public ArrayList<Video> returnVideos(ArrayList<String> info, String method) {
         switch (method) {
             case "name":
