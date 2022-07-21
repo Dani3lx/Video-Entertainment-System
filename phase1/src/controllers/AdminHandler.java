@@ -1,6 +1,5 @@
 package controllers;
 
-import entities.AdminUser;
 import entities.User;
 import usecase.AdminManager;
 import usecase.UserManager;
@@ -14,11 +13,11 @@ import java.util.Objects;
  *
  * @author Daniel Xu
  * @version 1.0
- * @since 2022-07-15
+ * @since 2022-07-21
  */
 public class AdminHandler extends UserActionHandler {
-
-    AdminManager am;
+    private final AdminManager am;
+    private final ArrayList<User> all_users;
 
     /**
      * Constructs an admin handler with a record of all the users and videos.
@@ -29,6 +28,7 @@ public class AdminHandler extends UserActionHandler {
     public AdminHandler(UserManager um, VideoManager vm) {
         super(um);
         am = new AdminManager(um, vm);
+        all_users = um.getAllUsers();
     }
 
     /**
@@ -40,7 +40,8 @@ public class AdminHandler extends UserActionHandler {
      * @return whether account creation was successful
      */
     public boolean createAdminUser(String username, String password) {
-        ArrayList<User> all_users = um.getAllUsers();
+
+        // Iterates through the list to check if the username already exist in the database using useCase method.
         if (!(Objects.isNull(all_users))) {
             for (User u : all_users) {
                 if (am.validateUserName(u, username)) {
@@ -48,6 +49,8 @@ public class AdminHandler extends UserActionHandler {
                 }
             }
         }
+
+        // Creates a new user through useCase method
         User newUser = am.instantiateUser(username, password, true);
         updateUserHistory(newUser);
         um.updateData(newUser);
@@ -55,7 +58,7 @@ public class AdminHandler extends UserActionHandler {
     }
 
     /**
-     * Deletes a user using name.
+     * Deletes the user with name.
      * Returns whether the user deleted was the current user.
      *
      * @param currentUser the user that is currently logged in
@@ -63,9 +66,12 @@ public class AdminHandler extends UserActionHandler {
      * @return whether the user deleted was the current user
      */
     public boolean deleteUser(User currentUser, String name) {
-        ArrayList<User> all_users = um.getAllUsers();
+
+        // Iterates through the list to check if the user exist in the database
         for (User user : all_users) {
             if (am.validateUserName(user, name)) {
+
+                // Checks if the user being deleted is the current user
                 if (am.validateUserName(currentUser, name)) {
                     am.deleteUser(user);
                     return true;
@@ -78,7 +84,7 @@ public class AdminHandler extends UserActionHandler {
     }
 
     /**
-     * Return whether the banning of a user using currentUser and name was successful.
+     * Return whether the banning of a user with currentUser and name was successful.
      * Bans the user with name if appropriate.
      *
      * @param currentUser the user that is currently logged in
@@ -86,18 +92,21 @@ public class AdminHandler extends UserActionHandler {
      * @return whether the banning of a user using currentUser and name was successful
      */
     public boolean banUser(User currentUser, String name) {
-        ArrayList<User> all_users = um.getAllUsers();
+
+        // Iterates through the list to see if there is a user with matching name
         for (User user : all_users) {
             if (am.validateUserName(user, name)) {
-                if (am.validateUserName(currentUser, name) || (user instanceof AdminUser)) {
-                    return true;
-                } else {
-                    am.banUser(user);
+
+                // Check if the user is the current user or if the user is an admin user
+                if (am.validateUserName(currentUser, name) || (am.getRole(user))) {
                     return false;
+                } else if (!(am.validateBanStatus(user))) { // Check if the user is unbanned
+                    am.banUser(user);
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -108,9 +117,12 @@ public class AdminHandler extends UserActionHandler {
      * @return whether the unbanning process was successful
      */
     public boolean unBanUser(String name) {
-        ArrayList<User> all_users = um.getAllUsers();
+
+        // Iterates through the list to see if a user with name exist in the database
         for (User user : all_users) {
             if (am.validateUserName(user, name)) {
+
+                // Check if the user is already banned
                 if (am.validateBanStatus(user)) {
                     am.unbanUser(user);
                     return true;
