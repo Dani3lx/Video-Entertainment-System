@@ -13,6 +13,15 @@ import java.util.*;
 import java.lang.*;
 
 public class VideoTest {
+    private static final VideoManager VM = new VideoManager();
+
+    @BeforeClass
+    public static void setUp() {
+        ArrayList<String> cates = new ArrayList<>();
+        cates.add("humour");
+        VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
+    }
+
     @Test
     public void VidGetterTest() {
         Video v1 = new Video("Akmar", "Top NBA Highlights", "These are the top NBA highlights of 2022",
@@ -45,55 +54,37 @@ public class VideoTest {
 
     @Test
     public void deleteVideoTest() {
-        VideoManager VM = new VideoManager();
-        ArrayList<String> cates = new ArrayList<>();
-        cates.add("humour");
-        VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
+
         assertTrue(VM.deleteVideo(VM.getByName("hello").get(0)));
     }
 
     @Test
     public void getByIDTest() throws Exception {
-        VideoManager VM = new VideoManager();
-        ArrayList<String> cates = new ArrayList<>();
-        cates.add("humour");
-        VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
+
         assertEquals(VM.getVids().get(0), VM.getByUniqueID(VM.getVids().get(0).getUniqueID()));
     }
 
     @Test
     public void getByUploaderTest() {
-        VideoManager VM = new VideoManager();
-        ArrayList<String> cates = new ArrayList<>();
-        cates.add("humour");
-        VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
+
         assertEquals(VM.getVids(), VM.getByUploader(VM.getVids().get(0).getUploader()));
     }
 
     @Test
     public void getByNameTest() {
-        VideoManager VM = new VideoManager();
-        ArrayList<String> cates = new ArrayList<>();
-        cates.add("humour");
-        VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
+
         assertEquals(VM.getVids(), VM.getByName(VM.getVids().get(0).getName()));
     }
 
     @Test
     public void getByCategoryTest() {
-        VideoManager VM = new VideoManager();
-        ArrayList<String> cates = new ArrayList<>();
-        cates.add("humour");
-        VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
+
         assertEquals(VM.getVids(), VM.getByCategory(VM.getVids().get(0).getCategories()));
     }
 
     @Test
     public void getVidNamesTest() {
-        VideoManager VM = new VideoManager();
-        ArrayList<String> cates = new ArrayList<>();
-        cates.add("humour");
-        VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
+
         ArrayList<String> names = new ArrayList<>(List.of("hello"));
         assertEquals(names, VM.getVideoNames(VM.getVids()));
     }
