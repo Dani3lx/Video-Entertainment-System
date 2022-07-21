@@ -46,6 +46,10 @@ public class PlaylistMenu {
      * Need to create way to #todo select and view playlist (not just get uniqueID)
      * */
 
+
+
+
+
     public void playlistBrowseMenu(User user){
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n1 - Search Playlist by name \n2 - Create New Playlist \n3 - Display All Playlists \n4 - Return");
@@ -55,36 +59,37 @@ public class PlaylistMenu {
                 menuPresenter.displayRequest("Enter the name of the playlist: ");
                 plname = sc.nextLine();
                 Playlist pl = pma.SearchPlaylist(pmm,user,plname);
-                if(Objects.isNull(pl)){ //todo helper function
-                    menuPresenter.displayAlert("No playlists can be found with that name, try again");
-                    menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
-                }
+                checkPlaylist(pl,user,menuPresenter,menuDisplayer,userActionHandler,"No playlists can be found with that name, try again");
                 playlistManageMenu(user,pl);
                 break;
             case 2:
                 menuPresenter.displayRequest("Enter the name of the playlist you want to create: ");
                 plname = sc.nextLine();
                 pl = pma.CreateNewPlaylist(user,plname);
-                if(Objects.isNull(pl)){ //todo helper function
-                    menuPresenter.displayAlert("Playlist Already Exists");
-                    menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
-                }
-                else {
-                    menuPresenter.displayAlert("Successfully created: " + pl.getPlaylistName());
-                    playlistManageMenu(user, pl);
-                }
+                checkPlaylist(pl,user,menuPresenter,menuDisplayer,userActionHandler,"Playlist Already Exists");
+                menuPresenter.displayAlert("Successfully created: " + pl.getPlaylistName());
+                playlistManageMenu(user, pl);
                 break;
             case 3:
                 ArrayList<Playlist> pl_list = pmm.getPlaylists();
-                pma.listPLaylistNames(pl_list);
-                menuPresenter.displayAlert("Choose playlist based on number: ");
-                int i = sc.nextInt();
-                pl = pmm.getPlaylists().get(i);
-                playlistManageMenu(user, pl);
+                pma.listPLaylistNames(pl_list); //todo give return option
+                int sub_option = menuDisplayer.getUserActionChoice("Do you want to "+"\n1 - Choose Playlist from list"+
+                        "\n2 - Return to user menu");
+                switch (sub_option){
+                    case 1:
+                        menuPresenter.displayAlert("Choose playlist based on number: ");
+                        int i = sc.nextInt();
+                        pl = pmm.getPlaylists().get(i);
+                        playlistManageMenu(user, pl);
+                        break;
+                    case 2:
+                        menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));
+                        break;
+                }
                 break;
             case 4:
                 menuDisplayer.callMenu(user,userActionHandler.isAdmin(user));
-                break; //todo
+                break;
         }
     }
 
@@ -209,6 +214,12 @@ public class PlaylistMenu {
                     break;
 
             }
+        }
+    }
+    public void checkPlaylist(Playlist pl,User user, MenuPresenter mp, MenuDisplayer md, UserActionHandler ua,String errorMsg){
+        if(Objects.isNull(pl)){
+            mp.displayAlert(errorMsg);
+            md.callMenu(user,ua.isAdmin(user));
         }
     }
 }
