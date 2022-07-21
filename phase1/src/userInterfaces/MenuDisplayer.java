@@ -153,9 +153,9 @@ public class MenuDisplayer {
                 menuPresenter.displayUsers(false);
                 menuPresenter.displayRequest("Please enter the name of the user that you wish to ban");
                 if (adminHandler.banUser(user, sc.nextLine())) {
-                    menuPresenter.displayError("The ban operation was unsuccessful");
+                    menuPresenter.displayError("The ban operation was successful");
                 } else {
-                    menuPresenter.displayAlert("The ban operation was successful");
+                    menuPresenter.displayAlert("The ban operation was unsuccessful");
                 }
                 adminMenu(user);
                 break;
