@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * This class is responsible for performing all direct interactions with the Playlist entity class.
- * @author Benedek Balla,
+ * @author Benedek Balla, ...
  */
 public class PlaylistManager {
     private ArrayList<Playlist> playlists;
