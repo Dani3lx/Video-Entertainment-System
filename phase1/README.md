@@ -14,7 +14,15 @@ Group 249 - Akmar, Wing, Daniel, Benedek, Nicholas, Kate
     * For admin user the login credentials are:
         * **Username:** admin
         * **Password:** admin
-4. There will be separate menus for admin and non-admin where you can change password and check previous login history
+4. There will be separate menus for admin and non-admin
+   * Non-admin user menu gives the user the option to:
+     * Change their own password
+     * Check their own login history
+     * Log out of their account
+     * Browse videos by name, categories, and uploader
+     * View all videos uploaded by themselves
+     * Upload/delete/edit their own videos
+     * Created/display playlists and browse playlists by name
 5. When you log out, you will be returned to the login menu 
     * **You Must Exit Program by inputting 3 in order for the session history to be saved**
 
