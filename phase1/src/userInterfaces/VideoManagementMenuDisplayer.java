@@ -55,8 +55,7 @@ public class VideoManagementMenuDisplayer {
      */
     protected void videoBrowseMenu(User user) {
         int result = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Browse by name \n 2 - Browse by categories \n 3 - Browse by uploader " +
-                "\n 4 - View all videos uploaded by " + user.getUserName() + "\n 5 - Return");
+                "\n 1 - Browse by name \n 2 - Browse by categories \n 3 - Browse by uploader \n 4 - Return");
 
         ArrayList<Video> videos;
         switch (result) {
@@ -84,9 +83,6 @@ public class VideoManagementMenuDisplayer {
                 viewVideo(videos, user);
                 break;
             case 4:
-                menuPresenter.displayVideos(user);
-                break;
-            case 5:
                 menuDisplayer.callMenu(user);
                 break;
             default:
@@ -168,14 +164,17 @@ public class VideoManagementMenuDisplayer {
     public void videoActionMenu(User user, NonAdminHandler nonAdminHandler) {
 
         int result = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Upload a video " +
-                "\n 2 - Delete a video \n 3 - Edit the title of a video " +
-                "\n 4 - Edit the categories of a video \n 5 - Edit the description of a video" +
-                "\n 6 - Return");
+                "\n 1 - View all the videos uploaded by " + user.getUserName() + " \n 2 - Upload a video " +
+                "\n 3 - Delete a video \n 4 - Edit the title of a video " +
+                "\n 5 - Edit the categories of a video \n 6 - Edit the description of a video" +
+                "\n 7 - Return");
         String uniqueID;
 
         switch (result) {
             case 1:
+                menuPresenter.displayVideos(user);
+                break;
+            case 2:
                 menuPresenter.displayRequest("Enter video title: ");
                 String title = sc.nextLine();
                 menuPresenter.displayRequest("Enter video description (optional): ");
@@ -187,7 +186,7 @@ public class VideoManagementMenuDisplayer {
                 nonAdminHandler.uploadVideo(user, title, description, categories, vidlink);
                 menuPresenter.displayAlert("Upload successful");
                 break;
-            case 2:
+            case 3:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to be deleted: ");
                 uniqueID = sc.nextLine();
                 if (nonAdminHandler.deleteVideo(user, uniqueID)) {
@@ -196,28 +195,28 @@ public class VideoManagementMenuDisplayer {
                     menuPresenter.displayError("Delete unsuccessful");
                 }
                 break;
-            case 3:
+            case 4:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
                 uniqueID = sc.nextLine();
                 menuPresenter.displayRequest("Enter new title: ");
                 String newTitle = sc.nextLine();
                 nonAdminHandler.editTitle(user, uniqueID, newTitle);
                 break;
-            case 4:
+            case 5:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
                 uniqueID = sc.nextLine();
                 menuPresenter.displayRequest("Enter new categories seperated by commas: ");
                 ArrayList<String> newCate = new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
                 nonAdminHandler.editCategories(user, uniqueID, newCate);
                 break;
-            case 5:
+            case 6:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
                 uniqueID = sc.nextLine();
                 menuPresenter.displayRequest("Enter new description: ");
                 String newDes = sc.nextLine();
                 nonAdminHandler.editDescription(user, uniqueID, newDes);
                 break;
-            case 6:
+            case 7:
                 menuDisplayer.callMenu(user);
             default:
                 menuPresenter.displayError("Invalid input, try again");
