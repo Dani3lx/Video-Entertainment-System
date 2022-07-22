@@ -183,8 +183,13 @@ public class VideoManagementMenuDisplayer {
                 ArrayList<String> categories = new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
                 menuPresenter.displayRequest("Enter video path: ");
                 String vidlink = sc.nextLine();
-                nonAdminHandler.uploadVideo(user, title, description, categories, vidlink);
-                menuPresenter.displayAlert("Upload successful");
+                Boolean upload = nonAdminHandler.uploadVideo(user, title, description, categories, vidlink);
+                if (upload){
+                    menuPresenter.displayAlert("Upload successful");
+                } else {
+                    menuPresenter.displayAlert("Upload unsuccessful, title or video path cannot be blank");
+                }
+
                 break;
             case 3:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to be deleted: ");

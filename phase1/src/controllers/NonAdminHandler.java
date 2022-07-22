@@ -38,16 +38,15 @@ public class NonAdminHandler extends UserActionHandler {
      * @param categories  the categories of the video
      * @param vidLink     the video link
      */
-    public void uploadVideo(User currentUser, String title, String description, ArrayList<String> categories, String vidLink) {
-        if (description.equals("") && categories.isEmpty()) {
-            nm.uploadVideo(currentUser, title, vidLink);
-        } else if (description.equals("")) {
-            nm.uploadVideo(currentUser, title, categories, vidLink);
-        } else if (categories.isEmpty()) {
-            nm.uploadVideo(currentUser, title, description, vidLink);
+    public boolean uploadVideo(User currentUser, String title, String description, ArrayList<String> categories, String vidLink) {
+        if (title.equals("") || vidLink.equals("")){
+            return false;
+        } else if (categories.isEmpty()){
+            nm.uploadVideo(currentUser, title, description, new ArrayList<>(), vidLink);
         } else {
             nm.uploadVideo(currentUser, title, description, categories, vidLink);
         }
+        return true;
     }
 
     /**
