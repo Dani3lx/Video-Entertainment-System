@@ -4,6 +4,7 @@ import entities.Playlist;
 import entities.User;
 import entities.Video;
 import usecase.PlaylistManager;
+import usecase.UserManager;
 import usecase.VideoManager;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class PlaylistMenuActions {
 
     private PlaylistManager pm;
+    private UserManager um;
     private final VideoManager vm;
 
 
@@ -27,12 +29,14 @@ public class PlaylistMenuActions {
 
 
     public Playlist CreateNewPlaylist(User user, String plname) {
-        String user_name = user.getUserName(); // dependency?
+        String user_name = um.getUserName(user);
         Playlist new_playlist = new Playlist(plname, user_name);
         if (pm.getPlaylists().contains(new_playlist)) {
+            return null;
+        } else {
             pm.addPlaylist(new_playlist);
             return new_playlist;
-        } else return null;
+        }
     }
 
     public Boolean AddDeleteFromPlaylist(String Vidname,User user, Playlist pl, boolean Add) {
