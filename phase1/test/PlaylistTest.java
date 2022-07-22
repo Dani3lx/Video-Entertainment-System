@@ -1,3 +1,4 @@
+import entities.NonAdminUser;
 import entities.Playlist;
 import entities.Video;
 import org.junit.Test;
@@ -56,18 +57,20 @@ public class PlaylistTest {
 
     }
 
-    /*@Test
-    todo user needs to have made the playlist to delete vids from it
+    @Test
     public void deleteFromPlaylistTest() {
-
+        NonAdminUser u1 = new NonAdminUser("k","123");
+        ArrayList<String> cates2 = new ArrayList<>(List.of("fun"));
+        ArrayList<String> ratings2 = new ArrayList<>(Arrays.asList("2", "0"));
+        Video v2 = new Video("t", "rockmusic", "amazing music", cates2, "url", "2", ratings2, "today");
 
         assertEquals(3, play.getUniqueIDs().size());
 
-        assertTrue(PM.deleteFromPlaylist(play, play.getUniqueIDs().get(0)));
+        assertTrue(PM.deleteFromPlaylist(u1,play, v2));
         assertEquals(2, play.getUniqueIDs().size());
 
 
-    }*/
+    }
 
 
     @Test
