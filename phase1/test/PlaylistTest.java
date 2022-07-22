@@ -19,7 +19,6 @@ public class PlaylistTest {
     private static final Playlist play_dup = new Playlist("Music1", "k1");
     private static final VideoManager VM = new VideoManager();
 
-
     @BeforeClass
     public static void setUp() {
         PM.addPlaylist(play);
@@ -40,10 +39,8 @@ public class PlaylistTest {
         PM.addToPlaylist(play, v1);
         PM.addToPlaylist(play, v3);
 
-
         PM.addToPlaylist(play_dup, v1);
         PM.addToPlaylist(play_dup, v3);
-
     }
 
     @Test
@@ -82,8 +79,12 @@ public class PlaylistTest {
 
     @Test
     public void reorderPlaylistByNameTest() {
-
-        assertTrue(play_dup.equals(PM.reorderPlaylistByName(play)));
+        Playlist result1 = PM.getPlaylistByName("Music");
+        Playlist expect1 = new Playlist( "Music", 0 ,  new ArrayList<>(Arrays.asList("2", "1", "3")),"k");
+        assertTrue(result1.equals(expect1));
+        Playlist result2 = PM.reorderPlaylistByName(play);
+        Playlist expect2 = new Playlist( "Music", 0 ,  new ArrayList<>(Arrays.asList("1", "2", "3")),"k");
+        assertTrue(result2.equals(expect2));
     }
 
 
