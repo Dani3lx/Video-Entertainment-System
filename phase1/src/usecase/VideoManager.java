@@ -137,5 +137,8 @@ public class VideoManager {
 
         return names;
     }
+    public String getVidName(Video vid){
+        return vid.getName();
+    }
 
 }

@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 public class PlaylistMenuActions {
 
-    PlaylistManager pm;
-    VideoManager vm;
+    private PlaylistManager pm;
+    private final VideoManager vm;
+
 
     public PlaylistMenuActions(PlaylistManager pm, VideoManager vm){
         this.pm = pm;
@@ -23,7 +24,6 @@ public class PlaylistMenuActions {
         return pl;
     }
 
-    //todo move to a presenter
 
 
     public Playlist CreateNewPlaylist(User user, String plname) {
@@ -36,8 +36,18 @@ public class PlaylistMenuActions {
     }
 
     public Boolean AddDeleteFromPlaylist(String Vidname,User user, Playlist pl, boolean Add) {
-        //todo need to turn this to controller -> make use cases with getters
-        Video vid = vm.getByUniqueID(Vidname); //todo think we need to extend this to video name
+        Video vid = vm.getByUniqueID(Vidname);
+        Boolean result;
+        if (Add == true) {
+            result = pm.addToPlaylist(pl,vid);
+            return result;
+        } else {
+            result = pm.deleteFromPlaylist(user,pl, vid);
+            return result;
+        }
+    }
+
+    public Boolean AddDeleteFromPlaylist(Video vid,User user, Playlist pl, boolean Add) {
         Boolean result;
         if (Add == true) {
             result = pm.addToPlaylist(pl,vid);

@@ -87,7 +87,7 @@ public class PlaylistMenu {
                 }
                 break;
             case 4:
-                menuDisplayer.callMenu(user);//todo need help with this
+                menuDisplayer.callMenu(user);
                 break;
         }
     }
@@ -189,7 +189,7 @@ public class PlaylistMenu {
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Reorder Playlist Alphabetically \n 2 - Reorder Playlist by Video Rating \n 3 - Shuffle Playlist  \n 4 -  Return");
 
-        if (user.getUserName().equals(pl.getUserName())) {
+        if (um.getUserName(user).equals(pmm.getPlName(pl))) {
             menuPresenter.displayError("You do not have permission to change the order");
             playlistManageMenu(user, pl);
         } else {
@@ -197,15 +197,18 @@ public class PlaylistMenu {
             switch (option) {
                 case 1:
                     pmm.reorderPlaylistByName(pl);
-                    menuPresenter.displayAlert("You have successfully ordered " + pl.getPlaylistName() + " by alphabetical order!");
+                    menuPresenter.displayAlert("You have successfully ordered " + pmm.getPlName(pl) + " by alphabetical order!");
+                    ReorderPlaylist(user,pl);
                     break;
                 case 2:
                     pmm.reorderPlaylistByRating(pl, vmm);
-                    menuPresenter.displayAlert("You have successfully ordered " + pl.getPlaylistName() + " by descending ratings order!");
+                    menuPresenter.displayAlert("You have successfully ordered " + pmm.getPlName(pl) + " by descending ratings order!");
+                    ReorderPlaylist(user,pl);
                     break;
                 case 3:
                     pmm.shufflePlaylist(pl, vmm);
-                    menuPresenter.displayAlert("You have successfully shuffled " + pl.getPlaylistName());
+                    menuPresenter.displayAlert("You have successfully shuffled " + pmm.getPlName(pl));
+                    ReorderPlaylist(user,pl);
                     break;
                 case 4:
                     playlistManageMenu(user, pl);
@@ -221,7 +224,6 @@ public class PlaylistMenu {
             playlistBrowseMenu(user);
         }
     }
-
 
 
 

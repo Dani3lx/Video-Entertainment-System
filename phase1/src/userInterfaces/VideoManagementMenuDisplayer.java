@@ -1,7 +1,9 @@
 package userInterfaces;
 
 import controllers.NonAdminHandler;
+import controllers.PlaylistMenuActions;
 import controllers.UserActionHandler;
+import entities.Playlist;
 import entities.User;
 import entities.Video;
 import presenters.MenuPresenter;
@@ -22,7 +24,7 @@ import java.util.Scanner;
  */
 public class VideoManagementMenuDisplayer {
     private final VideoBrowsePresenter vp;
-    private final PlaylistManager pmm;
+    private final PlaylistMenuActions pma;
     private final MenuPresenter menuPresenter;
     private final MenuDisplayer menuDisplayer;
     private final UserActionHandler userActionHandler;
@@ -42,7 +44,7 @@ public class VideoManagementMenuDisplayer {
         this.menuPresenter = menuPresenter;
         this.menuDisplayer = menuDisplayer;
         this.userActionHandler = userActionHandler;
-        this.pmm = pmm;
+        this.pma = new PlaylistMenuActions(pmm,vm);
         this.vp = new VideoBrowsePresenter(vm);
     }
 
@@ -140,7 +142,8 @@ public class VideoManagementMenuDisplayer {
             case 3:
                 menuPresenter.displayRequest("Please enter a playlist name");
                 String name = sc.nextLine();
-                pmm.addToPlaylist(pmm.getPlaylistByName(name), video); // todo fix this
+                Playlist pl = pma.SearchPlaylist(user,name);
+                pma.AddDeleteFromPlaylist(video,user,pl,true);
                 break;
             case 4:
                 menuDisplayer.callMenu(user);
