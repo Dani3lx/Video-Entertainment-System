@@ -42,12 +42,12 @@ public class MenuDisplayer {
         this.um = um;
         this.vm = vm;
         this.pm = pm;
-        pma = new PlaylistMenuActions(pm,vm);
+        pma = new PlaylistMenuActions(pm, vm);
         userActionHandler = new UserActionHandler(um);
         dataManager = new DataManager(um, vm, pm);
         menuPresenter = new MenuPresenter(um, vm);
         vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm, userActionHandler, pm);
-        pmd = new PlaylistMenu(menuPresenter,vm,pma,pm,um,userActionHandler, this);
+        pmd = new PlaylistMenu(menuPresenter, vm, pma, pm, um, userActionHandler, this);
     }
 
     /**
@@ -119,6 +119,7 @@ public class MenuDisplayer {
         }
     }
     // Trying to push
+
     /**
      * This menu navigates the user to perform actions done by admin users
      *
@@ -200,7 +201,7 @@ public class MenuDisplayer {
                 break;
             case 2:
                 menuPresenter.displayAlert("Checking history:");
-                menuPresenter.displayLoginHistory(user, userActionHandler);
+                menuPresenter.displayLoginHistory(user);
                 callMenu(user, isAdmin);
                 break;
             case 3:
@@ -266,7 +267,7 @@ public class MenuDisplayer {
         return new String[]{username, password};
     }
 
-    String[] getUploadVidInfo(){
+    String[] getUploadVidInfo() {
         menuPresenter.displayRequest("Please enter title of video: ");
         String title = sc.nextLine();
         menuPresenter.displayRequest("Please enter description of video: ");
@@ -275,20 +276,22 @@ public class MenuDisplayer {
         int numCates = sc.nextInt();
         ArrayList<String> cates = new ArrayList<>();
         menuPresenter.displayRequest("Please enter all categories of video: ");
-        for (int i=0; i<numCates;i++){
+        for (int i = 0; i < numCates; i++) {
             cates.add(sc.nextLine());
         }
         menuPresenter.displayRequest("Please enter video link: ");
         String vidLink = sc.nextLine();
         return new String[]{title, description, vidLink};
     }
-    ArrayList<String> getCates(){
+
+    ArrayList<String> getCates() {
         menuPresenter.displayRequest("Please enter number of categories you wish to input: ");
         int numCates = sc.nextInt();
         ArrayList<String> cates = new ArrayList<>();
         menuPresenter.displayRequest("Please enter all categories of video: ");
-        for (int i=0; i<numCates;i++){
+        for (int i = 0; i < numCates; i++) {
             cates.add(sc.nextLine());
-        }return cates;
+        }
+        return cates;
     }
 }

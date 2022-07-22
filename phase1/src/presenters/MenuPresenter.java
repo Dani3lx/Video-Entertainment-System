@@ -1,6 +1,5 @@
 package presenters;
 
-import controllers.UserActionHandler;
 import entities.User;
 import entities.Video;
 import usecase.AdminManager;
@@ -16,11 +15,12 @@ import java.util.List;
  *
  * @author Daniel Xu
  * @version 1.0
- * @since 2022-07-15
+ * @since 2022-07-21
  */
 public class MenuPresenter {
     private final UserManager um;
-    private final VideoManager vm;
+    private AdminManager am;
+    private NonAdminManager nm;
 
     /**
      * Constructs a menu presenter with a record of all the users and videos.
@@ -30,17 +30,17 @@ public class MenuPresenter {
      */
     public MenuPresenter(UserManager um, VideoManager vm) {
         this.um = um;
-        this.vm = vm;
+        this.am = new AdminManager(um, vm);
+        this.nm = new NonAdminManager(um, vm);
     }
 
     /**
      * Displays the user's login history.
      *
-     * @param user              the target user
-     * @param userActionHandler the handler that handle user actions
+     * @param user the target user
      */
-    public void displayLoginHistory(User user, UserActionHandler userActionHandler) {
-        System.out.println(userActionHandler.getHistory(user));
+    public void displayLoginHistory(User user) {
+        System.out.println(um.getHistory(user));
         System.out.println("\n");
     }
 
@@ -50,7 +50,7 @@ public class MenuPresenter {
      * @param banStatus whether to display banned or unbanned users
      */
     public void displayUsers(boolean banStatus) {
-        AdminManager am = new AdminManager(um, vm);
+
         if (banStatus) {
             displayAlert("Here are all the banned users");
         } else {
@@ -64,7 +64,6 @@ public class MenuPresenter {
      */
     public void displayUsers() {
         displayAlert("Here are all the users");
-        AdminManager am = new AdminManager(um, vm);
         displayList(am.returnUsers(um.getAllUsers()));
     }
 
@@ -72,10 +71,8 @@ public class MenuPresenter {
      * Displays all the videos uploaded by user.
      */
     public void displayVideos(User user, ArrayList<Video> vids) {
-        displayAlert("Here are all the videos uploaded by " + user.getUserName());
-        NonAdminManager nam = new NonAdminManager(um, vm);
-        displayList(nam.displayAllVideos(user, vids));
-
+        displayAlert("Here are all the videos uploaded by " + um.getUserName(user));
+        displayList(nm.displayAllVideos(user, vids));
     }
 
     /**

@@ -6,7 +6,10 @@ import java.util.*;
 
 /**
  * This class is responsible for performing all direct interactions with the User entity classes.
- * @author Benedek Balla, ...
+ *
+ * @author Benedek Balla, Daniel Xu, ...
+ * @version 1.0
+ * @since 2022-07-15
  */
 public class UserManager {
     VideoManager vm;
@@ -15,7 +18,6 @@ public class UserManager {
     public UserManager(VideoManager vm) {
         this.vm = vm;
         users = new ArrayList<>();
-
     }
 
     private ArrayList<User> users;
@@ -171,7 +173,7 @@ public class UserManager {
         }
     }
 
-    public String getUserName(User user){
+    public String getUserName(User user) {
         return user.getUserName();
     }
 }

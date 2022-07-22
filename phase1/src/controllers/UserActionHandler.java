@@ -64,16 +64,6 @@ public class UserActionHandler {
     }
 
     /**
-     * Returns the user's login history.
-     *
-     * @param user the targeted user
-     * @return the user's login history
-     */
-    public List<String> getHistory(User user) {
-        return um.getHistory(user);
-    }
-
-    /**
      * Logs in and return a user.
      *
      * @param userName the username
@@ -130,14 +120,20 @@ public class UserActionHandler {
     /**
      * Changes the user's password
      *
-     * @param user the targeted user
+     * @param user        the targeted user
      * @param newPassword the new password
      */
     public void changePassword(User user, String newPassword) {
         um.changePassword(user, newPassword);
     }
 
-    public void rateVideo(Video v, boolean like){
+    /**
+     * Likes or dislikes the video
+     *
+     * @param v    the video being rated
+     * @param like whether to like or dislike
+     */
+    public void rateVideo(Video v, boolean like) {
         um.rateVideo(v, like);
     }
 }
