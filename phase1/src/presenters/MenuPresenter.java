@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Responsible for formatting and outputting data to the user
  *
- * @author Daniel Xu
+ * @author Daniel Xu, Wing Zou
  * @version 1.0
  * @since 2022-07-21
  */

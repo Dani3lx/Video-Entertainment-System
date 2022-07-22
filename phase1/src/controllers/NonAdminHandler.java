@@ -8,9 +8,9 @@ import usecase.VideoManager;
 import java.util.ArrayList;
 
 /**
- * Responsible for handling non admin users' actions.
+ * Responsible for handling non admin users' choices.
  *
- * @author Daniel Xu
+ * @author Daniel Xu, Wing Zou
  * @version 1.0
  * @since 2022-07-15
  */

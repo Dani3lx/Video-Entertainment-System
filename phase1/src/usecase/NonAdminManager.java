@@ -4,7 +4,13 @@ import entities.User;
 import entities.Video;
 
 import java.util.ArrayList;
-
+/**
+ * Responsible for specific actions that only pertain to non-admin users.
+ *
+ * @author Wing Zou
+ * @version 1.0
+ * @since 2022-07-15
+ */
 public class NonAdminManager extends UserManager {
     private final VideoEditor ve;
 
