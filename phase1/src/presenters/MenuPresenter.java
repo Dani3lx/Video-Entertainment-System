@@ -21,6 +21,7 @@ public class MenuPresenter {
     private final UserManager um;
     private final AdminManager am;
     private final NonAdminManager nm;
+    private final VideoManager vm;
 
     /**
      * Constructs a menu presenter with a record of all the users and videos.
@@ -30,6 +31,7 @@ public class MenuPresenter {
      */
     public MenuPresenter(UserManager um, VideoManager vm) {
         this.um = um;
+        this.vm = vm;
         this.am = new AdminManager(um, vm);
         this.nm = new NonAdminManager(um, vm);
     }
@@ -70,9 +72,9 @@ public class MenuPresenter {
     /**
      * Displays all the videos uploaded by user.
      */
-    public void displayVideos(User user, ArrayList<Video> vids) {
+    public void displayVideos(User user) {
         displayAlert("Here are all the videos uploaded by " + um.getUserName(user));
-        displayList(nm.displayAllVideos(user, vids));
+        displayList(nm.displayAllVideos(user, vm.getVids()));
     }
 
     /**

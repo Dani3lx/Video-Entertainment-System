@@ -8,7 +8,6 @@ import presenters.MenuPresenter;
 import presenters.VideoBrowsePresenter;
 import usecase.PlaylistManager;
 import usecase.VideoManager;
-import userInterfaces.MenuDisplayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,27 +21,29 @@ import java.util.Scanner;
  * @since 2022-07-15
  */
 public class VideoManagementMenuDisplayer {
-    VideoBrowsePresenter vp;
-    VideoManager vmm; // May need to add the VM usage into VBP
-    PlaylistManager pmm;
-    MenuPresenter menuPresenter;
-    MenuDisplayer menuDisplayer;
-    UserActionHandler userActionHandler;
-    Scanner sc = new Scanner(System.in);
+    private final VideoBrowsePresenter vp;
+    private final PlaylistManager pmm;
+    private final MenuPresenter menuPresenter;
+    private final MenuDisplayer menuDisplayer;
+    private final UserActionHandler userActionHandler;
+    private final Scanner sc = new Scanner(System.in);
 
     /**
      * Constructs a userInterfaces.VideoManagementMenuDisplayer
      *
-     * @param menuPresenter the Presenter class that format and displays information to the user
-     * @param menuDisplayer the main menu that this menu will interact with
+     * @param menuPresenter     the Presenter class that format and displays information to the user
+     * @param menuDisplayer     the main menu that this menu will interact with
+     * @param vm                the video manager that manages videos
+     * @param userActionHandler the user action handler that handles user actions
+     * @param pmm               the playlist manager that manages playlists
      */
-    public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm, UserActionHandler userActionHandler, PlaylistManager pmm){
+    public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm,
+                                        UserActionHandler userActionHandler, PlaylistManager pmm) {
         this.menuPresenter = menuPresenter;
         this.menuDisplayer = menuDisplayer;
         this.userActionHandler = userActionHandler;
-        this.vmm = vm;
         this.pmm = pmm;
-        vp = new VideoBrowsePresenter(vm);
+        this.vp = new VideoBrowsePresenter(vm);
     }
 
     /**
@@ -50,7 +51,7 @@ public class VideoManagementMenuDisplayer {
      *
      * @param user the current user using the menu
      */
-    public void videoBrowseMenu(User user) {
+    protected void videoBrowseMenu(User user) {
         int result = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Browse by name \n 2 - Browse by categories \n 3 - Browse by uploader \n 4 - Return");
 
@@ -59,7 +60,6 @@ public class VideoManagementMenuDisplayer {
             case 1:
                 menuPresenter.displayRequest("Please enter the name of the video");
                 videos = userActionHandler.browseByName(sc.nextLine());
-                vp.listVideos(videos);
                 viewVideo(videos, user);
                 break;
             case 2:
@@ -73,20 +73,18 @@ public class VideoManagementMenuDisplayer {
                     categories.add(item);
                 }
                 videos = userActionHandler.browseByCategories(categories);
-                vp.listVideos(videos);
                 viewVideo(videos, user);
                 break;
             case 3:
                 menuPresenter.displayRequest("Please enter the name of the uploader");
                 videos = userActionHandler.browseByUploader(sc.nextLine());
-                vp.listVideos(videos);
                 viewVideo(videos, user);
                 break;
             case 4:
                 menuDisplayer.callMenu(user);
                 break;
             default:
-                menuPresenter.displayError("Invalid input, try again");
+                menuPresenter.displayError("Invalid choice, try again");
                 videoBrowseMenu(user);
         }
     }
@@ -95,12 +93,13 @@ public class VideoManagementMenuDisplayer {
      * This method is used to choose and display the video that the user selects
      *
      * @param videos list of videos
-     * @param user the current user
+     * @param user   the current user
      */
-    public void viewVideo(ArrayList<Video> videos, User user)  {
+    protected void viewVideo(ArrayList<Video> videos, User user) {
+        vp.listVideos(videos);
         if (videos.size() == 0) {
             menuPresenter.displayAlert("No video can be found, try again");
-            menuDisplayer.callMenu(user);
+            videoBrowseMenu(user);
         }
         Scanner sc = new Scanner(System.in);
         menuPresenter.displayRequest("Please enter a number to choose video you want to view");
@@ -109,23 +108,25 @@ public class VideoManagementMenuDisplayer {
             if (choice >= 0 && choice < videos.size()) {
                 vp.displayVideo(videos.get(choice));
                 userVideoInteraction(videos.get(choice), user);
+            } else {
+                menuPresenter.displayError("Please select a valid video");
+                viewVideo(videos, user);
             }
+        } else {
+            menuPresenter.displayError("Invalid input, try again");
+            viewVideo(videos, user);
         }
-        menuPresenter.displayError("Invalid input");
-        menuDisplayer.callMenu(user);
     }
 
     /**
      * This method is used for the user to interact with the video
      *
-     * Only use controller methods to do stuff here
-     *
      * @param video list of videos
-     * @param user the current user
+     * @param user  the current user
      */
-    public void userVideoInteraction(Video video, User user)  {
+    public void userVideoInteraction(Video video, User user) {
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Like the video \n 2 - Dislike the video \n 3 - Add to playlist");
+                "\n 1 - Like the video \n 2 - Dislike the video \n 3 - Add to playlist \n 4 - Return");
 
         switch (option) {
             case 1:
@@ -137,21 +138,23 @@ public class VideoManagementMenuDisplayer {
                 menuPresenter.displayAlert("You have disliked the video");
                 break;
             case 3:
-                // NEW
                 menuPresenter.displayRequest("Please enter a playlist name");
                 String name = sc.nextLine();
-                pmm.addToPlaylist(pmm.getPlaylistByName(name), video); // using entity directly
+                pmm.addToPlaylist(pmm.getPlaylistByName(name), video); // todo fix this
                 break;
+            case 4:
+                menuDisplayer.callMenu(user);
             default:
                 menuPresenter.displayError("Invalid input");
+                userVideoInteraction(video, user);
         }
-        menuDisplayer.callMenu(user);
+        userVideoInteraction(video, user);
     }
 
     /**
      * This menu navigates the user to perform actions on specific videos
      *
-     * @param user the current user using the menu
+     * @param user            the current user using the menu
      * @param nonAdminHandler controller that dictates what happens when a video action is performed
      */
 
@@ -165,7 +168,7 @@ public class VideoManagementMenuDisplayer {
 
         switch (result) {
             case 1:
-                menuPresenter.displayVideos(user, vmm.getVids());
+                menuPresenter.displayVideos(user);
                 break;
             case 2:
                 menuPresenter.displayRequest("Enter video title: ");
