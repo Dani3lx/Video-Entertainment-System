@@ -19,8 +19,8 @@ import java.util.List;
  */
 public class MenuPresenter {
     private final UserManager um;
-    private AdminManager am;
-    private NonAdminManager nm;
+    private final AdminManager am;
+    private final NonAdminManager nm;
 
     /**
      * Constructs a menu presenter with a record of all the users and videos.
@@ -122,7 +122,7 @@ public class MenuPresenter {
         }
     }
 
-    /**
+    /*
      * Formats the text for request.
      *
      * @param input the text to be formatted
@@ -134,7 +134,7 @@ public class MenuPresenter {
         return "\n" + input + "\n" + symbol.repeat(num) + "\n";
     }
 
-    /**
+    /*
      * Formats the text for menu option.
      *
      * @param input the text to be formatted
@@ -147,7 +147,7 @@ public class MenuPresenter {
         return decorator + "\n" + input + "\n" + decorator;
     }
 
-    /**
+    /*
      * Formats the text for alert.
      *
      * @param input the text to be formatted
@@ -159,7 +159,7 @@ public class MenuPresenter {
         return "\n" + symbol.repeat(num) + "\n" + input + "\n" + symbol.repeat(num) + "\n";
     }
 
-    /**
+    /*
      * Formats the text for error.
      *
      * @param input the text to be formatted

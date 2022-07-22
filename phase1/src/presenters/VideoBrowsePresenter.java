@@ -1,6 +1,5 @@
 package presenters;
 
-import entities.Playlist;
 import entities.Video;
 import usecase.VideoEditor;
 import usecase.VideoManager;
@@ -15,8 +14,8 @@ import java.util.ArrayList;
  * @since 2022-07-15
  */
 public class VideoBrowsePresenter {
-    VideoEditor ve;
-    VideoManager vm;
+    private final VideoEditor ve;
+    private final VideoManager vm;
 
     /**
      * Constructs a video browse presenter.
@@ -25,9 +24,8 @@ public class VideoBrowsePresenter {
      */
     public VideoBrowsePresenter(VideoManager vm) {
         this.vm = vm;
-        ve = new VideoEditor();
+        this.ve = new VideoEditor();
     }
-
 
     /**
      * Formats and displays list of videos to the user.
@@ -41,7 +39,6 @@ public class VideoBrowsePresenter {
             num++;
         }
     }
-
 
     /**
      * Displays the video to the user.
@@ -58,5 +55,4 @@ public class VideoBrowsePresenter {
         System.out.println("Likes : " + information[5]);
         System.out.println("Dislikes : " + information[6] + "\n");
     }
-
 }
