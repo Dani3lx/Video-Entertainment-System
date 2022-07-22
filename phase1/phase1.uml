@@ -1,84 +1,371 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>JAVA</ID>
-  <OriginalElement>C:/Users/landa/Documents/Kate/Uni/Courses/Year 1/Term 3/csc207/project/markus/phase1</OriginalElement>
+  <OriginalElement />
   <nodes>
-    <node x="530.0" y="785.0">Main</node>
-    <node x="29.0" y="785.0">VideoTest</node>
-    <node x="-27.75" y="-19.0">usecase.UserManager</node>
-    <node x="58.0" y="706.0">gateways.DataManager</node>
-    <node x="79.0" y="548.0">presenters.PlaylistPresenter</node>
-    <node x="470.0" y="706.0">usecase.VideoEditor</node>
-    <node x="-56.25" y="144.0">controllers.UserActionHandler</node>
-    <node x="-160.0" y="469.0">usecase.RandomComparator</node>
-    <node x="309.0" y="548.0">usecase.PlaylistManager</node>
-    <node x="280.0" y="228.0">entities.NonAdminUser</node>
-    <node x="416.0" y="390.0">presenters.VideoBrowsePresenter</node>
-    <node x="-160.0" y="228.0">controllers.NonAdminHandler</node>
-    <node x="66.0" y="627.0">presenters.MenuPresenter</node>
-    <node x="360.0" y="469.0">AdminManagerTest</node>
-    <node x="-160.0" y="390.0">usecase.VideoNameComparator</node>
-    <node x="210.0" y="785.0">phase2features.Ratings</node>
-    <node x="288.0" y="627.0">userInterfaces.MenuDisplayer</node>
-    <node x="-160.0" y="65.0">usecase.NonAdminManager</node>
-    <node x="372.0" y="785.0">entities.Playlist</node>
-    <node x="0.0" y="307.0">userInterfaces.VideoManagementMenuDisplayer</node>
-    <node x="412.25" y="144.0">entities.User</node>
-    <node x="365.0" y="307.0">usecase.VideoRatingComparator</node>
-    <node x="102.0" y="469.0">controllers.PlaylistMenuActions</node>
-    <node x="128.0" y="390.0">NonAdminManagerTest</node>
-    <node x="478.0" y="228.0">entities.AdminUser</node>
-    <node x="-160.0" y="627.0">VideoEditorTest</node>
-    <node x="-160.0" y="785.0">PlaylistTest</node>
-    <node x="64.0" y="228.0">controllers.AdminHandler</node>
-    <node x="72.0" y="65.0">usecase.AdminManager</node>
-    <node x="-160.0" y="706.0">usecase.VideoManager</node>
-    <node x="-160.0" y="548.0">UserManagerTest</node>
-    <node x="268.0" y="706.0">userInterfaces.PlaylistMenu</node>
-    <node x="-160.0" y="307.0">entities.Video</node>
+    <node x="799.107360616263" y="437.44611134887236">usecase.VideoManager</node>
+    <node x="1882.6626321313963" y="471.79069636961094">usecase.VideoEditor</node>
+    <node x="767.2593799262928" y="385.1966625408398">entities.AdminUser</node>
+    <node x="236.5142943181362" y="385.1966625408398">entities.NonAdminUser</node>
+    <node x="-426.1878151193639" y="1605.6508471443008">controllers.NonAdminHandler</node>
+    <node x="992.3784906685969" y="797.7057866629606">usecase.VideoNameComparator</node>
+    <node x="1652.7348638950348" y="963.877121280714">presenters.VideoBrowsePresenter</node>
+    <node x="1393.0879678430153" y="1206.3212450083547">userInterfaces.PlaylistMenu</node>
+    <node x="1896.1998233650063" y="778.0720056979183">usecase.VideoRatingComparator</node>
+    <node x="1849.1213517597191" y="-29.652418500059014">entities.Playlist</node>
+    <node x="1942.0494734309736" y="986.1313429672115">controllers.PlaylistMenuActions</node>
+    <node x="77.94715740925255" y="968.1088236710424">controllers.UserActionHandler</node>
+    <node x="1272.1550820263844" y="778.0720056979183">usecase.RandomComparator</node>
+    <node x="-342.78173140420716" y="979.1088236710425">usecase.NonAdminManager</node>
+    <node x="407.9111655949698" y="1304.3169568069786">userInterfaces.VideoManagementMenuDisplayer</node>
+    <node x="56.38355721434576" y="460.2267839180829">usecase.UserManager</node>
+    <node x="572.8659462898493" y="1057.0593731073438">controllers.AdminHandler</node>
+    <node x="2381.0950752099807" y="970.2986792596876">gateways.DataManager</node>
+    <node x="448.0415864475043" y="-53.850251620190704">entities.User</node>
+    <node x="1227.1073069646534" y="1038.3239218778149">presenters.PlaylistPresenter</node>
+    <node x="1024.9167097275542" y="1382.0448633800006">userInterfaces.MenuDisplayer</node>
+    <node x="346.3298321261075" y="1042.059735940156">usecase.AdminManager</node>
+    <node x="745.1595505613848" y="1661.1508471443008">Main</node>
+    <node x="942.346050079326" y="914.6269919887286">presenters.MenuPresenter</node>
+    <node x="1240.418222839431" y="-53.850251620190704">entities.Video</node>
+    <node x="2297.932220558803" y="417.15735711955915">usecase.PlaylistManager</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="controllers.NonAdminHandler" target="controllers.UserActionHandler" relationship="GENERALIZATION">
-      <point x="0.0" y="-17.0" />
-      <point x="-58.0" y="203.0" />
-      <point x="45.75" y="203.0" />
-      <point x="0.0" y="17.0" />
+    <edge source="userInterfaces.MenuDisplayer" target="presenters.MenuPresenter" relationship="TO_ONE">
+      <point x="-138.41670972755423" y="-192.49986338000053" />
+      <point x="1040.5" y="1361.0" />
+      <point x="1051.846" y="1361.0" />
+      <point x="-5.007932600165077E-5" y="203.50000801127135" />
+    </edge>
+    <edge source="userInterfaces.VideoManagementMenuDisplayer" target="presenters.MenuPresenter" relationship="TO_ONE">
+      <point x="153.99983440503013" y="4.3193021383558516E-5" />
+      <point x="898.0" y="1430.817" />
+      <point x="898.0" y="1361.0" />
+      <point x="1051.846" y="1361.0" />
+      <point x="-5.007932600165077E-5" y="203.50000801127135" />
+    </edge>
+    <edge source="userInterfaces.MenuDisplayer" target="userInterfaces.PlaylistMenu" relationship="TO_ONE">
+      <point x="154.0" y="-182.7238633800007" />
+      <point x="-188.5" y="14.999754991645204" />
+    </edge>
+    <edge source="userInterfaces.PlaylistMenu" target="userInterfaces.MenuDisplayer" relationship="TO_ONE">
+      <point x="-188.49996784301538" y="-2.450083547955728E-4" />
+      <point x="1350.0" y="1376.821" />
+      <point x="1350.0" y="1574.545" />
+      <point x="154.00029027244568" y="1.366199994663475E-4" />
     </edge>
     <edge source="controllers.AdminHandler" target="controllers.UserActionHandler" relationship="GENERALIZATION">
-      <point x="0.0" y="-17.0" />
-      <point x="149.5" y="203.0" />
-      <point x="45.75" y="203.0" />
-      <point x="0.0" y="17.0" />
+      <point x="44.54505371015068" y="82.49962689265612" />
+      <point x="748.411" y="1589.817" />
+      <point x="3.183" y="1589.817" />
+      <point x="3.183" y="1150.985" />
+      <point x="36.0" y="1150.985" />
+      <point x="36.0" y="1105.609" />
+      <point x="-176.00015740925255" y="1.7632895765018475E-4" />
+    </edge>
+    <edge source="controllers.UserActionHandler" target="usecase.UserManager" relationship="TO_ONE">
+      <point x="175.99984259074745" y="-66.04982367104242" />
+      <point x="913.0" y="1039.5590000000002" />
+      <point x="913.0" y="1260.609" />
+      <point x="60.447" y="1260.609" />
+      <point x="-188.43655721434575" y="214.49994489547646" />
     </edge>
     <edge source="entities.NonAdminUser" target="entities.User" relationship="GENERALIZATION">
-      <point x="0.0" y="-17.0" />
-      <point x="369.0" y="203.0" />
-      <point x="459.75" y="203.0" />
-      <point x="0.0" y="17.0" />
+      <point x="4.005971180731649E-4" y="-14.499662540839779" />
+      <point x="312.01469491525427" y="362.8918598649325" />
+      <point x="565.541220338983" y="362.8918598649325" />
+      <point x="-3.6610852134799643E-4" y="181.5003702642585" />
     </edge>
-    <edge source="usecase.AdminManager" target="usecase.UserManager" relationship="GENERALIZATION">
-      <point x="0.0" y="-17.0" />
-      <point x="161.5" y="40.0" />
-      <point x="53.75" y="40.0" />
-      <point x="0.0" y="17.0" />
+    <edge source="userInterfaces.MenuDisplayer" target="usecase.UserManager" relationship="TO_ONE">
+      <point x="-153.9997097275542" y="-105.0448633800006" />
+      <point x="913.0" y="1469.5" />
+      <point x="913.0" y="1260.609" />
+      <point x="60.447" y="1260.609" />
+      <point x="-188.43655721434575" y="214.49994489547646" />
     </edge>
-    <edge source="entities.AdminUser" target="entities.User" relationship="GENERALIZATION">
-      <point x="0.0" y="-17.0" />
-      <point x="550.5" y="203.0" />
-      <point x="459.75" y="203.0" />
-      <point x="0.0" y="17.0" />
+    <edge source="usecase.UserManager" target="usecase.VideoManager" relationship="TO_ONE">
+      <point x="192.50044278565426" y="51.6279448954765" />
+      <point x="974.878" y="726.3547288135594" />
+      <point x="-13.229360616262966" y="137.49988865112766" />
+    </edge>
+    <edge source="userInterfaces.PlaylistMenu" target="presenters.MenuPresenter" relationship="TO_ONE">
+      <point x="-188.49996784301538" y="-37.694245008354756" />
+      <point x="1234.607" y="1339.127" />
+      <point x="1234.607" y="1361.0" />
+      <point x="1051.846" y="1361.0" />
+      <point x="-5.007932600165077E-5" y="203.50000801127135" />
+    </edge>
+    <edge source="userInterfaces.PlaylistMenu" target="controllers.UserActionHandler" relationship="TO_ONE">
+      <point x="3.2156984616449336E-5" y="170.4997549916452" />
+      <point x="1581.588" y="1784.545" />
+      <point x="390.411" y="1784.545" />
+      <point x="390.411" y="1283.0" />
+      <point x="253.947" y="1283.0" />
+      <point x="-1.57409252551588E-4" y="137.50017632895754" />
+    </edge>
+    <edge source="userInterfaces.VideoManagementMenuDisplayer" target="controllers.PlaylistMenuActions" relationship="TO_ONE">
+      <point x="-30.00016559496987" y="126.50004319302138" />
+      <point x="531.911" y="1845.5" />
+      <point x="1949.549" y="1845.5" />
+      <point x="1949.549" y="1579.821" />
+      <point x="1842.0" y="1579.821" />
+      <point x="1842.0" y="1193.799" />
+      <point x="2144.549" y="1193.799" />
+      <point x="14.99952656902633" y="82.4996570327886" />
+    </edge>
+    <edge source="controllers.NonAdminHandler" target="usecase.NonAdminManager" relationship="TO_ONE">
+      <point x="-3.7132131399175705E-4" y="-82.49974544938595" />
+      <point x="-234.6881864406779" y="1192.4936065218935" />
+      <point x="-151.28140677966098" y="1192.4936065218935" />
+      <point x="3.246245461809849E-4" y="126.50035146848512" />
+    </edge>
+    <edge source="gateways.DataManager" target="usecase.PlaylistManager" relationship="TO_ONE">
+      <point x="-100.50007520998088" y="3.207403124179109E-4" />
+      <point x="2350.0" y="1085.799" />
+      <point x="2350.0" y="952.799" />
+      <point x="2472.4321141752966" y="952.799" />
+      <point x="-1.0638350613589864E-4" y="170.4998462702714" />
+    </edge>
+    <edge source="userInterfaces.MenuDisplayer" target="controllers.UserActionHandler" relationship="TO_ONE">
+      <point x="-153.9997097275542" y="0.27213661999940086" />
+      <point x="733.411" y="1574.817" />
+      <point x="733.411" y="1283.0" />
+      <point x="253.947" y="1283.0" />
+      <point x="-1.57409252551588E-4" y="137.50017632895754" />
+    </edge>
+    <edge source="userInterfaces.VideoManagementMenuDisplayer" target="presenters.VideoBrowsePresenter" relationship="TO_ONE">
+      <point x="-60.00016559496987" y="126.5" />
+      <point x="501.91099999999994" y="1890.5" />
+      <point x="-464.632" y="1890.5" />
+      <point x="-464.632" y="-83.10900000000001" />
+      <point x="1519.918222839431" y="-83.10900000000001" />
+      <point x="1519.918222839431" y="1020.823921877815" />
+      <point x="-112.5" y="-3.553199402899054" />
+    </edge>
+    <edge source="gateways.DataManager" target="usecase.UserManager" relationship="TO_ONE">
+      <point x="-7.520998087784392E-5" y="115.50032074031242" />
+      <point x="2481.595" y="1564.821" />
+      <point x="1365.417" y="1564.821" />
+      <point x="1365.417" y="1213.821" />
+      <point x="1206.0" y="1213.821" />
+      <point x="1206.0" y="1339.127" />
+      <point x="913.0" y="1339.127" />
+      <point x="913.0" y="1260.609" />
+      <point x="60.447" y="1260.609" />
+      <point x="-188.43655721434575" y="214.49994489547646" />
+    </edge>
+    <edge source="userInterfaces.PlaylistMenu" target="controllers.PlaylistMenuActions" relationship="TO_ONE">
+      <point x="188.50003215698462" y="-32.82124500835471" />
+      <point x="1842.0" y="1344.0" />
+      <point x="1842.0" y="1193.799" />
+      <point x="2144.549" y="1193.799" />
+      <point x="14.99952656902633" y="82.4996570327886" />
+    </edge>
+    <edge source="presenters.MenuPresenter" target="usecase.VideoManager" relationship="TO_ONE">
+      <point x="-5.007932600165077E-5" y="-203.49999198872865" />
+      <point x="1051.846" y="884.0" />
+      <point x="974.878" y="884.0" />
+      <point x="-13.229360616262966" y="137.49988865112766" />
+    </edge>
+    <edge source="userInterfaces.PlaylistMenu" target="usecase.UserManager" relationship="TO_ONE">
+      <point x="-188.49996784301538" y="-17.32124500835471" />
+      <point x="1365.417" y="1359.5" />
+      <point x="1365.417" y="1213.821" />
+      <point x="1206.0" y="1213.821" />
+      <point x="1206.0" y="1339.127" />
+      <point x="913.0" y="1339.127" />
+      <point x="913.0" y="1260.609" />
+      <point x="60.447" y="1260.609" />
+      <point x="-188.43655721434575" y="214.49994489547646" />
+    </edge>
+    <edge source="usecase.NonAdminManager" target="usecase.VideoEditor" relationship="TO_ONE">
+      <point x="191.50032462454618" y="-14.999648531514879" />
+      <point x="15.0" y="1090.6091751395277" />
+      <point x="15.0" y="319.52711864406797" />
+      <point x="-419.632" y="319.52711864406797" />
+      <point x="-419.632" y="-68.10900000000001" />
+      <point x="2165.632" y="-68.10900000000001" />
+      <point x="138.96936786860374" y="-82.00037433571265" />
+    </edge>
+    <edge source="gateways.DataManager" target="usecase.VideoManager" relationship="TO_ONE">
+      <point x="-7.520998087784392E-5" y="-115.49967925968758" />
+      <point x="2481.595" y="937.0" />
+      <point x="1382.0" y="937.0" />
+      <point x="1382.0" y="884.0" />
+      <point x="974.878" y="884.0" />
+      <point x="-13.229360616262966" y="137.49988865112766" />
+    </edge>
+    <edge source="controllers.NonAdminHandler" target="controllers.UserActionHandler" relationship="GENERALIZATION">
+      <point x="191.499628678686" y="2.5455061404500157E-4" />
+      <point x="36.0" y="1688.1511016949148" />
+      <point x="36.0" y="1105.6090000000002" />
+      <point x="-176.00015740925255" y="1.7632895765018475E-4" />
+    </edge>
+    <edge source="controllers.AdminHandler" target="usecase.AdminManager" relationship="TO_ONE">
+      <point x="-10.499946289849277" y="-82.50037310734388" />
+      <point x="693.366" y="963.5" />
+      <point x="910.5" y="963.5" />
+      <point x="910.5" y="900.0" />
+      <point x="906.0" y="900.0" />
+      <point x="906.0" y="1139.5593731073438" />
+      <point x="189.99979499253652" y="14.999637167187757" />
+    </edge>
+    <edge source="controllers.PlaylistMenuActions" target="usecase.PlaylistManager" relationship="TO_ONE">
+      <point x="-187.50047343097367" y="-3.429672115089488E-4" />
+      <point x="1919.0" y="1068.6309999999999" />
+      <point x="1919.0" y="1247.5" />
+      <point x="2350.0" y="1247.5" />
+      <point x="2350.0" y="952.799" />
+      <point x="2472.4321141752966" y="952.799" />
+      <point x="-1.0638350613589864E-4" y="170.4998462702714" />
+    </edge>
+    <edge source="presenters.MenuPresenter" target="usecase.NonAdminManager" relationship="TO_ONE">
+      <point x="-109.500050079326" y="-188.1269919887286" />
+      <point x="899.372" y="930.0" />
+      <point x="899.372" y="953.0" />
+      <point x="-151.28140677966098" y="953.0" />
+      <point x="3.246245461809849E-4" y="126.50035146848512" />
+    </edge>
+    <edge source="presenters.VideoBrowsePresenter" target="usecase.VideoEditor" relationship="TO_ONE">
+      <point x="30.000136104965122" y="-60.5001212807141" />
+      <point x="1795.235" y="-68.10900000000001" />
+      <point x="2165.632" y="-68.10900000000001" />
+      <point x="138.96936786860374" y="-82.00037433571265" />
+    </edge>
+    <edge source="controllers.PlaylistMenuActions" target="usecase.VideoManager" relationship="TO_ONE">
+      <point x="-4.734309736704745E-4" y="82.4996570327886" />
+      <point x="2129.549" y="1179.0" />
+      <point x="1895.235" y="1179.0" />
+      <point x="1895.235" y="937.0" />
+      <point x="1382.0" y="937.0" />
+      <point x="1382.0" y="884.0" />
+      <point x="974.878" y="884.0" />
+      <point x="-13.229360616262966" y="137.49988865112766" />
+    </edge>
+    <edge source="userInterfaces.MenuDisplayer" target="usecase.VideoManager" relationship="TO_ONE">
+      <point x="5.583290272445765" y="-192.49986338000053" />
+      <point x="1184.5" y="1179.0" />
+      <point x="1895.235" y="1179.0" />
+      <point x="1895.235" y="937.0" />
+      <point x="1382.0" y="937.0" />
+      <point x="1382.0" y="884.0" />
+      <point x="974.878" y="884.0" />
+      <point x="-13.229360616262966" y="137.49988865112766" />
+    </edge>
+    <edge source="userInterfaces.PlaylistMenu" target="usecase.PlaylistManager" relationship="TO_ONE">
+      <point x="188.50003215698462" y="-2.450083547955728E-4" />
+      <point x="1919.0" y="1376.821" />
+      <point x="1919.0" y="1247.5" />
+      <point x="2350.0" y="1247.5" />
+      <point x="2350.0" y="952.799" />
+      <point x="2472.4321141752966" y="952.799" />
+      <point x="-1.0638350613589864E-4" y="170.4998462702714" />
     </edge>
     <edge source="usecase.NonAdminManager" target="usecase.UserManager" relationship="GENERALIZATION">
-      <point x="0.0" y="-17.0" />
-      <point x="-54.0" y="40.0" />
-      <point x="53.75" y="40.0" />
-      <point x="0.0" y="17.0" />
+      <point x="191.50032462454618" y="-77.88964853151487" />
+      <point x="457.0" y="1027.7191751395276" />
+      <point x="457.0" y="656.4237288135594" />
+      <point x="192.50044278565426" y="-18.303055104523537" />
+    </edge>
+    <edge source="userInterfaces.MenuDisplayer" target="userInterfaces.VideoManagementMenuDisplayer" relationship="TO_ONE">
+      <point x="-154.0" y="-128.7278633800006" />
+      <point x="154.0" y="15.000043193021384" />
+    </edge>
+    <edge source="userInterfaces.VideoManagementMenuDisplayer" target="userInterfaces.MenuDisplayer" relationship="TO_ONE">
+      <point x="-1.6559496987156308E-4" y="126.50004319302138" />
+      <point x="561.911" y="1815.5" />
+      <point x="1380.417" y="1815.5" />
+      <point x="1380.417" y="1579.821" />
+      <point x="1350.0" y="1579.821" />
+      <point x="1350.0" y="1574.545" />
+      <point x="154.00029027244568" y="1.366199994663475E-4" />
+    </edge>
+    <edge source="presenters.MenuPresenter" target="usecase.UserManager" relationship="TO_ONE">
+      <point x="-109.500050079326" y="8.011271347641014E-6" />
+      <point x="913.0" y="1118.127" />
+      <point x="913.0" y="1260.609" />
+      <point x="60.447" y="1260.609" />
+      <point x="-188.43655721434575" y="214.49994489547646" />
+    </edge>
+    <edge source="presenters.VideoBrowsePresenter" target="usecase.VideoManager" relationship="TO_ONE">
+      <point x="1.3610496512228565E-4" y="-60.5001212807141" />
+      <point x="1765.235" y="937.0" />
+      <point x="1382.0" y="937.0" />
+      <point x="1382.0" y="884.0" />
+      <point x="974.878" y="884.0" />
+      <point x="-13.229360616262966" y="137.49988865112766" />
+    </edge>
+    <edge source="usecase.UserManager" target="usecase.VideoEditor" relationship="TO_ONE">
+      <point x="-192.49955721434577" y="-25.803055104523537" />
+      <point x="15.0" y="648.9237288135594" />
+      <point x="15.0" y="475.5677966101696" />
+      <point x="-419.632" y="475.5677966101696" />
+      <point x="-419.632" y="-68.10900000000001" />
+      <point x="2165.632" y="-68.10900000000001" />
+      <point x="138.96936786860374" y="-82.00037433571265" />
+    </edge>
+    <edge source="userInterfaces.PlaylistMenu" target="presenters.PlaylistPresenter" relationship="TO_ONE">
+      <point x="-14.999967843015384" y="-170.5" />
+      <point x="158.98069303534658" y="49.499999999999886" />
+    </edge>
+    <edge source="usecase.AdminManager" target="usecase.UserManager" relationship="GENERALIZATION">
+      <point x="-190.00020500746342" y="14.999637167187757" />
+      <point x="457.0" y="1139.5593731073438" />
+      <point x="457.0" y="656.4237288135594" />
+      <point x="192.50044278565426" y="-18.303055104523537" />
+    </edge>
+    <edge source="entities.AdminUser" target="entities.User" relationship="GENERALIZATION">
+      <point x="-1.2568900467613275E-4" y="-14.499548603378969" />
+      <point x="828.7592542372881" y="362.8918598649325" />
+      <point x="565.541220338983" y="362.8918598649325" />
+      <point x="-3.6610852134799643E-4" y="181.5003702642585" />
+    </edge>
+    <edge source="presenters.MenuPresenter" target="usecase.AdminManager" relationship="TO_ONE">
+      <point x="-15.000050079326002" y="-203.49999198872865" />
+      <point x="1036.846" y="900.0" />
+      <point x="906.0" y="900.0" />
+      <point x="906.0" y="1139.5593731073438" />
+      <point x="189.99979499253652" y="14.999637167187757" />
+    </edge>
+    <edge source="userInterfaces.VideoManagementMenuDisplayer" target="controllers.UserActionHandler" relationship="TO_ONE">
+      <point x="-1.6559496987156308E-4" y="-126.49995680697862" />
+      <point x="561.911" y="1283.0" />
+      <point x="253.947" y="1283.0" />
+      <point x="-1.57409252551588E-4" y="137.50017632895754" />
+    </edge>
+    <edge source="userInterfaces.PlaylistMenu" target="usecase.VideoManager" relationship="TO_ONE">
+      <point x="3.2156984616449336E-5" y="-170.5002450083548" />
+      <point x="1581.588" y="1179.0" />
+      <point x="1895.235" y="1179.0" />
+      <point x="1895.235" y="937.0" />
+      <point x="1382.0" y="937.0" />
+      <point x="1382.0" y="884.0" />
+      <point x="974.878" y="884.0" />
+      <point x="-13.229360616262966" y="137.49988865112766" />
+    </edge>
+    <edge source="userInterfaces.MenuDisplayer" target="gateways.DataManager" relationship="TO_ONE">
+      <point x="0.0" y="192.5" />
+      <point x="1178.9167097275542" y="1875.5" />
+      <point x="2526.595" y="1875.5" />
+      <point x="44.99992479001912" y="115.5" />
+    </edge>
+    <edge source="presenters.PlaylistPresenter" target="usecase.PlaylistManager" relationship="TO_ONE">
+      <point x="180.49969303534658" y="14.553078122184957" />
+      <point x="1919.0" y="1102.377" />
+      <point x="1919.0" y="1247.5" />
+      <point x="2350.0" y="1247.5" />
+      <point x="2350.0" y="952.799" />
+      <point x="2472.4321141752966" y="952.799" />
+      <point x="-1.0638350613589864E-4" y="170.4998462702714" />
     </edge>
   </edges>
-  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="243.5" y="402.0" />
+  <settings layout="Hierarchic" zoom="0.44360902255639095" showDependencies="true" x="1091.0" y="903.4999999999999" />
   <SelectedNodes />
-  <Categories />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>
