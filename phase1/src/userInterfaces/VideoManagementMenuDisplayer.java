@@ -166,7 +166,8 @@ public class VideoManagementMenuDisplayer {
         int result = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - View all the videos uploaded by " + user.getUserName() + " \n 2 - Upload a video " +
                 "\n 3 - Delete a video \n 4 - Edit the title of a video " +
-                "\n 5 - Edit the categories of a video \n 6 - Edit the description of a video");
+                "\n 5 - Edit the categories of a video \n 6 - Edit the description of a video" +
+                "\n 7 - Return");
         String uniqueID;
 
         switch (result) {
@@ -215,6 +216,8 @@ public class VideoManagementMenuDisplayer {
                 String newDes = sc.nextLine();
                 nonAdminHandler.editDescription(user, uniqueID, newDes);
                 break;
+            case 7:
+                menuDisplayer.callMenu(user);
             default:
                 menuPresenter.displayError("Invalid input, try again");
                 videoActionMenu(user, nonAdminHandler);
