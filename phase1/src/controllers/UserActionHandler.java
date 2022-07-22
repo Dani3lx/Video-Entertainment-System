@@ -136,4 +136,8 @@ public class UserActionHandler {
     public void rateVideo(Video v, boolean like) {
         um.rateVideo(v, like);
     }
+
+    public String getUserName(User user) {
+        return um.getUserName(user);
+    }
 }

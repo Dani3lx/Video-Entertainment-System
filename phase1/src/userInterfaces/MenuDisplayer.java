@@ -21,33 +21,31 @@ import java.util.*;
  * @since 2022-07-15
  */
 public class MenuDisplayer {
-    Scanner sc = new Scanner(System.in);
-    UserActionHandler userActionHandler;
-    DataManager dataManager;
-    UserManager um;
-    VideoManager vm;
-    PlaylistManager pm;
-    MenuPresenter menuPresenter;
-    VideoManagementMenuDisplayer vmmDisplayer;
-    PlaylistMenu pmd;
-    PlaylistMenuActions pma;
+    private final Scanner sc = new Scanner(System.in);
+    private final UserActionHandler userActionHandler;
+    private final DataManager dataManager;
+    private final UserManager um;
+    private final VideoManager vm;
+    private final MenuPresenter menuPresenter;
+    private final VideoManagementMenuDisplayer vmmDisplayer;
+    private final PlaylistMenu pmd;
 
     /**
      * Constructs a menu displayer with a record of all the users and videos.
      *
      * @param um the user manager for managing users
      * @param vm the video manager for managing videos
+     * @param pm the playlist manager for managing playlists
      */
     public MenuDisplayer(UserManager um, VideoManager vm, PlaylistManager pm) {
         this.um = um;
         this.vm = vm;
-        this.pm = pm;
-        pma = new PlaylistMenuActions(pm, vm);
-        userActionHandler = new UserActionHandler(um);
-        dataManager = new DataManager(um, vm, pm);
-        menuPresenter = new MenuPresenter(um, vm);
-        vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm, userActionHandler, pm);
-        pmd = new PlaylistMenu(menuPresenter, vm, pma, pm, um, userActionHandler, this);
+        PlaylistMenuActions pma = new PlaylistMenuActions(pm, vm);
+        this.userActionHandler = new UserActionHandler(um);
+        this.dataManager = new DataManager(um, vm, pm);
+        this.menuPresenter = new MenuPresenter(um, vm);
+        this.vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm, userActionHandler, pm);
+        this.pmd = new PlaylistMenu(menuPresenter, vm, pma, pm, um, userActionHandler, this);
     }
 
     /**
@@ -56,9 +54,12 @@ public class MenuDisplayer {
     public void startMenu() {
         User currentUser;
         String[] info;
+
+        // Gets user's choice to log in, create a new account or exit program
         switch (getUserActionChoice("Type 1 to login, type 2 to create a new user account, type 3" +
                 " to exit program")) {
             case 1:
+                // Takes in a username and password and tries to log in
                 info = getLoginInfo();
                 currentUser = userActionHandler.loginUser(info[0], info[1]);
                 checkNoUserFound(currentUser, "Login was unsuccessful");
@@ -67,11 +68,12 @@ public class MenuDisplayer {
                     menuPresenter.displayAlert("you are now logged in to an admin account");
                     adminMenu(currentUser);
                 } else {
-                    menuPresenter.displayAlert("you are now logged in to an non-admin account");
+                    menuPresenter.displayAlert("you are now logged in to a non-admin account");
                     nonAdminMenu(currentUser);
                 }
                 break;
             case 2:
+                // Takes in username and password and tries to create a new account
                 info = getLoginInfo();
                 currentUser = userActionHandler.createUser(info[0], info[1]);
                 checkNoUserFound(currentUser, "Account creation was not successful");
@@ -80,19 +82,20 @@ public class MenuDisplayer {
                 nonAdminMenu(currentUser);
                 break;
             case 3:
-                dataManager.saveData("phase1/Data.csv");
-                dataManager.saveVideoData("phase1/VideoData.csv");
-                dataManager.savePlayListData("phase1/PlaylistData.csv");
+                // Saves all the data and exits the program
+                dataManager.saveData("phase1/datasets/Data.csv");
+                dataManager.saveVideoData("phase1/datasets/VideoData.csv");
+                dataManager.savePlayListData("phase1/datasets/PlaylistData.csv");
                 System.exit(0);
                 break;
             default:
-                menuPresenter.displayError("Please enter a valid input");
+                menuPresenter.displayError("Invalid choice, please try again!");
                 startMenu();
         }
     }
 
 
-    /**
+    /*
      * This menu navigates the user to perform actions done by non admin users
      *
      * @param user the current user
@@ -115,12 +118,11 @@ public class MenuDisplayer {
                 pmd.playlistBrowseMenu(user);
                 break;
             default:
-                basicUserMenu(user, result, false);
+                basicUserMenu(user, result);
         }
     }
-    // Trying to push
 
-    /**
+    /*
      * This menu navigates the user to perform actions done by admin users
      *
      * @param user the current user
@@ -145,6 +147,7 @@ public class MenuDisplayer {
                 menuPresenter.displayUsers();
                 menuPresenter.displayRequest("Please enter the username of the user you wish to delete");
 
+                // Check if current user is deleted
                 if (adminHandler.deleteUser(user, sc.nextLine())) {
                     startMenu();
                 }
@@ -152,20 +155,24 @@ public class MenuDisplayer {
                 adminMenu(user);
                 break;
             case 6:
+                // Displays unbanned users
                 menuPresenter.displayUsers(false);
                 menuPresenter.displayRequest("Please enter the name of the user that you wish to ban");
                 if (adminHandler.banUser(user, sc.nextLine())) {
-                    menuPresenter.displayError("The ban operation was successful");
+                    menuPresenter.displayAlert("The user " + userActionHandler.getUserName(user) + " has been" +
+                            "successfully banned");
                 } else {
-                    menuPresenter.displayAlert("The ban operation was unsuccessful");
+                    menuPresenter.displayError("The ban operation was unsuccessful");
                 }
                 adminMenu(user);
                 break;
             case 7:
+                // Displays banned users
                 menuPresenter.displayUsers(true);
                 menuPresenter.displayRequest("Please enter the name of the user that you wish to unban");
                 if (adminHandler.unBanUser(sc.nextLine())) {
-                    menuPresenter.displayAlert("The account has been unbanned");
+                    menuPresenter.displayAlert("The user " + userActionHandler.getUserName(user) + "has been " +
+                            "unbanned");
                 } else {
                     menuPresenter.displayError("Unban was unsuccessful");
                 }
@@ -179,30 +186,29 @@ public class MenuDisplayer {
                 pmd.playlistBrowseMenu(user);
                 break;
             default:
-                basicUserMenu(user, result, true);
+                basicUserMenu(user, result);
         }
     }
 
-    /**
+    /*
      * This is a basic menu that navigates the user to perform actions done by all users
      *
      * @param user    the current user
      * @param choice  the action that user wish to perform
      * @param isAdmin the type of user
      */
-    void basicUserMenu(User user, int choice, boolean isAdmin) {
-
+    private void basicUserMenu(User user, int choice) {
         switch (choice) {
             case 1:
                 menuPresenter.displayRequest("Please enter a new password");
                 userActionHandler.changePassword(user, sc.nextLine());
                 menuPresenter.displayAlert("Password change was successful");
-                callMenu(user, isAdmin);
+                callMenu(user);
                 break;
             case 2:
                 menuPresenter.displayAlert("Checking history:");
                 menuPresenter.displayLoginHistory(user);
-                callMenu(user, isAdmin);
+                callMenu(user);
                 break;
             case 3:
                 startMenu();
@@ -210,15 +216,13 @@ public class MenuDisplayer {
         }
     }
 
-
     /**
      * This method decides which user menu to call
      *
-     * @param user    the current user
-     * @param isAdmin the user's type
+     * @param user the current user
      */
-    void callMenu(User user, boolean isAdmin) {
-        if (isAdmin) {
+    protected void callMenu(User user) {
+        if (userActionHandler.isAdmin(user)) {
             adminMenu(user);
         } else {
             nonAdminMenu(user);
@@ -231,7 +235,7 @@ public class MenuDisplayer {
      * @param text the text to be displayed
      * @return the choice that the user made
      */
-    int getUserActionChoice(String text) {
+    protected int getUserActionChoice(String text) {
         Scanner sc = new Scanner(System.in);
         menuPresenter.displayMenuOption(text);
         if (sc.hasNextInt()) {
@@ -241,7 +245,7 @@ public class MenuDisplayer {
         }
     }
 
-    /**
+    /*
      * This method checks whether a user is found
      *
      * @param currentUser the current user
@@ -254,44 +258,16 @@ public class MenuDisplayer {
         }
     }
 
-    /**
+    /*
      * This method takes in and returns the name and password
      *
      * @return the username and password
      */
-    String[] getLoginInfo() {
+    private String[] getLoginInfo() {
         menuPresenter.displayRequest("Please enter a username: ");
         String username = sc.nextLine();
         menuPresenter.displayRequest("Please enter a password: ");
         String password = sc.nextLine();
         return new String[]{username, password};
-    }
-
-    String[] getUploadVidInfo() {
-        menuPresenter.displayRequest("Please enter title of video: ");
-        String title = sc.nextLine();
-        menuPresenter.displayRequest("Please enter description of video: ");
-        String description = sc.nextLine();
-        menuPresenter.displayRequest("Please enter number of categories you wish to input:all categories of video: ");
-        int numCates = sc.nextInt();
-        ArrayList<String> cates = new ArrayList<>();
-        menuPresenter.displayRequest("Please enter all categories of video: ");
-        for (int i = 0; i < numCates; i++) {
-            cates.add(sc.nextLine());
-        }
-        menuPresenter.displayRequest("Please enter video link: ");
-        String vidLink = sc.nextLine();
-        return new String[]{title, description, vidLink};
-    }
-
-    ArrayList<String> getCates() {
-        menuPresenter.displayRequest("Please enter number of categories you wish to input: ");
-        int numCates = sc.nextInt();
-        ArrayList<String> cates = new ArrayList<>();
-        menuPresenter.displayRequest("Please enter all categories of video: ");
-        for (int i = 0; i < numCates; i++) {
-            cates.add(sc.nextLine());
-        }
-        return cates;
     }
 }

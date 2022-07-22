@@ -87,7 +87,7 @@ public class PlaylistMenu {
                 }
                 break;
             case 4:
-                menuDisplayer.callMenu(user, userActionHandler.isAdmin(user));//todo need help with this
+                menuDisplayer.callMenu(user);//todo need help with this
                 break;
         }
     }
