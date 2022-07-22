@@ -21,6 +21,8 @@ public class NonAdminManager extends UserManager {
     // start of overloaded uploadVideo functions region
 
     /**
+     * Uploads a video with user, title and vidlink
+     *
      * @param user    of type User
      * @param title   name of video being uploaded
      * @param vidlink link to the video
@@ -30,6 +32,8 @@ public class NonAdminManager extends UserManager {
     }
 
     /**
+     * Uploads a video with user, title, description and vidlink
+     *
      * @param user        of type User
      * @param title       name of video being uploaded
      * @param description what the video is about
@@ -40,6 +44,8 @@ public class NonAdminManager extends UserManager {
     }
 
     /**
+     * Uploads a video with user, title, categories and vidlink
+     *
      * @param user       of type User
      * @param title      name of the video being uploaded
      * @param categories what genres the video belongs to
@@ -50,6 +56,8 @@ public class NonAdminManager extends UserManager {
     }
 
     /**
+     * Uploads a video with user, title, description, categories and vidlink
+     *
      * @param user        of type User
      * @param title       name of the video being uploaded
      * @param description what the video is about
@@ -62,6 +70,8 @@ public class NonAdminManager extends UserManager {
     // end of overloaded uploadVideo functions region
 
     /**
+     * Deletes a video with user and uniqueID
+     *
      * @param user     of type User
      * @param uniqueID identifier of the video
      * @return if deletion was successful or not
@@ -76,6 +86,8 @@ public class NonAdminManager extends UserManager {
     }
 
     /**
+     * Edits the title of the video with uniqueID and user to newTitle
+     *
      * @param user     of type User
      * @param uniqueID identifier of the video
      * @param newTitle the title user wants to change to
@@ -89,6 +101,8 @@ public class NonAdminManager extends UserManager {
     }
 
     /**
+     * Edits the categories of the video with uniqueID and user to newCate
+     *
      * @param user     of type User
      * @param uniqueID identifier of the video
      * @param newCate  genres the user wants to change to
@@ -102,6 +116,8 @@ public class NonAdminManager extends UserManager {
     }
 
     /**
+     * Edits the description of the video with uniqueID and user to newDes
+     *
      * @param user     of type User
      * @param uniqueID identifier of the video
      * @param newDes   description the user wants to change to
