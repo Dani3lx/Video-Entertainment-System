@@ -15,7 +15,7 @@ import org.junit.BeforeClass;
 public class NonAdminManagerTest {
     private static final VideoManager VM = new VideoManager();
     private static final UserManager UM = new UserManager(VM);
-    private static final NonAdminManager NAM = new NonAdminManager(UM, VM);
+    private static final NonAdminManager NAM = new NonAdminManager(VM);
     private static final NonAdminUser u1 = new NonAdminUser("k", "1");
 
     @BeforeClass

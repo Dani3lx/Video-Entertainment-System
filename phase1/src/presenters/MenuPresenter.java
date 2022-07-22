@@ -1,13 +1,11 @@
 package presenters;
 
 import entities.User;
-import entities.Video;
 import usecase.AdminManager;
 import usecase.NonAdminManager;
 import usecase.UserManager;
 import usecase.VideoManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,7 +31,7 @@ public class MenuPresenter {
         this.um = um;
         this.vm = vm;
         this.am = new AdminManager(um, vm);
-        this.nm = new NonAdminManager(um, vm);
+        this.nm = new NonAdminManager(vm);
     }
 
     /**

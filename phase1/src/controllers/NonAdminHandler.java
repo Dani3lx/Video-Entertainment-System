@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class NonAdminHandler extends UserActionHandler {
 
-    NonAdminManager nm;
+    private final NonAdminManager nm;
 
     /**
      * Constructs a non admin handler with a record of all the users and videos.
@@ -26,34 +26,70 @@ public class NonAdminHandler extends UserActionHandler {
      */
     public NonAdminHandler(UserManager um, VideoManager vm) {
         super(um);
-        nm = new NonAdminManager(um, vm);
+        nm = new NonAdminManager(vm);
     }
 
-    // todo add the controller methods required for user interaction with playlist, and uploading videos and stuff
-    public void uploadVideo(User currentUser,String title, String description, ArrayList<String> categories, String vidLink){
-        if (description.equals("") && categories.isEmpty()){
-            nm.uploadVideo(currentUser,title, vidLink);
-        }else if (description.equals("") ) {
+    /**
+     * Uploads a video with currentUser, title, description, categories and vidlink
+     *
+     * @param currentUser the current user
+     * @param title       the title of the video
+     * @param description the description of the video
+     * @param categories  the categories of the video
+     * @param vidLink     the video link
+     */
+    public void uploadVideo(User currentUser, String title, String description, ArrayList<String> categories, String vidLink) {
+        if (description.equals("") && categories.isEmpty()) {
+            nm.uploadVideo(currentUser, title, vidLink);
+        } else if (description.equals("")) {
             nm.uploadVideo(currentUser, title, categories, vidLink);
-        } else if (categories.isEmpty())   {
-            nm.uploadVideo(currentUser,title,description,vidLink);
-        }else{
-            nm.uploadVideo(currentUser,title, description,categories,vidLink);
+        } else if (categories.isEmpty()) {
+            nm.uploadVideo(currentUser, title, description, vidLink);
+        } else {
+            nm.uploadVideo(currentUser, title, description, categories, vidLink);
         }
     }
 
-    public boolean deleteVideo(User user, String uniqueID){
+    /**
+     * Deletes a video using user and uniqueID
+     *
+     * @param user     the current user
+     * @param uniqueID the video ID
+     * @return whether the deletion was successful
+     */
+    public boolean deleteVideo(User user, String uniqueID) {
         return nm.deleteVideo(user, uniqueID);
     }
 
+    /**
+     * Edits the title of the video
+     *
+     * @param user     the crrent user
+     * @param uniqueID the video ID
+     * @param newTitle the new title
+     */
     public void editTitle(User user, String uniqueID, String newTitle) {
         nm.editTitle(user, uniqueID, newTitle);
     }
 
+    /**
+     * Edits the categories of the video
+     *
+     * @param user     the current user
+     * @param uniqueID the video ID
+     * @param newCate  the new categories
+     */
     public void editCategories(User user, String uniqueID, ArrayList<String> newCate) {
         nm.editCategories(user, uniqueID, newCate);
     }
 
+    /**
+     * Edits the description of the video
+     *
+     * @param user     the current user
+     * @param uniqueID the video ID
+     * @param newDes   the new description
+     */
     public void editDescription(User user, String uniqueID, String newDes) {
         nm.editDescription(user, uniqueID, newDes);
     }

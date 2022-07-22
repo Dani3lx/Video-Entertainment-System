@@ -6,15 +6,15 @@ import entities.Video;
 import java.util.ArrayList;
 
 public class NonAdminManager extends UserManager {
-    private UserManager um;
-    private ArrayList<User> users;
-
     private final VideoEditor ve;
 
-    public NonAdminManager(UserManager um, VideoManager vm) {
+    /**
+     * Responsible for managing non admin users
+     *
+     * @param vm the video manager that manages videos
+     */
+    public NonAdminManager(VideoManager vm) {
         super(vm);
-        this.um = um;
-        users = um.getAllUsers();
         ve = new VideoEditor();
     }
 
