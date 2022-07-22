@@ -75,9 +75,12 @@ public class PlaylistTest {
 
     @Test
     public void reorderPlaylistByRatingTest() {
-
-
-        assertTrue(PM.reorderPlaylistByRating(play, VM).equals(play_dup));
+        Playlist result1 = PM.getPlaylistByName("Music");
+        Playlist expect1 = new Playlist( "Music", 0 ,  new ArrayList<>(Arrays.asList("2", "1", "3")),"k");
+        assertTrue(result1.equals(expect1));
+        Playlist result2 = PM.reorderPlaylistByRating(play, VM);
+        Playlist expect2 = new Playlist( "Music", 0 ,  new ArrayList<>(Arrays.asList("1", "3", "2")),"k");
+        assertTrue(result2.equals(expect2));
     }
 
     @Test
