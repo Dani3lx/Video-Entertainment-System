@@ -12,7 +12,7 @@ import java.io.*;
 
 /**
  * This class is responsible for reading and writing data from and to the csv files contained in phase1/datasets
- * @author Benedek Balla, ...
+ * @author Benedek Balla, Shu Fan Nicholas Au
  */
 public class DataManager {
 
