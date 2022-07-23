@@ -142,7 +142,7 @@ public class VideoManagementMenuDisplayer {
             case 3:
                 menuPresenter.displayRequest("Please enter a playlist name");
                 String name = sc.nextLine();
-                Playlist pl = pma.SearchPlaylist(user,name);
+                Playlist pl = pma.SearchPlaylist(name);
                 pma.AddDeleteFromPlaylist(video,user,pl,true);
                 break;
             case 4:

@@ -218,6 +218,12 @@ public class PlaylistManager {
     }
 
 
+    /**
+     * Check if playlist name already exists
+     * @param playlistName name of the playlist to check
+     * @return boolean indicating if name already exists
+     */
+
     public boolean checkPlaylistByName(String playlistName) {
         for (int i = 0; i < playlists.size(); i++) {
             if (playlists.get(i).getPlaylistName().equalsIgnoreCase(playlistName)) {

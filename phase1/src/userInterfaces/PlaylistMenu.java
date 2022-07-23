@@ -54,7 +54,7 @@ public class PlaylistMenu {
             case 1:
                 menuPresenter.displayRequest("Enter the name of the playlist: ");
                 String plname = sc.nextLine();
-                Playlist pl = pma.SearchPlaylist(user, plname);
+                Playlist pl = pma.SearchPlaylist(plname);
                 checkPlaylist(pl, user, menuPresenter,  "No playlists can be found with that name, try again");
                 playlistManageMenu(user, pl);
                 break;
