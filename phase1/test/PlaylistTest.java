@@ -15,64 +15,18 @@ import static org.junit.Assert.assertTrue;
 
 public class PlaylistTest {
 
-    private static final PlaylistManager PM = new PlaylistManager();
-    private static final Playlist play = new Playlist("Music", "k");
-    private static final Playlist play_dup = new Playlist("Music1", "k1");
+    private static Video v1 =  new Video("k", "popmusic", "amazing music", new ArrayList<>(List.of("energizing"))
+            , "url", "1", new ArrayList<>(Arrays.asList("10", "0")), "today");
+
+    private static Video v2 = new Video("t", "rockmusic", "amazing music",
+            new ArrayList<>(List.of("fun")), "url", "2", new ArrayList<>(Arrays.asList("2", "0")), "today");
+
+    private static Video v3 = new Video("k", "moremusic", "amazing music", new ArrayList<>(List.of("energizing"))
+            , "url", "3", new ArrayList<>(Arrays.asList("1", "0")), "today");
+    private static final Playlist play = new Playlist("Music", 0 , new ArrayList<>(Arrays.asList("2", "1", "3")), "k");
+    private static final Playlist play_dup = new Playlist("Music1", 0, new ArrayList<>(Arrays.asList("1", "3")), "k1");
+    private static PlaylistManager PM = new PlaylistManager(new ArrayList<Playlist>(Arrays.asList(play, play_dup)));
     private static final VideoManager VM = new VideoManager();
-
-    @BeforeClass
-    public static void setUp() {
-        PM.addPlaylist(play);
-        PM.addPlaylist(play_dup);
-
-        ArrayList<String> cates = new ArrayList<>(List.of("energizing"));
-        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("10", "0"));
-        Video v1 = new Video("k", "popmusic", "amazing music", cates, "url", "1", ratings, "today");
-
-        ArrayList<String> ratings3 = new ArrayList<>(Arrays.asList("1", "0"));
-        Video v3 = new Video("k", "moremusic", "amazing music", cates, "url", "3", ratings3, "today");
-
-        ArrayList<String> cates2 = new ArrayList<>(List.of("fun"));
-        ArrayList<String> ratings2 = new ArrayList<>(Arrays.asList("2", "0"));
-        Video v2 = new Video("t", "rockmusic", "amazing music", cates2, "url", "2", ratings2, "today");
-
-        PM.addToPlaylist(play, v2);
-        PM.addToPlaylist(play, v1);
-        PM.addToPlaylist(play, v3);
-
-        PM.addToPlaylist(play_dup, v1);
-        PM.addToPlaylist(play_dup, v3);
-    }
-
-    @Test
-    public void addToPlaylistTest() {
-        Playlist play = new Playlist("Music", "k");
-        ArrayList<String> cates = new ArrayList<>(List.of("energizing"));
-        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("0", "0"));
-        Video v = new Video("k", "popmusic", "amazing music", cates, "url", "1", ratings, "today");
-        PlaylistManager PM = new PlaylistManager();
-        PM.addPlaylist(play);
-        assertTrue(PM.addToPlaylist(play, v));
-        assertEquals(1, play.getUniqueIDs().size());
-
-    }
-
-    @Test
-    public void deleteFromPlaylistTest() {
-        NonAdminUser u1 = new NonAdminUser("k","123");
-        ArrayList<String> cates2 = new ArrayList<>(List.of("fun"));
-        ArrayList<String> ratings2 = new ArrayList<>(Arrays.asList("2", "0"));
-        Video v2 = new Video("t", "rockmusic", "amazing music", cates2, "url", "2", ratings2, "today");
-
-        assertEquals(3, play.getUniqueIDs().size());
-
-        assertTrue(PM.deleteFromPlaylist(u1,play, v2));
-        assertEquals(2, play.getUniqueIDs().size());
-
-
-    }
-
-
     @Test
     public void reorderPlaylistByRatingTest() {
         Playlist result1 = PM.getPlaylistByName("Music");
@@ -92,7 +46,17 @@ public class PlaylistTest {
         Playlist expect2 = new Playlist( "Music", 0 ,  new ArrayList<>(Arrays.asList("1", "2", "3")),"k");
         assertTrue(result2.equals(expect2));
     }
-
+    @Test
+    public void addToPlaylistTest() {
+        Playlist play = new Playlist("Music", "k");
+        ArrayList<String> cates = new ArrayList<>(List.of("energizing"));
+        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("0", "0"));
+        Video v = new Video("k", "popmusic", "amazing music", cates, "url", "1", ratings, "today");
+        PlaylistManager PM = new PlaylistManager();
+        PM.addPlaylist(play);
+        assertTrue(PM.addToPlaylist(play, v));
+        assertEquals(1, play.getUniqueIDs().size());
+    }
 
     @Test
     public void likePlaylistTest() {
@@ -100,6 +64,26 @@ public class PlaylistTest {
         Playlist play = new Playlist("Music", "k");
         PM.likePlaylist(play);
         assertEquals(1, play.getLikes());
+    }
+
+    @Test
+    public void deleteFromPlaylistTest() {
+        Playlist play2 = new Playlist("Music", 0 , new ArrayList<>(Arrays.asList("2", "1", "3")), "k");
+        Playlist play_dup2 = new Playlist("Music1", 0, new ArrayList<>(Arrays.asList("1", "3")), "k1");
+
+        PlaylistManager PM2 = new PlaylistManager(new ArrayList<Playlist>(Arrays.asList(play2, play_dup2)));
+
+        NonAdminUser u1 = new NonAdminUser("k","123");
+        ArrayList<String> cates2 = new ArrayList<>(List.of("fun"));
+        ArrayList<String> ratings2 = new ArrayList<>(Arrays.asList("2", "0"));
+        Video v2 = new Video("t", "rockmusic", "amazing music", cates2, "url", "2", ratings2, "today");
+
+        assertEquals(3, play2.getUniqueIDs().size());
+
+        assertTrue(PM2.deleteFromPlaylist(u1,play2, v2));
+        assertEquals(2, play2.getUniqueIDs().size());
+
+
     }
 }
 
