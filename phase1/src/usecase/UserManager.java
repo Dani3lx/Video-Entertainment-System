@@ -174,6 +174,7 @@ public class UserManager {
     }
 
     public String getUserName(User user) {
-        return user.getUserName();
+        String name = user.getUserName();
+        return name;
     }
 }

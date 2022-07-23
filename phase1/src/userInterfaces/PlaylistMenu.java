@@ -3,15 +3,12 @@ package userInterfaces;
 import controllers.UserActionHandler;
 import entities.Playlist;
 import entities.User;
-import entities.Video;
 import presenters.MenuPresenter;
 import presenters.PlaylistPresenter;
-import presenters.VideoBrowsePresenter;
 import usecase.PlaylistManager;
 import controllers.PlaylistMenuActions;
 import usecase.UserManager;
 import usecase.VideoManager;
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -45,7 +42,7 @@ public class PlaylistMenu {
     /*
      * This is used for the user to interact with playlists and associated methods
      * will use VMM displayer/presenter for this unless otherwise necessary
-     * Need to create way to #todo select and view playlist (not just get uniqueID)
+     * Need to create way to
      * */
 
 
@@ -58,19 +55,20 @@ public class PlaylistMenu {
                 menuPresenter.displayRequest("Enter the name of the playlist: ");
                 String plname = sc.nextLine();
                 Playlist pl = pma.SearchPlaylist(user, plname);
-                checkPlaylist(pl, user, menuPresenter, userActionHandler, "No playlists can be found with that name, try again");
+                checkPlaylist(pl, user, menuPresenter,  "No playlists can be found with that name, try again");
                 playlistManageMenu(user, pl);
                 break;
             case 2:
                 menuPresenter.displayRequest("Enter the name of the playlist you want to create: ");
                 plname = sc.nextLine();
                 pl = pma.CreateNewPlaylist(user, plname);
-                checkPlaylist(pl, user, menuPresenter, userActionHandler, "Playlist Already Exists");
+
+                checkPlaylist(pl, user, menuPresenter,  "Playlist Already Exists");
                 menuPresenter.displayAlert("Successfully created: " + pl.getPlaylistName());
                 playlistManageMenu(user, pl);
                 break;
             case 3:
-                ArrayList<Playlist> pl_list = pmm.getPlaylists();
+                ArrayList<Playlist> pl_list = pma.pl_list();
                 pp.listPlaylistNames(pl_list, pmm);
                 int sub_option = menuDisplayer.getUserActionChoice("Do you want to " + "\n1 - Choose Playlist from list" +
                         "\n2 - Return");
@@ -78,7 +76,7 @@ public class PlaylistMenu {
                     case 1:
                         menuPresenter.displayAlert("Choose playlist based on number: ");
                         int i = sc.nextInt();
-                        pl = pmm.getPlaylists().get(i);
+                        pl = pma.pl_list().get(i);
                         playlistManageMenu(user, pl);
                         break;
                     case 2:
@@ -137,7 +135,7 @@ public class PlaylistMenu {
                         + " \n 1 - Yes \n 2 - No");
                 switch (option2) {
                     case 1:
-                        pmm.likePlaylist(pl);
+                        pma.likePlaylist(pl);
                         menuPresenter.displayAlert("You have successfully liked the playlist");
                         playlistManageMenu(user, pl);
                         break;
@@ -155,23 +153,24 @@ public class PlaylistMenu {
 //todo get rid of pmm for dependency rule
     public void viewPlaylist(User user, Playlist pl) {
         int option = menuDisplayer.getUserActionChoice("Which Action would you like to perform " +
-                "\n1 - View Video Names in Playlist \n2 - View How Many Likes " + pmm.getPlName(pl) + " has" +
+                "\n1 - View Video Names in Playlist \n2 - View How Many Likes " + pma.playlistName(pl) + " has" +
                 "\n3 - Change Playlist Name \n4 -  Return ");
 
         switch (option) {
             case 1:
-                ArrayList<String> vidname = pmm.namesInPlaylist(pmm.getPlName(pl), vmm);
+                ArrayList<String> vidname = pma.videosinPL(pl);
                 pp.listStringNames(vidname);
                 viewPlaylist(user, pl);
                 break;
             case 2:
-                menuPresenter.displayAlert(pmm.getRatings(pl));
+                String ratings = pma.getRatings(pl);
+                menuPresenter.displayAlert(ratings);
                 viewPlaylist(user, pl);
                 break;
             case 3:
-
-                if ((um.getUserName(user)).equals(pmm.getPlName(pl))) { //checks if current user also created the playlist
-                    menuPresenter.displayRequest("Please enter the name you would like to change " + pmm.getPlName(pl) + " to: ");
+                boolean check = pma.isUser(user,pl);
+                if (check) { //checks if current user also created the playlist
+                    menuPresenter.displayRequest("Please enter the name you would like to change " + pma.playlistName(pl) + " to: ");
                     String PlName = sc.nextLine();
                     pl.setPlaylistName(PlName);
                 } else menuPresenter.displayError("You do not have permission to change this Playlist's name");
@@ -188,26 +187,26 @@ public class PlaylistMenu {
     public void ReorderPlaylist(User user, Playlist pl) { //todo user needs authority to change the playlist
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Reorder Playlist Alphabetically \n 2 - Reorder Playlist by Video Rating \n 3 - Shuffle Playlist  \n 4 -  Return");
-
-        if (um.getUserName(user).equals(pmm.getPlName(pl))) {
+        boolean check = pma.isUser(user,pl);
+        if (check) {
             menuPresenter.displayError("You do not have permission to change the order");
             playlistManageMenu(user, pl);
         } else {
 
             switch (option) {
                 case 1:
-                    pmm.reorderPlaylistByName(pl);
-                    menuPresenter.displayAlert("You have successfully ordered " + pmm.getPlName(pl) + " by alphabetical order!");
+                    pma.reorderPL(pl,"name");
+                    menuPresenter.displayAlert("You have successfully ordered " + pma.playlistName(pl) + " by alphabetical order!");
                     ReorderPlaylist(user,pl);
                     break;
                 case 2:
-                    pmm.reorderPlaylistByRating(pl, vmm);
-                    menuPresenter.displayAlert("You have successfully ordered " + pmm.getPlName(pl) + " by descending ratings order!");
+                    pma.reorderPL(pl,"rating");
+                    menuPresenter.displayAlert("You have successfully ordered " + pma.playlistName(pl) + " by descending ratings order!");
                     ReorderPlaylist(user,pl);
                     break;
                 case 3:
-                    pmm.shufflePlaylist(pl, vmm);
-                    menuPresenter.displayAlert("You have successfully shuffled " + pmm.getPlName(pl));
+                    pma.reorderPL(pl,"shuffle");
+                    menuPresenter.displayAlert("You have successfully shuffled " + pma.playlistName(pl));
                     ReorderPlaylist(user,pl);
                     break;
                 case 4:
@@ -218,13 +217,11 @@ public class PlaylistMenu {
         }
     }
 
-    void checkPlaylist(Playlist pl, User user, MenuPresenter mp, UserActionHandler ua, String errorMsg) {
+    void checkPlaylist(Playlist pl, User user, MenuPresenter mp,  String errorMsg) {
         if (Objects.isNull(pl)) {
             mp.displayAlert(errorMsg);
             playlistBrowseMenu(user);
         }
     }
-
-
 
 }

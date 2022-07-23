@@ -19,6 +19,7 @@ public class PlaylistMenuActions {
     public PlaylistMenuActions(PlaylistManager pm, VideoManager vm){
         this.pm = pm;
         this.vm = vm;
+        this.um = new UserManager(vm);
     }
 
     public Playlist SearchPlaylist(User user, String plname) {
@@ -26,17 +27,43 @@ public class PlaylistMenuActions {
         return pl;
     }
 
+    public ArrayList<Playlist> pl_list(){
+        return pm.getPlaylists();
+    }
 
+    public String playlistName(Playlist pl){
+        return pm.getPlName(pl);
+    }
+
+    public void likePlaylist(Playlist pl){
+        pm.likePlaylist(pl);
+    }
+
+    public String getRatings(Playlist pl){
+        return pm.getRatings(pl);
+    }
+
+    public boolean isUser(User user,Playlist pl){
+        String user_name = um.getUserName(user);
+        String pl_name = pm.getPlName(pl);
+        return user_name.equals(pl_name);
+    }
+
+    public ArrayList<String> videosinPL(Playlist pl){
+        String name = playlistName(pl);
+        ArrayList<String> vidname = pm.namesInPlaylist(name, vm);
+        return vidname;
+    }
 
     public Playlist CreateNewPlaylist(User user, String plname) {
         String user_name = um.getUserName(user);
-        Playlist new_playlist = new Playlist(plname, user_name);
-        if (pm.getPlaylists().contains(new_playlist)) {
+        boolean check =  pm.checkPlaylistByName(plname);
+        if (check) {
             return null;
-        } else {
-            pm.addPlaylist(new_playlist);
-            return new_playlist;
         }
+        Playlist new_playlist = new Playlist(plname, user_name);
+        pm.addPlaylist(new_playlist);
+        return new_playlist;
     }
 
     public Boolean AddDeleteFromPlaylist(String Vidname,User user, Playlist pl, boolean Add) {
@@ -59,6 +86,16 @@ public class PlaylistMenuActions {
         } else {
             result = pm.deleteFromPlaylist(user,pl, vid);
             return result;
+        }
+    }
+    
+    public void reorderPL(Playlist pl, String choice){
+        if (choice.equals("name")){
+            pm.reorderPlaylistByName(pl);
+        } else if (choice.equals("rating")) {
+            pm.reorderPlaylistByRating(pl,vm);
+        } else if (choice.equals("shuffle")) {
+            pm.shufflePlaylist(pl,vm);
         }
     }
 

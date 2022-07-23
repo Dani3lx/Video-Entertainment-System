@@ -8,7 +8,7 @@ import java.util.*;
 
 /**
  * This class is responsible for performing all direct interactions with the Playlist entity class.
- * @author Benedek Balla, Shu Fan Nicholas Au
+ * @author Benedek Balla, Shu Fan Nicholas Au, Akmar
  */
 public class PlaylistManager {
     private ArrayList<Playlist> playlists;
@@ -95,12 +95,6 @@ public class PlaylistManager {
         return null;
     }
 
-    /**
-     * Delete specified video from specified playlist and return if operation was successful.
-     * @param playlistName name of the playlist to be deleted from
-     * @param videoID uniqueID of video to be deleted from playlist
-     * @return boolean to indicate if the deletion was successful
-     */
 
 
     /**
@@ -177,6 +171,16 @@ public class PlaylistManager {
         int numlike = pl.getLikes();
         String outline = pl.getPlaylistName() + " has " + numlike + " likes! ";
         return outline;
+    }
+
+
+    public boolean checkPlaylistByName(String playlistName) {
+        for (int i = 0; i < playlists.size(); i++) {
+            if (playlists.get(i).getPlaylistName().equalsIgnoreCase(playlistName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
