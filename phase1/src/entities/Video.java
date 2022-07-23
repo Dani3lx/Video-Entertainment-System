@@ -122,7 +122,7 @@ public class Video implements Comparable<Video> {
     /**
      * Sets the description of the video.
      *
-     * @param description he description of the video
+     * @param description the description of the video
      */
     public void setDescription(String description) {
         this.description = description;
