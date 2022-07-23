@@ -166,7 +166,8 @@ public class VideoManagementMenuDisplayer {
         int result = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - View all the videos uploaded by " + user.getUserName() + " \n 2 - Upload a video " +
                 "\n 3 - Delete a video \n 4 - Edit the title of a video " +
-                "\n 5 - Edit the categories of a video \n 6 - Edit the description of a video");
+                "\n 5 - Edit the categories of a video \n 6 - Edit the description of a video" +
+                "\n 7 - Return");
         String uniqueID;
 
         switch (result) {
@@ -182,8 +183,13 @@ public class VideoManagementMenuDisplayer {
                 ArrayList<String> categories = new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
                 menuPresenter.displayRequest("Enter video path: ");
                 String vidlink = sc.nextLine();
-                nonAdminHandler.uploadVideo(user, title, description, categories, vidlink);
-                menuPresenter.displayAlert("Upload successful");
+                Boolean upload = nonAdminHandler.uploadVideo(user, title, description, categories, vidlink);
+                if (upload){
+                    menuPresenter.displayAlert("Upload successful");
+                } else {
+                    menuPresenter.displayAlert("Upload unsuccessful, title or video path cannot be blank");
+                }
+
                 break;
             case 3:
                 menuPresenter.displayRequest("Enter uniqueID of the video you want to be deleted: ");
@@ -215,6 +221,8 @@ public class VideoManagementMenuDisplayer {
                 String newDes = sc.nextLine();
                 nonAdminHandler.editDescription(user, uniqueID, newDes);
                 break;
+            case 7:
+                menuDisplayer.callMenu(user);
             default:
                 menuPresenter.displayError("Invalid input, try again");
                 videoActionMenu(user, nonAdminHandler);

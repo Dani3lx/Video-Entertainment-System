@@ -17,6 +17,10 @@ public class PlaylistManager {
         this.playlists = new ArrayList<Playlist>();
     }
 
+    public PlaylistManager(ArrayList<Playlist> playlists){
+        this.playlists = playlists;
+    }
+
     public void addPlaylist(Playlist pl) {
         playlists.add(pl);
     }

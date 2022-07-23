@@ -24,43 +24,6 @@ public class NonAdminManager extends UserManager {
         ve = new VideoEditor();
     }
 
-    // start of overloaded uploadVideo functions region
-
-    /**
-     * Uploads a video with user, title and vidlink
-     *
-     * @param user    of type User
-     * @param title   name of video being uploaded
-     * @param vidlink link to the video
-     */
-    public void uploadVideo(User user, String title, String vidlink) {
-        vm.uploadVideo(user.getUserName(), title, "", new ArrayList<>(), vidlink);
-    }
-
-    /**
-     * Uploads a video with user, title, description and vidlink
-     *
-     * @param user        of type User
-     * @param title       name of video being uploaded
-     * @param description what the video is about
-     * @param vidlink     link to the video
-     */
-    public void uploadVideo(User user, String title, String description, String vidlink) {
-        vm.uploadVideo(user.getUserName(), title, description, new ArrayList<>(), vidlink);
-    }
-
-    /**
-     * Uploads a video with user, title, categories and vidlink
-     *
-     * @param user       of type User
-     * @param title      name of the video being uploaded
-     * @param categories what genres the video belongs to
-     * @param vidlink    link to the video
-     */
-    public void uploadVideo(User user, String title, ArrayList<String> categories, String vidlink) {
-        vm.uploadVideo(user.getUserName(), title, "", categories, vidlink);
-    }
-
     /**
      * Uploads a video with user, title, description, categories and vidlink
      *
@@ -73,7 +36,6 @@ public class NonAdminManager extends UserManager {
     public void uploadVideo(User user, String title, String description, ArrayList<String> categories, String vidLink) {
         vm.uploadVideo(user.getUserName(), title, description, categories, vidLink);
     }
-    // end of overloaded uploadVideo functions region
 
     /**
      * Deletes a video with user and uniqueID

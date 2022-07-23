@@ -21,7 +21,7 @@ public class NonAdminManagerTest {
     @BeforeClass
     public static void setUp_UploadVid() {
 
-        NAM.uploadVideo(u1, "vid", "url");
+        NAM.uploadVideo(u1, "vid", "", new ArrayList<>(), "url");
         ArrayList<String> ratings = new ArrayList<>();
         ratings.add("0");
         ratings.add("0");

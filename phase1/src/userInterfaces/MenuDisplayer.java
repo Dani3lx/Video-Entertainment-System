@@ -102,23 +102,15 @@ public class MenuDisplayer {
      */
     private void nonAdminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Browse Videos \n 5 - " +
-                "Upload/delete/edit videos \n 6 - View Playlists");
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Browse Videos \n 5 - View Playlists \n 6 - " +
+                "Upload/delete/edit videos");
 
         NonAdminHandler nonAdminHandler = new NonAdminHandler(um, vm);
 
-        switch (result) {
-            case 4:
-                vmmDisplayer.videoBrowseMenu(user);
-                break;
-            case 5:
-                vmmDisplayer.videoActionMenu(user, nonAdminHandler);
-                break;
-            case 6:
-                pmd.playlistBrowseMenu(user);
-                break;
-            default:
-                basicUserMenu(user, result);
+        if (result == 6) {
+            vmmDisplayer.videoActionMenu(user, nonAdminHandler);
+        } else {
+            basicUserMenu(user, result);
         }
     }
 
@@ -129,12 +121,13 @@ public class MenuDisplayer {
      */
     private void adminMenu(User user) {
         int result = getUserActionChoice("Please input one of the following number to proceed " +
-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Create AdminUser \n" +
-                " 5 - Delete User \n 6 - Ban User \n 7 - UnBan User \n 8 - Browse Videos \n 9 - View Playlists");
+                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Browse Videos \n 5 - View Playlists \n 6 - Create AdminUser \n" +
+                " 7 - Delete User \n 8 - Ban User \n 9 - UnBan User");
         AdminHandler adminHandler = new AdminHandler(um, vm);
         String[] info;
+        String target;
         switch (result) {
-            case 4:
+            case 6:
                 info = getLoginInfo();
                 if (adminHandler.createAdminUser(info[0], info[1])) {
                     menuPresenter.displayAlert("Account has been successfully created");
@@ -143,7 +136,7 @@ public class MenuDisplayer {
                 }
                 adminMenu(user);
                 break;
-            case 5:
+            case 7:
                 menuPresenter.displayUsers();
                 menuPresenter.displayRequest("Please enter the username of the user you wish to delete");
 
@@ -154,36 +147,31 @@ public class MenuDisplayer {
                 menuPresenter.displayAlert("Deletion was successful");
                 adminMenu(user);
                 break;
-            case 6:
+            case 8:
                 // Displays unbanned users
                 menuPresenter.displayUsers(false);
                 menuPresenter.displayRequest("Please enter the name of the user that you wish to ban");
-                if (adminHandler.banUser(user, sc.nextLine())) {
-                    menuPresenter.displayAlert("The user " + userActionHandler.getUserName(user) + " has been" +
+                target = sc.nextLine();
+                if (adminHandler.banUser(user, target)) {
+                    menuPresenter.displayAlert("The user " + target + " has been " +
                             "successfully banned");
                 } else {
                     menuPresenter.displayError("The ban operation was unsuccessful");
                 }
                 adminMenu(user);
                 break;
-            case 7:
+            case 9:
                 // Displays banned users
                 menuPresenter.displayUsers(true);
                 menuPresenter.displayRequest("Please enter the name of the user that you wish to unban");
-                if (adminHandler.unBanUser(sc.nextLine())) {
-                    menuPresenter.displayAlert("The user " + userActionHandler.getUserName(user) + "has been " +
+                target = sc.nextLine();
+                if (adminHandler.unBanUser(target)) {
+                    menuPresenter.displayAlert("The user " + target + "has been " +
                             "unbanned");
                 } else {
                     menuPresenter.displayError("Unban was unsuccessful");
                 }
                 adminMenu(user);
-                break;
-            case 8:
-                vmmDisplayer.videoBrowseMenu(user);
-                break;
-            case 9:
-                //todo
-                pmd.playlistBrowseMenu(user);
                 break;
             default:
                 basicUserMenu(user, result);
@@ -212,6 +200,12 @@ public class MenuDisplayer {
                 break;
             case 3:
                 startMenu();
+                break;
+            case 4:
+                vmmDisplayer.videoBrowseMenu(user);
+                break;
+            case 5:
+                pmd.playlistBrowseMenu(user);
                 break;
         }
     }
