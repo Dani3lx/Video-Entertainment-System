@@ -13,27 +13,51 @@ import java.util.*;
 public class PlaylistManager {
     private ArrayList<Playlist> playlists;
 
+    /**
+     * Initialize empty ArrayList for playlists
+     */
     public PlaylistManager() {
         this.playlists = new ArrayList<Playlist>();
     }
 
+    /**
+     * Initialize playlists with an existing ArrayList
+     * @param playlists list of playlists
+     */
     public PlaylistManager(ArrayList<Playlist> playlists){
         this.playlists = playlists;
     }
 
+    /**
+     * Add playlist object to playlists
+     * @param pl playlist object
+     */
     public void addPlaylist(Playlist pl) {
         playlists.add(pl);
     }
 
+    /**
+     * Set playlists equal to input list of playlists
+     * @param playlists new list of playlists
+     */
     public void setPlaylists(ArrayList<Playlist> playlists) {
         this.playlists = playlists;
     }
 
+    /**
+     * Get list of playlists
+     * @return playlists
+     */
     public ArrayList<Playlist> getPlaylists() {
         return playlists;
     }
 
-
+    /**
+     * Add a specified Video object to a specified Playlist object
+     * @param pl Playlist to be added to
+     * @param vid Video to be added
+     * @return boolean indicating if operation was successful
+     */
     public boolean addToPlaylist(Playlist pl, Video vid) {
 
         ArrayList<String> videos = pl.getUniqueIDs();
@@ -45,6 +69,14 @@ public class PlaylistManager {
         pl.addUniqueID(vid.getUniqueID());
         return true;
     }
+
+    /**
+     * Delete a Video from a Playlist created by a User
+     * @param user The user who wants to delete the video
+     * @param pl the playlist they want to delete from
+     * @param vid the video they want to delete
+     * @return boolean indicating if the operation was successful
+     */
     public boolean deleteFromPlaylist(User user, Playlist pl, Video vid) {
 
         ArrayList<String> videos = pl.getUniqueIDs();
@@ -94,8 +126,6 @@ public class PlaylistManager {
         }
         return null;
     }
-
-
 
     /**
      * Reorder the specified playlist using the VideoRatingComparator and return the new Playlist object.
@@ -159,14 +189,28 @@ public class PlaylistManager {
         }
     }
 
+    /**
+     * Increment the likes of a playlist by one
+     * @param playlist the playlist to be liked
+     */
     public void likePlaylist(Playlist playlist) {
         playlist.setLikes(playlist.getLikes() + 1);
     }
 
+    /**
+     * Get the name of the playlist
+     * @param pl the playlist
+     * @return String name of playlist
+     */
     public String getPlName(Playlist pl){
         return pl.getPlaylistName();
     }
 
+    /**
+     * Get the ratings of a playlist
+     * @param pl the playlist
+     * @return String the String of the form "_(playlist name)_ has _(x)_ likes!"
+     */
     public String getRatings(Playlist pl) {
         int numlike = pl.getLikes();
         String outline = pl.getPlaylistName() + " has " + numlike + " likes! ";
