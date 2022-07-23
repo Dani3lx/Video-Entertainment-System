@@ -44,6 +44,37 @@ Group 249 - Akmar, Wing, Daniel, Benedek, Nicholas, Kate
     * **You Must Exit Program by inputting 3 in order for the session history to be saved**
 
 
+Descriptions of Unit Tests:
+* AdminManagerTest
+  * Tests banning and unbannign of users
+  * Tests user deletion
+  * Tests the returning of users based on ban status
+  * Tests the returning of all users inputted
+* NonAdminManagerTest
+  * Tests the ability to upload a video
+  * Tests deletion of a video
+  * Tests the ability to manipulate attributes of a video
+* PlaylistTest
+  * Tests the successfulness of adding a video to a playlist
+  * Tests the various strategies of reordering a playlist
+    * Name
+    * Random shuffle
+    * Rating
+  * Tests the deletion of a video from a playlist
+  * Tests liking a playlist
+* UserManagerTest
+  * Tests to see if the login credentials matches a user in the system
+  * Tests to validate parts of a user login
+    * Username
+    * Ban status
+  * Tests that the correct videos which correspond to either a name, category or 
+  uploader are returned
+* VideoEditorTest
+  * Tests that fields of the Video class can be edited
+* VideoTest
+  * Tests that uploading a video is successful
+  * Tests that video deletion can be completed
+  * Tests getting the correct Videos by Category, Uploader, Name, ID
 
 ## Contributors
 |Name|Email Address|
