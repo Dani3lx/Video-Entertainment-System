@@ -6,6 +6,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * Use case class responsible for interacting with the Video entity class
+ * @author Kate Ma
+ */
 public class VideoManager {
     private ArrayList<Video> vids = new ArrayList<>();
 
@@ -70,7 +74,7 @@ public class VideoManager {
                 return v;
             }
         }
-        return null; // todo fix later
+        return null;
     }
 
     /**
@@ -136,9 +140,6 @@ public class VideoManager {
         }
 
         return names;
-    }
-    public String getVidName(Video vid){
-        return vid.getName();
     }
 
 }
