@@ -5,6 +5,10 @@ import entities.User;
 
 import java.util.ArrayList;
 
+/**
+ * This class is responsible for performing all actions pertaining to the AdminUser class.
+ * @author Benedek Balla, Daniel Xu, ...
+ */
 public class AdminManager extends UserManager {
 
     private final ArrayList<User> users;

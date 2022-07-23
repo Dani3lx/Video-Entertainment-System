@@ -4,6 +4,12 @@ import entities.Video;
 
 import java.util.*;
 
+/**
+ * This comparator class is responsible for comparing two videos and returning an ordering based on rating
+ * (used to reorder by rating)
+ * @author Benedek Balla
+ */
+
 public class VideoRatingComparator implements Comparator<Video> {
     public int compare(Video v1, Video v2) {
         Integer v1Likes = Integer.parseInt(v1.getRatings().get(0));
