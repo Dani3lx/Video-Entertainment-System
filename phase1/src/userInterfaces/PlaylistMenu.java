@@ -152,7 +152,7 @@ public class PlaylistMenu {
         }
     }
 
-
+//todo get rid of pmm for dependency rule
     public void viewPlaylist(User user, Playlist pl) {
         int option = menuDisplayer.getUserActionChoice("Which Action would you like to perform " +
                 "\n1 - View Video Names in Playlist \n2 - View How Many Likes " + pmm.getPlName(pl) + " has" +
