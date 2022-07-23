@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Class responsible for playlist menus and sub menus
+ * @authors akmar
+ */
+
 public class PlaylistMenu {
 
     /*
@@ -28,7 +33,17 @@ public class PlaylistMenu {
     MenuDisplayer menuDisplayer;
     UserActionHandler userActionHandler;
     Scanner sc = new Scanner(System.in);
-    // todo Code smell -> too many inputs
+
+    /**
+     * Constructor for playlist menu
+     * @param menuPresenter call presenter for output
+     * @param vm video manager to access videos in playlist
+     * @param pma playlist menu actions to control usecases to be used for UI
+     * @param pmm playlist manager, used by pma for actions
+     * @param um user used by pma to check user logic
+     * @param userActionHandler used by menuDisplayer
+     * @param menuDisplayer used to output choices
+     */
     public PlaylistMenu(MenuPresenter menuPresenter, VideoManager vm, PlaylistMenuActions pma, PlaylistManager pmm, UserManager um, UserActionHandler userActionHandler, MenuDisplayer menuDisplayer) {
         this.vmm = vm;
         this.pmm = pmm;
@@ -39,12 +54,11 @@ public class PlaylistMenu {
         this.pp = new PlaylistPresenter();
         this.menuDisplayer = menuDisplayer;
     }
-    /*
-     * This is used for the user to interact with playlists and associated methods
-     * will use VMM displayer/presenter for this unless otherwise necessary
-     * Need to create way to
-     * */
 
+    /**
+     * Main Playlist Menu, used to find a playlist
+     * @param user user who will access the menu
+     */
 
     public void playlistBrowseMenu(User user) {
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
@@ -90,10 +104,11 @@ public class PlaylistMenu {
         }
     }
 
-    /*
-     * This is used for user to interact with a specific playlist after they have selected a playlist
-     * Need to create a cleaner select playlist
-     * */
+    /**
+     * playlistManageMenu is used for actions on the chosen playlist by the user
+     * @param user the user that is making changes to playlist
+     * @param pl the playlist being changed/viewed
+     */
 
     public void playlistManageMenu(User user, Playlist pl) {
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
@@ -150,7 +165,11 @@ public class PlaylistMenu {
         }
     }
 
-//todo get rid of pmm for dependency rule
+    /**
+     * view playlist to see what is inside the playlist including likes, videos and ability to change the name
+     * @param user user viewing/making changes to the playlist
+     * @param pl playlist being viewed/made changes to
+     */
     public void viewPlaylist(User user, Playlist pl) {
         int option = menuDisplayer.getUserActionChoice("Which Action would you like to perform " +
                 "\n1 - View Video Names in Playlist \n2 - View How Many Likes " + pma.playlistName(pl) + " has" +
@@ -183,7 +202,11 @@ public class PlaylistMenu {
 
     }
 
-    //todo last menu
+    /**
+     * ReorderPlaylist is the menu where you choose which reorder method to use
+     * @param user checks if user is able to make changes to playlist
+     * @param pl playlist being reordered
+     */
     public void ReorderPlaylist(User user, Playlist pl) { //todo user needs authority to change the playlist
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Reorder Playlist Alphabetically \n 2 - Reorder Playlist by Video Rating \n 3 - Shuffle Playlist  \n 4 -  Return");
@@ -217,6 +240,13 @@ public class PlaylistMenu {
         }
     }
 
+    /**
+     * helper function used to give error messages
+     * @param pl playlist being checked
+     * @param user user that interacts with playlist
+     * @param mp presenter used to output prompts
+     * @param errorMsg message to display
+     */
     void checkPlaylist(Playlist pl, User user, MenuPresenter mp,  String errorMsg) {
         if (Objects.isNull(pl)) {
             mp.displayAlert(errorMsg);
