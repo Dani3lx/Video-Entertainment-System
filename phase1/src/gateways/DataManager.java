@@ -16,9 +16,9 @@ import java.io.*;
  */
 public class DataManager {
 
-    private UserManager um;
-    private VideoManager vm;
-    private PlaylistManager pm;
+    private final UserManager um;
+    private final VideoManager vm;
+    private final PlaylistManager pm;
 
     public DataManager(UserManager um, VideoManager vm, PlaylistManager pm) {
         this.um = um;
@@ -155,14 +155,5 @@ public class DataManager {
             System.out.println("An error occurred.");
         }
     }
-
-//    public List<Integer> stringToListInt(String stringType) {
-//        List<String> listString = Arrays.asList(stringType.split("/"));
-//        List<Integer> listInt = new ArrayList<Integer>();
-//        for (int i = 0; i < listString.size(); i++) {
-//            listInt.add(i, Integer.parseInt(listString.get(i)));
-//        }
-//        return listInt;
-//    }
 
 }

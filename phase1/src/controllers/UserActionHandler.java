@@ -137,13 +137,4 @@ public class UserActionHandler {
         um.rateVideo(v, like);
     }
 
-    /**
-     * Return username.
-     *
-     * @param user the target user
-     * @return the username
-     */
-    public String getUserName(User user) {
-        return um.getUserName(user);
-    }
 }

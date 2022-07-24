@@ -17,7 +17,7 @@ public class PlaylistMenuActions {
 
     private PlaylistManager pm;
     private UserManager um;
-    private VideoManager vm;
+    private final VideoManager vm;
 
     /**
      * Contructor for this class to use the same manager inputs
@@ -127,23 +127,23 @@ public class PlaylistMenuActions {
      * @return true or false depending on whether the operation was completed
      *
      */
-    public Boolean AddDeleteFromPlaylist(String Vidname,User user, Playlist pl, boolean Add) {
+    public Boolean AddDeleteFromPlaylist(String Vidname, User user, Playlist pl, boolean Add) {
         System.out.println("check0");
         Video vid = vm.getByUniqueID(Vidname);
         System.out.println("check1");
-        Boolean result;
-        if (Add == true) {
+        boolean result;
+        if (Add) {
             System.out.println("check2.1");
-            result = pm.addToPlaylist(pl,vid);
+            result = pm.addToPlaylist(pl, vid);
             System.out.println("check3.1");
-            return result;
         } else {
             System.out.println("check2.2");
-            result = pm.deleteFromPlaylist(user,pl, vid);
+            result = pm.deleteFromPlaylist(user, pl, vid);
             System.out.println("check3.2");
-            return result;
         }
+        return result;
     }
+
     /**
      * Adds or deletes video from playlist
      * @param vid video that is being add/removed
