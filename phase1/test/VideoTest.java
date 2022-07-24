@@ -59,7 +59,7 @@ public class VideoTest {
     }
 
     @Test
-    public void getByIDTest() throws Exception {
+    public void getByIDTest() {
 
         assertEquals(VM.getVids().get(0), VM.getByUniqueID(VM.getVids().get(0).getUniqueID()));
     }
