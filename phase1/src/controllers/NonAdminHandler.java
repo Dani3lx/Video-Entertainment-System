@@ -30,7 +30,7 @@ public class NonAdminHandler extends UserActionHandler {
     }
 
     /**
-     * Uploads a video with currentUser, title, description, categories and vidlink
+     * Uploads a video with currentUser, title, description, categories and vidlink.
      *
      * @param currentUser the current user
      * @param title       the title of the video
@@ -50,7 +50,7 @@ public class NonAdminHandler extends UserActionHandler {
     }
 
     /**
-     * Deletes a video using user and uniqueID
+     * Deletes a video using user and uniqueID.
      *
      * @param user     the current user
      * @param uniqueID the video ID
@@ -61,9 +61,9 @@ public class NonAdminHandler extends UserActionHandler {
     }
 
     /**
-     * Edits the title of the video
+     * Edits the title of the video.
      *
-     * @param user     the crrent user
+     * @param user     the current user
      * @param uniqueID the video ID
      * @param newTitle the new title
      */
@@ -72,7 +72,7 @@ public class NonAdminHandler extends UserActionHandler {
     }
 
     /**
-     * Edits the categories of the video
+     * Edits the categories of the video.
      *
      * @param user     the current user
      * @param uniqueID the video ID
@@ -83,7 +83,7 @@ public class NonAdminHandler extends UserActionHandler {
     }
 
     /**
-     * Edits the description of the video
+     * Edits the description of the video.
      *
      * @param user     the current user
      * @param uniqueID the video ID
