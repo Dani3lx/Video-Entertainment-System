@@ -114,12 +114,12 @@ public class PlaylistMenu {
      */
 
     public void playlistManageMenu(User user, Playlist pl) {
-        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+        int option3 = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - View Playlist \n 2 - Add Video to Playlist \n 3 - Remove Video from Playlist \n 4 - Reorder Playlist " +
                 "\n 5 - Like Playlist \n 6 -  Return");
         String VidName;
         boolean result;
-        switch (option) {
+        switch (option3) {
             case 1:
                 viewPlaylist(user, pl);
                 break;

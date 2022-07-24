@@ -127,7 +127,7 @@ public class PlaylistMenuActions {
      * @return true or false depending on whether the operation was completed
      *
      */
-    public Boolean AddDeleteFromPlaylist(String Vidname, User user, Playlist pl, boolean Add) {
+    public boolean AddDeleteFromPlaylist(String Vidname, User user, Playlist pl, boolean Add) {
         System.out.println("check0");
         Video vid = vm.getByUniqueID(Vidname);
         System.out.println("check1");
