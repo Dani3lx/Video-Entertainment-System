@@ -183,7 +183,7 @@ public class VideoManagementMenuDisplayer {
                 ArrayList<String> categories = new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
                 menuPresenter.displayRequest("Enter video path: ");
                 String vidlink = sc.nextLine();
-                Boolean upload = nonAdminHandler.uploadVideo(user, title, description, categories, vidlink);
+                boolean upload = nonAdminHandler.uploadVideo(user, title, description, categories, vidlink);
                 if (upload){
                     menuPresenter.displayAlert("Upload successful");
                 } else {
