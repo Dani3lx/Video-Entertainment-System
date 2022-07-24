@@ -98,7 +98,7 @@ public class UserActionHandler {
     }
 
     /**
-     * Updates the user's history
+     * Updates the user's history.
      *
      * @param user the targeted user
      */
@@ -118,7 +118,7 @@ public class UserActionHandler {
     }
 
     /**
-     * Changes the user's password
+     * Changes the user's password.
      *
      * @param user        the targeted user
      * @param newPassword the new password
@@ -128,7 +128,7 @@ public class UserActionHandler {
     }
 
     /**
-     * Likes or dislikes the video
+     * Likes or dislikes the video.
      *
      * @param v    the video being rated
      * @param like whether to like or dislike
