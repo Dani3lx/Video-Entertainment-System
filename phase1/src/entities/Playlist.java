@@ -20,7 +20,7 @@ public class Playlist implements Iterable<String> {
      * Constructs a PlayList using playlistName and userName.
      *
      * @param playlistName the playlistName
-     * @param userName the username of the person creating this Playlist.
+     * @param userName     the username of the person creating this Playlist.
      */
     public Playlist(String playlistName, String userName) {
         this.name = playlistName;
@@ -34,9 +34,9 @@ public class Playlist implements Iterable<String> {
      * Constructs a PlayList using playlistName and userName.
      *
      * @param playlistName the name of the Playlist
-     * @param likes the number of likes to the Playlist
-     * @param uniqueIDs the list of uniqueIDs of videos stored in the Playlist.
-     * @param userName the username of the person creating this Playlist.
+     * @param likes        the number of likes to the Playlist
+     * @param uniqueIDs    the list of uniqueIDs of videos stored in the Playlist.
+     * @param userName     the username of the person creating this Playlist.
      */
     public Playlist(String playlistName, int likes, ArrayList<String> uniqueIDs, String userName) {
         this.name = playlistName;
@@ -48,7 +48,7 @@ public class Playlist implements Iterable<String> {
     /**
      * Returns the name of the Playlist
      *
-     * @return  the name of the Playlist
+     * @return the name of the Playlist
      */
     public String getPlaylistName() {
         return name;
@@ -84,7 +84,7 @@ public class Playlist implements Iterable<String> {
     /**
      * Returns the list of uniqueIDs of videos stored in the Playlist.
      *
-     * @return  the list of uniqueIDs of videos stored in the Playlist.
+     * @return the list of uniqueIDs of videos stored in the Playlist.
      */
 
     public ArrayList<String> getUniqueIDs() {
@@ -94,7 +94,7 @@ public class Playlist implements Iterable<String> {
     /**
      * Returns the username of the person creating this Playlist.
      *
-     * @return  the username of the person creating this Playlist.
+     * @return the username of the person creating this Playlist.
      */
     public String getUserName() {
         return userName;
