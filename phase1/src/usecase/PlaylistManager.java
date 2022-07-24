@@ -59,14 +59,15 @@ public class PlaylistManager {
      * @return boolean indicating if operation was successful
      */
     public boolean addToPlaylist(Playlist pl, Video vid) {
-
+        String vidid = vid.getUniqueID();
         ArrayList<String> videos = pl.getUniqueIDs();
+
         for (String uniqueID : videos) {
-            if (uniqueID.equals(vid.getUniqueID())) {
+            if (uniqueID.equals(vidid)) {
                 return false;
             }
         }
-        pl.addUniqueID(vid.getUniqueID());
+        pl.addUniqueID(vidid);
         return true;
     }
 

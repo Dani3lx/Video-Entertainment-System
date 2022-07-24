@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class PlaylistPresenter {
 
-    PlaylistManager pm;
 
     public void listPlaylistNames(ArrayList<Playlist> playlists,PlaylistManager pm) {
         int num = 0;

@@ -79,6 +79,7 @@ Playlists are a collection of videos that are created by a user.  Playlists may 
   * **Add Video to Playlist**
   * **Delete Video From Playlist**
     * The above two actions will allow the user to add and delete videos from the playlist if they were the creator of the playlist
+    * You may have to press enter twice here if the program doesn't continue immediately after entering the video name
   * **Reorder Playlist**
     * This will take you to the following submenu
     1. **Reorder Playlist Alphabetically**
@@ -142,6 +143,30 @@ Playlists are a collection of videos that are created by a user.  Playlists may 
   * Tests that uploading a video is successful
   * Tests that video deletion can be completed
   * Tests getting the correct Videos by Category, Uploader, Name, ID
+
+# 5. Data
+
+We have 3 data files `datasets/Data.csv`, `datasets/PlaylistData.csv`, `datasets/VideoData.csv` which stores various information corresponding to our program.  They are in `.csv` and are delimited by commas.
+
+`datasets/Data.csv` includes user data in the form:
+
+`[anarcyst,2,false,false,2022-07-22 16:00:23/2022-07-21 23:27:36/2022-07-23 23:48:37/]`
+This is interpreted as:
+`[Username,Password,isBanned?,isAdmin?,loginhistory]`
+
+`datasets/PlaylistData.csv` includes playlist data in the form:
+`[anarcysts_vids,0,0665353f-6446-48ad-8628-864986d2fc5e/,anarcyst]`
+This is interpreted as:
+`[PlaylistName,NumberofLikes,VideoUniqueIDs,UploaderUsername]`
+
+`datasets/VideoData.csv` includes video data in the form:
+`[anarcyst,Why I hate Nintendo,I speak at length about how Nintendo consistently rips people off due to good-will of the past and how they fail to embrace modernization,gaming/pokemon/nintendo/cheap/online/internet/anarcyst/,www.youtube.com/u/anarcyst/videolink,1bc0ae3c-6f27-4fa8-88c1-e2ab5c75f252,0/0/,2022-07-23T23:52:21.818647700]`
+
+This is interpreted as:
+`[UploaderUserName,VideoName,VideoDescription,Categories,ContentLocation,UniqueID,ratings,upload_date]`
+
+
+
 
 
 ## Contributors
