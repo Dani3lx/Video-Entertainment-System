@@ -125,6 +125,7 @@ public class PlaylistMenu {
                 break;
             case 2:
                 menuPresenter.displayRequest("Please enter the name of the video you would like to add to the playlist "); // todo does it make more sense to have UniqueID search rather than name?
+                sc.nextLine();
                 VidName = sc.nextLine();
                 result = pma.AddDeleteFromPlaylist(VidName, user, pl, true);
                 if (result) {
@@ -136,7 +137,9 @@ public class PlaylistMenu {
                 break;
             case 3:
                 menuPresenter.displayRequest("Please enter the name of the video you would like to remove from the playlist "); //todo is this now videoID?
+                sc.nextLine();
                 VidName = sc.nextLine();
+                System.out.println(VidName);
                 result = pma.AddDeleteFromPlaylist(VidName, user, pl, false);
                 if (result) {
                     menuPresenter.displayAlert("Successfully removed " + VidName + " to " + pl.getPlaylistName());
