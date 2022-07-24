@@ -96,6 +96,9 @@ public class PlaylistMenu {
                     case 2:
                         playlistBrowseMenu(user);
                         break;
+                    default:
+                        menuPresenter.displayError("Invalid input");
+                        playlistBrowseMenu(user);
                 }
                 break;
             case 4:
