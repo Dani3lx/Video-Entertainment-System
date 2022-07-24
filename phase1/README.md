@@ -19,12 +19,6 @@ Group 249 - Akmar, Wing, Daniel, Benedek, Nicholas, Kate
      * Check their **own** login history
      * Log out of their **own** account
      * Browse videos by name, categories, and uploader
-       * For browse by name, input keywords in the video title, casing doesn't matter
-       * For browse by category, input a category name then press enter to input the next category name. Input **CONTINUE** to began search.
-       * For browse by uploader, input the uploader name
-       * After browsing, a list of video will be presented
-         * Select a video by entering the number associated with each video
-           * User can like, dislike or add the video to a playlist. Select **return** to return to the user menu
      * View all videos uploaded by themselves plus upload/delete/edit their own videos
        * In the case of uploading videos, the description and categories are optional. Press enter to skip it.
        * In order to edit or delete videos, the non-admin user needs to input the unique ID of the video. The view all videos function lists all the videos with their corresponding unique IDs.
@@ -38,7 +32,7 @@ Group 249 - Akmar, Wing, Daniel, Benedek, Nicholas, Kate
      * Delete a user
      * Ban a user
      * Unban a user
-     * Browse videos by name, categories, and uploader like non-admin user
+     * Browse videos by name, categories, and uploader
      * Create/display playlists and browse playlists by name
 5. When you log out, you will be returned to the login menu 
     * **You Must Exit Program by inputting 3 in order for the session history to be saved**
@@ -48,7 +42,7 @@ Group 249 - Akmar, Wing, Daniel, Benedek, Nicholas, Kate
    * For **browse by name**, input keywords in the video title (not case sensitive)
    * For **browse by category**, input a category name then press enter to input the next category name. Input **CONTINUE** to began search.
    * For **browse by uploader**, input the uploader name
-      * After browsing, a list of video will be presented
+   * After browsing, a list of video will be presented
       * Select a video by entering the number associated with each video
       * User can like, dislike or add the video to a playlist. Select **return** to return to the user menu
    * View all videos uploaded by themselves plus upload/delete/edit their own videos
