@@ -6,32 +6,50 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
+
 /**
  * Use case class responsible for interacting with the Video entity class
+ *
  * @author Kate Ma
+ * @version 1.0
+ * @since 2022-07-23
  */
+
 public class VideoManager {
     private ArrayList<Video> vids = new ArrayList<>();
 
-    public ArrayList<Video> getVids(){
+    /**
+     * Return all videos.
+     *
+     * @return all videos
+     */
+    public ArrayList<Video> getVids() {
         return vids;
     }
 
-    public void setVids(ArrayList<Video> videos) { vids = videos; }
+    /**
+     * Set all videos.
+     *
+     * @param videos a list of videos
+     */
+    public void setVids(ArrayList<Video> videos) {
+        vids = videos;
+    }
 
     /**
+     * Upload a video with the following properties.
      *
-     * @param uploader The name of the person uploading video
-     * @param title The title of the video
-     * @param description What the video is about
-     * @param categories Categories video falls under
-     * @param vidLink A link to the video
+     * @param uploader    the name of the person uploading video
+     * @param title       the title of the video
+     * @param description what the video is about
+     * @param categories  categories video falls under
+     * @param vidLink     a link to the video
      */
-    public void uploadVideo(String uploader, String title, String description, ArrayList<String> categories, String vidLink){
+    public void uploadVideo(String uploader, String title, String description, ArrayList<String> categories, String vidLink) {
 
         ArrayList<String> vidID = new ArrayList<>();
 
-        if (!vids.isEmpty()){
+        if (!vids.isEmpty()) {
             for (Video v : vids) {
                 vidID.add(v.getUniqueID());
             }
@@ -54,21 +72,23 @@ public class VideoManager {
 
 
     /**
+     * Delete a video.
      *
-     * @param v entities.Video object
-     * @return Whether or not deletion was successful
+     * @param v target video
+     * @return whether deletion was successful
      */
-    public boolean deleteVideo(Video v){
+    public boolean deleteVideo(Video v) {
         vids.remove(v);
         return true;
     }
 
     /**
+     * Return a video by uniqueID.
      *
-     * @param uniqueID The name of the person who uploaded video
+     * @param uniqueID the uniqueID of the video
      * @return video with correspond UniqueID
      */
-    public Video getByUniqueID(String uniqueID){
+    public Video getByUniqueID(String uniqueID) {
         for (Video v : vids) {
             if (uniqueID.equalsIgnoreCase(v.getUniqueID())) {
                 return v;
@@ -78,15 +98,16 @@ public class VideoManager {
     }
 
     /**
+     * Return a list of videos uploaded by uploader.
      *
-     * @param uploader The name of the person who uploaded video
-     * @return All the videos the uploader has uploaded
+     * @param uploader the name of the person who uploaded video
+     * @return all the videos the uploader has uploaded
      */
-    public ArrayList<Video> getByUploader(String uploader){
+    public ArrayList<Video> getByUploader(String uploader) {
         ArrayList<Video> vid_list = new ArrayList<>();
-        for (Video v: vids){
+        for (Video v : vids) {
 
-            if (uploader.equalsIgnoreCase(v.getUploader())){
+            if (uploader.equalsIgnoreCase(v.getUploader())) {
                 vid_list.add(v);
 
             }
@@ -96,9 +117,10 @@ public class VideoManager {
     }
 
     /**
+     * Return a list of videos that contains name in the title.
      *
-     * @param name The title of the video
-     * @return All the videos that correspond to the title
+     * @param name the title of the video
+     * @return all the videos that correspond to the title
      */
     public ArrayList<Video> getByName(String name) {
         ArrayList<Video> videoList = new ArrayList<>();
@@ -111,9 +133,10 @@ public class VideoManager {
     }
 
     /**
+     * Return a list of videos with the following categories.
      *
-     * @param categories The categories of the video
-     * @return All the videos belonging to the same categories
+     * @param categories the categories of the video
+     * @return all the videos belonging to the same categories
      */
     public ArrayList<Video> getByCategory(ArrayList<String> categories) {
         ArrayList<Video> videoList = new ArrayList<>();
@@ -129,9 +152,10 @@ public class VideoManager {
     }
 
     /**
+     * Return a list of video names.
      *
-     * @param videos The list of videos
-     * @return entities.Video names
+     * @param videos the list of videos
+     * @return list of video names
      */
     public ArrayList<String> getVideoNames(ArrayList<Video> videos) {
         ArrayList<String> names = new ArrayList<>();
@@ -141,5 +165,4 @@ public class VideoManager {
 
         return names;
     }
-
 }
