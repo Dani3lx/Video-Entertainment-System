@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class PlaylistMenuActions {
 
-    private PlaylistManager pm;
-    private UserManager um;
+    private final PlaylistManager pm;
+    private final UserManager um;
     private final VideoManager vm;
 
     /**
@@ -36,8 +36,7 @@ public class PlaylistMenuActions {
      * @return playlist of corresponding name or null
      */
     public Playlist SearchPlaylist(String plname) {
-        Playlist pl = pm.getPlaylistByName(plname);
-        return pl;
+        return pm.getPlaylistByName(plname);
     }
 
     /**
@@ -69,8 +68,8 @@ public class PlaylistMenuActions {
 
     /**
      * get the number of likes on a playlist
-     * @param pl
-     * @return
+     * @param pl playlist we want to see likes for
+     * @return string of the number of ratings playlist has
      */
     public String getRatings(Playlist pl){
         return pm.getRatings(pl);
@@ -97,8 +96,7 @@ public class PlaylistMenuActions {
      */
     public ArrayList<String> videosinPL(Playlist pl){
         String name = playlistName(pl);
-        ArrayList<String> vidname = pm.namesInPlaylist(name, vm);
-        return vidname;
+        return pm.namesInPlaylist(name, vm);
     }
 
     /**
@@ -128,18 +126,17 @@ public class PlaylistMenuActions {
      *
      */
     public boolean AddDeleteFromPlaylist(String Vidname, User user, Playlist pl, boolean Add) {
-        System.out.println("check0");
-        Video vid = vm.getByUniqueID(Vidname);
-        System.out.println("check1");
+
+        ArrayList<Video> vids = vm.getByName(Vidname);
+        if(vids.isEmpty()){
+            return false;
+        }
+        Video vid = vids.get(0);
         boolean result;
         if (Add) {
-            System.out.println("check2.1");
             result = pm.addToPlaylist(pl, vid);
-            System.out.println("check3.1");
         } else {
-            System.out.println("check2.2");
             result = pm.deleteFromPlaylist(user, pl, vid);
-            System.out.println("check3.2");
         }
         return result;
     }
@@ -153,15 +150,14 @@ public class PlaylistMenuActions {
      * @return true or false depending on whether the operation was completed
      *
      */
-    public Boolean AddDeleteFromPlaylist(Video vid,User user, Playlist pl, boolean Add) {
-        Boolean result;
-        if (Add == true) {
+    public boolean AddDeleteFromPlaylist(Video vid,User user, Playlist pl, boolean Add) {
+        boolean result;
+        if (Add) {
             result = pm.addToPlaylist(pl,vid);
-            return result;
         } else {
             result = pm.deleteFromPlaylist(user,pl, vid);
-            return result;
         }
+        return result;
     }
 
     /**
@@ -170,12 +166,16 @@ public class PlaylistMenuActions {
      * @param choice which reorder method
      */
     public void reorderPL(Playlist pl, String choice){
-        if (choice.equals("name")){
-            pm.reorderPlaylistByName(pl);
-        } else if (choice.equals("rating")) {
-            pm.reorderPlaylistByRating(pl,vm);
-        } else if (choice.equals("shuffle")) {
-            pm.shufflePlaylist(pl,vm);
+        switch (choice) {
+            case "name":
+                pm.reorderPlaylistByName(pl);
+                break;
+            case "rating":
+                pm.reorderPlaylistByRating(pl, vm);
+                break;
+            case "shuffle":
+                pm.shufflePlaylist(pl, vm);
+                break;
         }
     }
 

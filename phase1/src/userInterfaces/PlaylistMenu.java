@@ -124,7 +124,7 @@ public class PlaylistMenu {
                 viewPlaylist(user, pl);
                 break;
             case 2:
-                menuPresenter.displayRequest("Please enter the name of the video you would like to add to the playlist "); // todo does it make more sense to have UniqueID search rather than name?
+                menuPresenter.displayRequest("Please enter the name of the video you would like to add to the playlist ");
                 sc.nextLine();
                 VidName = sc.nextLine();
                 result = pma.AddDeleteFromPlaylist(VidName, user, pl, true);
@@ -136,7 +136,7 @@ public class PlaylistMenu {
                 playlistManageMenu(user, pl);
                 break;
             case 3:
-                menuPresenter.displayRequest("Please enter the name of the video you would like to remove from the playlist "); //todo is this now videoID?
+                menuPresenter.displayRequest("Please enter the name of the video you would like to remove from the playlist ");
                 sc.nextLine();
                 VidName = sc.nextLine();
                 System.out.println(VidName);
@@ -213,7 +213,7 @@ public class PlaylistMenu {
      * @param user checks if user is able to make changes to playlist
      * @param pl playlist being reordered
      */
-    public void ReorderPlaylist(User user, Playlist pl) { //todo user needs authority to change the playlist
+    public void ReorderPlaylist(User user, Playlist pl) {
         int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
                 "\n 1 - Reorder Playlist Alphabetically \n 2 - Reorder Playlist by Video Rating \n 3 - Shuffle Playlist  \n 4 -  Return");
         boolean check = pma.isUser(user,pl);
