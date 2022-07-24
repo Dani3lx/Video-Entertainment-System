@@ -166,7 +166,12 @@ This is interpreted as:
 `[UploaderUserName,VideoName,VideoDescription,Categories,ContentLocation,UniqueID,ratings,upload_date]`
 
 
+# 6. UML Diagram
 
+Unlocked green lock: public
+Locked orange lock: private
+Key: protected
+Grey circle: Package protected
 
 
 ## Contributors
