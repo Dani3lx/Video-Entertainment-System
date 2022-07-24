@@ -14,18 +14,24 @@ import java.util.*;
 public class UserManager {
     VideoManager vm;
     private final VideoEditor ve = new VideoEditor();
+    private ArrayList<User> users;
 
+    /**
+     * This constructs a user manager that manages user.
+     *
+     * @param vm video manager for managing videos
+     */
     public UserManager(VideoManager vm) {
         this.vm = vm;
         users = new ArrayList<>();
     }
 
-    private ArrayList<User> users;
-
     /**
-     * @param username of the user
-     * @param password of the user
-     * @return the entire User object of the user
+     * Validate and return a user.
+     *
+     * @param username username
+     * @param password password
+     * @return validated user
      */
     public User validateUser(String username, String password) {
         if (Objects.isNull(users)) {
@@ -43,7 +49,9 @@ public class UserManager {
     }
 
     /**
-     * @param user     of type User
+     * Changes the user's password.
+     *
+     * @param user     target user
      * @param password the new password user wants to change to
      */
     public void changePassword(User user, String password) {
@@ -51,7 +59,9 @@ public class UserManager {
     }
 
     /**
-     * @param user of type User
+     * Returns the user login history.
+     *
+     * @param user target user
      * @return login history of user
      */
     public List<String> getHistory(User user) {
@@ -61,7 +71,9 @@ public class UserManager {
     }
 
     /**
-     * @param user of type User
+     * Updates the user's login history.
+     *
+     * @param user target user
      * @param date new login date to add
      */
     public void updateHistory(User user, String date) {
@@ -71,6 +83,8 @@ public class UserManager {
     // Overloaded instantiateUser methods
 
     /**
+     * Instantiate a new user with the following properties.
+     *
      * @param userName    of the user
      * @param password    of the user
      * @param banStatus   of the user
@@ -88,6 +102,8 @@ public class UserManager {
     }
 
     /**
+     * Instantiate a new user with the following properties.
+     *
      * @param userName    of the user
      * @param password    of the user
      * @param adminStatus of the user
@@ -102,8 +118,10 @@ public class UserManager {
     }
 
     /**
-     * @param user of type User
-     * @param name of the user
+     * Returns whether user's name is equal to name.
+     *
+     * @param user target user
+     * @param name name
      * @return if the username of user matches name
      */
     public boolean validateUserName(User user, String name) {
@@ -111,7 +129,9 @@ public class UserManager {
     }
 
     /**
-     * @param user of type User
+     * Returns user's ban status.
+     *
+     * @param user target user
      * @return the ban status of the user
      */
     public boolean validateBanStatus(User user) {
@@ -119,14 +139,19 @@ public class UserManager {
     }
 
     /**
-     * Adds user to the list of all users
+     * Adds user to the list of all users.
      *
-     * @param user of type User
+     * @param user target user
      */
     public void updateData(User user) {
         users.add(user);
     }
 
+    /**
+     * Return all users.
+     *
+     * @return all user
+     */
     public ArrayList<User> getAllUsers() {
         return users;
     }
@@ -136,13 +161,21 @@ public class UserManager {
         users = allUsers;
     }
 
+    /**
+     * Return whether user is admin.
+     *
+     * @param user target user
+     * @return whether user is admin
+     */
     public boolean getRole(User user) {
         return user.isAdminInd();
     }
 
     /**
-     * @param v    Video object
-     * @param like if want to like the video or not
+     * Rates a video.
+     *
+     * @param v    target video
+     * @param like whether to like the video or not
      */
     public void rateVideo(Video v, boolean like) {
         if (like) {
@@ -153,6 +186,8 @@ public class UserManager {
     }
 
     /**
+     * Return list of videos.
+     *
      * @param info   list of names/category/uploader
      * @param method collect videos by name/category/uploader
      * @return list of videos corresponding to the name/category/uploader
@@ -173,8 +208,13 @@ public class UserManager {
         }
     }
 
+    /**
+     * Return user's username.
+     *
+     * @param user target user
+     * @return username
+     */
     public String getUserName(User user) {
-        String name = user.getUserName();
-        return name;
+        return user.getUserName();
     }
 }
