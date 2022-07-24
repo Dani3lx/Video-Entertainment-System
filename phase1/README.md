@@ -169,8 +169,11 @@ This is interpreted as:
 # 6. UML Diagram
 
 Unlocked green lock: public
+
 Locked orange lock: private
+
 Key: protected
+
 Grey circle: Package protected
 
 
