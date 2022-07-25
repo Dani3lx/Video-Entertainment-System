@@ -2,7 +2,6 @@ import entities.NonAdminUser;
 import entities.Playlist;
 import entities.Video;
 import org.junit.Test;
-import org.junit.BeforeClass;
 import usecase.PlaylistManager;
 import usecase.VideoManager;
 
@@ -15,17 +14,9 @@ import static org.junit.Assert.assertTrue;
 
 public class PlaylistTest {
 
-    private static Video v1 =  new Video("k", "popmusic", "amazing music", new ArrayList<>(List.of("energizing"))
-            , "url", "1", new ArrayList<>(Arrays.asList("10", "0")), "today");
-
-    private static Video v2 = new Video("t", "rockmusic", "amazing music",
-            new ArrayList<>(List.of("fun")), "url", "2", new ArrayList<>(Arrays.asList("2", "0")), "today");
-
-    private static Video v3 = new Video("k", "moremusic", "amazing music", new ArrayList<>(List.of("energizing"))
-            , "url", "3", new ArrayList<>(Arrays.asList("1", "0")), "today");
     private static final Playlist play = new Playlist("Music", 0 , new ArrayList<>(Arrays.asList("2", "1", "3")), "k");
     private static final Playlist play_dup = new Playlist("Music1", 0, new ArrayList<>(Arrays.asList("1", "3")), "k1");
-    private static PlaylistManager PM = new PlaylistManager(new ArrayList<Playlist>(Arrays.asList(play, play_dup)));
+    private static final PlaylistManager PM = new PlaylistManager(new ArrayList<>(Arrays.asList(play, play_dup)));
     private static final VideoManager VM = new VideoManager();
     @Test
     public void reorderPlaylistByRatingTest() {
@@ -71,7 +62,7 @@ public class PlaylistTest {
         Playlist play2 = new Playlist("Music", 0 , new ArrayList<>(Arrays.asList("2", "1", "3")), "k");
         Playlist play_dup2 = new Playlist("Music1", 0, new ArrayList<>(Arrays.asList("1", "3")), "k1");
 
-        PlaylistManager PM2 = new PlaylistManager(new ArrayList<Playlist>(Arrays.asList(play2, play_dup2)));
+        PlaylistManager PM2 = new PlaylistManager(new ArrayList<>(Arrays.asList(play2, play_dup2)));
 
         NonAdminUser u1 = new NonAdminUser("k","123");
         ArrayList<String> cates2 = new ArrayList<>(List.of("fun"));
