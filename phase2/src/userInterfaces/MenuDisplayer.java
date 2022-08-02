@@ -83,9 +83,9 @@ public class MenuDisplayer {
                 break;
             case 3:
                 // Saves all the data and exits the program
-                dataManager.saveData("phase1/datasets/Data.csv");
-                dataManager.saveVideoData("phase1/datasets/VideoData.csv");
-                dataManager.savePlayListData("phase1/datasets/PlaylistData.csv");
+                dataManager.saveData("phase2/datasets/Data.csv");
+                dataManager.saveVideoData("phase2/datasets/VideoData.csv");
+                dataManager.savePlayListData("phase2/datasets/PlaylistData.csv");
                 System.exit(0);
                 break;
             default:

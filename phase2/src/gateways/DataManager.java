@@ -11,7 +11,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * This class is responsible for reading and writing data from and to the csv files contained in phase1/datasets
+ * This class is responsible for reading and writing data from and to the csv files contained in phase2/datasets
  * @author Benedek Balla, Shu Fan Nicholas Au
  */
 public class DataManager {
@@ -27,7 +27,7 @@ public class DataManager {
     }
 
     /**
-     * Reads User data from phase1/datasets/Data.csv into the program by instantiating Users and adding them
+     * Reads User data from phase2/datasets/Data.csv into the program by instantiating Users and adding them
      * into the list of all Users within UserManager.
      * @param filePath the path to Data.csv
      */
@@ -56,7 +56,7 @@ public class DataManager {
     }
 
     /**
-     * Writes User data from the list of all users within UserManager to phase1/datasets/Data.csv
+     * Writes User data from the list of all users within UserManager to phase2/datasets/Data.csv
      * @param filePath the path to Data.csv
      */
     public void saveData(String filePath) {
@@ -75,7 +75,7 @@ public class DataManager {
     }
 
     /**
-     * Writes Video data from the list of all videos within VideoManager to phase1/datasets/VideoData.csv
+     * Writes Video data from the list of all videos within VideoManager to phase2/datasets/VideoData.csv
      * @param filePath the path to VideoData.csv
      */
     public void saveVideoData(String filePath) {
@@ -94,7 +94,7 @@ public class DataManager {
     }
 
     /**
-     * Reads Video data from phase1/datasets/VideoData.csv into the program by instantiating Videos and adding them
+     * Reads Video data from phase2/datasets/VideoData.csv into the program by instantiating Videos and adding them
      * into the list of all Videos within VideoManager.
      * @param filePath the path to VideoData.csv
      */
@@ -116,7 +116,7 @@ public class DataManager {
     }
 
     /**
-     * Writes Playlist data from the list of all playlists within PlaylistManager to phase1/datasets/PlaylistData.csv
+     * Writes Playlist data from the list of all playlists within PlaylistManager to phase2/datasets/PlaylistData.csv
      * @param filePath the path to PlaylistData.csv
      */
     public void savePlayListData(String filePath) {
@@ -135,7 +135,7 @@ public class DataManager {
     }
 
     /**
-     * Reads Playlist data from phase1/datasets/PlaylistData.csv into the program by instantiating Playlists and adding
+     * Reads Playlist data from phase2/datasets/PlaylistData.csv into the program by instantiating Playlists and adding
      * them into the list of all Playlists within PlaylistManager.
      * @param filePath the path to PlaylistData.csv
      */
