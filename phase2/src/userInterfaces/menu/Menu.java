@@ -11,18 +11,19 @@ import userInterfaces.menuAction.MenuAction;
 import java.util.List;
 
 public class Menu {
-    private List<String> actionList;
-    private UserPrompt userPrompt = new TerminalUserPrompt();
-    private MenuActionFactory factory;
-    private String type;
+    private final List<String> actionList;
+    private final UserPrompt userPrompt;
+    private final MenuActionFactory factory;
+    private final String type;
 
-    public Menu(String type, List<String> actionList, UserManager um, VideoManager vm, PlaylistManager pm) {
+    public Menu(String type, List<String> actionList, UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt) {
         this.actionList = actionList;
-        factory = new MenuActionFactory(um, vm, pm);
+        factory = new MenuActionFactory(um, vm, pm, userPrompt);
         this.type = type;
+        this.userPrompt = userPrompt;
     }
 
-    public void run(){
+    public void run() {
         int result = userPrompt.getUserActionChoice(type, actionList);
         MenuAction action = factory.getMenuAction(actionList.get(result - 1));
         action.run();

@@ -14,34 +14,34 @@ import userInterfaces.userPrompt.TerminalUserPrompt;
 import java.util.Objects;
 
 // Not a controller class, but acts as a UI controller.
-public class UserLogin implements MenuAction{
+public class UserLogin implements MenuAction {
     LanguagePresenter lp = new EnglishPresenter();
-    UserPrompt mc = new TerminalUserPrompt();
+    UserPrompt userPrompt;
     UserActionHandler userActionHandler;
-
-    UserManager um;
-    VideoManager vm;
-    PlaylistManager pm;
-
     MenuBuilder menuBuilder;
+    User currentUser;
 
-    public UserLogin(UserManager um, VideoManager vm, PlaylistManager pm) {
+    public UserLogin(UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt) {
         userActionHandler = new UserActionHandler(um);
-        menuBuilder = new MenuBuilder(um, vm, pm);
+        menuBuilder = new MenuBuilder(um, vm, pm, userPrompt);
+        this.userPrompt = userPrompt;
     }
 
-    public void run(){
+    public void run() {
         // Takes in a username and password and tries to log in
-        String username = mc.getUserStringInput(lp.getRequestText("username"));
-        String password = mc.getUserStringInput(lp.getRequestText("password"));
-        User currentUser = userActionHandler.loginUser(username, password);
+        String username = userPrompt.getUserStringInput(lp.getRequestText("username"));
+        String password = userPrompt.getUserStringInput(lp.getRequestText("password"));
+        currentUser = userActionHandler.loginUser(username, password);
+        navigateMenu();
+    }
+    public void navigateMenu(){
         if (Objects.isNull(currentUser)) {
             menuBuilder.getMenu("start").run();
         }
         if (userActionHandler.isAdmin(currentUser)) {
             menuBuilder.getMenu("admin").run();
         } else {
-            System.out.println("go to non admin menu");
+            menuBuilder.getMenu("nonAdmin").run();
         }
     }
 }

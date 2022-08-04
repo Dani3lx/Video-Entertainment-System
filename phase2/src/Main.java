@@ -4,6 +4,8 @@ import usecase.UserManager;
 import usecase.VideoManager;
 import userInterfaces.menu.MenuBuilder;
 import userInterfaces.menu.Menu;
+import userInterfaces.userPrompt.TerminalUserPrompt;
+import userInterfaces.userPrompt.UserPrompt;
 
 import java.io.IOException;
 
@@ -19,8 +21,10 @@ public class Main {
         sm.loadVideoData("phase2/datasets/VideoData.csv"); //Read data from VideoData.csv
         sm.loadPlaylistData("phase2/datasets/PlaylistData.csv"); //Read data from PlaylistData.csv
 
-        MenuBuilder factory = new MenuBuilder(um, vm, pm);
-        Menu menu = factory.getMenu("start");
+        UserPrompt userPrompt = new TerminalUserPrompt();
+
+        MenuBuilder builder = new MenuBuilder(um, vm, pm, userPrompt);
+        Menu menu = builder.getMenu("start");
         menu.run();
     }
 }
