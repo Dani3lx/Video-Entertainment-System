@@ -23,8 +23,11 @@ public class UserLogin implements MenuAction{
     VideoManager vm;
     PlaylistManager pm;
 
+    MenuBuilder menuBuilder;
+
     public UserLogin(UserManager um, VideoManager vm, PlaylistManager pm) {
         userActionHandler = new UserActionHandler(um);
+        menuBuilder = new MenuBuilder(um, vm, pm);
     }
 
     public void run(){
@@ -33,10 +36,10 @@ public class UserLogin implements MenuAction{
         String password = mc.getUserStringInput(lp.getRequestText("password"));
         User currentUser = userActionHandler.loginUser(username, password);
         if (Objects.isNull(currentUser)) {
-            new MenuBuilder(um, vm , pm).getMenu("start").run();
+            menuBuilder.getMenu("start").run();
         }
         if (userActionHandler.isAdmin(currentUser)) {
-            System.out.println("go to admin menu");
+            menuBuilder.getMenu("admin").run();
         } else {
             System.out.println("go to non admin menu");
         }

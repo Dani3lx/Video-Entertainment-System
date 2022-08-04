@@ -21,8 +21,10 @@ public class MenuActionFactory {
         switch (type) {
             case "login":
                 return new UserLogin(um, vm, pm);
-            case "createAccount":
+            case "create account":
                 return new AccountCreation();
+            case "exit":
+                return new ExitProgram(um, vm, pm);
             default:
                 return null;
         }
