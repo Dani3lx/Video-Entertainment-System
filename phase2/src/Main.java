@@ -23,7 +23,7 @@ public class Main {
 
         UserPrompt userPrompt = new TerminalUserPrompt();
 
-        MenuBuilder builder = new MenuBuilder(um, vm, pm, userPrompt);
+        MenuBuilder builder = new MenuBuilder(um, vm, pm, userPrompt, null);
         Menu menu = builder.getMenu("start");
         menu.run();
     }

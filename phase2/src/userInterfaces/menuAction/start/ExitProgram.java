@@ -1,11 +1,12 @@
-package userInterfaces.menuAction;
+package userInterfaces.menuAction.start;
 
 import gateways.DataManager;
 import usecase.PlaylistManager;
 import usecase.UserManager;
 import usecase.VideoManager;
+import userInterfaces.menuAction.MenuAction;
 
-public class ExitProgram implements MenuAction{
+public class ExitProgram implements MenuAction {
     DataManager dataManager;
     public ExitProgram(UserManager um, VideoManager vm, PlaylistManager pm) {
         dataManager = new DataManager(um, vm, pm);

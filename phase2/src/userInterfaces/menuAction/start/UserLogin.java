@@ -1,4 +1,4 @@
-package userInterfaces.menuAction;
+package userInterfaces.menuAction.start;
 
 import controllers.UserActionHandler;
 import entities.User;
@@ -8,6 +8,7 @@ import usecase.PlaylistManager;
 import usecase.UserManager;
 import usecase.VideoManager;
 import userInterfaces.menu.MenuBuilder;
+import userInterfaces.menuAction.MenuAction;
 import userInterfaces.userPrompt.UserPrompt;
 import userInterfaces.userPrompt.TerminalUserPrompt;
 
@@ -20,11 +21,16 @@ public class UserLogin implements MenuAction {
     UserActionHandler userActionHandler;
     MenuBuilder menuBuilder;
     User currentUser;
+    UserManager um;
+    VideoManager vm;
+    PlaylistManager pm;
 
     public UserLogin(UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt) {
         userActionHandler = new UserActionHandler(um);
-        menuBuilder = new MenuBuilder(um, vm, pm, userPrompt);
         this.userPrompt = userPrompt;
+        this.um = um;
+        this.vm = vm;
+        this.pm = pm;
     }
 
     public void run() {
@@ -35,9 +41,11 @@ public class UserLogin implements MenuAction {
         navigateMenu();
     }
     public void navigateMenu(){
+        menuBuilder = new MenuBuilder(um, vm, pm, userPrompt, currentUser);
         if (Objects.isNull(currentUser)) {
             menuBuilder.getMenu("start").run();
         }
+        userActionHandler.updateUserHistory(currentUser);
         if (userActionHandler.isAdmin(currentUser)) {
             menuBuilder.getMenu("admin").run();
         } else {

@@ -1,5 +1,6 @@
 package userInterfaces.menu;
 
+import entities.User;
 import usecase.PlaylistManager;
 import usecase.UserManager;
 import usecase.VideoManager;
@@ -16,9 +17,9 @@ public class Menu {
     private final MenuActionFactory factory;
     private final String type;
 
-    public Menu(String type, List<String> actionList, UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt) {
+    public Menu(String type, List<String> actionList, UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt, User user) {
         this.actionList = actionList;
-        factory = new MenuActionFactory(um, vm, pm, userPrompt);
+        factory = new MenuActionFactory(um, vm, pm, userPrompt, user);
         this.type = type;
         this.userPrompt = userPrompt;
     }
