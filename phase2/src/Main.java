@@ -2,12 +2,13 @@ import gateways.DataManager;
 import usecase.PlaylistManager;
 import usecase.UserManager;
 import usecase.VideoManager;
-import userInterfaces.MenuDisplayer;
+import userInterfaces.menu.MenuBuilder;
+import userInterfaces.menu.Menu;
 
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         VideoManager vm = new VideoManager();
         UserManager um = new UserManager(vm);
@@ -18,8 +19,8 @@ public class Main {
         sm.loadVideoData("phase2/datasets/VideoData.csv"); //Read data from VideoData.csv
         sm.loadPlaylistData("phase2/datasets/PlaylistData.csv"); //Read data from PlaylistData.csv
 
-        MenuDisplayer md = new MenuDisplayer(um, vm, pm);
-        md.startMenu();
-
+        MenuBuilder factory = new MenuBuilder(um, vm, pm);
+        Menu menu = factory.getMenu("start");
+        menu.run();
     }
 }

@@ -1,6 +1,8 @@
-package presenters;
+package presenters.menuPresenter;
 
 import entities.User;
+import presenters.language.EnglishPresenter;
+import presenters.language.LanguagePresenter;
 import usecase.AdminManager;
 import usecase.NonAdminManager;
 import usecase.UserManager;
@@ -15,11 +17,13 @@ import java.util.List;
  * @version 1.0
  * @since 2022-07-21
  */
-public class MenuPresenter {
+public class TerminalMenuPresenter implements MenuPresenter{
     private final UserManager um;
     private final AdminManager am;
     private final NonAdminManager nm;
     private final VideoManager vm;
+
+    private final LanguagePresenter lp = new EnglishPresenter(); //todo use a factory instead maybe??
 
     /**
      * Constructs a menu presenter with a record of all the users and videos.
@@ -27,7 +31,7 @@ public class MenuPresenter {
      * @param um this is the user manager which keep tracks of all the users
      * @param vm this is the video manager which keep tracks of all the videos
      */
-    public MenuPresenter(UserManager um, VideoManager vm) {
+    public TerminalMenuPresenter(UserManager um, VideoManager vm) {
         this.um = um;
         this.vm = vm;
         this.am = new AdminManager(um, vm);
@@ -90,7 +94,7 @@ public class MenuPresenter {
      * @param message the message being displayed
      */
     public void displayError(String message) {
-        System.out.println(errorText(message));
+        System.out.println(errorText(lp.getErrorText(message)));
     }
 
     /**
@@ -107,8 +111,13 @@ public class MenuPresenter {
      *
      * @param message the message being displayed
      */
-    public void displayMenuOption(String message) {
-        System.out.println(menuOption(message));
+    public void displayMenuOption(String message, List<String> actionList) {
+        System.out.println(menuOption(lp.getMenuText(message)));
+        int counter = 1;
+        for (String item : actionList) {
+            System.out.println(counter + ": " + item);
+            counter++;
+        }
     }
 
     /**

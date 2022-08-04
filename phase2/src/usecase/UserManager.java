@@ -26,6 +26,17 @@ public class UserManager {
         users = new ArrayList<>();
     }
 
+    public boolean userExist(String username) {
+        if (!(Objects.isNull(users))) {
+            for (User u : users) {
+                if (validateUserName(u, username)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     /**
      * Validate and return a user.
      *
