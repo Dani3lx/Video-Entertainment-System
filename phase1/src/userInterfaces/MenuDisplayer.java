@@ -5,8 +5,6 @@ import controllers.NonAdminHandler;
 import controllers.UserActionHandler;
 import entities.User;
 import gateways.DataManager;
-import presenters.EnglishPresenter;
-import presenters.LanguagePresenter;
 import presenters.MenuPresenter;
 import usecase.PlaylistManager;
 import controllers.PlaylistMenuActions;
@@ -59,12 +57,8 @@ public class MenuDisplayer {
 
 
 
-        LanguagePresenter lp = new EnglishPresenter();
         // Gets user's choice to log in, create a new account or exit program
-        switch (getUserActionChoice(lp.getMenuText("startMenu"))) {
-
-
-
+        switch (getUserActionChoice("Type 1 to login, 2 to create account, 3 to exit")) {
 
             case 1:
                 // Takes in a username and password and tries to log in
