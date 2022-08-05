@@ -22,7 +22,8 @@ public class EnglishPresenter implements LanguagePresenter {
 
     public String getAlertText(AlertTextType type){
         switch(type){
-
+            case CREATEACCOUNT:
+                return "Account creation was successful";
             default:
                 return "";
         }
@@ -32,6 +33,8 @@ public class EnglishPresenter implements LanguagePresenter {
         switch(type){
             case INVALIDINPUT:
                 return "Invalid input, please try again.";
+            case CREATEACCOUNT:
+                return "Account creation was not successful";
             default:
                 return "";
         }

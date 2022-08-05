@@ -11,11 +11,12 @@ public interface LanguagePresenter {
     }
 
     enum AlertTextType {
-
+        CREATEACCOUNT
     }
 
     enum ErrorTextType {
-        INVALIDINPUT
+        INVALIDINPUT,
+        CREATEACCOUNT
     }
 
     enum RequestTextType {

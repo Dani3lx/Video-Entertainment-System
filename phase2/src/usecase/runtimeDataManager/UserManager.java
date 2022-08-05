@@ -12,7 +12,7 @@ import java.util.*;
  * @version 1.0
  * @since 2022-07-15
  */
-public class UserManager implements RuntimeDataManager {
+public class UserManager {
     static VideoManager vm;
     private final VideoEditor ve = new VideoEditor();
     private ArrayList<User> users;

@@ -15,7 +15,7 @@ import java.util.UUID;
  * @since 2022-07-23
  */
 
-public class VideoManager {
+public class VideoManager{
     private ArrayList<Video> vids = new ArrayList<>();
     private static VideoManager instance;
 
