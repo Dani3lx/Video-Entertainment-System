@@ -3,6 +3,7 @@ package controllers.menuAction.start;
 import controllers.old.UserActionHandler;
 import controllers.menuAction.MenuAction;
 import entities.User;
+import presenters.language.LanguagePresenter;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
@@ -14,9 +15,9 @@ public class AccountCreation implements MenuAction {
     UserActionHandler userActionHandler;
     MenuBuilder menuBuilder;
     UserManager um = UserManager.getInstance();
-    public AccountCreation(UserPrompt userPrompt, User user) {
+    public AccountCreation(UserPrompt userPrompt, User user, LanguagePresenter lp) {
         userActionHandler = new UserActionHandler(um);
-        menuBuilder = new MenuBuilder(userPrompt, user);
+        menuBuilder = new MenuBuilder(userPrompt, user, lp);
         this.userPrompt = userPrompt;
     }
     public void run(){

@@ -18,66 +18,49 @@ import java.util.List;
  * @since 2022-07-21
  */
 public class TerminalMenuPresenter implements MenuPresenter{
-    private final UserManager um;
-    private final AdminManager am;
-    private final NonAdminManager nm;
-    private final VideoManager vm;
 
     private final LanguagePresenter lp = new EnglishPresenter(); //todo use a factory instead maybe??
-
-    /**
-     * Constructs a menu presenter with a record of all the users and videos.
-     *
-     * @param um this is the user manager which keep tracks of all the users
-     * @param vm this is the video manager which keep tracks of all the videos
-     */
-    public TerminalMenuPresenter(UserManager um, VideoManager vm) {
-        this.um = um;
-        this.vm = vm;
-        this.am = new AdminManager(um, vm);
-        this.nm = new NonAdminManager(vm);
-    }
 
     /**
      * Displays the user's login history.
      *
      * @param user the target user
      */
-    public void displayLoginHistory(User user) {
-        System.out.println(um.getHistory(user));
-        System.out.println("\n");
-    }
+//    public void displayLoginHistory(User user) {
+//        System.out.println(um.getHistory(user));
+//        System.out.println("\n");
+//    }
 
     /**
      * Displays all the banned/unbanned users.
      *
      * @param banStatus whether to display banned or unbanned users
      */
-    public void displayUsers(boolean banStatus) {
-
-        if (banStatus) {
-            displayAlert("Here are all the banned users");
-        } else {
-            displayAlert("Here are all the unbanned users");
-        }
-        displayList(am.returnUsersByBan(um.getAllUsers(), banStatus));
-    }
+//    public void displayUsers(boolean banStatus) {
+//
+//        if (banStatus) {
+//            displayAlert("Here are all the banned users");
+//        } else {
+//            displayAlert("Here are all the unbanned users");
+//        }
+//        displayList(am.returnUsersByBan(um.getAllUsers(), banStatus));
+//    }
 
     /**
      * Displays all the users.
      */
-    public void displayUsers() {
-        displayAlert("Here are all the users");
-        displayList(am.returnUsers(um.getAllUsers()));
-    }
+//    public void displayUsers() {
+//        displayAlert("Here are all the users");
+//        displayList(am.returnUsers(um.getAllUsers()));
+//    }
 
     /**
      * Displays all the videos uploaded by user.
      */
-    public void displayVideos(User user) {
-        displayAlert("Here are all the videos uploaded by " + um.getUserName(user));
-        displayList(nm.displayAllVideos(user, vm.getVids()));
-    }
+//    public void displayVideos(User user) {
+//        displayAlert("Here are all the videos uploaded by " + um.getUserName(user));
+//        displayList(nm.displayAllVideos(user, vm.getVids()));
+//    }
 
     /**
      * Displays an alert.

@@ -7,4 +7,5 @@ public interface MenuPresenter {
     void displayMenuOption(String message, List<String> actionList);
     void displayError(String message);
     void displayAlert(String message);
+    void displayList(List<String> list);
 }

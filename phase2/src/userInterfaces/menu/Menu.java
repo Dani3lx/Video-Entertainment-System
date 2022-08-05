@@ -1,6 +1,7 @@
 package userInterfaces.menu;
 
 import entities.User;
+import presenters.language.LanguagePresenter;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
@@ -16,11 +17,12 @@ public class Menu {
     private final MenuActionFactory factory;
     private final String type;
 
-    public Menu(String type, List<String> actionList, UserPrompt userPrompt, User user) {
+    public Menu(String type, List<String> actionList, UserPrompt userPrompt, User user, LanguagePresenter lp) {
         this.actionList = actionList;
-        factory = new MenuActionFactory(userPrompt, user);
+        factory = new MenuActionFactory(userPrompt, user, lp);
         this.type = type;
         this.userPrompt = userPrompt;
+
     }
 
     public void run() {

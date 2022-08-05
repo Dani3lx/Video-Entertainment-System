@@ -2,6 +2,7 @@ package controllers.menuAction.allUser;
 
 import controllers.menuAction.MenuAction;
 import entities.User;
+import presenters.language.LanguagePresenter;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
@@ -13,8 +14,8 @@ public class UserLogout implements MenuAction {
 
     MenuBuilder menuBuilder;
 
-    public UserLogout(UserPrompt userPrompt, User user) {
-        menuBuilder = new MenuBuilder(userPrompt, user);
+    public UserLogout(UserPrompt userPrompt, User user, LanguagePresenter lp) {
+        menuBuilder = new MenuBuilder(userPrompt, user, lp);
     }
 
     public void run() {

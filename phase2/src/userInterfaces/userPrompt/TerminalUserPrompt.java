@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TerminalUserPrompt implements UserPrompt {
-    MenuPresenter mp = new TerminalMenuPresenter(new UserManager(new VideoManager()), new VideoManager());
+    MenuPresenter mp = new TerminalMenuPresenter();
     Scanner sc;
 
     public int getUserActionChoice(String type, List<String> actionList) {

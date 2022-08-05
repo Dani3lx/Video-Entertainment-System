@@ -1,4 +1,6 @@
 import gateways.DataManager;
+import presenters.language.EnglishPresenter;
+import presenters.language.LanguagePresenter;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
@@ -21,9 +23,10 @@ public class Main {
         sm.loadPlaylistData("phase2/datasets/PlaylistData.csv"); //Read data from PlaylistData.csv
 
         UserPrompt userPrompt = new TerminalUserPrompt();
+        LanguagePresenter lp = new EnglishPresenter();
 
         // Demo, create a class called RunTimeData that stores all the data that will persist throughout the runtime of the program
-        MenuBuilder builder = new MenuBuilder(userPrompt, null);
+        MenuBuilder builder = new MenuBuilder(userPrompt, null, lp);
 
         Menu menu = builder.getMenu("start");
         menu.run();

@@ -2,6 +2,7 @@ package controllers.menuAction;
 
 import controllers.old.UserActionHandler;
 import entities.User;
+import presenters.language.LanguagePresenter;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
@@ -14,13 +15,13 @@ public class ReturnMenu implements MenuAction {
     UserActionHandler userActionHandler;
     UserManager um = UserManager.getInstance();
 
-    public ReturnMenu(UserPrompt userPrompt, User user){
-        menuBuilder = new MenuBuilder(userPrompt, user);
+    public ReturnMenu(UserPrompt userPrompt, User user, LanguagePresenter lp) {
+        menuBuilder = new MenuBuilder(userPrompt, user, lp);
         currentUser = user;
         userActionHandler = new UserActionHandler(um);
     }
 
-    public void run(){
+    public void run() {
         navigateMenu();
     }
 
