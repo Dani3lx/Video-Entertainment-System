@@ -12,16 +12,10 @@ import controllers.menuAction.start.UserLogin;
 import userInterfaces.userPrompt.UserPrompt;
 
 public class MenuActionFactory {
-    UserManager um;
-    VideoManager vm;
-    PlaylistManager pm;
     private final UserPrompt userPrompt;
     User user;
 
-    public MenuActionFactory(UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt, User user) {
-        this.um = um;
-        this.pm = pm;
-        this.vm = vm;
+    public MenuActionFactory(UserPrompt userPrompt, User user) {
         this.userPrompt = userPrompt;
         this.user = user;
     }
@@ -29,17 +23,17 @@ public class MenuActionFactory {
     public MenuAction getMenuAction(String type) {
         switch (type) {
             case "login":
-                return new UserLogin(um, vm, pm, userPrompt);
+                return new UserLogin(userPrompt);
             case "create account":
-                return new AccountCreation(um, vm, pm, userPrompt, user);
+                return new AccountCreation(userPrompt, user);
             case "exit":
-                return new ExitProgram(um, vm, pm);
+                return new ExitProgram();
             case "logout":
-                return new UserLogout(um, vm, pm, userPrompt, user);
+                return new UserLogout(userPrompt, user);
             case "return":
-                return new ReturnMenu(um, vm, pm, userPrompt, user);
+                return new ReturnMenu(userPrompt, user);
             case "browse video":
-                return new BrowseVideo(um, vm, pm, userPrompt, user);
+                return new BrowseVideo(userPrompt, user);
             default:
                 return null;
         }

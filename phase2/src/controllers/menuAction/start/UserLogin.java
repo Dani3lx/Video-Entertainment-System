@@ -1,6 +1,6 @@
 package controllers.menuAction.start;
 
-import controllers.UserActionHandler;
+import controllers.old.UserActionHandler;
 import controllers.menuAction.MenuAction;
 import entities.User;
 import presenters.language.EnglishPresenter;
@@ -20,16 +20,11 @@ public class UserLogin implements MenuAction {
     UserActionHandler userActionHandler;
     MenuBuilder menuBuilder;
     User currentUser;
-    UserManager um;
-    VideoManager vm;
-    PlaylistManager pm;
+    UserManager um = UserManager.getInstance();
 
-    public UserLogin(UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt) {
+    public UserLogin(UserPrompt userPrompt) {
         userActionHandler = new UserActionHandler(um);
         this.userPrompt = userPrompt;
-        this.um = um;
-        this.vm = vm;
-        this.pm = pm;
     }
 
     public void run() {
@@ -40,7 +35,7 @@ public class UserLogin implements MenuAction {
         navigateMenu();
     }
     public void navigateMenu(){
-        menuBuilder = new MenuBuilder(um, vm, pm, userPrompt, currentUser);
+        menuBuilder = new MenuBuilder(userPrompt, currentUser);
         if (Objects.isNull(currentUser)) {
             menuBuilder.getMenu("start").run();
         }

@@ -16,9 +16,9 @@ public class Menu {
     private final MenuActionFactory factory;
     private final String type;
 
-    public Menu(String type, List<String> actionList, UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt, User user) {
+    public Menu(String type, List<String> actionList, UserPrompt userPrompt, User user) {
         this.actionList = actionList;
-        factory = new MenuActionFactory(um, vm, pm, userPrompt, user);
+        factory = new MenuActionFactory(userPrompt, user);
         this.type = type;
         this.userPrompt = userPrompt;
     }

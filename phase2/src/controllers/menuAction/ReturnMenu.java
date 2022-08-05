@@ -1,6 +1,6 @@
 package controllers.menuAction;
 
-import controllers.UserActionHandler;
+import controllers.old.UserActionHandler;
 import entities.User;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
@@ -12,9 +12,10 @@ public class ReturnMenu implements MenuAction {
     User currentUser;
     MenuBuilder menuBuilder;
     UserActionHandler userActionHandler;
+    UserManager um = UserManager.getInstance();
 
-    public ReturnMenu(UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt, User user){
-        menuBuilder = new MenuBuilder(um, vm, pm, userPrompt, user);
+    public ReturnMenu(UserPrompt userPrompt, User user){
+        menuBuilder = new MenuBuilder(userPrompt, user);
         currentUser = user;
         userActionHandler = new UserActionHandler(um);
     }

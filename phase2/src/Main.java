@@ -13,7 +13,7 @@ public class Main {
 
         VideoManager vm = VideoManager.getInstance();
         UserManager um = UserManager.getInstance();
-        PlaylistManager pm = new PlaylistManager();
+        PlaylistManager pm = PlaylistManager.getInstance();
 
         DataManager sm = new DataManager(um, vm, pm);
         sm.loadData("phase2/datasets/Data.csv"); //Read data from Data.csv
@@ -22,12 +22,8 @@ public class Main {
 
         UserPrompt userPrompt = new TerminalUserPrompt();
 
-
-
         // Demo, create a class called RunTimeData that stores all the data that will persist throughout the runtime of the program
-        MenuBuilder builder = new MenuBuilder(um, vm, pm, userPrompt, null);
-
-        MenuActionFactory factory = new MenuActionFactory(um, vm, pm, userPrompt, null);
+        MenuBuilder builder = new MenuBuilder(userPrompt, null);
 
         Menu menu = builder.getMenu("start");
         menu.run();

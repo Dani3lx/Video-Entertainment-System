@@ -13,8 +13,8 @@ public class UserLogout implements MenuAction {
 
     MenuBuilder menuBuilder;
 
-    public UserLogout(UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt, User user) {
-        menuBuilder = new MenuBuilder(um, vm, pm, userPrompt, user);
+    public UserLogout(UserPrompt userPrompt, User user) {
+        menuBuilder = new MenuBuilder(userPrompt, user);
     }
 
     public void run() {

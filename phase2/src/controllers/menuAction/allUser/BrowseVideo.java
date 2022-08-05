@@ -12,8 +12,8 @@ public class BrowseVideo implements MenuAction {
 
     MenuBuilder menuBuilder;
 
-    public BrowseVideo(UserManager um, VideoManager vm, PlaylistManager pm, UserPrompt userPrompt, User user) {
-        menuBuilder = new MenuBuilder(um, vm, pm, userPrompt, user);
+    public BrowseVideo(UserPrompt userPrompt, User user) {
+        menuBuilder = new MenuBuilder(userPrompt, user);
     }
 
     @Override
