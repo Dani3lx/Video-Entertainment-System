@@ -3,10 +3,10 @@ package presenters.menuPresenter;
 import entities.User;
 import presenters.language.EnglishPresenter;
 import presenters.language.LanguagePresenter;
-import usecase.AdminManager;
-import usecase.NonAdminManager;
-import usecase.UserManager;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.AdminManager;
+import usecase.runtimeDataManager.NonAdminManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
 
 import java.util.List;
 

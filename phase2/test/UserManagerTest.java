@@ -2,8 +2,8 @@ import entities.AdminUser;
 import entities.NonAdminUser;
 import entities.Video;
 import org.junit.*;
-import usecase.UserManager;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;

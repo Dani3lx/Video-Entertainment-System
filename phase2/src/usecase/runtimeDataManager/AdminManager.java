@@ -1,4 +1,4 @@
-package usecase;
+package usecase.runtimeDataManager;
 
 import entities.AdminUser;
 import entities.User;

@@ -1,9 +1,9 @@
 import entities.NonAdminUser;
 import entities.User;
 import org.junit.Test;
-import usecase.AdminManager;
-import usecase.UserManager;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.AdminManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
 import org.junit.BeforeClass;
 
 import java.util.ArrayList;

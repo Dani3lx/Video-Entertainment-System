@@ -2,8 +2,8 @@ package userInterfaces.userPrompt;
 
 import presenters.menuPresenter.MenuPresenter;
 import presenters.menuPresenter.TerminalMenuPresenter;
-import usecase.UserManager;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
 
 import java.util.ArrayList;
 import java.util.List;

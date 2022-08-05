@@ -1,11 +1,11 @@
-package userInterfaces.menuAction.allUser;
+package controllers.menuAction.allUser;
 
+import controllers.menuAction.MenuAction;
 import entities.User;
-import usecase.PlaylistManager;
-import usecase.UserManager;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.PlaylistManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
 import userInterfaces.menu.MenuBuilder;
-import userInterfaces.menuAction.MenuAction;
 import userInterfaces.userPrompt.UserPrompt;
 
 public class UserLogout implements MenuAction {

@@ -1,8 +1,9 @@
-package usecase;
+package usecase.runtimeDataManager;
 
 import entities.Playlist;
 import entities.User;
 import entities.Video;
+import usecase.VideoRatingComparator;
 
 import java.util.*;
 
@@ -12,6 +13,15 @@ import java.util.*;
  */
 public class PlaylistManager {
     private ArrayList<Playlist> playlists;
+    private static PlaylistManager instance;
+
+    public static PlaylistManager getInstance(){
+        if (instance == null) {
+            return new PlaylistManager();
+        }
+
+        return instance;
+    }
 
     /**
      * Initialize empty ArrayList for playlists

@@ -1,6 +1,7 @@
-package usecase;
+package usecase.runtimeDataManager;
 
 import entities.*;
+import usecase.VideoEditor;
 
 import java.util.*;
 
@@ -11,10 +12,12 @@ import java.util.*;
  * @version 1.0
  * @since 2022-07-15
  */
-public class UserManager {
-    VideoManager vm;
+public class UserManager implements RuntimeDataManager {
+    static VideoManager vm;
     private final VideoEditor ve = new VideoEditor();
     private ArrayList<User> users;
+
+    private static UserManager instance;
 
     /**
      * This constructs a user manager that manages user.
@@ -22,8 +25,16 @@ public class UserManager {
      * @param vm video manager for managing videos
      */
     public UserManager(VideoManager vm) {
-        this.vm = vm;
+        UserManager.vm = vm;
         users = new ArrayList<>();
+    }
+
+
+    public static UserManager getInstance() {
+        if (instance == null)
+            instance = new UserManager(vm);
+
+        return instance;
     }
 
     public boolean noUserExist(String username) {

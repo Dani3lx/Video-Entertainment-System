@@ -1,6 +1,6 @@
 import entities.Video;
 import org.junit.*;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.VideoManager;
 
 
 import java.util.ArrayList;

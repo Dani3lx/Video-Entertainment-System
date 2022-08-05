@@ -2,7 +2,7 @@ package controllers;
 
 import entities.User;
 import entities.Video;
-import usecase.UserManager;
+import usecase.runtimeDataManager.UserManager;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

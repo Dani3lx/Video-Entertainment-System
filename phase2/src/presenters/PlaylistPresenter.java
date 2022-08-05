@@ -1,7 +1,7 @@
 package presenters;
 
 import entities.Playlist;
-import usecase.PlaylistManager;
+import usecase.runtimeDataManager.PlaylistManager;
 
 import java.util.ArrayList;
 

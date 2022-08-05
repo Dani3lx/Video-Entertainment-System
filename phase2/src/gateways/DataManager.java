@@ -3,9 +3,9 @@ package gateways;
 import entities.Playlist;
 import entities.User;
 import entities.Video;
-import usecase.PlaylistManager;
-import usecase.UserManager;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.PlaylistManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
 
 import java.util.*;
 import java.io.*;

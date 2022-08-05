@@ -1,10 +1,10 @@
-package userInterfaces.menuAction.start;
+package controllers.menuAction.start;
 
+import controllers.menuAction.MenuAction;
 import gateways.DataManager;
-import usecase.PlaylistManager;
-import usecase.UserManager;
-import usecase.VideoManager;
-import userInterfaces.menuAction.MenuAction;
+import usecase.runtimeDataManager.PlaylistManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
 
 public class ExitProgram implements MenuAction {
     DataManager dataManager;

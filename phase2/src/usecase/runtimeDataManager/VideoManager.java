@@ -1,4 +1,4 @@
-package usecase;
+package usecase.runtimeDataManager;
 
 import entities.Video;
 
@@ -17,6 +17,14 @@ import java.util.UUID;
 
 public class VideoManager {
     private ArrayList<Video> vids = new ArrayList<>();
+    private static VideoManager instance;
+
+    public static VideoManager getInstance(){
+        if (instance == null) {
+            return new VideoManager();
+        }
+        return instance;
+    }
 
     /**
      * Return all videos.

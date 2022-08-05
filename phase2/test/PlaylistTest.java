@@ -2,8 +2,8 @@ import entities.NonAdminUser;
 import entities.Playlist;
 import entities.Video;
 import org.junit.Test;
-import usecase.PlaylistManager;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.PlaylistManager;
+import usecase.runtimeDataManager.VideoManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;

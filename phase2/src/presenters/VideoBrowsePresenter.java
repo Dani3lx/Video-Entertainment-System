@@ -2,7 +2,7 @@ package presenters;
 
 import entities.Video;
 import usecase.VideoEditor;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.VideoManager;
 
 import java.util.ArrayList;
 

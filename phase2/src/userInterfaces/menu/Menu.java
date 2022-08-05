@@ -1,13 +1,12 @@
 package userInterfaces.menu;
 
 import entities.User;
-import usecase.PlaylistManager;
-import usecase.UserManager;
-import usecase.VideoManager;
-import userInterfaces.menuAction.MenuActionFactory;
-import userInterfaces.userPrompt.TerminalUserPrompt;
+import usecase.runtimeDataManager.PlaylistManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
+import controllers.menuAction.MenuActionFactory;
 import userInterfaces.userPrompt.UserPrompt;
-import userInterfaces.menuAction.MenuAction;
+import controllers.menuAction.MenuAction;
 
 import java.util.List;
 

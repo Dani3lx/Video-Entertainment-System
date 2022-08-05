@@ -1,14 +1,14 @@
-package userInterfaces.menuAction;
+package controllers.menuAction;
 
+import controllers.menuAction.allUser.BrowseVideo;
+import controllers.menuAction.start.AccountCreation;
+import controllers.menuAction.start.ExitProgram;
 import entities.User;
-import usecase.PlaylistManager;
-import usecase.UserManager;
-import usecase.VideoManager;
-import userInterfaces.menuAction.allUser.BrowseVideo;
-import userInterfaces.menuAction.allUser.UserLogout;
-import userInterfaces.menuAction.start.AccountCreation;
-import userInterfaces.menuAction.start.ExitProgram;
-import userInterfaces.menuAction.start.UserLogin;
+import usecase.runtimeDataManager.PlaylistManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
+import controllers.menuAction.allUser.UserLogout;
+import controllers.menuAction.start.UserLogin;
 import userInterfaces.userPrompt.UserPrompt;
 
 public class MenuActionFactory {

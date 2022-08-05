@@ -1,8 +1,8 @@
 import entities.NonAdminUser;
 import entities.Video;
 import org.junit.Test;
-import usecase.NonAdminManager;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.NonAdminManager;
+import usecase.runtimeDataManager.VideoManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;

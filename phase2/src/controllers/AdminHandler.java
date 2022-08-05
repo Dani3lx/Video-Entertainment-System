@@ -1,9 +1,9 @@
 package controllers;
 
 import entities.User;
-import usecase.AdminManager;
-import usecase.UserManager;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.AdminManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
 
 import java.util.ArrayList;
 

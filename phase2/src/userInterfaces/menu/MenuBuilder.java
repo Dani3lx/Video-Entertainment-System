@@ -1,9 +1,9 @@
 package userInterfaces.menu;
 
 import entities.User;
-import usecase.PlaylistManager;
-import usecase.UserManager;
-import usecase.VideoManager;
+import usecase.runtimeDataManager.PlaylistManager;
+import usecase.runtimeDataManager.UserManager;
+import usecase.runtimeDataManager.VideoManager;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
