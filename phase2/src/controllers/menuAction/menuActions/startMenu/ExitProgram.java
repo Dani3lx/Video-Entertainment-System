@@ -1,8 +1,6 @@
-package controllers.menuAction.start;
+package controllers.menuAction.menuActions.startMenu;
 
-import controllers.menuAction.MenuAction;
-import entities.Playlist;
-import entities.Video;
+import controllers.menuAction.menuActions.MenuAction;
 import gateways.DataManager;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;

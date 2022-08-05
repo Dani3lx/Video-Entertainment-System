@@ -6,7 +6,6 @@ import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
 import userInterfaces.menu.MenuBuilder;
 import userInterfaces.menu.Menu;
-import controllers.menuAction.MenuActionFactory;
 import userInterfaces.userPrompt.TerminalUserPrompt;
 import userInterfaces.userPrompt.UserPrompt;
 

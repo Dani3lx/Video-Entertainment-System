@@ -1,4 +1,4 @@
-package controllers.menuAction;
+package controllers.menuAction.menuActions;
 
 public interface MenuAction {
     void run();

@@ -1,11 +1,10 @@
-package controllers.menuAction;
+package controllers.menuAction.menuActions.videoBrowseMenu;
 
+import controllers.menuAction.menuActions.MenuAction;
 import controllers.old.UserActionHandler;
 import entities.User;
 import presenters.language.LanguagePresenter;
-import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
-import usecase.runtimeDataManager.VideoManager;
 import userInterfaces.menu.MenuBuilder;
 import userInterfaces.userPrompt.UserPrompt;
 

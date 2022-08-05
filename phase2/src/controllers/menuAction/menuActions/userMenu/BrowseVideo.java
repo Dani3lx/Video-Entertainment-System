@@ -1,11 +1,8 @@
-package controllers.menuAction.allUser;
+package controllers.menuAction.menuActions.userMenu;
 
-import controllers.menuAction.MenuAction;
+import controllers.menuAction.menuActions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
-import usecase.runtimeDataManager.PlaylistManager;
-import usecase.runtimeDataManager.UserManager;
-import usecase.runtimeDataManager.VideoManager;
 import userInterfaces.menu.MenuBuilder;
 import userInterfaces.userPrompt.UserPrompt;
 
