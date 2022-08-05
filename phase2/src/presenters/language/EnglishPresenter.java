@@ -1,48 +1,47 @@
 package presenters.language;
 
 public class EnglishPresenter implements LanguagePresenter {
-    public String getMenuText(String str){
-        switch(str){
-            case "start":
+    public String getMenuText(MenuTextType var){
+        switch(var){
+            case START:
                 return "This is the start menu, please select one of the following options to proceed.";
-            case "admin":
+            case ADMIN:
                 return "Welcome to the admin menu, please select one of the following admin action to proceed.";
-            case "nonAdmin":
+            case NONADMIN:
                 return "Welcome to the non-admin menu, please select one of the following non-admin action to proceed.";
-            case "videoBrowse":
+            case VIDEOBROWSE:
                 return "Welcome to the video browsing system, please select one of the following action to proceed.";
+            case VIDEOSTUDIO:
+                return "Welcome to the video studio, please select one of the following action to proceed.";
+            case PLAYLIST:
+                return "Welcome to the playlist system, please select one of the following action to proceed.";
             default:
                 return "";
         }
     }
 
-    public String getAlertText(String str){
-        switch(str){
-            case "....":
-                return "....";
-            case "...":
-                return "...";
+    public String getAlertText(AlertTextType type){
+        switch(type){
+
             default:
                 return "";
         }
     }
 
-    public String getErrorText(String str){
-        switch(str){
-            case "invalidInput":
+    public String getErrorText(ErrorTextType type){
+        switch(type){
+            case INVALIDINPUT:
                 return "Invalid input, please try again.";
-            case "....":
-                return "...";
             default:
                 return "";
         }
     }
 
-    public String getRequestText(String str){
-        switch(str){
-            case "username":
+    public String getRequestText(RequestTextType type){
+        switch(type){
+            case USERNAME:
                 return "Please input a username";
-            case "password":
+            case PASSWORD:
                 return "Please input a password";
             default:
                 return "";

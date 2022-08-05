@@ -1,8 +1,29 @@
 package presenters.language;
 
 public interface LanguagePresenter {
-    String getMenuText(String str);
-    String getAlertText(String str);
-    String getErrorText(String str);
-    String getRequestText(String str);
+    enum MenuTextType {
+        START,
+        ADMIN,
+        NONADMIN,
+        VIDEOBROWSE,
+        VIDEOSTUDIO,
+        PLAYLIST
+    }
+
+    enum AlertTextType {
+
+    }
+
+    enum ErrorTextType {
+        INVALIDINPUT
+    }
+
+    enum RequestTextType {
+        USERNAME,
+        PASSWORD
+    }
+    String getMenuText(MenuTextType type);
+    String getAlertText(AlertTextType type);
+    String getErrorText(ErrorTextType type);
+    String getRequestText(RequestTextType type);
 }

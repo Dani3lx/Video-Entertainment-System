@@ -26,8 +26,8 @@ public class UserLogin implements MenuAction {
 
     public void run() {
         // Takes in a username and password and tries to log in
-        String username = userPrompt.getUserStringInput(lp.getRequestText("username"));
-        String password = userPrompt.getUserStringInput(lp.getRequestText("password"));
+        String username = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.USERNAME);
+        String password = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PASSWORD);
         currentUser = um.validateUser(username, password);
         navigateMenu();
     }

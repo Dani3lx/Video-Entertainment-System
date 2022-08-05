@@ -65,37 +65,37 @@ public class TerminalMenuPresenter implements MenuPresenter{
     /**
      * Displays an alert.
      *
-     * @param message the message being displayed
      */
-    public void displayAlert(String message) {
-        System.out.println(alertText(message));
+    public void displayAlert(LanguagePresenter.AlertTextType type) {
+        System.out.println(alertText(lp.getAlertText(type)));
     }
 
     /**
      * Displays an error.
      *
-     * @param message the message being displayed
      */
-    public void displayError(String message) {
-        System.out.println(errorText(lp.getErrorText(message)));
+    public void displayError(LanguagePresenter.ErrorTextType type) {
+        System.out.println(errorText(lp.getErrorText(type)));
     }
 
     /**
      * Displays a request to the user.
      *
-     * @param message the message being displayed
      */
-    public void displayRequest(String message) {
-        System.out.println(requestText(message));
+    public void displayRequest(LanguagePresenter.RequestTextType type) {
+        System.out.println(requestText(lp.getRequestText(type)));
+    }
+
+    public void displayRequestMultiple(LanguagePresenter.RequestTextType type) {
+        System.out.println(requestText(lp.getRequestText(type)) + ". Type CONTINUE to proceed.");
     }
 
     /**
      * Displays a menu option.
      *
-     * @param message the message being displayed
      */
-    public void displayMenuOption(String message, List<String> actionList) {
-        System.out.println(menuOption(lp.getMenuText(message)));
+    public void displayMenuOption(LanguagePresenter.MenuTextType type, List<String> actionList) {
+        System.out.println(menuOption(lp.getMenuText(type)));
         int counter = 1;
         for (String item : actionList) {
             System.out.println(counter + ": " + item);

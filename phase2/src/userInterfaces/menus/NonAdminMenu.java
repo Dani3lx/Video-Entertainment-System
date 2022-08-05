@@ -21,7 +21,7 @@ public class NonAdminMenu implements Menu{
     }
 
     public void run() {
-        int result = userPrompt.getUserActionChoice("nonAdmin", actionList);
+        int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.NONADMIN, actionList);
         MenuAction action = factory.getMenuAction(actionList.get(result - 1));
         action.run();
     }

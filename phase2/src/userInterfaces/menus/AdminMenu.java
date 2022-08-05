@@ -21,7 +21,7 @@ public class AdminMenu implements Menu{
     }
 
     public void run() {
-        int result = userPrompt.getUserActionChoice("Admin", actionList);
+        int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.ADMIN, actionList);
         MenuAction action = factory.getMenuAction(actionList.get(result - 1));
         action.run();
     }

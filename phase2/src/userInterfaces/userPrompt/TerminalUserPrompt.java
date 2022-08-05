@@ -1,5 +1,6 @@
 package userInterfaces.userPrompt;
 
+import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import presenters.menuPresenter.TerminalMenuPresenter;
 import usecase.runtimeDataManager.UserManager;
@@ -13,7 +14,7 @@ public class TerminalUserPrompt implements UserPrompt {
     MenuPresenter mp = new TerminalMenuPresenter();
     Scanner sc;
 
-    public int getUserActionChoice(String type, List<String> actionList) {
+    public int getUserActionChoice(LanguagePresenter.MenuTextType type, List<String> actionList) {
         while (true){
             sc = new Scanner(System.in);
             mp.displayMenuOption(type, actionList);
@@ -23,19 +24,19 @@ public class TerminalUserPrompt implements UserPrompt {
                     return result;
                 }
             }
-            mp.displayError("invalidInput");
+            mp.displayError(LanguagePresenter.ErrorTextType.INVALIDINPUT);
         }
     }
 
-    public String getUserStringInput(String text) {
+    public String getUserStringInput(LanguagePresenter.RequestTextType type) {
         sc = new Scanner(System.in);
-        mp.displayRequest(text);
+        mp.displayRequest(type);
         return sc.nextLine();
     }
 
-    public int getUserIntInput(String text) {
+    public int getUserIntInput(LanguagePresenter.RequestTextType type) {
         sc = new Scanner(System.in);
-        mp.displayRequest(text);
+        mp.displayRequest(type);
         if (sc.hasNextInt()) {
             return (sc.nextInt());
         } else {
@@ -43,9 +44,9 @@ public class TerminalUserPrompt implements UserPrompt {
         }
     }
 
-    public List<String> getMultipleInputs(String text) {
+    public List<String> getMultipleInputs(LanguagePresenter.RequestTextType type) {
         sc = new Scanner(System.in);
-        mp.displayRequest(text + ". Type CONTINUE to proceed.");
+        mp.displayRequest(type);
         List<String> list = new ArrayList<>();
         while (true) {
             String item = sc.nextLine();

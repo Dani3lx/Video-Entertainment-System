@@ -20,6 +20,7 @@ public class ExitProgram implements MenuAction {
         dataManager.saveData("phase2/datasets/Data.csv");
         dataManager.saveVideoData("phase2/datasets/VideoData.csv");
         dataManager.savePlayListData("phase2/datasets/PlaylistData.csv");
+        navigateMenu();
     }
 
     public void navigateMenu(){
