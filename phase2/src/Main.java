@@ -4,8 +4,8 @@ import presenters.language.LanguagePresenter;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
-import userInterfaces.menu.MenuBuilder;
-import userInterfaces.menu.Menu;
+import userInterfaces.MenuBuilder;
+import userInterfaces.menus.Menu;
 import userInterfaces.userPrompt.TerminalUserPrompt;
 import userInterfaces.userPrompt.UserPrompt;
 

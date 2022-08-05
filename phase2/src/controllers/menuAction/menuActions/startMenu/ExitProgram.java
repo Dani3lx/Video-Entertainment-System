@@ -1,6 +1,6 @@
 package controllers.menuAction.menuActions.startMenu;
 
-import controllers.menuAction.menuActions.MenuAction;
+import controllers.menuAction.menuActionFactories.MenuAction;
 import gateways.DataManager;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;

@@ -1,14 +1,9 @@
-package userInterfaces.menu;
+package userInterfaces;
 
 import entities.User;
-import entities.Video;
 import presenters.language.LanguagePresenter;
-import usecase.runtimeDataManager.PlaylistManager;
-import usecase.runtimeDataManager.UserManager;
-import usecase.runtimeDataManager.VideoManager;
+import userInterfaces.menus.*;
 import userInterfaces.userPrompt.UserPrompt;
-
-import java.util.List;
 
 public class MenuBuilder {
     private final UserPrompt userPrompt;

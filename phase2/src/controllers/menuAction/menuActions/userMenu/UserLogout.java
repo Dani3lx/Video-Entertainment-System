@@ -1,9 +1,9 @@
 package controllers.menuAction.menuActions.userMenu;
 
-import controllers.menuAction.menuActions.MenuAction;
+import controllers.menuAction.menuActionFactories.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
-import userInterfaces.menu.MenuBuilder;
+import userInterfaces.MenuBuilder;
 import userInterfaces.userPrompt.UserPrompt;
 
 public class UserLogout implements MenuAction {

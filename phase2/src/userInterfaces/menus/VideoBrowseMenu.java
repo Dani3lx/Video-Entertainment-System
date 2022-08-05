@@ -1,7 +1,7 @@
-package userInterfaces.menu;
+package userInterfaces.menus;
 
 import controllers.menuAction.menuActionFactories.VideoBrowseMenuActionFactory;
-import controllers.menuAction.menuActions.MenuAction;
+import controllers.menuAction.menuActionFactories.MenuAction;
 import controllers.menuAction.menuActionFactories.MenuActionFactory;
 import entities.User;
 import presenters.language.LanguagePresenter;

@@ -1,10 +1,10 @@
 package controllers.menuAction.menuActions.startMenu;
 
-import controllers.menuAction.menuActions.MenuAction;
+import controllers.menuAction.menuActionFactories.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import usecase.runtimeDataManager.UserManager;
-import userInterfaces.menu.MenuBuilder;
+import userInterfaces.MenuBuilder;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.time.LocalDateTime;

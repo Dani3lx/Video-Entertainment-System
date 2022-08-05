@@ -1,4 +1,4 @@
-package controllers.menuAction.menuActions;
+package controllers.menuAction.menuActionFactories;
 
 public interface MenuAction {
     void run();

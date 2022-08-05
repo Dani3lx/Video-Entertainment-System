@@ -1,9 +1,5 @@
 package controllers.menuAction.menuActionFactories;
 
-import controllers.menuAction.menuActions.MenuAction;
-import controllers.menuAction.menuActions.startMenu.AccountCreation;
-import controllers.menuAction.menuActions.startMenu.ExitProgram;
-import controllers.menuAction.menuActions.startMenu.UserLogin;
 import controllers.menuAction.menuActions.userMenu.BrowseVideo;
 import controllers.menuAction.menuActions.userMenu.UserLogout;
 import entities.User;
