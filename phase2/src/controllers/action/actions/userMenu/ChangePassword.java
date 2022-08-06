@@ -1,7 +1,7 @@
 package controllers.action.actions.userMenu;
 
 import controllers.action.actionFactories.Action;
-import controllers.action.actionFactories.MenuAction;
+import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import userInterfaces.MenuBuilder;

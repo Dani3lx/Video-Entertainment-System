@@ -15,8 +15,8 @@ public class VideoStudioMenu implements Menu {
 
     private final List<String> actionList = List.of(new String[]{""});
 
-    public VideoStudioMenu(UserPrompt userPrompt, User user, LanguagePresenter lp) {
-        factory = new PlaylistActionFactory(userPrompt, user, lp);
+    public VideoStudioMenu(UserPrompt userPrompt, User user) {
+        factory = new PlaylistActionFactory(user);
         this.userPrompt = userPrompt;
     }
 

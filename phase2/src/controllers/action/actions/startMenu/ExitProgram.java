@@ -1,7 +1,7 @@
 package controllers.action.actions.startMenu;
 
 import controllers.action.actionFactories.Action;
-import controllers.action.actionFactories.MenuAction;
+import controllers.action.actions.MenuAction;
 import gateways.DataManager;
 
 public class ExitProgram extends MenuAction implements Action {

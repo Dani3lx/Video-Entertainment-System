@@ -21,10 +21,8 @@ public class Main {
         sm.loadData("phase2/datasets/Data.csv"); //Read data from Data.csv
         sm.loadVideoData("phase2/datasets/VideoData.csv"); //Read data from VideoData.csv
         sm.loadPlaylistData("phase2/datasets/PlaylistData.csv"); //Read data from PlaylistData.csv
-
-        UserPrompt userPrompt = new TerminalUserPrompt();
-
-        // Demo, create a class called RunTimeData that stores all the data that will persist throughout the runtime of the program
+        LanguagePresenter lp = new EnglishPresenter();
+        UserPrompt userPrompt = new TerminalUserPrompt(lp);
         MenuBuilder builder = new MenuBuilder(userPrompt, null);
 
         Menu menu = builder.getMenu(Menus.START);

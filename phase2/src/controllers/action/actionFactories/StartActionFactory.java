@@ -4,8 +4,6 @@ import controllers.action.actions.startMenu.AccountCreation;
 import controllers.action.actions.startMenu.ExitProgram;
 import controllers.action.actions.startMenu.UserLogin;
 import entities.User;
-import presenters.language.LanguagePresenter;
-import userInterfaces.userPrompt.UserPrompt;
 
 public class StartActionFactory implements ActionFactory {
     private final User user;

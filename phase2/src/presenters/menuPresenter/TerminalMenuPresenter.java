@@ -18,8 +18,11 @@ import java.util.List;
  * @since 2022-07-21
  */
 public class TerminalMenuPresenter implements MenuPresenter{
+    private final LanguagePresenter lp;
+    public TerminalMenuPresenter(LanguagePresenter lp){
+        this.lp = lp;
+    }
 
-    private final LanguagePresenter lp = new EnglishPresenter(); //todo use a factory instead maybe??
 
     /**
      * Displays the user's login history.
