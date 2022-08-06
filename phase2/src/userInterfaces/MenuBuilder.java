@@ -30,6 +30,10 @@ public class MenuBuilder {
                 return new NonAdminMenu(userPrompt, user, lp, mp);
             case VIDEOBROWSE:
                 return new VideoBrowseMenu(userPrompt, user, lp, mp);
+            case PLAYLIST:
+                return new PlaylistMenu(userPrompt, user, lp, mp);
+            case VIDEOSTUDIO:
+                return new VideoStudioMenu(userPrompt, user, lp, mp);
             default:
                 return null;
         }

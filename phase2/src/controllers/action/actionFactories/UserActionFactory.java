@@ -1,9 +1,6 @@
 package controllers.action.actionFactories;
 
-import controllers.action.actions.userMenu.BrowseVideo;
-import controllers.action.actions.userMenu.ChangePassword;
-import controllers.action.actions.userMenu.CheckLoginHistory;
-import controllers.action.actions.userMenu.UserLogout;
+import controllers.action.actions.userMenu.*;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
@@ -32,6 +29,10 @@ public class UserActionFactory implements ActionFactory {
                 return new ChangePassword(userPrompt, user, lp, mp);
             case "check history":
                 return new CheckLoginHistory(userPrompt, user, lp, mp);
+            case "view playlist":
+                return new ViewPlaylist(userPrompt, user, lp, mp);
+            case "video studio":
+                return new VideoStudio(userPrompt, user, lp, mp);
             default:
                 return null;
         }
