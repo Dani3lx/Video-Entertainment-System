@@ -106,7 +106,7 @@ public class NonAdminManager extends UserManager {
      * @param vids collection of all the videos uploaded
      * @return the title and ID of all the videos uploaded by user
      */
-    public ArrayList<String> displayAllVideos(User user, ArrayList<Video> vids) {
+    public ArrayList<String> ReturnUserVideos(User user, ArrayList<Video> vids) {
         ArrayList<String> newList = new ArrayList<>();
         for (Video video : vids) {
             if (user.getUserName().equals(video.getUploader())) {

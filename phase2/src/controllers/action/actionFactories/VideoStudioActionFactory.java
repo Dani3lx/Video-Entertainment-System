@@ -1,5 +1,6 @@
 package controllers.action.actionFactories;
 
+import controllers.action.actions.videoStudioMenu.ViewVideoUploaded;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
@@ -20,6 +21,13 @@ public class VideoStudioActionFactory implements ActionFactory {
 
     public Action getAction(String type) {
         switch (type) {
+            case "view videos uploaded":
+                return new ViewVideoUploaded(userPrompt, user, lp, mp);
+            case "upload video":
+            case "delete video":
+            case "edit title":
+            case "edit categories":
+            case "edit description":
             default:
                 return null;
         }

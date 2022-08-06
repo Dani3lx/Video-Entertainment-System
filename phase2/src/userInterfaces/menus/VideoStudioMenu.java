@@ -15,7 +15,8 @@ public class VideoStudioMenu implements Menu {
     private final UserPrompt userPrompt;
     private final ActionFactory factory;
 
-    private final List<String> actionList = List.of(new String[]{"test"});
+    private final List<String> actionList = List.of(new String[]{"view videos uploaded", "upload video", "delete video",
+            "edit title", "edit categories", "edit description"});
 
     public VideoStudioMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         factory = new VideoStudioActionFactory(userPrompt, user, lp, mp);

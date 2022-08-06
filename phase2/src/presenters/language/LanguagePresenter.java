@@ -12,7 +12,8 @@ public interface LanguagePresenter {
 
     enum AlertTextType {
         CREATEACCOUNT,
-        CHANGEPASSWORD
+        CHANGEPASSWORD,
+        VIDEOSUPLOADED
     }
 
     enum ErrorTextType {
