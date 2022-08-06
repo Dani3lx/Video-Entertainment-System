@@ -17,7 +17,7 @@ public class PlaylistManager {
 
     public static PlaylistManager getInstance(){
         if (instance == null) {
-            return new PlaylistManager();
+            instance = new PlaylistManager();
         }
 
         return instance;
