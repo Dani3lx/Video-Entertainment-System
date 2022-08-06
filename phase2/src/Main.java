@@ -1,6 +1,8 @@
 import gateways.DataManager;
 import presenters.language.EnglishPresenter;
 import presenters.language.LanguagePresenter;
+import presenters.menuPresenter.MenuPresenter;
+import presenters.menuPresenter.TerminalMenuPresenter;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
@@ -22,8 +24,9 @@ public class Main {
         sm.loadVideoData("phase2/datasets/VideoData.csv"); //Read data from VideoData.csv
         sm.loadPlaylistData("phase2/datasets/PlaylistData.csv"); //Read data from PlaylistData.csv
         LanguagePresenter lp = new EnglishPresenter();
-        UserPrompt userPrompt = new TerminalUserPrompt(lp);
-        MenuBuilder builder = new MenuBuilder(userPrompt, null);
+        MenuPresenter mp = new TerminalMenuPresenter(lp);
+        UserPrompt userPrompt = new TerminalUserPrompt(mp);
+        MenuBuilder builder = new MenuBuilder(userPrompt, null, lp, mp);
 
         Menu menu = builder.getMenu(Menus.START);
         menu.run();

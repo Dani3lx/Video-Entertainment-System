@@ -5,6 +5,7 @@ import controllers.action.actionFactories.Action;
 import controllers.action.actionFactories.ActionFactory;
 import entities.User;
 import presenters.language.LanguagePresenter;
+import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
@@ -15,8 +16,8 @@ public class NonAdminMenu implements Menu{
 
     private final List<String> actionList = List.of(new String[]{"change password", "check history", "logout", "browse video", "view playlist", "video studio"});
 
-    public NonAdminMenu(UserPrompt userPrompt, User user) {
-        factory = new UserActionFactory(user);
+    public NonAdminMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+        factory = new UserActionFactory(userPrompt, user, lp, mp);
         this.userPrompt = userPrompt;
     }
 

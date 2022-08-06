@@ -3,8 +3,10 @@ package controllers.action.actions.startMenu;
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
 import presenters.language.LanguagePresenter;
+import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.MenuBuilder;
 import userInterfaces.Menus;
+import userInterfaces.userPrompt.UserPrompt;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +15,12 @@ import java.util.Objects;
 // Not a controller class, but acts as a UI controller.
 public class UserLogin extends MenuAction implements Action {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    public UserLogin(UserPrompt userPrompt, LanguagePresenter lp, MenuPresenter mp){
+        this.userPrompt = userPrompt;
+        this.lp = lp;
+        this.mp = mp;
+    }
 
     public void run() {
         // Takes in a username and password and tries to log in
@@ -23,7 +31,7 @@ public class UserLogin extends MenuAction implements Action {
     }
 
     public void navigateMenu() {
-        MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser);
+        MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser, lp, mp);
         if (Objects.isNull(currentUser)) {
             menuBuilder.getMenu(Menus.START).run();
         }
