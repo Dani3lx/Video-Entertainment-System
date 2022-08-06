@@ -133,8 +133,8 @@ public class UserActionHandler {
      * @param v    the video being rated
      * @param like whether to like or dislike
      */
-    public void rateVideo(Video v, boolean like) {
-        um.rateVideo(v, like);
+    public void rateVideo(Video v,String userUniqueID, boolean like) {
+        um.rateVideo(v, userUniqueID, like);
     }
 
 }
