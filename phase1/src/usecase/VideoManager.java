@@ -1,5 +1,6 @@
 package usecase;
 
+import entities.Ratings;
 import entities.Video;
 
 import java.time.LocalDateTime;
@@ -63,9 +64,7 @@ public class VideoManager {
             uniqueID = UUID.randomUUID().toString();
 
         }
-        ArrayList<String> ratings = new ArrayList<>();
-        ratings.add("0");
-        ratings.add("0");
+        Ratings ratings = new Ratings();
         Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString());
         vids.add(v1);
     }
