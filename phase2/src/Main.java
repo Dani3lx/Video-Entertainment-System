@@ -5,6 +5,7 @@ import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
 import userInterfaces.MenuBuilder;
+import userInterfaces.Menus;
 import userInterfaces.menus.Menu;
 import userInterfaces.userPrompt.TerminalUserPrompt;
 import userInterfaces.userPrompt.UserPrompt;
@@ -22,12 +23,11 @@ public class Main {
         sm.loadPlaylistData("phase2/datasets/PlaylistData.csv"); //Read data from PlaylistData.csv
 
         UserPrompt userPrompt = new TerminalUserPrompt();
-        LanguagePresenter lp = new EnglishPresenter();
 
         // Demo, create a class called RunTimeData that stores all the data that will persist throughout the runtime of the program
-        MenuBuilder builder = new MenuBuilder(userPrompt, null, lp);
+        MenuBuilder builder = new MenuBuilder(userPrompt, null);
 
-        Menu menu = builder.getMenu("start");
+        Menu menu = builder.getMenu(Menus.START);
         menu.run();
     }
 }

@@ -1,31 +1,21 @@
-package controllers.menuAction.menuActions.startMenu;
+package controllers.action.actions.startMenu;
 
-import controllers.menuAction.menuActionFactories.MenuAction;
+import controllers.action.actionFactories.Action;
+import controllers.action.actionFactories.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
-import presenters.menuPresenter.MenuPresenter;
-import presenters.menuPresenter.TerminalMenuPresenter;
-import usecase.runtimeDataManager.UserManager;
 import userInterfaces.MenuBuilder;
-import userInterfaces.userPrompt.UserPrompt;
+import userInterfaces.Menus;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class AccountCreation implements MenuAction {
-    UserPrompt userPrompt;
-    MenuBuilder menuBuilder;
-    UserManager um = UserManager.getInstance();
-    User currentUser;
-    MenuPresenter mp = new TerminalMenuPresenter();
-    LanguagePresenter lp;
+public class AccountCreation extends MenuAction implements Action {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public AccountCreation(UserPrompt userPrompt, User user, LanguagePresenter lp) {
+    public AccountCreation(User user) {
         currentUser = user;
-        this.userPrompt = userPrompt;
-        this.lp = lp;
     }
 
     public void run() {
@@ -45,12 +35,12 @@ public class AccountCreation implements MenuAction {
     }
 
     public void navigateMenu() {
-        menuBuilder = new MenuBuilder(userPrompt, currentUser, lp);
+        MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser);
         if (Objects.isNull(currentUser)) {
-            menuBuilder.getMenu("start").run();
+            menuBuilder.getMenu(Menus.START).run();
         } else {
             um.updateHistory(currentUser, LocalDateTime.now().format(formatter));
-            menuBuilder.getMenu("nonAdmin").run();
+            menuBuilder.getMenu(Menus.NONADMIN).run();
         }
     }
 }

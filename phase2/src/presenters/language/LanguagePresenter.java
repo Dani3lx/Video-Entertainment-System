@@ -11,7 +11,8 @@ public interface LanguagePresenter {
     }
 
     enum AlertTextType {
-        CREATEACCOUNT
+        CREATEACCOUNT,
+        CHANGEPASSWORD
     }
 
     enum ErrorTextType {
@@ -23,8 +24,12 @@ public interface LanguagePresenter {
         USERNAME,
         PASSWORD
     }
+
     String getMenuText(MenuTextType type);
+
     String getAlertText(AlertTextType type);
+
     String getErrorText(ErrorTextType type);
+
     String getRequestText(RequestTextType type);
 }

@@ -1,8 +1,8 @@
 package presenters.language;
 
 public class EnglishPresenter implements LanguagePresenter {
-    public String getMenuText(MenuTextType var){
-        switch(var){
+    public String getMenuText(MenuTextType var) {
+        switch (var) {
             case START:
                 return "This is the start menu, please select one of the following options to proceed.";
             case ADMIN:
@@ -20,17 +20,19 @@ public class EnglishPresenter implements LanguagePresenter {
         }
     }
 
-    public String getAlertText(AlertTextType type){
-        switch(type){
+    public String getAlertText(AlertTextType type) {
+        switch (type) {
             case CREATEACCOUNT:
                 return "Account creation was successful";
+            case CHANGEPASSWORD:
+                return "Password has been successfully changed";
             default:
                 return "";
         }
     }
 
-    public String getErrorText(ErrorTextType type){
-        switch(type){
+    public String getErrorText(ErrorTextType type) {
+        switch (type) {
             case INVALIDINPUT:
                 return "Invalid input, please try again.";
             case CREATEACCOUNT:
@@ -40,8 +42,8 @@ public class EnglishPresenter implements LanguagePresenter {
         }
     }
 
-    public String getRequestText(RequestTextType type){
-        switch(type){
+    public String getRequestText(RequestTextType type) {
+        switch (type) {
             case USERNAME:
                 return "Please input a username";
             case PASSWORD:

@@ -1,8 +1,8 @@
 package userInterfaces.menus;
 
-import controllers.menuAction.menuActionFactories.VideoBrowseMenuActionFactory;
-import controllers.menuAction.menuActionFactories.MenuAction;
-import controllers.menuAction.menuActionFactories.MenuActionFactory;
+import controllers.action.actionFactories.VideoBrowseActionFactory;
+import controllers.action.actionFactories.Action;
+import controllers.action.actionFactories.ActionFactory;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import userInterfaces.userPrompt.UserPrompt;
@@ -11,18 +11,18 @@ import java.util.List;
 
 public class VideoBrowseMenu implements Menu{
     private final UserPrompt userPrompt;
-    private final MenuActionFactory factory;
+    private final ActionFactory factory;
 
     private final List<String> actionList = List.of(new String[]{"browse by name", "browse by category", "browse by uploader", "return"});
 
-    public VideoBrowseMenu(UserPrompt userPrompt, User user, LanguagePresenter lp) {
-        factory = new VideoBrowseMenuActionFactory(userPrompt, user, lp);
+    public VideoBrowseMenu(UserPrompt userPrompt, User user) {
+        factory = new VideoBrowseActionFactory(user);
         this.userPrompt = userPrompt;
     }
 
     public void run() {
         int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.VIDEOBROWSE, actionList);
-        MenuAction action = factory.getMenuAction(actionList.get(result - 1));
+        Action action = factory.getAction(actionList.get(result - 1));
         action.run();
     }
 }

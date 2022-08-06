@@ -79,30 +79,30 @@ public class UserActionHandler {
      * @param password the password
      * @return the user created
      */
-    public User createUser(String userName, String password) {
-
-//        List<User> all_users = um.getAllUsers();
-//        if (!(Objects.isNull(all_users))) {
-//            for (User u : all_users) {
-//                if (um.validateUserName(u, userName)) {
-//                    return null;
-//                }
-//            }
-//        }
-//        User newUser = um.instantiateUser(userName, password, false);
+//    public User createUser(String userName, String password) {
 //
-//        um.updateData(newUser);
-//        return newUser;
-
-        if (um.noUserExist(userName)) {
-            // Creates a new user through useCase method
-            User newUser = um.instantiateUser(userName, password, false);
-            um.updateData(newUser);
-            return newUser;
-        } else {
-            return null;
-        }
-    }
+////        List<User> all_users = um.getAllUsers();
+////        if (!(Objects.isNull(all_users))) {
+////            for (User u : all_users) {
+////                if (um.validateUserName(u, userName)) {
+////                    return null;
+////                }
+////            }
+////        }
+////        User newUser = um.instantiateUser(userName, password, false);
+////
+////        um.updateData(newUser);
+////        return newUser;
+//
+//        if (um.noUserExist(userName)) {
+//            // Creates a new user through useCase method
+//            User newUser = um.instantiateUser(userName, password, false);
+//            um.updateData(newUser);
+//            return newUser;
+//        } else {
+//            return null;
+//        }
+//    }
 
     /**
      * Updates the user's history.

@@ -1,21 +1,21 @@
-package controllers.menuAction.menuActions.videoBrowseMenu;
+package controllers.action.actions.videoBrowseMenu;
 
-import controllers.menuAction.menuActionFactories.MenuAction;
+import controllers.action.actionFactories.Action;
+import controllers.action.actionFactories.MenuAction;
 import controllers.old.UserActionHandler;
 import entities.User;
-import presenters.language.LanguagePresenter;
 import usecase.runtimeDataManager.UserManager;
 import userInterfaces.MenuBuilder;
-import userInterfaces.userPrompt.UserPrompt;
+import userInterfaces.Menus;
 
-public class ReturnMenu implements MenuAction {
+public class Return extends MenuAction implements Action {
     User currentUser;
     MenuBuilder menuBuilder;
     UserActionHandler userActionHandler;
     UserManager um = UserManager.getInstance();
 
-    public ReturnMenu(UserPrompt userPrompt, User user, LanguagePresenter lp) {
-        menuBuilder = new MenuBuilder(userPrompt, user, lp);
+    public Return(User user) {
+        menuBuilder = new MenuBuilder(userPrompt, user);
         currentUser = user;
         userActionHandler = new UserActionHandler(um);
     }
@@ -27,9 +27,9 @@ public class ReturnMenu implements MenuAction {
     @Override
     public void navigateMenu() {
         if (userActionHandler.isAdmin(currentUser)) {
-            menuBuilder.getMenu("admin").run();
+            menuBuilder.getMenu(Menus.ADMIN).run();
         } else {
-            menuBuilder.getMenu("nonAdmin").run();
+            menuBuilder.getMenu(Menus.NONADMIN).run();
         }
     }
 }

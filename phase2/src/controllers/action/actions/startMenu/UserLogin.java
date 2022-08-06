@@ -1,28 +1,18 @@
-package controllers.menuAction.menuActions.startMenu;
+package controllers.action.actions.startMenu;
 
-import controllers.menuAction.menuActionFactories.MenuAction;
-import entities.User;
+import controllers.action.actionFactories.Action;
+import controllers.action.actionFactories.MenuAction;
 import presenters.language.LanguagePresenter;
-import usecase.runtimeDataManager.UserManager;
 import userInterfaces.MenuBuilder;
-import userInterfaces.userPrompt.UserPrompt;
+import userInterfaces.Menus;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 // Not a controller class, but acts as a UI controller.
-public class UserLogin implements MenuAction {
-    LanguagePresenter lp;
-    UserPrompt userPrompt;
-    User currentUser;
-    UserManager um = UserManager.getInstance();
+public class UserLogin extends MenuAction implements Action {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-    public UserLogin(UserPrompt userPrompt, LanguagePresenter lp) {
-        this.userPrompt = userPrompt;
-        this.lp = lp;
-    }
 
     public void run() {
         // Takes in a username and password and tries to log in
@@ -33,15 +23,15 @@ public class UserLogin implements MenuAction {
     }
 
     public void navigateMenu() {
-        MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser, lp);
+        MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser);
         if (Objects.isNull(currentUser)) {
-            menuBuilder.getMenu("start").run();
+            menuBuilder.getMenu(Menus.START).run();
         }
         um.updateHistory(currentUser, LocalDateTime.now().format(formatter));
         if (um.getRole(currentUser)) {
-            menuBuilder.getMenu("admin").run();
+            menuBuilder.getMenu(Menus.ADMIN).run();
         } else {
-            menuBuilder.getMenu("nonAdmin").run();
+            menuBuilder.getMenu(Menus.NONADMIN).run();
         }
     }
 }

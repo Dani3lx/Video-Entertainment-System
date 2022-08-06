@@ -1,16 +1,11 @@
-package controllers.menuAction.menuActions.startMenu;
+package controllers.action.actions.startMenu;
 
-import controllers.menuAction.menuActionFactories.MenuAction;
+import controllers.action.actionFactories.Action;
+import controllers.action.actionFactories.MenuAction;
 import gateways.DataManager;
-import usecase.runtimeDataManager.PlaylistManager;
-import usecase.runtimeDataManager.UserManager;
-import usecase.runtimeDataManager.VideoManager;
 
-public class ExitProgram implements MenuAction {
+public class ExitProgram extends MenuAction implements Action {
     DataManager dataManager;
-    UserManager um = UserManager.getInstance();
-    VideoManager vm = VideoManager.getInstance();
-    PlaylistManager pm = PlaylistManager.getInstance();
     public ExitProgram() {
         dataManager = new DataManager(um, vm, pm);
     }
