@@ -2,6 +2,7 @@ package controllers.action.actionFactories;
 
 import controllers.action.actions.userMenu.BrowseVideo;
 import controllers.action.actions.userMenu.ChangePassword;
+import controllers.action.actions.userMenu.CheckLoginHistory;
 import controllers.action.actions.userMenu.UserLogout;
 import entities.User;
 
@@ -20,6 +21,8 @@ public class UserActionFactory implements ActionFactory {
                 return new BrowseVideo(user);
             case "change password":
                 return new ChangePassword(user);
+            case "check history":
+                return new CheckLoginHistory(user);
             default:
                 return null;
         }
