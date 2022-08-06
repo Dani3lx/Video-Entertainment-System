@@ -172,16 +172,29 @@ public class UserManager {
     }
 
     /**
-     * Rates a video.
+     * Rates a video. If the parameter "like" is true, change the video's ratings to like if the video
+     * is not originally liked by that uniqueID, or else delete that rating for the video.
+     * If the parameter "dislike" is true, change the video's ratings to dislike if the video
+     * is not originally disliked by that uniqueID, or else delete that rating for the video.
      *
      * @param v    target video
      * @param like whether to like the video or not
      */
-    public void rateVideo(Video v, boolean like) {
+    public void rateVideo(Video v, String userUniqueID, boolean like) {
         if (like) {
-            ve.likeVideo(v);
+            if (!ve.currentRatingOfUserUniqueID(v, userUniqueID).equals(1)){
+                ve.likeVideo(v, userUniqueID);
+            }
+            else{
+                ve.deleteRating(v, userUniqueID);
+            }
         } else {
-            ve.dislikeVideo(v);
+            if (!ve.currentRatingOfUserUniqueID(v, userUniqueID).equals(0)){
+                ve.dislikeVideo(v, userUniqueID);
+            }
+            else{
+                ve.deleteRating(v, userUniqueID);
+            }
         }
     }
 
