@@ -48,6 +48,8 @@ public class VideoManager{
         vids = videos;
     }
 
+
+    // todo: create a builder for video
     /**
      * Upload a video with the following properties.
      *
