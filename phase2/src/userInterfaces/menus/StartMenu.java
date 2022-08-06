@@ -9,7 +9,7 @@ import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
 
-public class StartMenu implements Menu{
+public class StartMenu implements Menu {
     private final UserPrompt userPrompt;
     private final ActionFactory factory;
 

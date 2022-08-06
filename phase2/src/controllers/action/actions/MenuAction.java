@@ -1,5 +1,6 @@
-package controllers.action.actionFactories;
+package controllers.action.actions;
 
+import controllers.action.actionFactories.Action;
 import entities.User;
 import presenters.language.EnglishPresenter;
 import presenters.language.LanguagePresenter;
@@ -11,12 +12,13 @@ import usecase.runtimeDataManager.VideoManager;
 import userInterfaces.userPrompt.TerminalUserPrompt;
 import userInterfaces.userPrompt.UserPrompt;
 
-public abstract class MenuAction implements Action{
+public abstract class MenuAction implements Action {
     protected User currentUser;
-    protected UserPrompt userPrompt = new TerminalUserPrompt();
-    protected LanguagePresenter lp = new EnglishPresenter();
+
     protected UserManager um = UserManager.getInstance();
     protected VideoManager vm = VideoManager.getInstance();
     protected PlaylistManager pm = PlaylistManager.getInstance();
-    protected final MenuPresenter mp = new TerminalMenuPresenter();
+    protected LanguagePresenter lp = new EnglishPresenter();
+    protected final MenuPresenter mp = new TerminalMenuPresenter(lp);
+    protected UserPrompt userPrompt = new TerminalUserPrompt(lp);
 }

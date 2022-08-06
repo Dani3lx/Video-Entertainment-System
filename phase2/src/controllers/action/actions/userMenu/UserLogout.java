@@ -1,13 +1,12 @@
 package controllers.action.actions.userMenu;
 
 import controllers.action.actionFactories.Action;
-import controllers.action.actionFactories.MenuAction;
+import controllers.action.actions.MenuAction;
 import entities.User;
 import userInterfaces.MenuBuilder;
 import userInterfaces.Menus;
 
 public class UserLogout extends MenuAction implements Action {
-
 
     MenuBuilder menuBuilder;
 

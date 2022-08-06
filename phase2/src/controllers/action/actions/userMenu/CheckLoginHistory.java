@@ -3,21 +3,21 @@ package controllers.action.actions.userMenu;
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
 import entities.User;
-import presenters.language.LanguagePresenter;
 import userInterfaces.MenuBuilder;
 import userInterfaces.Menus;
 
-public class ChangePassword extends MenuAction implements Action {
+import java.util.List;
 
-    public ChangePassword(User user) {
+public class CheckLoginHistory extends MenuAction implements Action {
+
+    public CheckLoginHistory(User user){
         currentUser = user;
     }
 
     @Override
     public void run() {
-        String password = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PASSWORD);
-        um.changePassword(currentUser, password);
-        mp.displayAlert(LanguagePresenter.AlertTextType.CHANGEPASSWORD);
+        List<String> history = um.getHistory(currentUser);
+        mp.displayList(history);
         navigateMenu();
     }
 

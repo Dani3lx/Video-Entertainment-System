@@ -11,8 +11,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TerminalUserPrompt implements UserPrompt {
-    MenuPresenter mp = new TerminalMenuPresenter();
+    MenuPresenter mp;
     Scanner sc;
+
+    public TerminalUserPrompt(LanguagePresenter lp){
+        mp = new TerminalMenuPresenter(lp);
+    }
 
     public int getUserActionChoice(LanguagePresenter.MenuTextType type, List<String> actionList) {
         while (true){

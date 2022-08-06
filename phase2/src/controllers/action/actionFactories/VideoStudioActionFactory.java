@@ -8,14 +8,10 @@ import presenters.language.LanguagePresenter;
 import userInterfaces.userPrompt.UserPrompt;
 
 public class VideoStudioActionFactory implements ActionFactory {
-    private final UserPrompt userPrompt;
     private final User user;
-    private final LanguagePresenter lp;
 
-    public VideoStudioActionFactory(UserPrompt userPrompt, User user, LanguagePresenter lp) {
-        this.userPrompt = userPrompt;
+    public VideoStudioActionFactory(User user) {
         this.user = user;
-        this.lp = lp;
     }
 
     public Action getAction(String type) {
