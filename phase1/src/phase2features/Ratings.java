@@ -8,6 +8,7 @@ import java.util.Map;
  * THIS IS FOR PHASE 2
  */
 public class Ratings {
+    //Todo change userName to uniqueID instead.
     private HashMap<String, Integer> userNames; // 0 = dislike, 1 = like
 
     public Ratings(HashMap<String, Integer> userNames){
@@ -36,24 +37,33 @@ public class Ratings {
         }
         return count;}
 
-    public void addOrChangeToLikes(String username){
-        if (userNames.containsKey(username)){
-            userNames.replace(username, 1);
+    public boolean addUserName(String username, Integer value){
+        if (!value.equals(0) && !value.equals(1)){
+            return false;
+        }
+        else if (userNames.containsKey(username)){
+            return false;
         }
         else {
-            userNames.put(username, 1);
-        }
-    }
-    public void addOrChangeToDislikes(String username){
-        if (userNames.containsKey(username)){
-            userNames.replace(username, 0);
-        }
-        else {
-            userNames.put(username, 0);
+            userNames.put(username, value);
+            return true;
         }
     }
 
-    public void undoLikesOrDislikes(String username){
+    public boolean editUserNames(String username, Integer value){
+        if (!value.equals(0) && !value.equals(1)){
+            return false;
+        }
+        else if(userNames.containsKey(username)){
+            userNames.replace(username, value);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void deleteUserName(String username){
         userNames.remove(username);
     }
 
