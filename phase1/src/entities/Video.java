@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * This represents video.
@@ -18,7 +19,7 @@ public class Video implements Comparable<Video> {
     private String name;
     private final String uploader;
     private final String date_upload;
-    private final ArrayList<String> ratings;
+    private Ratings ratings;
 
     /**
      * Constructs a video with uploader, name, description, categories, content, uniqueID, ratings and date_upload.
@@ -33,7 +34,7 @@ public class Video implements Comparable<Video> {
      * @param date_upload the date the video is uploaded
      */
     public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID,
-                 ArrayList<String> ratings, String date_upload) {
+                 Ratings ratings, String date_upload) {
         this.name = name;
         this.uploader = uploader;
         this.content = content;
@@ -59,7 +60,7 @@ public class Video implements Comparable<Video> {
      *
      * @return video rating
      */
-    public ArrayList<String> getRatings() {
+    public Ratings getRatings() {
         return ratings;
     }
 
@@ -147,20 +148,6 @@ public class Video implements Comparable<Video> {
     }
 
     /**
-     * Likes the video.
-     */
-    public void addLikes() {
-        ratings.set(0, String.valueOf(Integer.parseInt(ratings.get(0)) + 1));
-    }
-
-    /**
-     * Dislikes the video.
-     */
-    public void addDislikes() {
-        ratings.set(1, String.valueOf(Integer.parseInt(ratings.get(1)) + 1));
-    }
-
-    /**
      * Return whether v is equal to this video.
      *
      * @param v the target video
@@ -197,11 +184,16 @@ public class Video implements Comparable<Video> {
             s1.append(it1.next()).append("/");
         }
 
-        Iterator<String> it2 = ratings.iterator();
         StringBuilder s2 = new StringBuilder();
-        while (it2.hasNext()) {
-            s2.append(it2.next()).append("/");
+        for (Map.Entry<String, Boolean> set: ratings.getRatings().entrySet()){
+            s2.append(set.getKey() + "=" + set.getValue() + "/");
         }
+//
+//        Iterator<String> it2 = ratings.iterator();
+//        StringBuilder s2 = new StringBuilder();
+//        while (it2.hasNext()) {
+//            s2.append(it2.next()).append("/");
+//        }
 
         return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," +
                 s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
