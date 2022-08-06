@@ -48,6 +48,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Please input a username";
             case PASSWORD:
                 return "Please input a password";
+            case VIDEONAME:
+                return "Please input the video name";
             default:
                 return "";
         }

@@ -19,11 +19,11 @@ public class Return extends MenuAction implements Action {
     }
 
     public void run() {
-        navigateMenu();
+        next();
     }
 
     @Override
-    public void navigateMenu() {
+    public void next() {
         if (um.getRole(currentUser)) {
             menuBuilder.getMenu(Menus.ADMIN).run();
         } else {

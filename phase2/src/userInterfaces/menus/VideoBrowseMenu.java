@@ -13,7 +13,6 @@ import java.util.List;
 public class VideoBrowseMenu implements Menu{
     private final UserPrompt userPrompt;
     private final ActionFactory factory;
-
     private final List<String> actionList = List.of(new String[]{"browse by name", "browse by category", "browse by uploader", "return"});
 
     public VideoBrowseMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {

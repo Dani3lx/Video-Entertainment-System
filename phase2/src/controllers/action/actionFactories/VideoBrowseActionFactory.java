@@ -1,6 +1,8 @@
 package controllers.action.actionFactories;
 
+import controllers.action.actions.videoBrowseMenu.BrowseByName;
 import controllers.action.actions.videoBrowseMenu.Return;
+import controllers.action.actions.videoBrowseMenu.SelectVideo;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
@@ -22,6 +24,10 @@ public class VideoBrowseActionFactory implements ActionFactory {
 
     public Action getAction(String type) {
         switch (type) {
+            case "browse by name":
+                return new BrowseByName(userPrompt, user, lp, mp);
+            case "select video":
+                return new SelectVideo(userPrompt, user, lp, mp);
             case "return":
                 return new Return(userPrompt, user, lp, mp);
             default:

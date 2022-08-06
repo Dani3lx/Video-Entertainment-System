@@ -24,11 +24,11 @@ public class CheckLoginHistory extends MenuAction implements Action {
     public void run() {
         List<String> history = um.getHistory(currentUser);
         mp.displayList(history);
-        navigateMenu();
+        next();
     }
 
     @Override
-    public void navigateMenu() {
+    public void next() {
         MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser, lp, mp);
         if (um.getRole(currentUser)) {
             menuBuilder.getMenu(Menus.ADMIN).run();

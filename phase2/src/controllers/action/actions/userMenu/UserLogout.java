@@ -18,10 +18,10 @@ public class UserLogout extends MenuAction implements Action {
     }
 
     public void run() {
-        navigateMenu();
+        next();
     }
 
-    public void navigateMenu() {
+    public void next() {
         menuBuilder.getMenu(Menus.START).run();
     }
 }

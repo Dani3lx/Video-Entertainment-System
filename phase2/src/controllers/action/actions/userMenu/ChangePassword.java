@@ -23,11 +23,11 @@ public class ChangePassword extends MenuAction implements Action {
         String password = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PASSWORD);
         um.changePassword(currentUser, password);
         mp.displayAlert(LanguagePresenter.AlertTextType.CHANGEPASSWORD);
-        navigateMenu();
+        next();
     }
 
     @Override
-    public void navigateMenu() {
+    public void next() {
         MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser, lp, mp);
         if (um.getRole(currentUser)) {
             menuBuilder.getMenu(Menus.ADMIN).run();

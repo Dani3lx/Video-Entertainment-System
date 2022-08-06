@@ -11,7 +11,6 @@ import userInterfaces.userPrompt.UserPrompt;
 
 public abstract class MenuAction implements Action {
     protected User currentUser;
-
     protected UserManager um = UserManager.getInstance();
     protected VideoManager vm = VideoManager.getInstance();
     protected PlaylistManager pm = PlaylistManager.getInstance();

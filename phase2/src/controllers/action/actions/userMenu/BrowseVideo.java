@@ -20,11 +20,11 @@ public class BrowseVideo extends MenuAction implements Action {
 
     @Override
     public void run() {
-        navigateMenu();
+        next();
     }
 
     @Override
-    public void navigateMenu() {
+    public void next() {
         menuBuilder.getMenu(Menus.VIDEOBROWSE).run();
     }
 }

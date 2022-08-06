@@ -27,10 +27,10 @@ public class UserLogin extends MenuAction implements Action {
         String username = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.USERNAME);
         String password = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PASSWORD);
         currentUser = um.validateUser(username, password);
-        navigateMenu();
+        next();
     }
 
-    public void navigateMenu() {
+    public void next() {
         MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser, lp, mp);
         if (Objects.isNull(currentUser)) {
             menuBuilder.getMenu(Menus.START).run();

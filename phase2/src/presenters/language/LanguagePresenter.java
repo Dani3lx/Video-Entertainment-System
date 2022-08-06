@@ -22,7 +22,8 @@ public interface LanguagePresenter {
 
     enum RequestTextType {
         USERNAME,
-        PASSWORD
+        PASSWORD,
+        VIDEONAME
     }
 
     String getMenuText(MenuTextType type);

@@ -36,10 +36,10 @@ public class AccountCreation extends MenuAction implements Action {
             currentUser = null;
             mp.displayError(LanguagePresenter.ErrorTextType.CREATEACCOUNT);
         }
-        navigateMenu();
+        next();
     }
 
-    public void navigateMenu() {
+    public void next() {
         MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser, lp, mp);
         if (Objects.isNull(currentUser)) {
             menuBuilder.getMenu(Menus.START).run();

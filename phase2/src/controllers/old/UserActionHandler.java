@@ -33,11 +33,11 @@ public class UserActionHandler {
      * @param name the name of the video being searched
      * @return list of video that contains name in their title
      */
-    public ArrayList<Video> browseByName(String name) {
-        ArrayList<String> info = new ArrayList<>();
-        info.add(name);
-        return um.returnVideos(info, "name");
-    }
+//    public ArrayList<Video> browseByName(String name) {
+//        ArrayList<String> info = new ArrayList<>();
+//        info.add(name);
+//        return um.returnVideos(info, "name");
+//    }
 
     /**
      * Returns a list of videos that contains all the categories.
@@ -45,9 +45,9 @@ public class UserActionHandler {
      * @param categories the categories being searched
      * @return list of video that contains all the categories
      */
-    public ArrayList<Video> browseByCategories(ArrayList<String> categories) {
-        return um.returnVideos(categories, "category");
-    }
+//    public ArrayList<Video> browseByCategories(ArrayList<String> categories) {
+//        return um.returnVideos(categories, "category");
+//    }
 
     /**
      * Returns a list of videos uploaded by uploader.
@@ -55,11 +55,11 @@ public class UserActionHandler {
      * @param uploader the uploader being searched
      * @return list of videos uploaded by uploader
      */
-    public ArrayList<Video> browseByUploader(String uploader) {
-        ArrayList<String> info = new ArrayList<>();
-        info.add(uploader);
-        return um.returnVideos(info, "uploader");
-    }
+//    public ArrayList<Video> browseByUploader(String uploader) {
+//        ArrayList<String> info = new ArrayList<>();
+//        info.add(uploader);
+//        return um.returnVideos(info, "uploader");
+//    }
 
     /**
      * Logs in and return a user.
