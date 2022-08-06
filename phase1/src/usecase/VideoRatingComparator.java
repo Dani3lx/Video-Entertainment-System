@@ -12,8 +12,8 @@ import java.util.*;
 
 public class VideoRatingComparator implements Comparator<Video> {
     public int compare(Video v1, Video v2) {
-        Integer v1Likes = Integer.parseInt(v1.getRatings().get(0));
-        Integer v2Likes = Integer.parseInt(v2.getRatings().get(0));
+        Integer v1Likes = v1.getRatings().getTotalLikes() - v1.getRatings().getTotalDislikes();
+        Integer v2Likes = v2.getRatings().getTotalLikes() - v2.getRatings().getTotalDislikes();
         int i = v1Likes.compareTo(v2Likes);
         if (i == 0) {
             return 0;
