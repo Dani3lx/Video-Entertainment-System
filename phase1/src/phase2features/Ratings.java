@@ -14,7 +14,7 @@ public class Ratings {
         this.userNames = userNames;
     }
     public Ratings(){
-        this.userNames = new HashMap<String, Integer>(userNames);
+        this.userNames = new HashMap<>(userNames);
     }
 
     public Integer getTotalLikes() {
@@ -36,11 +36,25 @@ public class Ratings {
         }
         return count;}
 
-    public void addLikes(String username){
-        userNames.put(username, 1);
+    public void addOrChangeToLikes(String username){
+        if (userNames.containsKey(username)){
+            userNames.replace(username, 1);
+        }
+        else {
+            userNames.put(username, 1);
+        }
     }
-    public void addDislikes(String username){
-        userNames.put(username, 0);
+    public void addOrChangeToDislikes(String username){
+        if (userNames.containsKey(username)){
+            userNames.replace(username, 0);
+        }
+        else {
+            userNames.put(username, 0);
+        }
+    }
+
+    public void undoLikesOrDislikes(String username){
+        userNames.remove(username);
     }
 
     public ArrayList<String> getLikeUserNames() {
@@ -61,4 +75,5 @@ public class Ratings {
         }
         return DislikeUserNames;
     }
+
 }
