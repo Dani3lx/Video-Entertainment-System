@@ -42,12 +42,17 @@ public class VideoEditor {
     }
 
     /**
-     * Likes the video.
+     * Likes the video
      *
      * @param v target video
      */
-    public void likeVideo(Video v){
-        v.addLikes();
+    public void likeVideo(Video v, String userUniqueID){
+        if (v.getRatings().containsRating(userUniqueID)){
+            v.getRatings().editRating(userUniqueID, true);
+        }
+        else{
+            v.getRatings().addRating(userUniqueID, true);
+        }
     }
 
     /**
@@ -55,8 +60,42 @@ public class VideoEditor {
      *
      * @param v the target video
      */
-    public void dislikeVideo(Video v){
-        v.addDislikes();
+    public void dislikeVideo(Video v,  String userUniqueID){
+        if (v.getRatings().containsRating(userUniqueID)){
+            v.getRatings().editRating(userUniqueID, false);
+        }
+        else{
+            v.getRatings().addRating(userUniqueID, false);
+        }
+    }
+
+    public void deleteRating(Video v, String userUniqueID){
+        if (v.getRatings().containsRating(userUniqueID)){
+            v.getRatings().deleteRating(userUniqueID);
+        }
+    }
+
+    // return current Rating of the uniqueID. 0 = dislike, 1 = like, 2 = null
+    public Integer currentRatingOfUserUniqueID(Video v, String userUniqueID){
+        if (v.getRatings().getRatings().containsKey(userUniqueID)){
+            if (v.getRatings().getRatings().get(userUniqueID)){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 2;
+        }
+    }
+
+    public void getTotalLikes(Video v){
+        v.getRatings().getTotalLikes();
+    }
+
+    public void getTotalDislikes(Video v){
+        v.getRatings().getTotalDislikes();
     }
 
     /**
@@ -66,6 +105,6 @@ public class VideoEditor {
      * @return video's information
      */
     public String[] returnVideoInformation(Video vid) {
-        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent(), vid.getRatings().get(0), vid.getRatings().get(1)};
+        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent(), vid.getRatings().getTotalLikes().toString(),  vid.getRatings().getTotalDislikes().toString()};
     }
 }
