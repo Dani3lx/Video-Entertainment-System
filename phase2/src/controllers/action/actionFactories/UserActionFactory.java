@@ -33,6 +33,8 @@ public class UserActionFactory implements ActionFactory {
                 return new ViewPlaylist(userPrompt, user, lp, mp);
             case "video studio":
                 return new VideoStudio(userPrompt, user, lp, mp);
+            case "create admin user":
+                return new CreateAdminUser(userPrompt, user, lp, mp);
             default:
                 return null;
         }
