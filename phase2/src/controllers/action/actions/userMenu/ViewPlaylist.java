@@ -5,17 +5,19 @@ import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import userInterfaces.MenuFactory;
-import userInterfaces.Menus;
+import userInterfaces.menuFactories.MenuFactory;
+import userInterfaces.menuFactories.PlaylistsMenuFactory;
+import userInterfaces.menuFactories.UserMenuFactory;
+import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.userPrompt.UserPrompt;
 
 
 public class ViewPlaylist extends MenuAction implements Action {
 
-    MenuFactory menuFactory;
+    MenuFactory playlistsMenuFactory;
 
     public ViewPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
-        menuFactory = new MenuFactory(userPrompt, user, lp, mp);
+        playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, user, lp, mp, null);
     }
 
     @Override
@@ -25,6 +27,6 @@ public class ViewPlaylist extends MenuAction implements Action {
 
     @Override
     public void next() {
-        menuFactory.getMenu(Menus.PLAYLIST).run();
+        playlistsMenuFactory.getMenu(MenuEnums.PLAYLIST).run();
     }
 }

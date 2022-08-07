@@ -1,26 +1,31 @@
-package userInterfaces;
+package userInterfaces.menuFactories;
 
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import userInterfaces.menus.*;
+import userInterfaces.menuEnums.MenuEnums;
+import userInterfaces.menus.playlistsMenu.PlaylistMenu;
+import userInterfaces.menus.userMenus.AdminMenu;
+import userInterfaces.menus.userMenus.NonAdminMenu;
+import userInterfaces.menus.userMenus.StartMenu;
+import userInterfaces.menus.videosMenus.VideoStudioMenu;
 import userInterfaces.userPrompt.UserPrompt;
 
-public class MenuFactory {
+public class UserMenuFactory implements MenuFactory {
     private final User user;
     private final UserPrompt userPrompt;
     private final LanguagePresenter lp;
     private final MenuPresenter mp;
 
 
-    public MenuFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+    public UserMenuFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         this.user = user;
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
     }
 
-    public Menu getMenu(Menus type) {
+    public Menu getMenu(MenuEnums type) {
         switch (type) {
             case START:
                 return new StartMenu(userPrompt, user, lp, mp);
@@ -28,10 +33,6 @@ public class MenuFactory {
                 return new AdminMenu(userPrompt, user, lp, mp);
             case NONADMIN:
                 return new NonAdminMenu(userPrompt, user, lp, mp);
-            case VIDEOBROWSE:
-                return new VideoBrowseMenu(userPrompt, user, lp, mp);
-            case PLAYLIST:
-                return new PlaylistMenu(userPrompt, user, lp, mp);
             case VIDEOSTUDIO:
                 return new VideoStudioMenu(userPrompt, user, lp, mp);
             default:

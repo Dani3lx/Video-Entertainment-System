@@ -1,4 +1,4 @@
-package userInterfaces.menus;
+package userInterfaces.menus.userMenus;
 
 import controllers.action.actionFactories.StartActionFactory;
 import controllers.action.actionFactories.Action;
@@ -6,6 +6,7 @@ import controllers.action.actionFactories.ActionFactory;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
+import userInterfaces.menuFactories.Menu;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;

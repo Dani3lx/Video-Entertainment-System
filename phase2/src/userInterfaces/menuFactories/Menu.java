@@ -1,4 +1,4 @@
-package userInterfaces.menus;
+package userInterfaces.menuFactories;
 
 public interface Menu {
     void run();

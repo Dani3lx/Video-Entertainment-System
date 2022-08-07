@@ -1,6 +1,6 @@
-package userInterfaces;
+package userInterfaces.menuEnums;
 
-public enum Menus {
+public enum MenuEnums {
     START,
     ADMIN,
     NONADMIN,

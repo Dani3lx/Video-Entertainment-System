@@ -5,17 +5,19 @@ import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import userInterfaces.MenuFactory;
-import userInterfaces.Menus;
+import userInterfaces.menuFactories.MenuFactory;
+import userInterfaces.menuFactories.UserMenuFactory;
+import userInterfaces.menuEnums.MenuEnums;
+import userInterfaces.menuFactories.VideosMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
 
 public class BrowseVideo extends MenuAction implements Action {
 
-    MenuFactory menuFactory;
+    MenuFactory videosMenuFactory;
 
     public BrowseVideo(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
-        menuFactory = new MenuFactory(userPrompt, user, lp, mp);
+        videosMenuFactory = new VideosMenuFactory(userPrompt, user, lp, mp, null);
     }
 
     @Override
@@ -25,6 +27,6 @@ public class BrowseVideo extends MenuAction implements Action {
 
     @Override
     public void next() {
-        menuFactory.getMenu(Menus.VIDEOBROWSE).run();
+        videosMenuFactory.getMenu(MenuEnums.VIDEOBROWSE).run();
     }
 }

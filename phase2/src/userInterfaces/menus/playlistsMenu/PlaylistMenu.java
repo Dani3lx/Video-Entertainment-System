@@ -1,11 +1,13 @@
-package userInterfaces.menus;
+package userInterfaces.menus.playlistsMenu;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actionFactories.ActionFactory;
 import controllers.action.actionFactories.PlaylistActionFactory;
+import entities.Playlist;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
+import userInterfaces.menuFactories.Menu;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
@@ -16,8 +18,8 @@ public class PlaylistMenu implements Menu {
 
     private final List<String> actionList = List.of(new String[]{"test"});
 
-    public PlaylistMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
-        actionFactory = new PlaylistActionFactory(userPrompt, user, lp, mp);
+    public PlaylistMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> playlists) {
+        actionFactory = new PlaylistActionFactory(userPrompt, user, lp, mp, playlists);
         this.userPrompt = userPrompt;
     }
 

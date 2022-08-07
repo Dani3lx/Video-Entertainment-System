@@ -10,7 +10,7 @@ public class VideoStudioActionFactory implements ActionFactory {
     private final User user;
     private final LanguagePresenter lp;
     private final MenuPresenter mp;
-    UserPrompt userPrompt;
+    private final UserPrompt userPrompt;
 
     public VideoStudioActionFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         this.userPrompt = userPrompt;

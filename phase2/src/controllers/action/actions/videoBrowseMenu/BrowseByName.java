@@ -14,11 +14,7 @@ import java.util.List;
 
 public class BrowseByName extends MenuAction implements Action {
     List<Video> videos;
-    ActionFactory actionFactory;
-    SelectVideo action;
     public BrowseByName(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
-        actionFactory = new VideoBrowseActionFactory(userPrompt, user, lp, mp);
-        action = new SelectVideo(userPrompt, user, lp, mp);
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
@@ -33,7 +29,5 @@ public class BrowseByName extends MenuAction implements Action {
 
     @Override
     public void next() {
-        action.getVideos(videos);
-        action.run();
     }
 }

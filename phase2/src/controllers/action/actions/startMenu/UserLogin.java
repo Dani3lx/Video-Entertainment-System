@@ -4,8 +4,9 @@ import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import userInterfaces.MenuFactory;
-import userInterfaces.Menus;
+import userInterfaces.menuFactories.MenuFactory;
+import userInterfaces.menuFactories.UserMenuFactory;
+import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.time.LocalDateTime;
@@ -31,15 +32,15 @@ public class UserLogin extends MenuAction implements Action {
     }
 
     public void next() {
-        MenuFactory menuFactory = new MenuFactory(userPrompt, currentUser, lp, mp);
+        MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
         if (Objects.isNull(currentUser)) {
-            menuFactory.getMenu(Menus.START).run();
+            userMenuFactory.getMenu(MenuEnums.START).run();
         }
         um.updateHistory(currentUser, LocalDateTime.now().format(formatter));
         if (um.getRole(currentUser)) {
-            menuFactory.getMenu(Menus.ADMIN).run();
+            userMenuFactory.getMenu(MenuEnums.ADMIN).run();
         } else {
-            menuFactory.getMenu(Menus.NONADMIN).run();
+            userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
         }
     }
 }

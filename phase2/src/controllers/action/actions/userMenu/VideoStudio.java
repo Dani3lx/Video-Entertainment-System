@@ -5,16 +5,17 @@ import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import userInterfaces.MenuFactory;
-import userInterfaces.Menus;
+import userInterfaces.menuFactories.MenuFactory;
+import userInterfaces.menuFactories.UserMenuFactory;
+import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.userPrompt.UserPrompt;
 
 public class VideoStudio extends MenuAction implements Action {
 
-    MenuFactory menuFactory;
+    MenuFactory userMenuFactory;
 
     public VideoStudio(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
-        menuFactory = new MenuFactory(userPrompt, user, lp, mp);
+        userMenuFactory = new UserMenuFactory(userPrompt, user, lp, mp);
     }
 
     @Override
@@ -24,6 +25,6 @@ public class VideoStudio extends MenuAction implements Action {
 
     @Override
     public void next() {
-        menuFactory.getMenu(Menus.VIDEOSTUDIO).run();
+        userMenuFactory.getMenu(MenuEnums.VIDEOSTUDIO).run();
     }
 }
