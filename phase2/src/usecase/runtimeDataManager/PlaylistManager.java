@@ -4,6 +4,7 @@ import entities.Playlist;
 import entities.User;
 import entities.Video;
 import usecase.VideoRatingComparator;
+import usecase.RandomComparator;
 
 import java.util.*;
 
@@ -189,6 +190,8 @@ public class PlaylistManager {
             for (String uniqueID : uniqueIDs) {
                 videos.add(vm.getByUniqueID(uniqueID));
             }
+            Collections.sort(videos, new RandomComparator());
+
             ArrayList<String> newUniqueIDs = new ArrayList<>();
             for (Video video : videos) {
                 newUniqueIDs.add(video.getUniqueID());
