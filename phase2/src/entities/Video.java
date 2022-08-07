@@ -156,6 +156,22 @@ public class Video implements Comparable<Video> {
     }
 
     /**
+     * Add new comment to comments of video.
+     * @param comment to be added
+     */
+    public void addComment(Comments comment) {
+        this.comments.add(comment);
+    }
+
+    /**
+     * Remove comment from comments of video.
+     * @param comment to be removed
+     */
+    public void deleteComment(Comments comment) {
+        this.comments.remove(comment);
+    }
+
+    /**
      * Likes the video.
      */
     public void addLikes() {
