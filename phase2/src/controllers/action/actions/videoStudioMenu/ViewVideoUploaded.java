@@ -6,7 +6,7 @@ import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import usecase.runtimeDataManager.NonAdminManager;
-import userInterfaces.MenuBuilder;
+import userInterfaces.MenuFactory;
 import userInterfaces.Menus;
 import userInterfaces.userPrompt.UserPrompt;
 
@@ -27,7 +27,7 @@ public class ViewVideoUploaded extends MenuAction implements Action {
     }
 
     public void next(){
-        MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser, lp, mp);
-        menuBuilder.getMenu(Menus.NONADMIN).run();
+        MenuFactory menuFactory = new MenuFactory(userPrompt, currentUser, lp, mp);
+        menuFactory.getMenu(Menus.NONADMIN).run();
     }
 }

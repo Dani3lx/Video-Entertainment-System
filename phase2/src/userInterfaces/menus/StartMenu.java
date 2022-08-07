@@ -12,18 +12,18 @@ import java.util.List;
 
 public class StartMenu implements Menu {
     private final UserPrompt userPrompt;
-    private final ActionFactory factory;
+    private final ActionFactory actionFactory;
 
     private final List<String> actionList = List.of(new String[]{"login", "create account", "exit"});
 
     public StartMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
-        factory = new StartActionFactory(userPrompt, user, lp, mp);
+        actionFactory = new StartActionFactory(userPrompt, user, lp, mp);
         this.userPrompt = userPrompt;
     }
 
     public void run() {
         int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.START, actionList);
-        Action action = factory.getAction(actionList.get(result - 1));
+        Action action = actionFactory.getAction(actionList.get(result - 1));
         action.run();
     }
 }

@@ -6,14 +6,14 @@ import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.menus.*;
 import userInterfaces.userPrompt.UserPrompt;
 
-public class MenuBuilder {
+public class MenuFactory {
     private final User user;
     private final UserPrompt userPrompt;
     private final LanguagePresenter lp;
     private final MenuPresenter mp;
 
 
-    public MenuBuilder(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+    public MenuFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         this.user = user;
         this.userPrompt = userPrompt;
         this.lp = lp;

@@ -5,7 +5,7 @@ import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import userInterfaces.MenuBuilder;
+import userInterfaces.MenuFactory;
 import userInterfaces.Menus;
 import userInterfaces.userPrompt.UserPrompt;
 
@@ -40,12 +40,12 @@ public class AccountCreation extends MenuAction implements Action {
     }
 
     public void next() {
-        MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser, lp, mp);
+        MenuFactory menuFactory = new MenuFactory(userPrompt, currentUser, lp, mp);
         if (Objects.isNull(currentUser)) {
-            menuBuilder.getMenu(Menus.START).run();
+            menuFactory.getMenu(Menus.START).run();
         } else {
             um.updateHistory(currentUser, LocalDateTime.now().format(formatter));
-            menuBuilder.getMenu(Menus.NONADMIN).run();
+            menuFactory.getMenu(Menus.NONADMIN).run();
         }
     }
 }

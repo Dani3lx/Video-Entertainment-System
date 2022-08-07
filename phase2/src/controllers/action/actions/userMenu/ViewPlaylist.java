@@ -5,17 +5,17 @@ import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import userInterfaces.MenuBuilder;
+import userInterfaces.MenuFactory;
 import userInterfaces.Menus;
 import userInterfaces.userPrompt.UserPrompt;
 
 
 public class ViewPlaylist extends MenuAction implements Action {
 
-    MenuBuilder menuBuilder;
+    MenuFactory menuFactory;
 
     public ViewPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
-        menuBuilder = new MenuBuilder(userPrompt, user, lp, mp);
+        menuFactory = new MenuFactory(userPrompt, user, lp, mp);
     }
 
     @Override
@@ -25,6 +25,6 @@ public class ViewPlaylist extends MenuAction implements Action {
 
     @Override
     public void next() {
-        menuBuilder.getMenu(Menus.PLAYLIST).run();
+        menuFactory.getMenu(Menus.PLAYLIST).run();
     }
 }

@@ -5,16 +5,16 @@ import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import userInterfaces.MenuBuilder;
+import userInterfaces.MenuFactory;
 import userInterfaces.Menus;
 import userInterfaces.userPrompt.UserPrompt;
 
 public class Return extends MenuAction implements Action {
     User currentUser;
-    MenuBuilder menuBuilder;
+    MenuFactory menuFactory;
 
     public Return(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
-        menuBuilder = new MenuBuilder(userPrompt, user, lp, mp);
+        menuFactory = new MenuFactory(userPrompt, user, lp, mp);
         currentUser = user;
     }
 
@@ -25,9 +25,9 @@ public class Return extends MenuAction implements Action {
     @Override
     public void next() {
         if (um.getRole(currentUser)) {
-            menuBuilder.getMenu(Menus.ADMIN).run();
+            menuFactory.getMenu(Menus.ADMIN).run();
         } else {
-            menuBuilder.getMenu(Menus.NONADMIN).run();
+            menuFactory.getMenu(Menus.NONADMIN).run();
         }
     }
 }

@@ -6,7 +6,7 @@ import presenters.menuPresenter.TerminalMenuPresenter;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
-import userInterfaces.MenuBuilder;
+import userInterfaces.MenuFactory;
 import userInterfaces.Menus;
 import userInterfaces.menus.Menu;
 import userInterfaces.userPrompt.TerminalUserPrompt;
@@ -28,8 +28,8 @@ public class Main {
         LanguagePresenter lp = new EnglishPresenter();
         MenuPresenter mp = new TerminalMenuPresenter(lp);
         UserPrompt userPrompt = new TerminalUserPrompt(mp);
-        MenuBuilder builder = new MenuBuilder(userPrompt, null, lp, mp);
-        Menu menu = builder.getMenu(Menus.START);
+        MenuFactory menuFactory = new MenuFactory(userPrompt, null, lp, mp);
+        Menu menu = menuFactory.getMenu(Menus.START);
         menu.run();
     }
 }

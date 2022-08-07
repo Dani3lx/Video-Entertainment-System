@@ -5,7 +5,7 @@ import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import userInterfaces.MenuBuilder;
+import userInterfaces.MenuFactory;
 import userInterfaces.Menus;
 import userInterfaces.userPrompt.UserPrompt;
 
@@ -29,11 +29,11 @@ public class CheckLoginHistory extends MenuAction implements Action {
 
     @Override
     public void next() {
-        MenuBuilder menuBuilder = new MenuBuilder(userPrompt, currentUser, lp, mp);
+        MenuFactory menuFactory = new MenuFactory(userPrompt, currentUser, lp, mp);
         if (um.getRole(currentUser)) {
-            menuBuilder.getMenu(Menus.ADMIN).run();
+            menuFactory.getMenu(Menus.ADMIN).run();
         } else {
-            menuBuilder.getMenu(Menus.NONADMIN).run();
+            menuFactory.getMenu(Menus.NONADMIN).run();
         }
     }
 }

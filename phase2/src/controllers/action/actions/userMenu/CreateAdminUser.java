@@ -6,7 +6,7 @@ import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import usecase.runtimeDataManager.AdminManager;
-import userInterfaces.MenuBuilder;
+import userInterfaces.MenuFactory;
 import userInterfaces.Menus;
 import userInterfaces.userPrompt.UserPrompt;
 
@@ -42,7 +42,7 @@ public class CreateAdminUser extends MenuAction implements Action {
 
     @Override
     public void next() {
-        MenuBuilder builder = new MenuBuilder(userPrompt, currentUser, lp, mp);
-        builder.getMenu(Menus.ADMIN).run();
+        MenuFactory menuFactory = new MenuFactory(userPrompt, currentUser, lp, mp);
+        menuFactory.getMenu(Menus.ADMIN).run();
     }
 }
