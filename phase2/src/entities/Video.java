@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import phase2features.Ratings;
 
 /**
  * This represents video.
@@ -18,7 +19,11 @@ public class Video implements Comparable<Video> {
     private String name;
     private final String uploader;
     private final String date_upload;
-    private final ArrayList<String> ratings;
+
+    private final ArrayList<String> ratings; // old style of ratings
+
+    // private Ratings ratings; // new style ratings
+
     private ArrayList<Comments> comments;
 
     /**
@@ -222,6 +227,7 @@ public class Video implements Comparable<Video> {
             s1.append(it1.next()).append("/");
         }
 
+        // old style ratings
         Iterator<String> it2 = ratings.iterator();
         StringBuilder s2 = new StringBuilder();
         while (it2.hasNext()) {
@@ -230,6 +236,7 @@ public class Video implements Comparable<Video> {
 
         return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," +
                 s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
+        // this should be changed from s2 to this.getRatings() since I implemented toString for new Ratings class
     }
 }
 
