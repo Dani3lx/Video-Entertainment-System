@@ -81,8 +81,10 @@ public class VideoManager{
         ArrayList<String> ratings = new ArrayList<>();
         ratings.add("0");
         ratings.add("0");
+        ArrayList<Comments> comments = new ArrayList<>();
         Comments c = new Comments("","","");
-        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString(), c);
+        comments.add(c);
+        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString(), comments);
         vids.add(v1);
     }
 
