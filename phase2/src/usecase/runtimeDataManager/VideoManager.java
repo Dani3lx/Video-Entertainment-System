@@ -1,5 +1,6 @@
 package usecase.runtimeDataManager;
 
+import entities.Comments;
 import entities.Video;
 
 import java.time.LocalDateTime;
@@ -80,7 +81,8 @@ public class VideoManager{
         ArrayList<String> ratings = new ArrayList<>();
         ratings.add("0");
         ratings.add("0");
-        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString());
+        Comments c = new Comments("","","");
+        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString(), c);
         vids.add(v1);
     }
 
