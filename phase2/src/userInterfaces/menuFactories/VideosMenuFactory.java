@@ -38,7 +38,7 @@ public class VideosMenuFactory implements MenuFactory{
     public Menu getMenu(MenuEnums type) {
         switch (type) {
             case VIDEOBROWSE:
-                return new VideoBrowseMenu(userPrompt, user, lp, mp, videos);
+                return new VideoBrowseMenu(userPrompt, user, lp, mp);
             default:
                 return null;
         }

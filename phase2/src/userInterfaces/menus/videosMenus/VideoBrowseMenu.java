@@ -17,8 +17,8 @@ public class VideoBrowseMenu implements Menu {
     private final ActionFactory actionFactory;
     private final List<String> actionList = List.of(new String[]{"browse by name", "browse by category", "browse by uploader", "return"});
 
-    public VideoBrowseMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Video> videos) {
-        actionFactory = new VideoBrowseActionFactory(userPrompt, user, lp, mp, videos);
+    public VideoBrowseMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+        actionFactory = new VideoBrowseActionFactory(userPrompt, user, lp, mp);
         this.userPrompt = userPrompt;
     }
 

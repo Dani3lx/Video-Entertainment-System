@@ -19,7 +19,7 @@ public class VideoBrowseActionFactory implements ActionFactory {
     private final MenuPresenter mp;
     private final UserPrompt userPrompt;
 
-    public VideoBrowseActionFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Video> videos) {
+    public VideoBrowseActionFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         this.userPrompt = userPrompt;
         this.user = user;
         this.lp = lp;
