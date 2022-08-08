@@ -41,6 +41,7 @@ public interface LanguagePresenter {
         BANUSER,
         UNBANUSER,
         CATEGORY,
+        UPLOADER,
     }
 
     String getChoiceText(ChoiceTextType type);

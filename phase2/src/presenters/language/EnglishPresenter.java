@@ -84,6 +84,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Please enter the username of the user you wish to unban";
             case CATEGORY:
                 return "Please enter the categories";
+            case UPLOADER:
+                return "Please enter the name of the uploader";
             default:
                 return "";
         }

@@ -2,6 +2,7 @@ package controllers.action.actionFactories;
 
 import controllers.action.actions.videoBrowseMenu.BrowseByCategory;
 import controllers.action.actions.videoBrowseMenu.BrowseByName;
+import controllers.action.actions.videoBrowseMenu.BrowseByUploader;
 import controllers.action.actions.videoBrowseMenu.Return;
 import entities.User;
 import entities.Video;
@@ -31,6 +32,8 @@ public class VideoBrowseActionFactory implements ActionFactory {
                 return new BrowseByName(userPrompt, user, lp, mp);
             case "browse by category":
                 return new BrowseByCategory(userPrompt, user, lp, mp);
+            case "browse by uploader":
+                return new BrowseByUploader(userPrompt, user, lp, mp);
             case "return":
                 return new Return(userPrompt, user, lp, mp);
             default:
