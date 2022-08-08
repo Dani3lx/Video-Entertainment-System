@@ -28,6 +28,8 @@ public class VideoStudioActionFactory implements ActionFactory {
             case "edit title":
             case "edit categories":
             case "edit description":
+            case "edit comment":
+            case "delete comment":
             default:
                 return null;
         }
