@@ -46,7 +46,7 @@ public class AdminManagerTest {
     @Test
     public void deleteUserTest() {
 
-        AM.deleteUser(u1);
+        AM.deleteUser("k");
         assertTrue(UM.getAllUsers().isEmpty());
     }
 

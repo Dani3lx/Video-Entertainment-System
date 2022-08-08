@@ -1,7 +1,6 @@
 package controllers.action.actionFactories;
 
 import entities.Playlist;
-import controllers.action.actions.playlistMenu.*;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
@@ -25,14 +24,14 @@ public class PlaylistActionFactory implements ActionFactory {
 
     public Action getAction(String type) {
         switch (type) {
-            case "search playlist":
-                return new SearchPlaylist(user);
-            case "create playlist":
-                return new CreatePlaylist(user);
-            case "display all playlists":
-                return new DisplayAllPlaylist(user);
-            case "return":
-                return new Return(user);
+//            case "search playlist":
+//                return new SearchPlaylist(user);
+//            case "create playlist":
+//                return new CreatePlaylist(user);
+//            case "display all playlists":
+//                return new DisplayAllPlaylist(user);
+//            case "return":
+//                return new Return(user);
             default:
                 return null;
         }

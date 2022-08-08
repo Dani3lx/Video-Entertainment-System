@@ -36,10 +36,15 @@ public class AdminManager extends UserManager {
 
     /**
      * Removes the user from the arraylist of users
-     * @param user of type User
      */
-    public void deleteUser(User user) {
-        users.remove(user);
+    public boolean deleteUser(String username) {
+        for (User u : users) {
+            if(validateUserName(u, username)){
+                users.remove(u);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

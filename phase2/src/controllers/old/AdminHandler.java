@@ -77,19 +77,19 @@ public class AdminHandler extends UserActionHandler {
      */
     public boolean deleteUser(User currentUser, String name) {
 
-        // Iterates through the list to check if the user exist in the database
-        for (User user : all_users) {
-            if (am.validateUserName(user, name)) {
-
-                // Checks if the user being deleted is the current user
-                if (am.validateUserName(currentUser, name)) {
-                    am.deleteUser(user);
-                    return true;
-                }
-                am.deleteUser(user);
-                return false;
-            }
-        }
+//        // Iterates through the list to check if the user exist in the database
+//        for (User user : all_users) {
+//            if (am.validateUserName(user, name)) {
+//
+//                // Checks if the user being deleted is the current user
+//                if (am.validateUserName(currentUser, name)) {
+//                    am.deleteUser(user);
+//                    return true;
+//                }
+//                am.deleteUser(user);
+//                return false;
+//            }
+//        }
         return false;
     }
 
