@@ -16,7 +16,7 @@ public class PlaylistMenu implements Menu {
     private final UserPrompt userPrompt;
     private final ActionFactory actionFactory;
 
-    private final List<String> actionList = List.of(new String[]{"test"});
+    private final List<String> actionList = List.of(new String[]{"test","test2","test3"});
 
     public PlaylistMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> playlists) {
         actionFactory = new PlaylistActionFactory(userPrompt, user, lp, mp, playlists);
