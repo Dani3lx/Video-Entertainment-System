@@ -24,7 +24,7 @@ public class PlaylistMenu implements Menu {
     }
 
     public void run() {
-        int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.PLAYLIST, actionList);
+        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.PLAYLIST, actionList);
         Action action = actionFactory.getAction(actionList.get(result - 1));
         action.run();
     }

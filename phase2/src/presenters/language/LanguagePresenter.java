@@ -1,13 +1,14 @@
 package presenters.language;
 
 public interface LanguagePresenter {
-    enum MenuTextType {
+    enum ChoiceTextType {
         START,
         ADMIN,
         NONADMIN,
         VIDEOBROWSE,
         VIDEOSTUDIO,
-        PLAYLIST
+        PLAYLIST,
+        VIDEO,
     }
 
     enum AlertTextType {
@@ -20,6 +21,7 @@ public interface LanguagePresenter {
         BANNEDUSERS,
         BANNED,
         UNBANNED,
+        RESULT,
     }
 
     enum ErrorTextType {
@@ -39,7 +41,7 @@ public interface LanguagePresenter {
         UNBANUSER,
     }
 
-    String getMenuText(MenuTextType type);
+    String getChoiceText(ChoiceTextType type);
 
     String getAlertText(AlertTextType type);
 

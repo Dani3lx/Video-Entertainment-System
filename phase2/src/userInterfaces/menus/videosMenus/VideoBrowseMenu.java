@@ -23,7 +23,7 @@ public class VideoBrowseMenu implements Menu {
     }
 
     public void run() {
-        int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.VIDEOBROWSE, actionList);
+        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.VIDEOBROWSE, actionList);
         Action action = actionFactory.getAction(actionList.get(result - 1));
         action.run();
     }

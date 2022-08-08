@@ -23,7 +23,7 @@ public class StartMenu implements Menu {
     }
 
     public void run() {
-        int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.START, actionList);
+        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.START, actionList);
         Action action = actionFactory.getAction(actionList.get(result - 1));
         action.run();
     }

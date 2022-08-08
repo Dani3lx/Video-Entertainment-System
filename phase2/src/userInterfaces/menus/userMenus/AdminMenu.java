@@ -23,7 +23,7 @@ public class AdminMenu implements Menu {
     }
 
     public void run() {
-        int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.ADMIN, actionList);
+        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.ADMIN, actionList);
         Action action = actionFactory.getAction(actionList.get(result - 1));
         action.run();
     }

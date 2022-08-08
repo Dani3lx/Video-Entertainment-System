@@ -24,7 +24,7 @@ public class VideoStudioMenu implements Menu {
     }
 
     public void run() {
-        int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.VIDEOSTUDIO, actionList);
+        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.VIDEOSTUDIO, actionList);
         Action action = actionFactory.getAction(actionList.get(result - 1));
         action.run();
     }

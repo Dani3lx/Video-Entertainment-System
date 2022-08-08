@@ -1,8 +1,6 @@
 package controllers.action.actions.videoBrowseMenu;
 
 import controllers.action.actionFactories.Action;
-import controllers.action.actionFactories.ActionFactory;
-import controllers.action.actionFactories.VideoBrowseActionFactory;
 import controllers.action.actions.MenuAction;
 import entities.User;
 import entities.Video;
@@ -14,6 +12,7 @@ import java.util.List;
 
 public class BrowseByName extends MenuAction implements Action {
     List<Video> videos;
+    Video video;
     public BrowseByName(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
         this.userPrompt = userPrompt;
         this.lp = lp;
@@ -24,10 +23,13 @@ public class BrowseByName extends MenuAction implements Action {
     public void run() {
         String videoName = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.VIDEONAME);
         videos = vm.getByName(videoName);
+        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.VIDEO, vm.getVideoNames(videos));
+        video = videos.get(result - 1);
         next();
     }
 
     @Override
     public void next() {
+        System.out.println(video);
     }
 }
