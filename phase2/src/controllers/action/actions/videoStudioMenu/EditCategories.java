@@ -13,6 +13,7 @@ import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class EditCategories extends MenuAction implements Action {
 
@@ -29,9 +30,9 @@ public class EditCategories extends MenuAction implements Action {
 
         // Asks for uniqueID of video and the new categories for the corresponding video
         String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.EDITVIDEO);
-        String categories = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.CATEGORIES);
+        List<String> categories = userPrompt.getMultipleInputs(LanguagePresenter.RequestTextType.CATEGORY);
 
-        if (nam.editTitle(currentUser, uniqueID, categories)){
+        if (nam.editCategories(currentUser, uniqueID, categories)){
             mp.displayAlert(LanguagePresenter.AlertTextType.EDIT);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.EDIT);

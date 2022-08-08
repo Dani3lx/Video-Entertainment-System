@@ -6,6 +6,7 @@ import usecase.VideoEditor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Responsible for specific actions that only pertain to non-admin users.
@@ -78,10 +79,10 @@ public class NonAdminManager extends UserManager {
      *
      * @param user     of type User
      * @param uniqueID identifier of the video
-     * @param newCate  genres the user wants to change to
+     * @param categories  categories the user wants to change to
      */
-    public Boolean editCategories(User user, String uniqueID, String categories) {
-        ArrayList<String> newCate = new ArrayList<>(Arrays.asList(categories.split(",")));
+    public Boolean editCategories(User user, String uniqueID, List<String> categories) {
+        ArrayList<String> newCate = new ArrayList<>(categories);
         for (Video video : vm.getVids()) {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
                 ve.editCategories(video, newCate);

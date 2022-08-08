@@ -47,7 +47,7 @@ public class TerminalUserPrompt implements UserPrompt {
 
     public List<String> getMultipleInputs(LanguagePresenter.RequestTextType type) {
         sc = new Scanner(System.in);
-        mp.displayRequest(type);
+        mp.displayRequestMultiple(type);
         List<String> list = new ArrayList<>();
         while (true) {
             String item = sc.nextLine();

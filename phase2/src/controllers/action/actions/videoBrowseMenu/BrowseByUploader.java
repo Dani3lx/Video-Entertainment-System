@@ -10,10 +10,10 @@ import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
 
-public class BrowseByName extends MenuAction implements Action {
+public class BrowseByUploader extends MenuAction implements Action {
     List<Video> videos;
     Video video;
-    public BrowseByName(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
+    public BrowseByUploader(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
@@ -21,8 +21,8 @@ public class BrowseByName extends MenuAction implements Action {
 
     @Override
     public void run() {
-        String videoName = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.VIDEONAME);
-        videos = vm.getByName(videoName);
+        String uploader = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.UPLOADER);
+        videos = vm.getByUploader(uploader);
         if (!videos.isEmpty()) {
             int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.VIDEO, vm.getVideoNames(videos));
             video = videos.get(result - 1);

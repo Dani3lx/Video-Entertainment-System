@@ -156,7 +156,7 @@ public class VideoManager{
      * @param categories the categories of the video
      * @return all the videos belonging to the same categories
      */
-    public ArrayList<Video> getByCategory(ArrayList<String> categories) {
+    public List<Video> getByCategory(List<String> categories) {
         ArrayList<Video> videoList = new ArrayList<>();
         for (Video vid : vids) {
 

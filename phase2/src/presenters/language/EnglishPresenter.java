@@ -65,6 +65,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "The unban operation was unsuccessful";
             case EDIT:
                 return "Edit video operation was unsuccessful";
+            case NORESULT:
+                return "No results were found";
             default:
                 return "";
         }
@@ -84,12 +86,14 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Please enter the username of the user you wish to ban";
             case UNBANUSER:
                 return "Please enter the username of the user you wish to unban";
+            case CATEGORY:
+                return "Please enter the categories";
+            case UPLOADER:
+                return "Please enter the name of the uploader";
             case EDITVIDEO:
                 return "Enter uniqueID of the video you want to edit";
             case TITLE:
                 return "Enter new title";
-            case CATEGORIES:
-                return "Enter new categories seperated by commas";
             case DESCRIPTION:
                 return "Enter new description";
             default:

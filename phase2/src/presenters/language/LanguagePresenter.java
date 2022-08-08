@@ -32,6 +32,7 @@ public interface LanguagePresenter {
         BANNED,
         UNBANNED,
         EDIT,
+        NORESULT,
     }
 
     enum RequestTextType {
@@ -41,9 +42,10 @@ public interface LanguagePresenter {
         DELETEUSER,
         BANUSER,
         UNBANUSER,
+        CATEGORY,
+        UPLOADER,
         EDITVIDEO,
         TITLE,
-        CATEGORIES,
         DESCRIPTION,
     }
 
