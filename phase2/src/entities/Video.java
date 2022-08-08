@@ -20,9 +20,9 @@ public class Video implements Comparable<Video> {
     private final String uploader;
     private final String date_upload;
 
-    private final ArrayList<String> ratings; // old style of ratings
+    // private final ArrayList<String> ratings; // old style of ratings
 
-    // private Ratings ratings; // new style ratings
+    private Ratings ratings; // new style ratings
 
     private ArrayList<Comments> comments;
 
@@ -39,7 +39,7 @@ public class Video implements Comparable<Video> {
      * @param date_upload the date the video is uploaded
      */
     public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID,
-                 ArrayList<String> ratings, String date_upload, ArrayList<Comments> comments) {
+                 Ratings ratings, String date_upload, ArrayList<Comments> comments) {
         this.name = name;
         this.uploader = uploader;
         this.content = content;
@@ -66,11 +66,11 @@ public class Video implements Comparable<Video> {
      *
      * @return video rating
      */
-    public ArrayList<String> getRatings() {
+    public Ratings getRatings() {
         return ratings;
     }
 
-    // public Integer getRatings() { return ratings.getTotalLikes; } // for new ratings class
+    public int getLikes() { return ratings.getTotalLikes(); }
 
     /**
      * Return the uniqueID.
@@ -182,14 +182,14 @@ public class Video implements Comparable<Video> {
      * Likes the video.
      */
     public void addLikes() {
-        ratings.set(0, String.valueOf(Integer.parseInt(ratings.get(0)) + 1));
+        ratings.addLikes("Needs to be fixed");
     }
 
     /**
      * Dislikes the video.
      */
     public void addDislikes() {
-        ratings.set(1, String.valueOf(Integer.parseInt(ratings.get(1)) + 1));
+        ratings.addDislikes("Need to be fixed");
     }
 
     /**
@@ -230,14 +230,14 @@ public class Video implements Comparable<Video> {
         }
 
         // old style ratings
-        Iterator<String> it2 = ratings.iterator();
-        StringBuilder s2 = new StringBuilder();
-        while (it2.hasNext()) {
-            s2.append(it2.next()).append("/");
-        }
+//        Iterator<String> it2 = ratings.iterator();
+//        StringBuilder s2 = new StringBuilder();
+//        while (it2.hasNext()) {
+//            s2.append(it2.next()).append("/");
+//        }
 
         return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," +
-                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
+                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + this.getRatings() + "," + this.getDate_upload();
         // this should be changed from s2 to this.getRatings() since I implemented toString for new Ratings class
     }
 }

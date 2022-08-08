@@ -66,6 +66,6 @@ public class VideoEditor {
      * @return video's information
      */
     public String[] returnVideoInformation(Video vid) {
-        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent(), vid.getRatings().get(0), vid.getRatings().get(1)};
+        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent(), Integer.toString(vid.getLikes()), "0"};
     }
 }
