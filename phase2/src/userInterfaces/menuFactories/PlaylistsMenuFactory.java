@@ -5,8 +5,10 @@ import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.menuEnums.MenuEnums;
+import userInterfaces.menus.playlistsMenu.PlaylistManageMenu;
 import userInterfaces.menus.playlistsMenu.PlaylistMenu;
-import userInterfaces.menus.playlistsMenu.PlaylistSubMenu;
+import userInterfaces.menus.playlistsMenu.PlaylistOrderMenu;
+import userInterfaces.menus.playlistsMenu.PlaylistViewMenu;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
@@ -32,10 +34,12 @@ public class PlaylistsMenuFactory implements MenuFactory{
         switch (type) {
             case PLAYLIST:
                 return new PlaylistMenu(userPrompt, user, lp, mp, playlists);
-            case SUBPLAYLIST:
-                return new PlaylistSubMenu()
-            case REORDER:
-                return new PlaylistReorderMenu()
+            case PLAYLISTMANAGE:
+                return new PlaylistManageMenu(userPrompt, user, lp, mp, playlists);
+            case PLAYLISTVIEW:
+                return new PlaylistViewMenu(userPrompt, user, lp, mp, playlists);
+            case PLAYLISTORDER:
+                return new PlaylistOrderMenu(userPrompt, user, lp, mp, playlists);
             default:
                 return null;
         }

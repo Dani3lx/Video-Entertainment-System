@@ -30,38 +30,42 @@ public class PlaylistActionFactory implements ActionFactory {
         switch (type) {
           /* Find Playlist Actions*/
             case "search playlist":
-                return new SearchPlaylist(userPrompt,user,lp,mp);
-            case "create playlist":
-                return new CreatePlaylist(userPrompt,user,lp,mp);
+                return new SearchPlaylist(userPrompt,user,lp,mp,null);
+            case "create new playlist":
+                return new CreatePlaylist(userPrompt,user,lp,mp,null);
             case "display all playlists":
-                return new DisplayAllPlaylist(userPrompt,user,lp,mp);
+                return new DisplayAllPlaylist(userPrompt,user,lp,mp,null);
           /*Playlist Management Actions*/
             case "view playlist":
                 return new ViewPlaylist(userPrompt,user,lp,mp,playlists);
-            case "add to playlist":
+            case "add videos to playlist":
                 return new AddToPlaylist(userPrompt,user,lp,mp,playlists);
-            case "remove from playlist":
+            case "remove videos from playlist":
                 return new RemoveFromPlaylist(userPrompt,user,lp,mp,playlists);
             case "reorder playlist":
                 return new ReorderPlaylist(userPrompt,user,lp,mp,playlists);
             case "like playlist":
                 return new LikePlaylist(userPrompt,user,lp,mp,playlists);
             /*View Playlist Actions*/
-            case "view names":
+            case "view videos in playlist":
                 return new ViewVidsPlaylist(userPrompt,user,lp,mp,playlists);
             case "view likes":
                 return new ViewLikesPlaylist(userPrompt,user,lp,mp,playlists);
-            case "change name":
+            case "change playlist name":
                 return new ChangeNamePlaylist(userPrompt,user,lp,mp,playlists);
             /*Reorder Playlist Actions*/
-            case "reorder alphabetically":
+            case "reorder playlist alphabetically":
                 return new ReorderABCPlaylist(userPrompt,user,lp,mp,playlists);
-            case "reorder likes":
+            case "reorder playlist by likes":
                 return new ReorderLikesPlaylist(userPrompt,user,lp,mp,playlists);
-            case "reorder shuffle":
+            case "shuffle playlist":
                 return new RearderShufflePlaylist(userPrompt,user,lp,mp,playlists);
-            case "return":
+            case "return to user menu":
                 return new Return(user);
+            case "return to playlist search":
+                return
+            case "return to playlist menu":
+                return
             default:
                 return null;
         }

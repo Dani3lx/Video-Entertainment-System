@@ -9,6 +9,9 @@ public interface LanguagePresenter {
         VIDEOSTUDIO,
         PLAYLIST,
         VIDEO,
+        PLAYLISTMANAGE,
+        PLAYLISTVIEW,
+        PLAYLISTORDER,
     }
 
     enum AlertTextType {

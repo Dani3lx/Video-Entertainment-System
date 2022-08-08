@@ -12,22 +12,22 @@ import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
 
-public class PlaylistMenu implements Menu {
+public class PlaylistViewMenu implements Menu {
     private final UserPrompt userPrompt;
     private final ActionFactory actionFactory;
 
-    private final List<String> actionList = List.of(new String[]{"search playlist",
-            "create new playlist",
-            "display all playlists",
-            "return to user menu"});
+    private final List<String> actionList = List.of(new String[]{"view videos in playlist",
+            "view likes",
+            "change playlist name",
+            "return to playlist menu"});
 
-    public PlaylistMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> playlists) {
+    public PlaylistViewMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> playlists) {
         actionFactory = new PlaylistActionFactory(userPrompt, user, lp, mp, playlists);
         this.userPrompt = userPrompt;
     }
 
     public void run() {
-        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.PLAYLIST, actionList);
+        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.PLAYLISTVIEW, actionList);
         Action action = actionFactory.getAction(actionList.get(result - 1));
         action.run();
     }
