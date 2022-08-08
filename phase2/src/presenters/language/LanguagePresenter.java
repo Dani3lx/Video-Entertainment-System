@@ -25,6 +25,7 @@ public interface LanguagePresenter {
         BANNED,
         UNBANNED,
         RESULT,
+        SUCCESS
     }
 
     enum ErrorTextType {

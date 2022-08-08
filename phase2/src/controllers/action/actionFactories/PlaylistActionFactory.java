@@ -1,13 +1,13 @@
 package controllers.action.actionFactories;
 
-import controllers.action.actions.playlistMenu.SearchPlaylist;
+import controllers.action.actions.playlistMenu.searchPlaylist.CreatePlaylist;
+import controllers.action.actions.playlistMenu.searchPlaylist.SearchPlaylist;
 import entities.Playlist;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.userPrompt.UserPrompt;
 
-import java.util.ArrayList;
 import java.util.List;
 import controllers.action.actions.videoBrowseMenu.Return;
 

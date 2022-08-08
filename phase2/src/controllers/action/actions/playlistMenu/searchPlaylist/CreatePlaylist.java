@@ -1,4 +1,5 @@
-package controllers.action.actions.playlistMenu;
+package controllers.action.actions.playlistMenu.searchPlaylist;
+
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -15,12 +16,11 @@ import userInterfaces.userPrompt.UserPrompt;
 import java.util.List;
 import java.util.Objects;
 
-public class SearchPlaylist extends MenuAction implements Action {
+public class CreatePlaylist extends MenuAction implements Action {
 
-    private boolean found_pl = true;
     MenuFactory playlistsMenuFactory;
-
-    public SearchPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
+    private boolean check;
+    public CreatePlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
@@ -29,22 +29,27 @@ public class SearchPlaylist extends MenuAction implements Action {
     @Override
     public void run(){
         String plname = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PLAYLIST);
-        Playlist pl = pm.getPlaylistByName(plname);
-        /* Check if Playlist Exists*/
-        if (Objects.isNull(pl)){
-            mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);
-            found_pl = false;
+        String username = um.getUserName(currentUser);
+        /*Check if playlist name exists*/
+        check =  pm.checkPlaylistByName(plname);
+        if (check){
+            mp.displayError(LanguagePresenter.ErrorTextType.INVALIDINPUT);
+            next();
         }
-        /*Adding playlist to future menus*/
-        playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp,List.of(pl));
-
-        next();
+        else {
+            Playlist pl = new Playlist(plname,username);
+            pm.addPlaylist(pl);
+            mp.displayAlert(LanguagePresenter.AlertTextType.SUCCESS);
+            /*Adding playlist to future menus*/
+            playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, List.of(pl));
+            next();
+        }
     }
     @Override
     public void next(){
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt,currentUser,lp,mp);
 
-        if (found_pl){
+        if (!check){
             playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTMANAGE).run();
         }
         else{
