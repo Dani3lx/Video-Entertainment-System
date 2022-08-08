@@ -111,7 +111,7 @@ public class AdminHandler extends UserActionHandler {
                 if (am.validateUserName(currentUser, name) || (am.getRole(user))) {
                     return false;
                 } else if (!(am.validateBanStatus(user))) { // Check if the user is unbanned
-                    am.banUser(user);
+//                    am.banUser(user);
                     return true;
                 }
             }
@@ -134,7 +134,7 @@ public class AdminHandler extends UserActionHandler {
 
                 // Check if the user is already banned
                 if (am.validateBanStatus(user)) {
-                    am.unbanUser(user);
+//                    am.unbanUser(user);
                     return true;
                 }
                 return false;

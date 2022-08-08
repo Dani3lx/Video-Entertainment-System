@@ -13,7 +13,6 @@ import userInterfaces.userPrompt.UserPrompt;
 
 public class BanUser extends MenuAction implements Action {
 
-    private boolean banned;
 
     public BanUser(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
         this.userPrompt = userPrompt;
@@ -31,18 +30,7 @@ public class BanUser extends MenuAction implements Action {
         mp.displayList(am.returnUsersByBan(um.getAllUsers(), false));
         String username = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.BANUSER);
 
-        // Iterates through the list to see if there is a user with matching username
-        for (User user : um.getAllUsers()){
-            if (am.validateUserName(user, username)){
-
-                // Check if the user is unbanned
-                if (!(am.validateBanStatus(user))) {
-                    am.banUser(user);
-                    banned = true;
-                }
-            }
-        }
-        if (banned){
+        if (am.banUser(currentUser, username)){
             mp.displayAlert(LanguagePresenter.AlertTextType.BANNED);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.BANNED);
