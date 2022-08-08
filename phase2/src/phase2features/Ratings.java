@@ -32,6 +32,7 @@ public class Ratings {
         return likeUserName;
     }
 
+    @Override
     public String toString(){
         Iterator<String> usernames = likeUserName.iterator();
         StringBuilder s = new StringBuilder();
@@ -39,6 +40,7 @@ public class Ratings {
             s.append(usernames.next()).append("/");
         }
 
-        return s + "," + this.getTotalLikes();
+        return s.toString(); // don't need to include likes since the constructor sets that automatically
     }
+
 }

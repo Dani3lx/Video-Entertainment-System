@@ -70,6 +70,8 @@ public class Video implements Comparable<Video> {
         return ratings;
     }
 
+    // public Integer getRatings() { return ratings.getTotalLikes; } // for new ratings class
+
     /**
      * Return the uniqueID.
      *
