@@ -28,6 +28,7 @@ public interface LanguagePresenter {
         DELETEUSER,
         BANNED,
         UNBANNED,
+        NOTFOUND
     }
 
     enum RequestTextType {
@@ -37,6 +38,7 @@ public interface LanguagePresenter {
         DELETEUSER,
         BANUSER,
         UNBANUSER,
+        PLAYLIST,
     }
 
     String getMenuText(MenuTextType type);
