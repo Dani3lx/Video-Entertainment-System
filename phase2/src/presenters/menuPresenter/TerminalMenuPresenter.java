@@ -1,12 +1,6 @@
 package presenters.menuPresenter;
 
-import entities.User;
-import presenters.language.EnglishPresenter;
 import presenters.language.LanguagePresenter;
-import usecase.runtimeDataManager.AdminManager;
-import usecase.runtimeDataManager.NonAdminManager;
-import usecase.runtimeDataManager.UserManager;
-import usecase.runtimeDataManager.VideoManager;
 
 import java.util.List;
 
@@ -90,15 +84,15 @@ public class TerminalMenuPresenter implements MenuPresenter{
     }
 
     public void displayRequestMultiple(LanguagePresenter.RequestTextType type) {
-        System.out.println(requestText(lp.getRequestText(type)) + ". Type CONTINUE to proceed.");
+        System.out.println(requestText(lp.getRequestText(type)) + "Type CONTINUE to proceed.");
     }
 
     /**
      * Displays a menu option.
      *
      */
-    public void displayMenuOption(LanguagePresenter.MenuTextType type, List<String> actionList) {
-        System.out.println(menuOption(lp.getMenuText(type)));
+    public void displayChoiceOption(LanguagePresenter.ChoiceTextType type, List<String> actionList) {
+        System.out.println(menuOption(lp.getChoiceText(type)));
         int counter = 1;
         for (String item : actionList) {
             System.out.println(counter + ": " + item);
@@ -112,8 +106,10 @@ public class TerminalMenuPresenter implements MenuPresenter{
      * @param list the list being displayed
      */
     public void displayList(List<String> list) {
+        int count = 1;
         for (String str : list) {
-            System.out.println(str);
+            System.out.println(count + " - " + str);
+            count++;
         }
     }
 

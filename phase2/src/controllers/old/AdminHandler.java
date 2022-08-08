@@ -57,10 +57,10 @@ public class AdminHandler extends UserActionHandler {
 
         // Iterates through the list to check if the username already exist in the database using useCase method.
         if (um.noUserExist(username)) {
-            // Creates a new user through useCase method
-            User newUser = am.instantiateUser(username, password, true);
-            updateUserHistory(newUser);
-            um.updateData(newUser);
+//            // Creates a new user through useCase method
+//            User newUser = am.instantiateUser(username, password, true);
+//            updateUserHistory(newUser);
+//            um.updateData(newUser);
             return true;
         } else {
             return false;

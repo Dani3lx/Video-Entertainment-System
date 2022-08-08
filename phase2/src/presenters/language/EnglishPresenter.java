@@ -1,7 +1,7 @@
 package presenters.language;
 
 public class EnglishPresenter implements LanguagePresenter {
-    public String getMenuText(MenuTextType var) {
+    public String getChoiceText(ChoiceTextType var) {
         switch (var) {
             case START:
                 return "This is the start menu, please select one of the following options to proceed.";
@@ -15,6 +15,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Welcome to the video studio, please select one of the following action to proceed.";
             case PLAYLIST:
                 return "Welcome to the playlist system, please select one of the following action to proceed.";
+            case VIDEO:
+                return "Here are the videos";
             default:
                 return "";
         }
@@ -40,6 +42,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "The user has been successfully banned";
             case UNBANNED:
                 return "The user has been successfully unbanned";
+            case RESULT:
+                return "These are the search result";
             default:
                 return "";
         }
@@ -57,6 +61,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "The ban operation was unsuccessful";
             case UNBANNED:
                 return "The unban operation was unsuccessful";
+            case NORESULT:
+                return "No results were found";
             default:
                 return "";
         }
@@ -76,6 +82,10 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Please enter the username of the user you wish to ban";
             case UNBANUSER:
                 return "Please enter the username of the user you wish to unban";
+            case CATEGORY:
+                return "Please enter the categories";
+            case UPLOADER:
+                return "Please enter the name of the uploader";
             default:
                 return "";
         }
