@@ -28,6 +28,10 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Password has been successfully changed";
             case VIDEOSUPLOADED:
                 return "Here are all the videos you uploaded";
+            case ALLUSERS:
+                return "Here are all the users";
+            case DELETEUSER:
+                return "Deletion was successful";
             default:
                 return "";
         }
@@ -39,6 +43,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Invalid input, please try again.";
             case CREATEACCOUNT:
                 return "Account creation was not successful";
+            case DELETEUSER:
+                return "User was not successfully deleted";
             default:
                 return "";
         }
@@ -52,6 +58,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Please input a password";
             case VIDEONAME:
                 return "Please input the video name";
+            case DELETEUSER:
+                return "Please enter the username of the user you wish to delete";
             default:
                 return "";
         }

@@ -13,18 +13,23 @@ public interface LanguagePresenter {
     enum AlertTextType {
         CREATEACCOUNT,
         CHANGEPASSWORD,
-        VIDEOSUPLOADED
+        VIDEOSUPLOADED,
+        ALLUSERS,
+        DELETEUSER,
+
     }
 
     enum ErrorTextType {
         INVALIDINPUT,
-        CREATEACCOUNT
+        CREATEACCOUNT,
+        DELETEUSER,
     }
 
     enum RequestTextType {
         USERNAME,
         PASSWORD,
-        VIDEONAME
+        VIDEONAME,
+        DELETEUSER,
     }
 
     String getMenuText(MenuTextType type);
