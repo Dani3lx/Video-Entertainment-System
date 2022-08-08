@@ -20,6 +20,7 @@ public class ViewVideoUploaded extends MenuAction implements Action {
         this.mp = mp;
     }
 
+    @Override
     public void run(){
         NonAdminManager nam = new NonAdminManager(vm);
         mp.displayAlert(LanguagePresenter.AlertTextType.VIDEOSUPLOADED);
@@ -27,6 +28,7 @@ public class ViewVideoUploaded extends MenuAction implements Action {
         next();
     }
 
+    @Override
     public void next(){
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
         userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
