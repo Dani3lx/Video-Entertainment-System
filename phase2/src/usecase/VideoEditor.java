@@ -1,5 +1,7 @@
 package usecase;
 
+import entities.Comments;
+import entities.User;
 import entities.Video;
 
 import java.util.ArrayList;
@@ -59,6 +61,14 @@ public class VideoEditor {
         v.addDislikes();
     }
 
+    public void editComment(Video v, User u, String newComm) {
+        ArrayList<Comments> comments = new ArrayList<>(v.getComments());
+        for (Comments c : comments) {
+            if (c.getCommenter().equals(u.getUserName())) {
+                c.setComment(newComm);
+            }
+        }
+    }
     /**
      * Return the video's information.
      *
