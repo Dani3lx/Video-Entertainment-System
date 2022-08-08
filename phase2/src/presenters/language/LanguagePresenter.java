@@ -22,6 +22,7 @@ public interface LanguagePresenter {
         BANNED,
         UNBANNED,
         RESULT,
+        EDIT,
     }
 
     enum ErrorTextType {
@@ -30,6 +31,7 @@ public interface LanguagePresenter {
         DELETEUSER,
         BANNED,
         UNBANNED,
+        EDIT,
     }
 
     enum RequestTextType {
@@ -39,6 +41,10 @@ public interface LanguagePresenter {
         DELETEUSER,
         BANUSER,
         UNBANUSER,
+        EDITVIDEO,
+        TITLE,
+        CATEGORIES,
+        DESCRIPTION,
     }
 
     String getChoiceText(ChoiceTextType type);

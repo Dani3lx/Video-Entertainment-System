@@ -5,6 +5,8 @@ import entities.Video;
 import usecase.VideoEditor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Responsible for specific actions that only pertain to non-admin users.
  *
@@ -61,12 +63,14 @@ public class NonAdminManager extends UserManager {
      * @param uniqueID identifier of the video
      * @param newTitle the title user wants to change to
      */
-    public void editTitle(User user, String uniqueID, String newTitle) {
+    public boolean editTitle(User user, String uniqueID, String newTitle) {
         for (Video video : vm.getVids()) {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
                 ve.editTitle(video, newTitle);
+                return true;
             }
         }
+        return false;
     }
 
     /**
@@ -76,12 +80,15 @@ public class NonAdminManager extends UserManager {
      * @param uniqueID identifier of the video
      * @param newCate  genres the user wants to change to
      */
-    public void editCategories(User user, String uniqueID, ArrayList<String> newCate) {
+    public Boolean editCategories(User user, String uniqueID, String categories) {
+        ArrayList<String> newCate = new ArrayList<>(Arrays.asList(categories.split(",")));
         for (Video video : vm.getVids()) {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
                 ve.editCategories(video, newCate);
+                return true;
             }
         }
+        return false;
     }
 
     /**
@@ -91,12 +98,14 @@ public class NonAdminManager extends UserManager {
      * @param uniqueID identifier of the video
      * @param newDes   description the user wants to change to
      */
-    public void editDescription(User user, String uniqueID, String newDes) {
+    public Boolean editDescription(User user, String uniqueID, String newDes) {
         for (Video video : vm.getVids()) {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
                 ve.editDescription(video, newDes);
+                return true;
             }
         }
+        return false;
     }
 
     /**

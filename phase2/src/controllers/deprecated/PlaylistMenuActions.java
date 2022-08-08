@@ -1,4 +1,4 @@
-package controllers.old;
+package controllers.deprecated;
 
 import entities.Playlist;
 import entities.User;

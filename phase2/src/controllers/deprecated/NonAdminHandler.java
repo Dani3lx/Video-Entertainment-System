@@ -1,4 +1,4 @@
-package controllers.old;
+package controllers.deprecated;
 
 import entities.User;
 import usecase.runtimeDataManager.NonAdminManager;
@@ -78,9 +78,9 @@ public class NonAdminHandler extends UserActionHandler {
      * @param uniqueID the video ID
      * @param newCate  the new categories
      */
-    public void editCategories(User user, String uniqueID, ArrayList<String> newCate) {
-        nm.editCategories(user, uniqueID, newCate);
-    }
+//    public void editCategories(User user, String uniqueID, ArrayList<String> newCate) {
+//        nm.editCategories(user, uniqueID, newCate);
+//    }
 
     /**
      * Edits the description of the video.

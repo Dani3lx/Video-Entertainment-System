@@ -1,4 +1,4 @@
-package controllers.old;
+package controllers.deprecated;
 
 import entities.User;
 import entities.Video;
@@ -6,7 +6,6 @@ import usecase.runtimeDataManager.UserManager;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 /**
  * Responsible for handling all users' actions.
