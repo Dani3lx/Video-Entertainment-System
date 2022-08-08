@@ -61,6 +61,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "The ban operation was unsuccessful";
             case UNBANNED:
                 return "The unban operation was unsuccessful";
+            case NORESULT:
+                return "No results were found";
             default:
                 return "";
         }
@@ -80,6 +82,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Please enter the username of the user you wish to ban";
             case UNBANUSER:
                 return "Please enter the username of the user you wish to unban";
+            case CATEGORY:
+                return "Please enter the categories";
             default:
                 return "";
         }

@@ -87,13 +87,4 @@ public class UserManagerTest {
         assertTrue(UM.getRole(u1));
     }
 
-    @Test
-    public void testReturnVids() {
-
-        ArrayList<String> cates = new ArrayList<>(List.of("serious"));
-        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("10", "0"));
-        Video v1 = new Video("k", "popmusic", "amazing music", cates, "url", "1", ratings, "today");
-        ArrayList<String> names = new ArrayList<>(List.of("popmusic"));
-        assertTrue(v1.equals(UM.returnVideos(names, "name").get(0)));
-    }
 }

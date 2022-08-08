@@ -30,6 +30,7 @@ public interface LanguagePresenter {
         DELETEUSER,
         BANNED,
         UNBANNED,
+        NORESULT,
     }
 
     enum RequestTextType {
@@ -39,6 +40,7 @@ public interface LanguagePresenter {
         DELETEUSER,
         BANUSER,
         UNBANUSER,
+        CATEGORY,
     }
 
     String getChoiceText(ChoiceTextType type);

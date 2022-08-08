@@ -84,7 +84,7 @@ public class TerminalMenuPresenter implements MenuPresenter{
     }
 
     public void displayRequestMultiple(LanguagePresenter.RequestTextType type) {
-        System.out.println(requestText(lp.getRequestText(type)) + ". Type CONTINUE to proceed.");
+        System.out.println(requestText(lp.getRequestText(type)) + "Type CONTINUE to proceed.");
     }
 
     /**
