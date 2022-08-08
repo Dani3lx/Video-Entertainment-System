@@ -37,6 +37,10 @@ public class UserActionFactory implements ActionFactory {
                 return new CreateAdminUser(userPrompt, user, lp, mp);
             case "delete user":
                 return new DeleteUser(userPrompt, user, lp, mp);
+            case "ban user":
+                return new BanUser(userPrompt, user, lp, mp);
+            case "unban user":
+                return new UnbanUser(userPrompt, user, lp, mp);
             default:
                 return null;
         }

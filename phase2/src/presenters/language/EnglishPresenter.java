@@ -32,6 +32,14 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Here are all the users";
             case DELETEUSER:
                 return "Deletion was successful";
+            case UNBANNEDUSERS:
+                return "Here are all the unbanned users";
+            case BANNEDUSERS:
+                return "Here are all the banned users";
+            case BANNED:
+                return "The user has been successfully banned";
+            case UNBANNED:
+                return "The user has been successfully unbanned";
             default:
                 return "";
         }
@@ -45,6 +53,10 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Account creation was not successful";
             case DELETEUSER:
                 return "User was not successfully deleted";
+            case BANNED:
+                return "The ban operation was unsuccessful";
+            case UNBANNED:
+                return "The unban operation was unsuccessful";
             default:
                 return "";
         }
@@ -60,6 +72,10 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Please input the video name";
             case DELETEUSER:
                 return "Please enter the username of the user you wish to delete";
+            case BANUSER:
+                return "Please enter the username of the user you wish to ban";
+            case UNBANUSER:
+                return "Please enter the username of the user you wish to unban";
             default:
                 return "";
         }

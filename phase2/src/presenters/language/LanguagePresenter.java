@@ -16,13 +16,18 @@ public interface LanguagePresenter {
         VIDEOSUPLOADED,
         ALLUSERS,
         DELETEUSER,
-
+        UNBANNEDUSERS,
+        BANNEDUSERS,
+        BANNED,
+        UNBANNED,
     }
 
     enum ErrorTextType {
         INVALIDINPUT,
         CREATEACCOUNT,
         DELETEUSER,
+        BANNED,
+        UNBANNED,
     }
 
     enum RequestTextType {
@@ -30,6 +35,8 @@ public interface LanguagePresenter {
         PASSWORD,
         VIDEONAME,
         DELETEUSER,
+        BANUSER,
+        UNBANUSER,
     }
 
     String getMenuText(MenuTextType type);
