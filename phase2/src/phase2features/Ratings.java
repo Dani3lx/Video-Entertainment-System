@@ -1,6 +1,7 @@
 package phase2features;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * THIS IS FOR PHASE 2
@@ -29,5 +30,15 @@ public class Ratings {
 
     public ArrayList<String> getLikeUserName() {
         return likeUserName;
+    }
+
+    public String toString(){
+        Iterator<String> usernames = likeUserName.iterator();
+        StringBuilder s = new StringBuilder();
+        while (usernames.hasNext()) {
+            s.append(usernames.next()).append("/");
+        }
+
+        return s + "," + this.getTotalLikes();
     }
 }

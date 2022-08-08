@@ -15,10 +15,10 @@ public class ExitProgram extends MenuAction implements Action {
         dataManager.saveData("phase2/datasets/Data.csv");
         dataManager.saveVideoData("phase2/datasets/VideoData.csv");
         dataManager.savePlayListData("phase2/datasets/PlaylistData.csv");
-        navigateMenu();
+        next();
     }
 
-    public void navigateMenu(){
+    public void next(){
         System.exit(0);
     }
 }

@@ -14,8 +14,8 @@ public class TerminalUserPrompt implements UserPrompt {
     MenuPresenter mp;
     Scanner sc;
 
-    public TerminalUserPrompt(LanguagePresenter lp){
-        mp = new TerminalMenuPresenter(lp);
+    public TerminalUserPrompt(MenuPresenter mp){
+        this.mp = mp;
     }
 
     public int getUserActionChoice(LanguagePresenter.MenuTextType type, List<String> actionList) {

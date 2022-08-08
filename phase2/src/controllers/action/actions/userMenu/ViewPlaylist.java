@@ -6,18 +6,18 @@ import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.menuFactories.MenuFactory;
+import userInterfaces.menuFactories.PlaylistsMenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.menuEnums.MenuEnums;
-import userInterfaces.menuFactories.VideosMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
 
-public class BrowseVideo extends MenuAction implements Action {
+public class ViewPlaylist extends MenuAction implements Action {
 
-    MenuFactory videosMenuFactory;
+    MenuFactory playlistsMenuFactory;
 
-    public BrowseVideo(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
-        videosMenuFactory = new VideosMenuFactory(userPrompt, user, lp, mp, null);
+    public ViewPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+        playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, user, lp, mp, null);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class BrowseVideo extends MenuAction implements Action {
 
     @Override
     public void next() {
-        videosMenuFactory.getMenu(MenuEnums.VIDEOBROWSE).run();
+        playlistsMenuFactory.getMenu(MenuEnums.PLAYLIST).run();
     }
 }

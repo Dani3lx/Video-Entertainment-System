@@ -26,6 +26,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Account creation was successful";
             case CHANGEPASSWORD:
                 return "Password has been successfully changed";
+            case VIDEOSUPLOADED:
+                return "Here are all the videos you uploaded";
             default:
                 return "";
         }
@@ -48,6 +50,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Please input a username";
             case PASSWORD:
                 return "Please input a password";
+            case VIDEONAME:
+                return "Please input the video name";
             default:
                 return "";
         }

@@ -3,28 +3,32 @@ package controllers.action.actions.videoBrowseMenu;
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
 import entities.User;
-import userInterfaces.MenuBuilder;
-import userInterfaces.Menus;
+import presenters.language.LanguagePresenter;
+import presenters.menuPresenter.MenuPresenter;
+import userInterfaces.menuFactories.MenuFactory;
+import userInterfaces.menuFactories.UserMenuFactory;
+import userInterfaces.menuEnums.MenuEnums;
+import userInterfaces.userPrompt.UserPrompt;
 
 public class Return extends MenuAction implements Action {
     User currentUser;
-    MenuBuilder menuBuilder;
+    MenuFactory userMenuFactory;
 
-    public Return(User user) {
-        menuBuilder = new MenuBuilder(userPrompt, user);
+    public Return(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+        userMenuFactory = new UserMenuFactory(userPrompt, user, lp, mp);
         currentUser = user;
     }
 
     public void run() {
-        navigateMenu();
+        next();
     }
 
     @Override
-    public void navigateMenu() {
+    public void next() {
         if (um.getRole(currentUser)) {
-            menuBuilder.getMenu(Menus.ADMIN).run();
+            userMenuFactory.getMenu(MenuEnums.ADMIN).run();
         } else {
-            menuBuilder.getMenu(Menus.NONADMIN).run();
+            userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
         }
     }
 }
