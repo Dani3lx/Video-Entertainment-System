@@ -33,8 +33,6 @@ public class UserMenuFactory implements MenuFactory {
                 return new AdminMenu(userPrompt, user, lp, mp);
             case NONADMIN:
                 return new NonAdminMenu(userPrompt, user, lp, mp);
-            case VIDEOSTUDIO:
-                return new VideoStudioMenu(userPrompt, user, lp, mp);
             default:
                 return null;
         }

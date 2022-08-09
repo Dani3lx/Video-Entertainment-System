@@ -8,6 +8,8 @@ import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.menuEnums.MenuEnums;
+import userInterfaces.menuFactories.VideosMenuFactory;
+import userInterfaces.menus.videosMenus.VideoStudioMenu;
 import userInterfaces.userPrompt.UserPrompt;
 
 public class VideoStudio extends MenuAction implements Action {
@@ -15,7 +17,7 @@ public class VideoStudio extends MenuAction implements Action {
     MenuFactory userMenuFactory;
 
     public VideoStudio(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
-        userMenuFactory = new UserMenuFactory(userPrompt, user, lp, mp);
+        userMenuFactory = new VideosMenuFactory(userPrompt, user, lp, mp, null);
     }
 
     @Override

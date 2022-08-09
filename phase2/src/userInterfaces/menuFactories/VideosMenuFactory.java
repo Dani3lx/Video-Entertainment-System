@@ -8,6 +8,7 @@ import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menus.videosMenus.VideoBrowseMenu;
 import userInterfaces.menus.videosMenus.VideoInteractionMenu;
+import userInterfaces.menus.videosMenus.VideoStudioMenu;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
@@ -42,6 +43,8 @@ public class VideosMenuFactory implements MenuFactory{
                 return new VideoBrowseMenu(userPrompt, user, lp, mp);
             case VIDEOINTERACTION:
                 return new VideoInteractionMenu(userPrompt, user, lp, mp, video);
+            case VIDEOSTUDIO:
+                return new VideoStudioMenu(userPrompt, user, lp, mp);
             default:
                 return null;
         }

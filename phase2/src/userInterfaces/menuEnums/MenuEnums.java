@@ -7,5 +7,5 @@ public enum MenuEnums {
     VIDEOBROWSE,
     VIDEOSTUDIO,
     PLAYLIST,
-    VIDEOINTERACTION
+    VIDEOINTERACTION,
 }
