@@ -3,6 +3,8 @@ package controllers.action.actionFactories;
 import controllers.action.actions.videoInteractionMenu.DeleteComment;
 import controllers.action.actions.videoInteractionMenu.EditComment;
 import controllers.action.actions.videoInteractionMenu.LikeVideo;
+import controllers.action.actions.videoInteractionMenu.AddComment;
+
 import entities.User;
 import entities.Video;
 import presenters.language.LanguagePresenter;
@@ -32,9 +34,11 @@ public class VideoInteractionActionFactory implements ActionFactory {
             case "dislike video":
                 return null;
             case "delete comment":
-                return new DeleteComment(userPrompt, user, lp, mp);
+                return new DeleteComment(userPrompt, user, lp, mp,video);
             case "edit comment":
-                return new EditComment(userPrompt, user, lp, mp);
+                return new EditComment(userPrompt, user, lp, mp,video);
+            case "add comment":
+                return new AddComment(userPrompt,user,lp,mp,video);
             default:
                 return null;
         }
