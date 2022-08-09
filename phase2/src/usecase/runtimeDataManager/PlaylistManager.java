@@ -64,6 +64,21 @@ public class PlaylistManager {
     }
 
     /**
+     * Get list of playlist names
+     * @return list of strings
+     */
+    public List<String> getPlaylistNames(){
+        List<String> pl_names = null;
+        int i = 0;
+        for(Playlist playlist : playlists){
+            pl_names.set(i, playlist.getPlaylistName());
+            i++;
+        }
+        return pl_names;
+    }
+
+
+    /**
      * Add a specified Video object to a specified Playlist object
      * @param pl Playlist to be added to
      * @param vid Video to be added
@@ -245,6 +260,23 @@ public class PlaylistManager {
             }
         }
         return false;
+    }
+    /**
+     * Check if user can change playlist
+     * @param pl playlist we want to change
+     * @param username string name of the individual trying to change the playlist
+     * @return boolean indicating if user is allowed to change the playlist
+     */
+    public boolean validatePlaylistAction(Playlist pl,String username){
+        boolean validate;
+        String pl_user = pl.getUserName();
+        if (pl_user.equals(username)){
+            validate = true;
+        }
+        else {
+            validate = false;
+        }
+        return validate;
     }
 
 }

@@ -25,7 +25,8 @@ public interface LanguagePresenter {
         BANNED,
         UNBANNED,
         RESULT,
-        SUCCESS
+        SUCCESS,
+        ALLPLAYLISTS
     }
 
     enum ErrorTextType {
@@ -35,6 +36,7 @@ public interface LanguagePresenter {
         BANNED,
         UNBANNED,
         NORESULT,
+        INVALIDUSER
     }
 
     enum RequestTextType {

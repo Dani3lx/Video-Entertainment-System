@@ -1,6 +1,10 @@
 package controllers.action.actionFactories;
 
+import controllers.action.actions.playlistMenu.AddToPlaylist;
+import controllers.action.actions.playlistMenu.ReorderPlaylist;
+import controllers.action.actions.playlistMenu.ViewPlaylist;
 import controllers.action.actions.playlistMenu.searchPlaylist.CreatePlaylist;
+import controllers.action.actions.playlistMenu.searchPlaylist.DisplayAllPlaylist;
 import controllers.action.actions.playlistMenu.searchPlaylist.SearchPlaylist;
 import entities.Playlist;
 import entities.User;
