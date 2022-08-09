@@ -116,4 +116,25 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "";
         }
     }
+
+    public String getVideoDataText(VideoDataType type) {
+        switch(type){
+            case UPLOADER:
+                return "Uploaded by: ";
+            case LIKES:
+                return "Likes: ";
+            case TITLE:
+                return "Title: ";
+            case CONTENT:
+                return "Content: ";
+            case DISLIKES:
+                return "Dislikes: ";
+            case DESCRIPTION:
+                return "Description: ";
+            case DATEUPLOADED:
+                return "Date uploaded: ";
+            default:
+                return "";
+        }
+    }
 }

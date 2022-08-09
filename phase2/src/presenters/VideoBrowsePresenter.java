@@ -46,13 +46,6 @@ public class VideoBrowsePresenter {
      * @param video the video being displayed
      */
     public void displayVideo(Video video) {
-        String[] information = ve.returnVideoInformation(video);
-        System.out.println("\nTitle: " + information[0]);
-        System.out.println("Uploader : " + information[1]);
-        System.out.println("Description: " + information[2]);
-        System.out.println("Date Uploaded : " + information[3]);
-        System.out.println("Content : " + information[4]);
-        System.out.println("Likes : " + information[5]);
-        System.out.println("Dislikes : " + information[6] + "\n");
+
     }
 }

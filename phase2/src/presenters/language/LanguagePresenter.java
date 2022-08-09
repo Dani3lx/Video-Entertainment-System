@@ -57,6 +57,16 @@ public interface LanguagePresenter {
         DELETECOMMENT,
     }
 
+    enum VideoDataType{
+        TITLE,
+        LIKES,
+        DISLIKES,
+        DESCRIPTION,
+        UPLOADER,
+        DATEUPLOADED,
+        CONTENT
+    }
+
     String getChoiceText(ChoiceTextType type);
 
     String getAlertText(AlertTextType type);
@@ -64,4 +74,5 @@ public interface LanguagePresenter {
     String getErrorText(ErrorTextType type);
 
     String getRequestText(RequestTextType type);
+    String getVideoDataText(VideoDataType type);
 }
