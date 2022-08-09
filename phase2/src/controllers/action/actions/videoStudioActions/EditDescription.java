@@ -1,4 +1,4 @@
-package controllers.action.actions.videoStudioMenu;
+package controllers.action.actions.videoStudioActions;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -11,13 +11,9 @@ import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+public class EditDescription extends MenuAction implements Action {
 
-public class EditCategories extends MenuAction implements Action {
-
-    public EditCategories(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+    public EditDescription(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         currentUser = user;
         this.userPrompt = userPrompt;
         this.lp = lp;
@@ -25,14 +21,14 @@ public class EditCategories extends MenuAction implements Action {
     }
 
     @Override
-    public void run(){
+    public void run() {
         NonAdminManager nam = new NonAdminManager(vm);
 
-        // Asks for uniqueID of video and the new categories for the corresponding video
+        // Asks for uniqueID of video and the new description for the corresponding video
         String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.EDITVIDEO);
-        List<String> categories = userPrompt.getMultipleInputs(LanguagePresenter.RequestTextType.CATEGORY);
+        String description = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.DESCRIPTION);
 
-        if (nam.editCategories(currentUser, uniqueID, categories)){
+        if (nam.editDescription(currentUser, uniqueID, description)){
             mp.displayAlert(LanguagePresenter.AlertTextType.EDIT);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.EDIT);
@@ -41,7 +37,7 @@ public class EditCategories extends MenuAction implements Action {
     }
 
     @Override
-    public void next(){
+    public void next() {
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
         userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
     }

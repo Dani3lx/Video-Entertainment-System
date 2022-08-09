@@ -1,4 +1,4 @@
-package controllers.action.actions.userMenu;
+package controllers.action.actions.userActions;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -10,9 +10,11 @@ import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.userPrompt.UserPrompt;
 
-public class ChangePassword extends MenuAction implements Action {
+import java.util.List;
 
-    public ChangePassword(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+public class CheckLoginHistory extends MenuAction implements Action {
+
+    public CheckLoginHistory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
         currentUser = user;
         this.userPrompt = userPrompt;
         this.lp = lp;
@@ -21,9 +23,8 @@ public class ChangePassword extends MenuAction implements Action {
 
     @Override
     public void run() {
-        String password = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PASSWORD);
-        um.changePassword(currentUser, password);
-        mp.displayAlert(LanguagePresenter.AlertTextType.CHANGEPASSWORD);
+        List<String> history = um.getHistory(currentUser);
+        mp.displayList(history);
         next();
     }
 

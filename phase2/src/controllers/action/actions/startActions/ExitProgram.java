@@ -1,4 +1,4 @@
-package controllers.action.actions.startMenu;
+package controllers.action.actions.startActions;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;

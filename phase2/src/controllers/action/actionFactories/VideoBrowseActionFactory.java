@@ -1,16 +1,13 @@
 package controllers.action.actionFactories;
 
-import controllers.action.actions.videoBrowseMenu.BrowseByCategory;
-import controllers.action.actions.videoBrowseMenu.BrowseByName;
-import controllers.action.actions.videoBrowseMenu.BrowseByUploader;
-import controllers.action.actions.videoBrowseMenu.Return;
+import controllers.action.actions.videoBrowseActions.BrowseByCategory;
+import controllers.action.actions.videoBrowseActions.BrowseByName;
+import controllers.action.actions.videoBrowseActions.BrowseByUploader;
+import controllers.action.actions.videoBrowseActions.Return;
 import entities.User;
-import entities.Video;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.userPrompt.UserPrompt;
-
-import java.util.List;
 
 
 public class VideoBrowseActionFactory implements ActionFactory {

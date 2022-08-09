@@ -1,4 +1,4 @@
-package controllers.action.actions.userMenu;
+package controllers.action.actions.userActions;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -7,7 +7,6 @@ import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.PlaylistsMenuFactory;
-import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.userPrompt.UserPrompt;
 

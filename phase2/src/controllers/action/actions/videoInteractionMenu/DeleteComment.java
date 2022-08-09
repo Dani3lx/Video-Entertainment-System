@@ -1,6 +1,5 @@
 package controllers.action.actions.videoInteractionMenu;
 
-import controllers.action.actionFactories.ActionFactory;
 import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;

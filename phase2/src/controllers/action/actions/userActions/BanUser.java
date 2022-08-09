@@ -1,4 +1,4 @@
-package controllers.action.actions.userMenu;
+package controllers.action.actions.userActions;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -11,10 +11,10 @@ import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
-public class UnbanUser extends MenuAction implements Action {
+public class BanUser extends MenuAction implements Action {
 
 
-    public UnbanUser(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
+    public BanUser(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
@@ -25,15 +25,15 @@ public class UnbanUser extends MenuAction implements Action {
     public void run(){
         AdminManager am = new AdminManager(um, vm);
 
-        // Displays all banned users and asks for input to unban a user
-        mp.displayAlert(LanguagePresenter.AlertTextType.BANNEDUSERS);
-        mp.displayList(am.returnUsersByBan(um.getAllUsers(), true));
-        String username = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.UNBANUSER);
+        // Displays all unbanned users and asks for input to ban a user
+        mp.displayAlert(LanguagePresenter.AlertTextType.UNBANNEDUSERS);
+        mp.displayList(am.returnUsersByBan(um.getAllUsers(), false));
+        String username = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.BANUSER);
 
-        if (am.unbanUser(username)){
-            mp.displayAlert(LanguagePresenter.AlertTextType.UNBANNED);
+        if (am.banUser(currentUser, username)){
+            mp.displayAlert(LanguagePresenter.AlertTextType.BANNED);
         } else {
-            mp.displayError(LanguagePresenter.ErrorTextType.UNBANNED);
+            mp.displayError(LanguagePresenter.ErrorTextType.BANNED);
         }
         next();
     }

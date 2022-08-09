@@ -1,5 +1,4 @@
 package controllers.action.actions.videoInteractionMenu;
-
 import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
@@ -9,7 +8,6 @@ import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
-
 public class EditComment extends MenuAction {
 
     public EditComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
@@ -39,6 +37,3 @@ public class EditComment extends MenuAction {
         userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
     }
 }
-
-
-
