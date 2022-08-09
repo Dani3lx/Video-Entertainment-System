@@ -16,8 +16,11 @@ public class CommentManager {
         return instance;
     }
 
-    public void editComment(Comments c, String newComm) {
+    public Boolean editComment(Comments c, String newComm) {
         c.setComment(newComm);
+        c.setComment_date(LocalDateTime.now().toString());
+        return true;
+
     }
 
     public Boolean deleteComment(Video v, Comments c){

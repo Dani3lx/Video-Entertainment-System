@@ -114,29 +114,25 @@ public class NonAdminManager extends UserManager {
     }
 
     public Boolean editComment(String uniqueID, User user, String newComm) {
-        List<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
+        ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
         for (Comments c : comments) {
             if (c.getCommenter().equals(user.getUserName())) {
-                CM.editComment(c,newComm);
-                c.setComment_date(LocalDateTime.now().toString());
-                return true;
+                return CM.editComment(c,newComm);
+
             }
         }
         return false;
     }
 
     public Boolean deleteComment(String uniqueID, User user){
-        ArrayList<Video> vids = new ArrayList<>(vm.getVids());
-        for (Video v: vids){
-            if (v.getUniqueID().equals(uniqueID)){
-                ArrayList<Comments> coms = v.getComments();
-                for (Comments c: coms){
-                    if (c.getCommenter().equals(user.getUserName())){
-                        return CM.deleteComment(v, c);
-                    }
-                }
+
+        ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
+        for (Comments c: comments){
+            if (c.getCommenter().equals(user.getUserName())){
+                return CM.deleteComment(vm.getByUniqueID(uniqueID), c);
             }
         }
+
         return false;
     }
 
