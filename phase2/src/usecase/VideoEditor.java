@@ -45,12 +45,17 @@ public class VideoEditor {
     }
 
     /**
-     * Likes the video.
+     * Likes the video
      *
      * @param v target video
      */
-    public void likeVideo(Video v) {
-        v.addLikes();
+    public void likeVideo(Video v, User user){
+        if (v.getRatings().containsRating(user.getUserName())){
+            v.getRatings().editRating(user.getUserName(), true);
+        }
+        else{
+            v.getRatings().addRating(user.getUserName(), true);
+        }
     }
 
     /**
@@ -58,8 +63,41 @@ public class VideoEditor {
      *
      * @param v the target video
      */
-    public void dislikeVideo(Video v) {
-        v.addDislikes();
+    public void dislikeVideo(Video v,  User user){
+        if (v.getRatings().containsRating(user.getUserName())){
+            v.getRatings().editRating(user.getUserName(), false);
+        }
+        else{
+            v.getRatings().addRating(user.getUserName(), false);
+        }
+    }
+
+    public void deleteRating(Video v, User user){
+        if (v.getRatings().containsRating(user.getUserName())){
+            v.getRatings().deleteRating(user.getUserName());
+        }
+    }
+
+    // return current Rating of the uniqueID. 0 = dislike, 1 = like, 2 = null
+    public Integer currentRatingOfUser(Video v, User user){
+        if (v.getRatings().getRatings().containsKey(user.getUserName())){
+            if (v.getRatings().getRatings().get(user.getUserName())){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 2;
+        }
+    }
+    public void getTotalLikes(Video v){
+        v.getRatings().getTotalLikes();
+    }
+
+    public void getTotalDislikes(Video v){
+        v.getRatings().getTotalDislikes();
     }
 
     public void editComment(Comments c, String newComm) {
@@ -78,7 +116,7 @@ public class VideoEditor {
                 lp.getVideoDataText(LanguagePresenter.VideoDataType.DESCRIPTION) + vid.getDescription(),
                 lp.getVideoDataText(LanguagePresenter.VideoDataType.DATEUPLOADED) + vid.getDate_upload(),
                 lp.getVideoDataText(LanguagePresenter.VideoDataType.CONTENT) + vid.getContent(),
-                lp.getVideoDataText(LanguagePresenter.VideoDataType.LIKES) + Integer.toString(vid.getLikes()),
-                lp.getVideoDataText(LanguagePresenter.VideoDataType.DISLIKES) + "0"};
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.LIKES) + vid.getRatings().getTotalLikes().toString(),
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.DISLIKES) + vid.getRatings().getTotalDislikes().toString()};
     }
 }

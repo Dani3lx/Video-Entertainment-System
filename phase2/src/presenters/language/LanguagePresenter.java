@@ -27,10 +27,11 @@ public interface LanguagePresenter {
         UNBANNED,
         RESULT,
         SUCCESS,
-        ALLPLAYLISTS
+        ALLPLAYLISTS,
         EDIT,
         EDITCOMMENT,
         DELETECOMMENT,
+        ADDCOMMENT,
     }
 
     enum ErrorTextType {
@@ -41,9 +42,10 @@ public interface LanguagePresenter {
         UNBANNED,
         EDIT,
         NORESULT,
-        INVALIDUSER
+        INVALIDUSER,
         EDITCOMMENT,
         DELETECOMMENT,
+        ADDCOMMENT,
     }
 
     enum RequestTextType {
@@ -60,8 +62,10 @@ public interface LanguagePresenter {
         TITLE,
         DESCRIPTION,
         EDITCOMMENT,
-        COMMENT,
+        NEWCOMMENT,
         DELETECOMMENT,
+        ADDCOMMENT,
+        COMMENT,
     }
 
     enum VideoDataType{

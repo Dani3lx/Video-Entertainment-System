@@ -27,8 +27,10 @@ public class VideoRatingComparator implements Comparator<Video> {
 //        }
 
         // using the new style Ratings class:
-        Integer v1Likes = v1.getRatings().getTotalLikes();
-        Integer v2Likes = v2.getRatings().getTotalLikes();
+//        Integer v1Likes = v1.getRating();
+//        Integer v2Likes = v2.getRating();
+        Integer v1Likes = v1.getRatings().getTotalLikes() - v1.getRatings().getTotalDislikes();
+        Integer v2Likes = v2.getRatings().getTotalLikes() - v2.getRatings().getTotalDislikes();
         int i = v1Likes.compareTo(v2Likes);
         if (i == 0) {
             return 0;

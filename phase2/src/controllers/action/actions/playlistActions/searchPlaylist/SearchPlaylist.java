@@ -30,6 +30,7 @@ public class SearchPlaylist extends MenuAction implements Action {
     public void run(){
         String plname = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PLAYLIST);
         Playlist pl = pm.getPlaylistByName(plname);
+        System.out.println("hi");
         /* Check if Playlist Exists*/
         if (Objects.isNull(pl)){
             mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);

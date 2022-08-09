@@ -1,6 +1,7 @@
 package usecase.runtimeDataManager;
 
 import entities.Comments;
+import entities.Ratings;
 import entities.Video;
 
 import java.time.LocalDateTime;
@@ -61,31 +62,23 @@ public class VideoManager{
      * @param vidLink     a link to the video
      */
     public void uploadVideo(String uploader, String title, String description, ArrayList<String> categories, String vidLink) {
-
         ArrayList<String> vidID = new ArrayList<>();
-
         if (!vids.isEmpty()) {
             for (Video v : vids) {
                 vidID.add(v.getUniqueID());
             }
         }
-
-
         String uniqueID = UUID.randomUUID().toString();
-
-
         while (vidID.contains(uniqueID)) {
             uniqueID = UUID.randomUUID().toString();
 
         }
-        ArrayList<String> ratings = new ArrayList<>();
-        ratings.add("0");
-        ratings.add("0");
+        Ratings ratings = new Ratings();
         ArrayList<Comments> comments = new ArrayList<>();
         Comments c = new Comments("","","");
         comments.add(c);
-//        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString(), comments);
-//        vids.add(v1);
+        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString(), comments);
+        vids.add(v1);
     }
 
 

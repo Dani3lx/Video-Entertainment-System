@@ -2,7 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import phase2features.Ratings;
+import java.util.Map;
 
 /**
  * This represents video.
@@ -70,7 +70,11 @@ public class Video implements Comparable<Video> {
         return ratings;
     }
 
-    public int getLikes() { return ratings.getTotalLikes(); }
+//    /**
+//     * Return list of usernames who liked the video.
+//     * @return ArrayList<String> of usernames
+//     */
+//    public ArrayList<String> getRatingUsers() { return ratings.getLikeUserName(); }
 
     /**
      * Return the uniqueID.
@@ -178,19 +182,23 @@ public class Video implements Comparable<Video> {
         this.comments.remove(comment);
     }
 
-    /**
-     * Likes the video.
-     */
-    public void addLikes() {
-        ratings.addLikes("Needs to be fixed");
-    }
-
-    /**
-     * Dislikes the video.
-     */
-    public void addDislikes() {
-        ratings.addDislikes("Need to be fixed");
-    }
+//    /**
+//     * Likes the video.
+//     */
+//    public void addLikes() {
+//        ratings.addLikes();
+//    }
+//
+//    public void addLikes(String username) {
+//        ratings.addLikes(username);
+//    }
+//
+//    /**
+//     * Dislikes the video.
+//     */
+//    public void addDislikes() {
+//        ratings.addDislikes("Need to be fixed");
+//    }
 
     /**
      * Return whether v is equal to this video.
@@ -229,7 +237,11 @@ public class Video implements Comparable<Video> {
             s1.append(it1.next()).append("/");
         }
 
-        // old style ratings
+        StringBuilder s2 = new StringBuilder();
+        for (Map.Entry<String, Boolean> set: ratings.getRatings().entrySet()){
+            s2.append(set.getKey() + "=" + set.getValue() + "/");
+        }
+//
 //        Iterator<String> it2 = ratings.iterator();
 //        StringBuilder s2 = new StringBuilder();
 //        while (it2.hasNext()) {
@@ -237,8 +249,7 @@ public class Video implements Comparable<Video> {
 //        }
 
         return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," +
-                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + this.getRatings() + "," + this.getDate_upload();
-        // this should be changed from s2 to this.getRatings() since I implemented toString for new Ratings class
+                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
     }
 }
 
