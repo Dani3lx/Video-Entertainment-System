@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class VideoBrowseMenuAction extends MenuAction {
     protected void nextMenu(List<Video> videos, Video video, User user){
         if (videos.isEmpty()) {
-            VideoBrowseActionFactory actionFactory = new VideoBrowseActionFactory(userPrompt, currentUser, lp, mp);
+            VideoBrowseActionFactory actionFactory = new VideoBrowseActionFactory(userPrompt, user, lp, mp);
             actionFactory.getAction("return").run();
         } else {
             MenuFactory menuFactory = new VideosMenuFactory(userPrompt, currentUser, lp, mp, video);
