@@ -1,9 +1,9 @@
 package controllers.action.actionFactories;
 
-import controllers.action.actions.videoStudioMenu.EditCategories;
-import controllers.action.actions.videoStudioMenu.EditDescription;
-import controllers.action.actions.videoStudioMenu.EditTitle;
-import controllers.action.actions.videoStudioMenu.ViewVideoUploaded;
+import controllers.action.actions.videoStudioActions.EditCategories;
+import controllers.action.actions.videoStudioActions.EditDescription;
+import controllers.action.actions.videoStudioActions.EditTitle;
+import controllers.action.actions.videoStudioActions.ViewVideoUploaded;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;

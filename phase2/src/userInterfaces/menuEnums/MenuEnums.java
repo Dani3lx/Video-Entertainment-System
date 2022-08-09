@@ -6,5 +6,6 @@ public enum MenuEnums {
     NONADMIN,
     VIDEOBROWSE,
     VIDEOSTUDIO,
-    PLAYLIST
+    PLAYLIST,
+    VIDEOINTERACTION
 }

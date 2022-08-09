@@ -1,4 +1,4 @@
-package controllers.action.actions.userMenu;
+package controllers.action.actions.userActions;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -10,19 +10,21 @@ import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.userPrompt.UserPrompt;
 
-public class UserLogout extends MenuAction implements Action {
+public class VideoStudio extends MenuAction implements Action {
 
     MenuFactory userMenuFactory;
 
-    public UserLogout(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+    public VideoStudio(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         userMenuFactory = new UserMenuFactory(userPrompt, user, lp, mp);
     }
 
+    @Override
     public void run() {
         next();
     }
 
+    @Override
     public void next() {
-        userMenuFactory.getMenu(MenuEnums.START).run();
+        userMenuFactory.getMenu(MenuEnums.VIDEOSTUDIO).run();
     }
 }

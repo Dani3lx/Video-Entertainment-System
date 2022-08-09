@@ -1,12 +1,10 @@
-package controllers.action.actions.videoStudioMenu;
+package controllers.action.videoInteractionActions;
 
 import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import usecase.VideoEditor;
-import usecase.runtimeDataManager.NonAdminManager;
-import usecase.runtimeDataManager.VideoManager;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;

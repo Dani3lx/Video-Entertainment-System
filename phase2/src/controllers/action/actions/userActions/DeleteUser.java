@@ -1,4 +1,4 @@
-package controllers.action.actions.userMenu;
+package controllers.action.actions.userActions;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -10,8 +10,6 @@ import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
-
-import java.util.ArrayList;
 
 public class DeleteUser extends MenuAction implements Action {
 

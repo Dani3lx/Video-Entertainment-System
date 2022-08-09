@@ -17,6 +17,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Welcome to the playlist system, please select one of the following action to proceed.";
             case VIDEO:
                 return "Here are the videos";
+            case VIDEOINTERACTION:
+                return "Welcome to the video interaction menu, please select one of the following action to proceed.";
             default:
                 return "";
         }

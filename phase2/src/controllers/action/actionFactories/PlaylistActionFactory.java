@@ -7,7 +7,6 @@ import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
-import controllers.action.actions.videoBrowseMenu.Return;
 
 public class PlaylistActionFactory implements ActionFactory {
     private final User user;
