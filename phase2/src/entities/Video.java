@@ -241,15 +241,15 @@ public class Video implements Comparable<Video> {
         for (Map.Entry<String, Boolean> set: ratings.getRatings().entrySet()){
             s2.append(set.getKey() + "=" + set.getValue() + "/");
         }
-//
-//        Iterator<String> it2 = ratings.iterator();
-//        StringBuilder s2 = new StringBuilder();
-//        while (it2.hasNext()) {
-//            s2.append(it2.next()).append("/");
-//        }
+
+        Iterator<Comments> it2 = comments.iterator();
+        StringBuilder s3 = new StringBuilder();
+        while (it2.hasNext()) {
+            s3.append(it2.next()).append("/");
+        }
 
         return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," +
-                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
+                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload() + s3;
     }
 }
 
