@@ -118,7 +118,23 @@ public class PlaylistManager {
         }
         return false;
     }
+    /**
+     * Delete a Video from a Playlist created by a User
+     * @param pl the playlist they want to delete from
+     * @param vid the video they want to delete
+     * @return boolean indicating if the operation was successful
+     */
+    public boolean deleteFromPlaylist(Playlist pl, Video vid) {
 
+        ArrayList<String> videos = pl.getUniqueIDs();
+        for (String uniqueID : videos) {
+            if (uniqueID.equals(vid.getUniqueID())) {
+                    pl.removeUniqueID(vid.getUniqueID());
+                    return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * Return the name of each video within the specified playlist.
