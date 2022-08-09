@@ -27,7 +27,7 @@ public interface LanguagePresenter {
         UNBANNED,
         RESULT,
         SUCCESS,
-        ALLPLAYLISTS
+        ALLPLAYLISTS,
         EDIT,
         EDITCOMMENT,
         DELETECOMMENT,
@@ -41,7 +41,7 @@ public interface LanguagePresenter {
         UNBANNED,
         EDIT,
         NORESULT,
-        INVALIDUSER
+        INVALIDUSER,
         EDITCOMMENT,
         DELETECOMMENT,
     }
