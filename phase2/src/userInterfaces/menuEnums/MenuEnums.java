@@ -10,4 +10,5 @@ public enum MenuEnums {
     PLAYLISTMANAGE,
     PLAYLISTVIEW,
     PLAYLISTORDER,
+    VIDEOINTERACTION
 }

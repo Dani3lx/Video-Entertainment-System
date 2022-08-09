@@ -1,6 +1,6 @@
 package controllers.action.actionFactories;
 
-import controllers.action.actions.userMenu.*;
+import controllers.action.actions.userActions.*;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;

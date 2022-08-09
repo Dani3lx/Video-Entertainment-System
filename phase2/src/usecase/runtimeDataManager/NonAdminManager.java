@@ -1,10 +1,15 @@
 package usecase.runtimeDataManager;
 
+import entities.Comments;
 import entities.User;
 import entities.Video;
 import usecase.VideoEditor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Responsible for specific actions that only pertain to non-admin users.
  *
@@ -14,6 +19,7 @@ import java.util.ArrayList;
  */
 public class NonAdminManager extends UserManager {
     private final VideoEditor ve;
+    private final CommentManager CM;
 
     /**
      * Responsible for managing non admin users
@@ -23,6 +29,7 @@ public class NonAdminManager extends UserManager {
     public NonAdminManager(VideoManager vm) {
         super(vm);
         ve = new VideoEditor();
+        CM = new CommentManager();
     }
 
     /**
@@ -61,12 +68,14 @@ public class NonAdminManager extends UserManager {
      * @param uniqueID identifier of the video
      * @param newTitle the title user wants to change to
      */
-    public void editTitle(User user, String uniqueID, String newTitle) {
+    public boolean editTitle(User user, String uniqueID, String newTitle) {
         for (Video video : vm.getVids()) {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
                 ve.editTitle(video, newTitle);
+                return true;
             }
         }
+        return false;
     }
 
     /**
@@ -74,14 +83,17 @@ public class NonAdminManager extends UserManager {
      *
      * @param user     of type User
      * @param uniqueID identifier of the video
-     * @param newCate  genres the user wants to change to
+     * @param categories  categories the user wants to change to
      */
-    public void editCategories(User user, String uniqueID, ArrayList<String> newCate) {
+    public Boolean editCategories(User user, String uniqueID, List<String> categories) {
+        ArrayList<String> newCate = new ArrayList<>(categories);
         for (Video video : vm.getVids()) {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
                 ve.editCategories(video, newCate);
+                return true;
             }
         }
+        return false;
     }
 
     /**
@@ -91,12 +103,41 @@ public class NonAdminManager extends UserManager {
      * @param uniqueID identifier of the video
      * @param newDes   description the user wants to change to
      */
-    public void editDescription(User user, String uniqueID, String newDes) {
+    public Boolean editDescription(User user, String uniqueID, String newDes) {
         for (Video video : vm.getVids()) {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
                 ve.editDescription(video, newDes);
+                return true;
             }
         }
+        return false;
+    }
+
+    public Boolean editComment(String uniqueID, User user, String newComm) {
+        List<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
+        for (Comments c : comments) {
+            if (c.getCommenter().equals(user.getUserName())) {
+                ve.editComment(c,newComm);
+                c.setComment_date(LocalDateTime.now().toString());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Boolean deleteComment(String uniqueID, User user){
+        ArrayList<Video> vids = new ArrayList<>(vm.getVids());
+        for (Video v: vids){
+            if (v.getUniqueID().equals(uniqueID)){
+                ArrayList<Comments> coms = v.getComments();
+                for (Comments c: coms){
+                    if (c.getCommenter().equals(user.getUserName())){
+                        return CM.deleteComment(v, c);
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**

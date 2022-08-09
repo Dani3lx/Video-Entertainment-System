@@ -12,6 +12,7 @@ public interface LanguagePresenter {
         PLAYLISTMANAGE,
         PLAYLISTVIEW,
         PLAYLISTORDER,
+        VIDEOINTERACTION
     }
 
     enum AlertTextType {
@@ -27,6 +28,9 @@ public interface LanguagePresenter {
         RESULT,
         SUCCESS,
         ALLPLAYLISTS
+        EDIT,
+        EDITCOMMENT,
+        DELETECOMMENT,
     }
 
     enum ErrorTextType {
@@ -35,8 +39,11 @@ public interface LanguagePresenter {
         DELETEUSER,
         BANNED,
         UNBANNED,
+        EDIT,
         NORESULT,
         INVALIDUSER
+        EDITCOMMENT,
+        DELETECOMMENT,
     }
 
     enum RequestTextType {
@@ -49,6 +56,22 @@ public interface LanguagePresenter {
         CATEGORY,
         UPLOADER,
         PLAYLIST,
+        EDITVIDEO,
+        TITLE,
+        DESCRIPTION,
+        EDITCOMMENT,
+        COMMENT,
+        DELETECOMMENT,
+    }
+
+    enum VideoDataType{
+        TITLE,
+        LIKES,
+        DISLIKES,
+        DESCRIPTION,
+        UPLOADER,
+        DATEUPLOADED,
+        CONTENT
     }
 
     String getChoiceText(ChoiceTextType type);
@@ -58,4 +81,5 @@ public interface LanguagePresenter {
     String getErrorText(ErrorTextType type);
 
     String getRequestText(RequestTextType type);
+    String getVideoDataText(VideoDataType type);
 }
