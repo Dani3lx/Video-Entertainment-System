@@ -33,7 +33,9 @@ public class EditComment extends MenuAction {
 
     @Override
     public void next() {
-        MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
-        userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
+        if (!currentUser.isAdminInd()) {
+            MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
+            userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
+        }
     }
 }

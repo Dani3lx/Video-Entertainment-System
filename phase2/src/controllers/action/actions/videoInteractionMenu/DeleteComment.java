@@ -10,8 +10,6 @@ import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
-import java.util.List;
-
 public class DeleteComment extends MenuAction {
     public DeleteComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         currentUser = user;
@@ -35,7 +33,9 @@ public class DeleteComment extends MenuAction {
 
     @Override
     public void next(){
-        MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
-        userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
+        if (!currentUser.isAdminInd()) {
+            MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
+            userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
+        }
     }
 }
