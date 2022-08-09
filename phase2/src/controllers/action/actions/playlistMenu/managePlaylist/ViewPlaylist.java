@@ -1,4 +1,4 @@
-package controllers.action.actions.playlistMenu;
+package controllers.action.actions.playlistMenu.managePlaylist;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -9,16 +9,18 @@ import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.PlaylistsMenuFactory;
+import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
+import java.util.Objects;
 
 
-public class ReorderPlaylist extends MenuAction implements Action {
+public class ViewPlaylist extends MenuAction implements Action {
 
     MenuFactory playlistsMenuFactory;
 
-    public ReorderPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
+    public ViewPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
@@ -31,6 +33,6 @@ public class ReorderPlaylist extends MenuAction implements Action {
     }
     @Override
     public void next(){
-        playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTORDER).run();
+        playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTVIEW).run();
     }
 }

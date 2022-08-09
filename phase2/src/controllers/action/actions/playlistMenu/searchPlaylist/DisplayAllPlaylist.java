@@ -31,10 +31,13 @@ public class DisplayAllPlaylist extends MenuAction implements Action {
         mp.displayAlert(LanguagePresenter.AlertTextType.ALLPLAYLISTS);
         List<String> pl_list = pm.getPlaylistNames();
         mp.displayList(pl_list);
+
         /*User Will Type Playlist name*/
         String plname = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PLAYLIST);
         Playlist pl = pm.getPlaylistByName(plname);
+
         if (Objects.isNull(pl)){
+
             mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);
             found_pl = false;
         }

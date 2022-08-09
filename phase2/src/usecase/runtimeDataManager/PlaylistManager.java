@@ -252,6 +252,12 @@ public class PlaylistManager {
     }
 
     /**
+     * Change the name of the playlist
+     * @param pl the playlist
+     * @param NewName the new name of the playlist
+     */
+    public void setPlName(Playlist pl,String NewName){pl.setPlaylistName(NewName);}
+    /**
      * Get the ratings of a playlist
      * @param pl the playlist
      * @return String the String of the form "_(playlist name)_ has _(x)_ likes!"
