@@ -21,6 +21,8 @@ public class LikeVideo extends MenuAction implements Action {
     @Override
     public void run() {
         VideoEditor ve = new VideoEditor();
+        ve.likeVideo(video, currentUser);
+        next();
     }
 
     @Override
