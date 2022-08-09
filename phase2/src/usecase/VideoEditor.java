@@ -45,22 +45,28 @@ public class VideoEditor {
     }
 
     /**
-     * Likes the video.
-     *
+     * Likes the video if the user hasn't liked it already.
+     * @param user user who likes video
      * @param v target video
      */
-    public void likeVideo(Video v) {
-        v.addLikes();
+    public void likeVideo(Video v, String user) {
+        ArrayList<String> usernames = v.getRatingUsers();
+        for (String username : usernames) {
+            if (user.equals(username)) {
+                return;
+            }
+        }
+        v.addLikes(user);
     }
 
-    /**
-     * Dislikes the video.
-     *
-     * @param v the target video
-     */
-    public void dislikeVideo(Video v) {
-        v.addDislikes();
-    }
+//    /**
+//     * Dislikes the video.
+//     *
+//     * @param v the target video
+//     */
+//    public void dislikeVideo(Video v) {
+//        v.addDislikes();
+//    }
 
     public void editComment(Comments c, String newComm) {
         c.setComment(newComm);
@@ -78,7 +84,7 @@ public class VideoEditor {
                 lp.getVideoDataText(LanguagePresenter.VideoDataType.DESCRIPTION) + vid.getDescription(),
                 lp.getVideoDataText(LanguagePresenter.VideoDataType.DATEUPLOADED) + vid.getDate_upload(),
                 lp.getVideoDataText(LanguagePresenter.VideoDataType.CONTENT) + vid.getContent(),
-                lp.getVideoDataText(LanguagePresenter.VideoDataType.LIKES) + Integer.toString(vid.getLikes()),
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.LIKES) + Integer.toString(vid.getRating()),
                 lp.getVideoDataText(LanguagePresenter.VideoDataType.DISLIKES) + "0"};
     }
 }

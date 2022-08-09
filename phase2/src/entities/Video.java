@@ -2,7 +2,6 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import phase2features.Ratings;
 
 /**
  * This represents video.
@@ -64,13 +63,17 @@ public class Video implements Comparable<Video> {
     /**
      * Return the video's rating.
      *
-     * @return video rating
+     * @return int video rating
      */
-    public Ratings getRatings() {
-        return ratings;
+    public int getRating() {
+        return ratings.getTotalLikes();
     }
 
-    public int getLikes() { return ratings.getTotalLikes(); }
+    /**
+     * Return list of usernames who liked the video.
+     * @return ArrayList<String> of usernames
+     */
+    public ArrayList<String> getRatingUsers() { return ratings.getLikeUserName(); }
 
     /**
      * Return the uniqueID.
@@ -182,15 +185,19 @@ public class Video implements Comparable<Video> {
      * Likes the video.
      */
     public void addLikes() {
-        ratings.addLikes("Needs to be fixed");
+        ratings.addLikes();
+    }
+
+    public void addLikes(String username) {
+        ratings.addLikes(username);
     }
 
     /**
      * Dislikes the video.
      */
-    public void addDislikes() {
-        ratings.addDislikes("Need to be fixed");
-    }
+//    public void addDislikes() {
+//        ratings.addDislikes("Need to be fixed");
+//    }
 
     /**
      * Return whether v is equal to this video.
@@ -201,7 +208,7 @@ public class Video implements Comparable<Video> {
     public boolean equals(Video v) {
         return (v.getUploader().equals(this.getUploader()) && v.getName().equals(this.getName()) && v.getContent().equals(this.getContent()) &&
                 v.getCategories().equals(this.getCategories()) && v.getUniqueID().equals(this.getUniqueID()) && v.getDescription().equals(this.description) &&
-                v.getDate_upload().equals(this.date_upload) && v.getRatings().equals(this.getRatings()));
+                v.getDate_upload().equals(this.date_upload) && v.getRating() == this.getRating());
     }
 
     /**
@@ -237,7 +244,7 @@ public class Video implements Comparable<Video> {
 //        }
 
         return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," +
-                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + this.getRatings() + "," + this.getDate_upload();
+                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + this.getRating() + "," + this.getDate_upload();
         // this should be changed from s2 to this.getRatings() since I implemented toString for new Ratings class
     }
 }
