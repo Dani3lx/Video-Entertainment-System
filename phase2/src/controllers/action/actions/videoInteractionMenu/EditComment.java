@@ -4,6 +4,7 @@ import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import usecase.runtimeDataManager.NonAdminManager;
+import usecase.runtimeDataManager.UserManager;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
@@ -33,9 +34,13 @@ public class EditComment extends MenuAction {
 
     @Override
     public void next() {
-        if (!currentUser.isAdminInd()) {
+        UserManager UM = new UserManager(vm);
+        if (!UM.getRole(currentUser)) {
             MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
             userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
+        }else{
+            MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
+            userMenuFactory.getMenu(MenuEnums.ADMIN).run();
         }
     }
 }
