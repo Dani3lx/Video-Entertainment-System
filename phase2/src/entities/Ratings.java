@@ -13,7 +13,7 @@ public class Ratings {
 
     public Ratings(HashMap<String, Boolean> ratings){
         this.ratings = ratings;
-    } // userUniqueID, like/dislike
+    } // userName, like/dislike
     public Ratings(){
         this.ratings = new HashMap<>(ratings);
     }
@@ -42,40 +42,40 @@ public class Ratings {
         return count;
     }
 
-    public boolean containsRating(String userUniqueID){
-        return ratings.containsKey(userUniqueID);
+    public boolean containsRating(String userName){
+        return ratings.containsKey(userName);
     }
 
-    public void addRating(String userUniqueID, Boolean like){
-        ratings.put(userUniqueID, like);
+    public void addRating(String userName, Boolean like){
+        ratings.put(userName, like);
     }
 
-    public void editRating (String userUniqueID, Boolean like){
-        ratings.replace(userUniqueID, like);
+    public void editRating (String userName, Boolean like){
+        ratings.replace(userName, like);
     }
 
-    public void deleteRating(String userUniqueID){
-        ratings.remove(userUniqueID);
+    public void deleteRating(String userName){
+        ratings.remove(userName);
     }
 
-    public ArrayList<String> getLikeUserUniqueIDs() {
-        ArrayList<String> likeUserUniqueIDs = new ArrayList<>();
+    public ArrayList<String> getLikeUserName() {
+        ArrayList<String> likeUserNames = new ArrayList<>();
         for (String key: ratings.keySet()){
             if (ratings.get(key).equals(true)){
-                likeUserUniqueIDs.add(key);
+                likeUserNames.add(key);
             }
         }
-        return likeUserUniqueIDs;
+        return likeUserNames;
     }
 
-    public ArrayList<String> getDislikeUserUniqueIDs() {
-        ArrayList<String> DislikeUserUniqueIDs = new ArrayList<>();
+    public ArrayList<String> getDislikeUserNames() {
+        ArrayList<String> DislikeUserNames = new ArrayList<>();
         for (String key: ratings.keySet()){
             if (ratings.get(key).equals(false)){
-                DislikeUserUniqueIDs.add(key);
+                DislikeUserNames.add(key);
             }
         }
-        return DislikeUserUniqueIDs;
+        return DislikeUserNames;
     }
 //    @Override
 //    public String toString(){
