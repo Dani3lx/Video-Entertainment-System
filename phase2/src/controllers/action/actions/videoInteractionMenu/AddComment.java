@@ -1,4 +1,5 @@
 package controllers.action.actions.videoInteractionMenu;
+import controllers.action.actionFactories.Action;
 
 import controllers.action.actions.MenuAction;
 import entities.User;
