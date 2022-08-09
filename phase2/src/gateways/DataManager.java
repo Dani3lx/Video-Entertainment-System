@@ -7,7 +7,7 @@ import entities.Video;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
-import phase2features.Ratings;
+import entities.Ratings;
 
 import java.util.*;
 import java.io.*;
