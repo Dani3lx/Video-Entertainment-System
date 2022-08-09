@@ -34,6 +34,6 @@ public class BrowseByCategory extends VideoBrowseMenuAction implements Action {
 
     @Override
     public void next() {
-        nextMenu(videos, video, currentUser);
+        nextMenu(videos, video, currentUser, lp, mp);
     }
 }
