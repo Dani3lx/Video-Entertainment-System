@@ -29,13 +29,13 @@ public class VideoInteractionActionFactory implements ActionFactory {
     public Action getAction(String type) {
         switch (type) {
             case "like video":
-                return new BrowseByName(userPrompt, user, lp, mp);
+                return null;
             case "dislike video":
-                return new BrowseByCategory(userPrompt, user, lp, mp);
-            case "view comments":
-                return new BrowseByUploader(userPrompt, user, lp, mp);
+                return null;
+            case "delete comment":
+                return null;
             case "edit comment":
-                return new Return(userPrompt, user, lp, mp);
+                return null;
             default:
                 return null;
         }
