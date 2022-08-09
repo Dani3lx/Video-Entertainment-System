@@ -77,15 +77,24 @@ public class Ratings {
         }
         return DislikeUserUniqueIDs;
     }
+
 //    @Override
 //    public String toString(){
-//        Iterator<String> usernames = likeUserName.iterator();
-//        StringBuilder s = new StringBuilder();
-//        while (usernames.hasNext()) {
-//            s.append(usernames.next()).append("/");
+//        Iterator<String> keys = ratings.keySet().iterator();
+//        Iterator<Boolean> values = ratings.values().iterator();
+//
+//        StringBuilder s1 = new StringBuilder();
+//        StringBuilder s2 = new StringBuilder();
+//
+//        while (keys.hasNext()) {
+//            s1.append(keys.next()).append("/");
 //        }
 //
-//        return s.toString(); // don't need to include likes since the constructor sets that automatically
+//        while (values.hasNext()) {
+//            s2.append(values.next()).append("/");
+//        }
+//
+//        return s1 + "," + s2;
 //    }
 
 }
