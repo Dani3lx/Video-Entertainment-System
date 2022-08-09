@@ -16,7 +16,10 @@ public class PlaylistMenu implements Menu {
     private final UserPrompt userPrompt;
     private final ActionFactory actionFactory;
 
-    private final List<String> actionList = List.of(new String[]{"test"});
+    private final List<String> actionList = List.of(new String[]{"search playlist",
+            "create new playlist",
+            "display all playlists",
+            "return to user menu"});
 
     public PlaylistMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> playlists) {
         actionFactory = new PlaylistActionFactory(userPrompt, user, lp, mp, playlists);
@@ -24,7 +27,7 @@ public class PlaylistMenu implements Menu {
     }
 
     public void run() {
-        int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.PLAYLIST, actionList);
+        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.PLAYLIST, actionList);
         Action action = actionFactory.getAction(actionList.get(result - 1));
         action.run();
     }

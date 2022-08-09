@@ -27,8 +27,9 @@ public class AdminManagerTest {
         VideoManager VM = new VideoManager();
         UserManager UM = new UserManager(VM);
         NonAdminUser u1 = new NonAdminUser("k", "1");
+        NonAdminUser u = new NonAdminUser("p", "1");
         AdminManager AM = new AdminManager(UM, VM);
-        AM.banUser(u1);
+        AM.banUser(u, "k");
         assertTrue(u1.getBanStatus());
     }
 
@@ -39,14 +40,14 @@ public class AdminManagerTest {
         NonAdminUser u1 = new NonAdminUser("k", "1");
         u1.setBanStatus(true);
         AdminManager AM = new AdminManager(UM, VM);
-        AM.unbanUser(u1);
+        AM.unbanUser("k");
         assertFalse(u1.getBanStatus());
     }
 
     @Test
     public void deleteUserTest() {
 
-        AM.deleteUser(u1);
+        AM.deleteUser("k");
         assertTrue(UM.getAllUsers().isEmpty());
     }
 

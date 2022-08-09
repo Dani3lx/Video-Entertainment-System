@@ -5,8 +5,7 @@ public class Comments{
     private String commenter;
     private String comment;
     private String comment_date;
-//    private Ratings r;
-    //add ratings to the comment later
+
 
     public Comments(String commenter, String comment, String comment_date){
         this.commenter = commenter;

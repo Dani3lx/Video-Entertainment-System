@@ -1,7 +1,11 @@
 package controllers.action.actionFactories;
 
-import controllers.action.actions.videoStudioMenu.ViewVideoUploaded;
+import controllers.action.actions.videoStudioActions.EditCategories;
+import controllers.action.actions.videoStudioActions.EditDescription;
+import controllers.action.actions.videoStudioActions.EditTitle;
+import controllers.action.actions.videoStudioActions.ViewVideoUploaded;
 import entities.User;
+import entities.Video;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.userPrompt.UserPrompt;
@@ -11,12 +15,14 @@ public class VideoStudioActionFactory implements ActionFactory {
     private final LanguagePresenter lp;
     private final MenuPresenter mp;
     private final UserPrompt userPrompt;
+    private Video video;
 
-    public VideoStudioActionFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+    public VideoStudioActionFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, Video video) {
         this.userPrompt = userPrompt;
         this.user = user;
         this.lp = lp;
         this.mp = mp;
+        this.video = video;
     }
 
     public Action getAction(String type) {
@@ -26,8 +32,11 @@ public class VideoStudioActionFactory implements ActionFactory {
             case "upload video":
             case "delete video":
             case "edit title":
+                return new EditTitle(userPrompt, user, lp, mp);
             case "edit categories":
+                return new EditCategories(userPrompt, user, lp, mp);
             case "edit description":
+                return new EditDescription(userPrompt, user, lp, mp);
             default:
                 return null;
         }

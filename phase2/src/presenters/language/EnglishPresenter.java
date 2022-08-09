@@ -1,7 +1,7 @@
 package presenters.language;
 
 public class EnglishPresenter implements LanguagePresenter {
-    public String getMenuText(MenuTextType var) {
+    public String getChoiceText(ChoiceTextType var) {
         switch (var) {
             case START:
                 return "This is the start menu, please select one of the following options to proceed.";
@@ -15,6 +15,10 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Welcome to the video studio, please select one of the following action to proceed.";
             case PLAYLIST:
                 return "Welcome to the playlist system, please select one of the following action to proceed.";
+            case VIDEO:
+                return "Here are the videos";
+            case VIDEOINTERACTION:
+                return "Welcome to the video interaction menu, please select one of the following action to proceed.";
             default:
                 return "";
         }
@@ -40,6 +44,14 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "The user has been successfully banned";
             case UNBANNED:
                 return "The user has been successfully unbanned";
+            case RESULT:
+                return "These are the search result";
+            case EDIT:
+                return "Video has been successfully edited";
+            case EDITCOMMENT:
+                return "The user has edited the comment successfully";
+            case DELETECOMMENT:
+                return "The user has deleted the comment successfully";
             default:
                 return "";
         }
@@ -57,6 +69,14 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "The ban operation was unsuccessful";
             case UNBANNED:
                 return "The unban operation was unsuccessful";
+            case EDIT:
+                return "Edit video operation was unsuccessful";
+            case NORESULT:
+                return "No results were found";
+            case EDITCOMMENT:
+                return "Comment edit of the video has not been successful";
+            case DELETECOMMENT:
+                return "Deletion of comment has not been successful";
             default:
                 return "";
         }
@@ -76,6 +96,43 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Please enter the username of the user you wish to ban";
             case UNBANUSER:
                 return "Please enter the username of the user you wish to unban";
+            case CATEGORY:
+                return "Please enter the categories";
+            case UPLOADER:
+                return "Please enter the name of the uploader";
+            case EDITVIDEO:
+                return "Enter uniqueID of the video you want to edit";
+            case TITLE:
+                return "Enter new title";
+            case DESCRIPTION:
+                return "Enter new description";
+            case EDITCOMMENT:
+                return "Enter the uniqueID of the video whose comment you'd like to edit";
+            case COMMENT:
+                return "Enter the new comment:";
+            case DELETECOMMENT:
+                return "Enter the uniqueID of the video whose comment you'd like to delete";
+            default:
+                return "";
+        }
+    }
+
+    public String getVideoDataText(VideoDataType type) {
+        switch(type){
+            case UPLOADER:
+                return "Uploaded by: ";
+            case LIKES:
+                return "Likes: ";
+            case TITLE:
+                return "Title: ";
+            case CONTENT:
+                return "Content: ";
+            case DISLIKES:
+                return "Dislikes: ";
+            case DESCRIPTION:
+                return "Description: ";
+            case DATEUPLOADED:
+                return "Date uploaded: ";
             default:
                 return "";
         }

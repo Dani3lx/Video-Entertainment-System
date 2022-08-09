@@ -23,7 +23,7 @@ public class NonAdminMenu implements Menu {
     }
 
     public void run() {
-        int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.NONADMIN, actionList);
+        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.NONADMIN, actionList);
         Action action = actionFactory.getAction(actionList.get(result - 1));
         action.run();
     }

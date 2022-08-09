@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="851ae0c9-a640-4d97-bc8f-2ddedf75b206" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/master" />
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="master" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2BaUJJCdm3nAce5ky4dJGIozm4U" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "corretto-11",
+    "last_opened_file_path": "D:/Education/[1] Learning/[3] School/[1] Summer 2022/CSC207 - Software Design/Tutorials/chowd224/group_0249/phase1/phase2/src/usecase",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Education\[1] Learning\[3] School\[1] Summer 2022\CSC207 - Software Design\Tutorials\chowd224\group_0249\phase1\phase2\src\usecase" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="controllers" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="phase1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AdminManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="phase1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AdminManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="phase1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VideoEditorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="phase1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="VideoEditorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VideoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="phase1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="VideoTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.VideoTest" />
+        <item itemvalue="JUnit.VideoEditorTest" />
+        <item itemvalue="JUnit.UserManagerTest" />
+        <item itemvalue="JUnit.AdminManagerTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="851ae0c9-a640-4d97-bc8f-2ddedf75b206" name="Changes" comment="" />
+      <created>1657143615610</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1657143615610</updated>
+      <workItem from="1657143617122" duration="6352000" />
+      <workItem from="1657320771870" duration="1923000" />
+      <workItem from="1657512403647" duration="1233000" />
+      <workItem from="1657568728569" duration="3162000" />
+      <workItem from="1657572653618" duration="4564000" />
+      <workItem from="1657853963310" duration="3857000" />
+      <workItem from="1657976792207" duration="3220000" />
+      <workItem from="1658062960681" duration="10673000" />
+      <workItem from="1658172218805" duration="18165000" />
+      <workItem from="1658288126602" duration="1903000" />
+      <workItem from="1658318987144" duration="2719000" />
+      <workItem from="1658342494511" duration="134000" />
+      <workItem from="1658342674556" duration="376000" />
+      <workItem from="1658343072889" duration="108000" />
+      <workItem from="1658343195403" duration="581000" />
+      <workItem from="1658343800350" duration="126000" />
+      <workItem from="1658343931069" duration="7892000" />
+      <workItem from="1658413495378" duration="13724000" />
+      <workItem from="1658442531330" duration="2538000" />
+      <workItem from="1658447701340" duration="137000" />
+      <workItem from="1658508990030" duration="5704000" />
+      <workItem from="1658580639538" duration="17915000" />
+      <workItem from="1658628740622" duration="8283000" />
+      <workItem from="1659199349863" duration="314000" />
+      <workItem from="1659476044098" duration="3317000" />
+      <workItem from="1659798109634" duration="4789000" />
+      <workItem from="1659923300941" duration="19361000" />
+    </task>
+    <task id="LOCAL-00001" summary="Updated Video with getters/setters">
+      <created>1657328617693</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1657328617693</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Created Video Constructor">
+      <created>1657513449736</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1657513449736</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added ratings to constructor BETA">
+      <created>1657572431634</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1657572431634</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added date_upload to constructor parameters">
+      <created>1657577411051</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1657577411051</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added date_upload to constructor parameters">
+      <created>1657979820059</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1657979820059</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Finished Video Constructor">
+      <created>1657981362540</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1657981362540</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Included Playlist presenters">
+      <created>1658084282871</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1658084282871</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Updated playlist controller">
+      <created>1658087414306</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1658087414306</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Updated playlist controller for new playlist manager methods">
+      <created>1658088858712</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1658088858712</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Updated playlist controller to finish functionality for playlists (maybe like and dislike for p2 but otherwise done for now).  Need to clean the code up">
+      <created>1658179105355</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1658179105355</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Fixing Playlist menu">
+      <created>1658268084776</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1658268084776</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Commit compile fixes">
+      <created>1658271016753</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1658271016753</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Can go into PlaylistMenu.java now.  Need to include functionality to check for playlists, check strings that are being displayed now that we have refactored some stuff, include going back to prev menu in event of error">
+      <created>1658276220553</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1658276220553</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Amended filepaths for data">
+      <created>1658288767082</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1658288767082</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Amended filepaths for data - included display all playlists with works correctly">
+      <created>1658289723172</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1658289723172</updated>
+    </task>
+    <task id="LOCAL-00016" summary="This is the correct commit!">
+      <created>1658341829264</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1658341829264</updated>
+    </task>
+    <task id="LOCAL-00017" summary="This is the correct commit!">
+      <created>1658342352660</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1658342352660</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fixing PlaylistMenu.java">
+      <created>1658342920154</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1658342920154</updated>
+    </task>
+    <task id="LOCAL-00019" summary="PlaylistMenu.java has return menu options">
+      <created>1658346303063</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1658346303063</updated>
+    </task>
+    <task id="LOCAL-00020" summary="PlaylistMenu.java includes list playlists and choose from list">
+      <created>1658352785106</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1658352785106</updated>
+    </task>
+    <task id="LOCAL-00021" summary="PlaylistMenu.java playlistBrowseMenu Completed">
+      <created>1658374318779</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1658374318779</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Fixed playlistmenu for some dependencies, fixed more PlaylistManager menu">
+      <created>1658436255651</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1658436255651</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Included lot more helper functions for playlistmenu">
+      <created>1658440797977</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1658440797977</updated>
+    </task>
+    <task id="LOCAL-00024" summary="included more changes in PlaylistMenu.java, maybe need to revert?">
+      <created>1658442491271</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1658442491271</updated>
+    </task>
+    <task id="LOCAL-00025" summary="readded menudisplayer to playlist menu">
+      <created>1658446429100</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1658446429100</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added readme, removed usecase and added controller to vmmd">
+      <created>1658517865758</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1658517865758</updated>
+    </task>
+    <task id="LOCAL-00027" summary="changed some PMA methods">
+      <created>1658519347048</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1658519347048</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Added playlistmenu information in Readme, added todo">
+      <created>1658587789861</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1658587789861</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Added playlistmenu information in Readme, added todo">
+      <created>1658587885121</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1658587885121</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Revert &quot;added description of unit tests&quot;&#10;&#10;This reverts commit 4ad41b654ac31ab665376d81c84efd22367f6596.&#10;&#10;# Conflicts:&#10;#&#9;phase1/README.md">
+      <created>1658588119043</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1658588119043</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Fixed dependency issues, fixed create playlist by initializing usermanager">
+      <created>1658593703428</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1658593703428</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Javadocs for PMA">
+      <created>1658596945421</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1658596945421</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Javadocs for PlaylistMenu.java">
+      <created>1658598930045</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1658598930045</updated>
+    </task>
+    <task id="LOCAL-00034" summary="added some souts to tests code">
+      <created>1658630653917</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1658630653917</updated>
+    </task>
+    <task id="LOCAL-00035" summary="changed output from Boolean to boolean in PMA">
+      <created>1658632113113</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1658632113113</updated>
+    </task>
+    <task id="LOCAL-00036" summary="fixed issues in playlist add/delete">
+      <created>1658634392721</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1658634392721</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Add examples in README.md for the data">
+      <created>1658636039709</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1658636039709</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Setting up playlist actions">
+      <created>1659890352370</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1659890352371</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Finished SearchPlaylist.java">
+      <created>1659997232657</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1659997232657</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Setting up Menus">
+      <created>1659998215281</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1659998215281</updated>
+    </task>
+    <task id="LOCAL-00041" summary="All PlaylistMenu Factory implementations completed">
+      <created>1660000815678</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1660000815678</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Finished CreatePlaylist and SearchPlaylist">
+      <created>1660002048572</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1660002048572</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Finished searchPlaylist package, halfway through managePlaylist package">
+      <created>1660006012133</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1660006012133</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Finished creating managePlaylist package classes, starting viewPlaylist">
+      <created>1660006652238</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1660006652238</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Finished viewPlaylist and orderPlaylist packages.  Now working on returns">
+      <created>1660012860131</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1660012860131</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Finished implementing playlist menu. now need to debug">
+      <created>1660013648312</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1660013648312</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Debloated import statements">
+      <created>1660013755966</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1660013755966</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Included lot more helper functions for playlistmenu" />
+    <MESSAGE value="included more changes, maybe need to revert?" />
+    <MESSAGE value="included more changes in PlaylistMenu.java, maybe need to revert?" />
+    <MESSAGE value="readded menudisplayer to playlist menu" />
+    <MESSAGE value="Added readme, removed usecase and added controller to vmmd" />
+    <MESSAGE value="changed some PMA methods" />
+    <MESSAGE value="Added playlistmenu information in Readme, added todo" />
+    <MESSAGE value="Revert &quot;added description of unit tests&quot;&#10;&#10;This reverts commit 4ad41b654ac31ab665376d81c84efd22367f6596.&#10;&#10;# Conflicts:&#10;#&#9;phase1/README.md" />
+    <MESSAGE value="Fixed dependency issues, fixed create playlist by initializing usermanager" />
+    <MESSAGE value="Javadocs for PMA" />
+    <MESSAGE value="Javadocs for PlaylistMenu.java" />
+    <MESSAGE value="added some souts to tests code" />
+    <MESSAGE value="changed output from Boolean to boolean in PMA" />
+    <MESSAGE value="fixed issues in playlist add/delete" />
+    <MESSAGE value="Add examples in README.md for the data" />
+    <MESSAGE value="Setting up playlist actions" />
+    <MESSAGE value="Finished SearchPlaylist.java" />
+    <MESSAGE value="Setting up Menus" />
+    <MESSAGE value="All PlaylistMenu Factory implementations completed" />
+    <MESSAGE value="Finished CreatePlaylist and SearchPlaylist" />
+    <MESSAGE value="Finished searchPlaylist package, halfway through managePlaylist package" />
+    <MESSAGE value="Finished creating managePlaylist package classes, starting viewPlaylist" />
+    <MESSAGE value="Finished viewPlaylist and orderPlaylist packages.  Now working on returns" />
+    <MESSAGE value="Finished implementing playlist menu. now need to debug" />
+    <MESSAGE value="Debloated import statements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Debloated import statements" />
+    <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

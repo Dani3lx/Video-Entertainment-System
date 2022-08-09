@@ -17,13 +17,13 @@ public class VideoBrowseMenu implements Menu {
     private final ActionFactory actionFactory;
     private final List<String> actionList = List.of(new String[]{"browse by name", "browse by category", "browse by uploader", "return"});
 
-    public VideoBrowseMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Video> videos) {
-        actionFactory = new VideoBrowseActionFactory(userPrompt, user, lp, mp, videos);
+    public VideoBrowseMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+        actionFactory = new VideoBrowseActionFactory(userPrompt, user, lp, mp);
         this.userPrompt = userPrompt;
     }
 
     public void run() {
-        int result = userPrompt.getUserActionChoice(LanguagePresenter.MenuTextType.VIDEOBROWSE, actionList);
+        int result = userPrompt.getUserChoice(LanguagePresenter.ChoiceTextType.VIDEOBROWSE, actionList);
         Action action = actionFactory.getAction(actionList.get(result - 1));
         action.run();
     }

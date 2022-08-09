@@ -84,8 +84,8 @@ public class VideoManager{
         ArrayList<Comments> comments = new ArrayList<>();
         Comments c = new Comments("","","");
         comments.add(c);
-        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString(), comments);
-        vids.add(v1);
+//        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString(), comments);
+//        vids.add(v1);
     }
 
 
@@ -156,7 +156,7 @@ public class VideoManager{
      * @param categories the categories of the video
      * @return all the videos belonging to the same categories
      */
-    public ArrayList<Video> getByCategory(ArrayList<String> categories) {
+    public List<Video> getByCategory(List<String> categories) {
         ArrayList<Video> videoList = new ArrayList<>();
         for (Video vid : vids) {
 

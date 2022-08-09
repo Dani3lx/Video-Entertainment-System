@@ -1,8 +1,8 @@
 package controllers.action.actionFactories;
 
-import controllers.action.actions.startMenu.AccountCreation;
-import controllers.action.actions.startMenu.ExitProgram;
-import controllers.action.actions.startMenu.UserLogin;
+import controllers.action.actions.startActions.AccountCreation;
+import controllers.action.actions.startActions.ExitProgram;
+import controllers.action.actions.startActions.UserLogin;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;

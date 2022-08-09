@@ -1,6 +1,9 @@
 package usecase;
 
+import entities.Comments;
+import entities.User;
 import entities.Video;
+import presenters.language.LanguagePresenter;
 
 import java.util.ArrayList;
 
@@ -46,7 +49,7 @@ public class VideoEditor {
      *
      * @param v target video
      */
-    public void likeVideo(Video v){
+    public void likeVideo(Video v) {
         v.addLikes();
     }
 
@@ -55,8 +58,12 @@ public class VideoEditor {
      *
      * @param v the target video
      */
-    public void dislikeVideo(Video v){
+    public void dislikeVideo(Video v) {
         v.addDislikes();
+    }
+
+    public void editComment(Comments c, String newComm) {
+        c.setComment(newComm);
     }
 
     /**
@@ -65,7 +72,13 @@ public class VideoEditor {
      * @param vid target video
      * @return video's information
      */
-    public String[] returnVideoInformation(Video vid) {
-        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent(), Integer.toString(vid.getLikes()), "0"};
+    public String[] returnVideoInformation(Video vid, LanguagePresenter lp) {
+        return new String[]{lp.getVideoDataText(LanguagePresenter.VideoDataType.TITLE) + vid.getName(),
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.UPLOADER) + vid.getUploader(),
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.DESCRIPTION) + vid.getDescription(),
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.DATEUPLOADED) + vid.getDate_upload(),
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.CONTENT) + vid.getContent(),
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.LIKES) + Integer.toString(vid.getLikes()),
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.DISLIKES) + "0"};
     }
 }
