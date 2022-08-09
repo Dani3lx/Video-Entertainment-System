@@ -1,20 +1,20 @@
-package controllers.action.actions.videoStudioMenu;
+package controllers.action.actions.videoInteractionMenu;
 
+import controllers.action.actionFactories.ActionFactory;
 import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import usecase.VideoEditor;
 import usecase.runtimeDataManager.NonAdminManager;
-import usecase.runtimeDataManager.VideoManager;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
-public class EditComment extends MenuAction {
+import java.util.List;
 
-    public EditComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+public class DeleteComment extends MenuAction {
+    public DeleteComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         currentUser = user;
         this.userPrompt = userPrompt;
         this.lp = lp;
@@ -23,17 +23,20 @@ public class EditComment extends MenuAction {
 
     @Override
     public void run() {
-        VideoEditor VE = new VideoEditor();
-//        VE.editComment();
+        NonAdminManager NAM = new NonAdminManager(vm);
+
+        String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.DELETECOMMENT);
+        if (NAM.deleteComment(uniqueID,currentUser)){
+            mp.displayAlert(LanguagePresenter.AlertTextType.DELETECOMMENT);
+        } else {
+            mp.displayError(LanguagePresenter.ErrorTextType.DELETECOMMENT);
+        }
         next();
     }
 
     @Override
-    public void next() {
+    public void next(){
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
         userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
     }
 }
-
-
-

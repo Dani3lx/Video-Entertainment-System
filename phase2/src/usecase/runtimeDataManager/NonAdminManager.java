@@ -1,9 +1,11 @@
 package usecase.runtimeDataManager;
 
+import entities.Comments;
 import entities.User;
 import entities.Video;
 import usecase.VideoEditor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
  */
 public class NonAdminManager extends UserManager {
     private final VideoEditor ve;
+    private final CommentManager CM;
 
     /**
      * Responsible for managing non admin users
@@ -26,6 +29,7 @@ public class NonAdminManager extends UserManager {
     public NonAdminManager(VideoManager vm) {
         super(vm);
         ve = new VideoEditor();
+        CM = new CommentManager();
     }
 
     /**
@@ -104,6 +108,33 @@ public class NonAdminManager extends UserManager {
             if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
                 ve.editDescription(video, newDes);
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public Boolean editComment(String uniqueID, User user, String newComm) {
+        ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
+        for (Comments c : comments) {
+            if (c.getCommenter().equals(user.getUserName())) {
+                ve.editComment(c,newComm);
+                c.setComment_date(LocalDateTime.now().toString());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Boolean deleteComment(String uniqueID, User user){
+        ArrayList<Video> vids = new ArrayList<>(vm.getVids());
+        for (Video v: vids){
+            if (v.getUniqueID().equals(uniqueID)){
+                ArrayList<Comments> coms = v.getComments();
+                for (Comments c: coms){
+                    if (c.getCommenter().equals(user.getUserName())){
+                        return CM.deleteComment(v, c);
+                    }
+                }
             }
         }
         return false;

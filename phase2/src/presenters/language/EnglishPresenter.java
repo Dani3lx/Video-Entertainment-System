@@ -46,6 +46,10 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "These are the search result";
             case EDIT:
                 return "Video has been successfully edited";
+            case EDITCOMMENT:
+                return "The user has edited the comment successfully";
+            case DELETECOMMENT:
+                return "The user has deleted the comment successfully";
             default:
                 return "";
         }
@@ -67,6 +71,10 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Edit video operation was unsuccessful";
             case NORESULT:
                 return "No results were found";
+            case EDITCOMMENT:
+                return "Comment edit of the video has not been successful";
+            case DELETECOMMENT:
+                return "Deletion of comment has not been successful";
             default:
                 return "";
         }
@@ -96,6 +104,12 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Enter new title";
             case DESCRIPTION:
                 return "Enter new description";
+            case EDITCOMMENT:
+                return "Enter the uniqueID of the video whose comment you'd like to edit";
+            case COMMENT:
+                return "Enter the new comment:";
+            case DELETECOMMENT:
+                return "Enter the uniqueID of the video whose comment you'd like to delete";
             default:
                 return "";
         }
