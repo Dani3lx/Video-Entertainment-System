@@ -45,30 +45,44 @@ public class VideoEditor {
     }
 
     /**
-     * Likes the video
+     * Like the video if the video is not originally liked by that user, delete that rating
+     * for the video by that user if it is originally liked.
      *
      * @param v target video
+     * @param user target user
      */
     public void likeVideo(Video v, User user){
-        if (v.getRatings().containsRating(user.getUserName())){
-            v.getRatings().editRating(user.getUserName(), true);
-        }
-        else{
-            v.getRatings().addRating(user.getUserName(), true);
-        }
+            if (!this.currentRatingOfUser(v, user).equals(1)){
+                if (v.getRatings().containsRating(user.getUserName())){
+                    v.getRatings().editRating(user.getUserName(), true);
+                }
+                else{
+                    v.getRatings().addRating(user.getUserName(), true);
+                }
+            }
+            else{
+                this.deleteRating(v, user);
+            }
     }
 
     /**
-     * Dislikes the video.
+     * Dislike the video if the video is not originally disliked by that user, delete that rating
+     * for the video by that user if it is originally disliked
      *
      * @param v the target video
+     * @param user the target user
      */
     public void dislikeVideo(Video v,  User user){
-        if (v.getRatings().containsRating(user.getUserName())){
-            v.getRatings().editRating(user.getUserName(), false);
+        if (!this.currentRatingOfUser(v, user).equals(0)){
+            if (v.getRatings().containsRating(user.getUserName())){
+                v.getRatings().editRating(user.getUserName(), false);
+            }
+            else{
+                v.getRatings().addRating(user.getUserName(), false);
+            }
         }
         else{
-            v.getRatings().addRating(user.getUserName(), false);
+            this.deleteRating(v, user);
         }
     }
 
@@ -78,7 +92,7 @@ public class VideoEditor {
         }
     }
 
-    // return current Rating of the uniqueID. 0 = dislike, 1 = like, 2 = null
+    // return current Rating of the user. 0 = dislike, 1 = like, 2 = null
     public Integer currentRatingOfUser(Video v, User user){
         if (v.getRatings().getRatings().containsKey(user.getUserName())){
             if (v.getRatings().getRatings().get(user.getUserName())){
