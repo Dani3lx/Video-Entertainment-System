@@ -37,4 +37,9 @@ public class Comments{
     public void setComment_date(String comment_date){
         this.comment_date = comment_date;
     }
+
+    @Override
+    public String toString(){
+        return commenter + ";" + comment + ";" + comment_date;
+    }
 }
