@@ -34,8 +34,6 @@ public class VideoStudioActionFactory implements ActionFactory {
                 return new EditCategories(userPrompt, user, lp, mp);
             case "edit description":
                 return new EditDescription(userPrompt, user, lp, mp);
-            case "edit comment":
-            case "delete comment":
             default:
                 return null;
         }
