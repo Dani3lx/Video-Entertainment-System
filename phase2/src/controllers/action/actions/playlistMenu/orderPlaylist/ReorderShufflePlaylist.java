@@ -1,4 +1,4 @@
-package controllers.action.actions.playlistMenu;
+package controllers.action.actions.playlistMenu.orderPlaylist;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -14,12 +14,12 @@ import userInterfaces.userPrompt.UserPrompt;
 import java.util.List;
 
 
-public class ReorderLikesPlaylist extends MenuAction implements Action {
+public class ReorderShufflePlaylist extends MenuAction implements Action {
 
     MenuFactory playlistsMenuFactory;
     public Playlist pl;
 
-    public ReorderLikesPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
+    public ReorderShufflePlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
@@ -38,7 +38,7 @@ public class ReorderLikesPlaylist extends MenuAction implements Action {
             next();
         }
         else{
-            Playlist sorted_pl = pm.reorderPlaylistByRating(pl,vm);
+            Playlist sorted_pl = pm.shufflePlaylist(pl,vm);
             String old_name = pm.getPlName(pl);
             pm.setPlName(sorted_pl,old_name + "_rating_sorted");
             pm.addPlaylist(sorted_pl);

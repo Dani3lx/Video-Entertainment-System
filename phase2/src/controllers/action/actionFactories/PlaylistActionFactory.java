@@ -1,7 +1,10 @@
 package controllers.action.actionFactories;
 
-import controllers.action.actions.playlistMenu.ReorderABCPlaylist;
-import controllers.action.actions.playlistMenu.ReorderLikesPlaylist;
+import controllers.action.actions.playlistMenu.ReturnPL;
+import controllers.action.actions.playlistMenu.ReturnPLsub;
+import controllers.action.actions.playlistMenu.orderPlaylist.ReorderABCPlaylist;
+import controllers.action.actions.playlistMenu.orderPlaylist.ReorderLikesPlaylist;
+import controllers.action.actions.playlistMenu.orderPlaylist.ReorderShufflePlaylist;
 import controllers.action.actions.playlistMenu.viewPlaylist.ChangeNamePlaylist;
 import controllers.action.actions.playlistMenu.viewPlaylist.ViewLikesPlaylist;
 import controllers.action.actions.playlistMenu.viewPlaylist.ViewVidsPlaylist;
@@ -66,13 +69,13 @@ public class PlaylistActionFactory implements ActionFactory {
             case "reorder playlist by likes":
                 return new ReorderLikesPlaylist(userPrompt,user,lp,mp,playlists);
             case "shuffle playlist":
-                return new RearderShufflePlaylist(userPrompt,user,lp,mp,playlists);
+                return new ReorderShufflePlaylist(userPrompt,user,lp,mp,playlists);
             case "return to user menu":
-                return new Return(user);
+                return new Return(userPrompt,user,lp,mp);
             case "return to playlist search":
-                return
+                return new ReturnPL(userPrompt,user,lp,mp,playlists);
             case "return to playlist menu":
-                return
+                return new ReturnPLsub(userPrompt,user,lp,mp,playlists);
             default:
                 return null;
         }
