@@ -2,9 +2,6 @@ package userInterfaces.userPrompt;
 
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import presenters.menuPresenter.TerminalMenuPresenter;
-import usecase.runtimeDataManager.UserManager;
-import usecase.runtimeDataManager.VideoManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +11,17 @@ public class TerminalUserPrompt implements UserPrompt {
     MenuPresenter mp;
     Scanner sc;
 
-    public TerminalUserPrompt(LanguagePresenter lp){
-        mp = new TerminalMenuPresenter(lp);
+    public TerminalUserPrompt(MenuPresenter mp){
+        this.mp = mp;
     }
 
-    public int getUserActionChoice(LanguagePresenter.MenuTextType type, List<String> actionList) {
+    public int getUserChoice(LanguagePresenter.ChoiceTextType type, List<String> choices) {
         while (true){
             sc = new Scanner(System.in);
-            mp.displayMenuOption(type, actionList);
+            mp.displayChoiceOption(type, choices);
             if (sc.hasNextInt()) {
                 int result = sc.nextInt();
-                if (result > 0 && result <= actionList.size()) {
+                if (result > 0 && result <= choices.size()) {
                     return result;
                 }
             }
@@ -50,7 +47,7 @@ public class TerminalUserPrompt implements UserPrompt {
 
     public List<String> getMultipleInputs(LanguagePresenter.RequestTextType type) {
         sc = new Scanner(System.in);
-        mp.displayRequest(type);
+        mp.displayRequestMultiple(type);
         List<String> list = new ArrayList<>();
         while (true) {
             String item = sc.nextLine();

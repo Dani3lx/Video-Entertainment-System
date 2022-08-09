@@ -197,38 +197,12 @@ public class UserManager {
      * Rates a video.
      *
      * @param v    target video
-     * @param like whether to like the video or not
+     * @param username username of user
      */
-    public void rateVideo(Video v, boolean like) {
-        if (like) {
-            ve.likeVideo(v);
-        } else {
-            ve.dislikeVideo(v);
-        }
+    public void rateVideo(Video v, String username) {
+        ve.likeVideo(v, username);
     }
 
-    /**
-     * Return list of videos.
-     *
-     * @param info   list of names/category/uploader
-     * @param method collect videos by name/category/uploader
-     * @return list of videos corresponding to the name/category/uploader
-     */
-    public ArrayList<Video> returnVideos(ArrayList<String> info, String method) {
-        switch (method) {
-            case "name":
-                return vm.getByName(info.get(0));
-
-            case "category":
-                return vm.getByCategory(info);
-
-            case "uploader":
-                return vm.getByUploader(info.get(0));
-
-            default:
-                return new ArrayList<>();
-        }
-    }
 
     /**
      * Return user's username.

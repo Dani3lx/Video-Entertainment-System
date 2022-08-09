@@ -1,9 +1,11 @@
 package usecase.runtimeDataManager;
 
+import entities.Comments;
 import entities.Video;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -16,14 +18,17 @@ import java.util.UUID;
  */
 
 public class VideoManager{
-    private ArrayList<Video> vids = new ArrayList<>();
+    private ArrayList<Video> vids;
     private static VideoManager instance;
 
     public static VideoManager getInstance(){
-        if (instance == null) {
-            return new VideoManager();
-        }
+        if (instance == null)
+            instance = new VideoManager();
         return instance;
+    }
+
+    public VideoManager(){
+        vids = new ArrayList<>();
     }
 
     /**
@@ -44,6 +49,8 @@ public class VideoManager{
         vids = videos;
     }
 
+
+    // todo: create a builder for video
     /**
      * Upload a video with the following properties.
      *
@@ -74,8 +81,11 @@ public class VideoManager{
         ArrayList<String> ratings = new ArrayList<>();
         ratings.add("0");
         ratings.add("0");
-        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString());
-        vids.add(v1);
+        ArrayList<Comments> comments = new ArrayList<>();
+        Comments c = new Comments("","","");
+        comments.add(c);
+//        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString(), comments);
+//        vids.add(v1);
     }
 
 
@@ -146,7 +156,7 @@ public class VideoManager{
      * @param categories the categories of the video
      * @return all the videos belonging to the same categories
      */
-    public ArrayList<Video> getByCategory(ArrayList<String> categories) {
+    public List<Video> getByCategory(List<String> categories) {
         ArrayList<Video> videoList = new ArrayList<>();
         for (Video vid : vids) {
 
@@ -165,7 +175,7 @@ public class VideoManager{
      * @param videos the list of videos
      * @return list of video names
      */
-    public ArrayList<String> getVideoNames(ArrayList<Video> videos) {
+    public List<String> getVideoNames(List<Video> videos) {
         ArrayList<String> names = new ArrayList<>();
         for (Video vid : videos) {
             names.add(vid.getName());

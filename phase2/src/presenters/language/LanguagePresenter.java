@@ -1,35 +1,85 @@
 package presenters.language;
 
 public interface LanguagePresenter {
-    enum MenuTextType {
+    enum ChoiceTextType {
         START,
         ADMIN,
         NONADMIN,
         VIDEOBROWSE,
         VIDEOSTUDIO,
-        PLAYLIST
+        PLAYLIST,
+        VIDEO,
+        PLAYLISTMANAGE,
+        PLAYLISTVIEW,
+        PLAYLISTORDER,
+        VIDEOINTERACTION
     }
 
     enum AlertTextType {
         CREATEACCOUNT,
-        CHANGEPASSWORD
+        CHANGEPASSWORD,
+        VIDEOSUPLOADED,
+        ALLUSERS,
+        DELETEUSER,
+        UNBANNEDUSERS,
+        BANNEDUSERS,
+        BANNED,
+        UNBANNED,
+        RESULT,
+        SUCCESS,
+        ALLPLAYLISTS
+        EDIT,
+        EDITCOMMENT,
+        DELETECOMMENT,
     }
 
     enum ErrorTextType {
         INVALIDINPUT,
-        CREATEACCOUNT
+        CREATEACCOUNT,
+        DELETEUSER,
+        BANNED,
+        UNBANNED,
+        EDIT,
+        NORESULT,
+        INVALIDUSER
+        EDITCOMMENT,
+        DELETECOMMENT,
     }
 
     enum RequestTextType {
         USERNAME,
-        PASSWORD
+        PASSWORD,
+        VIDEONAME,
+        DELETEUSER,
+        BANUSER,
+        UNBANUSER,
+        CATEGORY,
+        UPLOADER,
+        PLAYLIST,
+        EDITVIDEO,
+        TITLE,
+        DESCRIPTION,
+        EDITCOMMENT,
+        COMMENT,
+        DELETECOMMENT,
     }
 
-    String getMenuText(MenuTextType type);
+    enum VideoDataType{
+        TITLE,
+        LIKES,
+        DISLIKES,
+        DESCRIPTION,
+        UPLOADER,
+        DATEUPLOADED,
+        CONTENT
+    }
+
+    String getChoiceText(ChoiceTextType type);
 
     String getAlertText(AlertTextType type);
 
     String getErrorText(ErrorTextType type);
 
     String getRequestText(RequestTextType type);
+    String getVideoDataText(VideoDataType type);
 }

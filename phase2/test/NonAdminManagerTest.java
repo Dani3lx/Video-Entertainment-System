@@ -67,6 +67,6 @@ public class NonAdminManagerTest {
     public void displayAllVidsTest(){
         Video v1 = new Video("k","vid","great",new ArrayList<>(List.of("funny")),"url","ID",
                 new ArrayList<>(Arrays.asList("0","0")),"today");
-        assertEquals("Title: vid (ID: ID)",NAM.displayAllVideos(u1, new ArrayList<>(List.of(v1))).get(0));
+        assertEquals("Title: vid (ID: ID)",NAM.ReturnUserVideos(u1, new ArrayList<>(List.of(v1))).get(0));
     }
 }

@@ -18,7 +18,12 @@ public class Video implements Comparable<Video> {
     private String name;
     private final String uploader;
     private final String date_upload;
-    private final ArrayList<String> ratings;
+
+    // private final ArrayList<String> ratings; // old style of ratings
+
+    private Ratings ratings; // new style ratings
+
+    private ArrayList<Comments> comments;
 
     /**
      * Constructs a video with uploader, name, description, categories, content, uniqueID, ratings and date_upload.
@@ -33,7 +38,7 @@ public class Video implements Comparable<Video> {
      * @param date_upload the date the video is uploaded
      */
     public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID,
-                 ArrayList<String> ratings, String date_upload) {
+                 Ratings ratings, String date_upload, ArrayList<Comments> comments) {
         this.name = name;
         this.uploader = uploader;
         this.content = content;
@@ -43,6 +48,7 @@ public class Video implements Comparable<Video> {
         this.categories = categories;
         this.uniqueID = uniqueID;
         this.ratings = ratings;
+        this.comments = comments;
     }
 
     /**
@@ -57,11 +63,17 @@ public class Video implements Comparable<Video> {
     /**
      * Return the video's rating.
      *
-     * @return video rating
+     * @return int video rating
      */
-    public ArrayList<String> getRatings() {
-        return ratings;
+    public int getRating() {
+        return ratings.getTotalLikes();
     }
+
+    /**
+     * Return list of usernames who liked the video.
+     * @return ArrayList<String> of usernames
+     */
+    public ArrayList<String> getRatingUsers() { return ratings.getLikeUserName(); }
 
     /**
      * Return the uniqueID.
@@ -117,7 +129,10 @@ public class Video implements Comparable<Video> {
         return categories;
     }
 
-    // Setters - We will allow users/programs change these data fields
+    public ArrayList<Comments> getComments() {
+        return comments;
+    }
+// Setters - We will allow users/programs change these data fields
 
     /**
      * Sets the description of the video.
@@ -146,19 +161,43 @@ public class Video implements Comparable<Video> {
         this.categories = categories;
     }
 
+    public void setComments(ArrayList<Comments> comments){
+        this.comments = comments;
+    }
+
+    /**
+     * Add new comment to comments of video.
+     * @param comment to be added
+     */
+    public void addComment(Comments comment) {
+        this.comments.add(comment);
+    }
+
+    /**
+     * Remove comment from comments of video.
+     * @param comment to be removed
+     */
+    public void deleteComment(Comments comment) {
+        this.comments.remove(comment);
+    }
+
     /**
      * Likes the video.
      */
     public void addLikes() {
-        ratings.set(0, String.valueOf(Integer.parseInt(ratings.get(0)) + 1));
+        ratings.addLikes();
+    }
+
+    public void addLikes(String username) {
+        ratings.addLikes(username);
     }
 
     /**
      * Dislikes the video.
      */
-    public void addDislikes() {
-        ratings.set(1, String.valueOf(Integer.parseInt(ratings.get(1)) + 1));
-    }
+//    public void addDislikes() {
+//        ratings.addDislikes("Need to be fixed");
+//    }
 
     /**
      * Return whether v is equal to this video.
@@ -169,7 +208,7 @@ public class Video implements Comparable<Video> {
     public boolean equals(Video v) {
         return (v.getUploader().equals(this.getUploader()) && v.getName().equals(this.getName()) && v.getContent().equals(this.getContent()) &&
                 v.getCategories().equals(this.getCategories()) && v.getUniqueID().equals(this.getUniqueID()) && v.getDescription().equals(this.description) &&
-                v.getDate_upload().equals(this.date_upload) && v.getRatings().equals(this.getRatings()));
+                v.getDate_upload().equals(this.date_upload) && v.getRating() == this.getRating());
     }
 
     /**
@@ -197,14 +236,16 @@ public class Video implements Comparable<Video> {
             s1.append(it1.next()).append("/");
         }
 
-        Iterator<String> it2 = ratings.iterator();
-        StringBuilder s2 = new StringBuilder();
-        while (it2.hasNext()) {
-            s2.append(it2.next()).append("/");
-        }
+        // old style ratings
+//        Iterator<String> it2 = ratings.iterator();
+//        StringBuilder s2 = new StringBuilder();
+//        while (it2.hasNext()) {
+//            s2.append(it2.next()).append("/");
+//        }
 
         return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," +
-                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
+                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + this.getRating() + "," + this.getDate_upload();
+        // this should be changed from s2 to this.getRatings() since I implemented toString for new Ratings class
     }
 }
 

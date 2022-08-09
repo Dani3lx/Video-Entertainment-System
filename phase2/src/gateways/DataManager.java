@@ -1,11 +1,13 @@
 package gateways;
 
+import entities.Comments;
 import entities.Playlist;
 import entities.User;
 import entities.Video;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
+import entities.Ratings;
 
 import java.util.*;
 import java.io.*;
@@ -111,7 +113,16 @@ public class DataManager {
 
             while (scanner.hasNextLine()) {
                 record = scanner.nextLine().split(",");
-                Video video = new Video(record[0], record[1], record[2], new ArrayList<>(Arrays.asList(record[3].split("/"))), record[4], record[5], new ArrayList<>(Arrays.asList((record[6]).split("/"))), record[7]);
+                ArrayList<Comments> comments = new ArrayList<>();
+                String[] indComment = record[8].split("/");
+
+                for (String s : indComment) {
+                    String[] commentAttributes = s.split(":");
+                    Comments comment = new Comments(commentAttributes[0], commentAttributes[1], commentAttributes[2]);
+
+                    comments.add(comment);
+                }
+                Video video = new Video(record[0], record[1], record[2], new ArrayList<>(Arrays.asList(record[3].split("/"))), record[4], record[5], new Ratings(new ArrayList<>(Arrays.asList((record[6]).split("/")))), record[7],comments);
                 videos.add(video);
             }
             scanner.close();

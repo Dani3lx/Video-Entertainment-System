@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * This class is responsible for performing all actions pertaining to the AdminUser class.
+ *
  * @author Benedek Balla, Daniel Xu, ...
  */
 public class AdminManager extends UserManager {
@@ -20,31 +21,51 @@ public class AdminManager extends UserManager {
 
     /**
      * Sets user ban status to true
-     * @param user of type User
      */
-    public void banUser(User user) {
-        user.setBanStatus(true);
+    public boolean banUser(User currentUser, String username) {
+        for (User user : users) {
+            if (validateUserName(user, username)) {
+                // Check if the user is the current user or if the user is an admin user
+                if (validateUserName(currentUser, username) || (getRole(user))) {
+                    return false;
+                } else if (!(validateBanStatus(user))) { // Check if the user is unbanned
+                    user.setBanStatus(true);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
      * Sets user ban status to false
-     * @param user of type User
+     *
      */
-    public void unbanUser(User user) {
-        user.setBanStatus(false);
+    public boolean unbanUser(String username) {
+        for (User user : users) {
+            if (validateUserName(user, username) && (validateBanStatus(user))) {
+                user.setBanStatus(false);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
      * Removes the user from the arraylist of users
-     * @param user of type User
      */
-    public void deleteUser(User user) {
-        users.remove(user);
+    public boolean deleteUser(String username) {
+        for (User u : users) {
+            if (validateUserName(u, username)) {
+                users.remove(u);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
-     *
-     * @param users of type Users
+     * @param users      of type Users
      * @param displayBan ban status of user
      * @return List of usernames corresponding to the displayBan
      */
@@ -59,7 +80,6 @@ public class AdminManager extends UserManager {
     }
 
     /**
-     *
      * @param users contains items of type User
      * @return List of all usernames in users
      */

@@ -1,0 +1,4427 @@
+Index: phase1/src/controllers/UserActionHandler.java
+===================================================================
+diff --git a/phase1/src/controllers/UserActionHandler.java b/phase1/src/controllers/UserActionHandler.java
+deleted file mode 100644
+--- a/phase1/src/controllers/UserActionHandler.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,140 +0,0 @@
+-package controllers;
+-
+-import entities.User;
+-import entities.Video;
+-import usecase.UserManager;
+-
+-import java.time.LocalDateTime;
+-import java.time.format.DateTimeFormatter;
+-import java.util.ArrayList;
+-import java.util.List;
+-import java.util.Objects;
+-
+-/**
+- * Responsible for handling all users' actions.
+- *
+- * @author Daniel Xu
+- * @version 1.0
+- * @since 2022-07-21
+- */
+-public class UserActionHandler {
+-    UserManager um;
+-
+-    /**
+-     * Constructs a user action handler with a user manager.
+-     *
+-     * @param um user manager that manages all users
+-     */
+-    public UserActionHandler(UserManager um) {
+-        this.um = um;
+-    }
+-
+-    /**
+-     * Returns a list of videos that contains name in their title.
+-     *
+-     * @param name the name of the video being searched
+-     * @return list of video that contains name in their title
+-     */
+-    public ArrayList<Video> browseByName(String name) {
+-        ArrayList<String> info = new ArrayList<>();
+-        info.add(name);
+-        return um.returnVideos(info, "name");
+-    }
+-
+-    /**
+-     * Returns a list of videos that contains all the categories.
+-     *
+-     * @param categories the categories being searched
+-     * @return list of video that contains all the categories
+-     */
+-    public ArrayList<Video> browseByCategories(ArrayList<String> categories) {
+-        return um.returnVideos(categories, "category");
+-    }
+-
+-    /**
+-     * Returns a list of videos uploaded by uploader.
+-     *
+-     * @param uploader the uploader being searched
+-     * @return list of videos uploaded by uploader
+-     */
+-    public ArrayList<Video> browseByUploader(String uploader) {
+-        ArrayList<String> info = new ArrayList<>();
+-        info.add(uploader);
+-        return um.returnVideos(info, "uploader");
+-    }
+-
+-    /**
+-     * Logs in and return a user.
+-     *
+-     * @param userName the username
+-     * @param password the password
+-     * @return the user with the username and password
+-     */
+-    public User loginUser(String userName, String password) {
+-        return um.validateUser(userName, password);
+-    }
+-
+-    /**
+-     * Creates and return a user.
+-     *
+-     * @param userName the username
+-     * @param password the password
+-     * @return the user created
+-     */
+-    public User createUser(String userName, String password) {
+-
+-        List<User> all_users = um.getAllUsers();
+-        if (!(Objects.isNull(all_users))) {
+-            for (User u : all_users) {
+-                if (um.validateUserName(u, userName)) {
+-                    return null;
+-                }
+-            }
+-        }
+-        User newUser = um.instantiateUser(userName, password, false);
+-
+-        um.updateData(newUser);
+-        return newUser;
+-    }
+-
+-    /**
+-     * Updates the user's history.
+-     *
+-     * @param user the targeted user
+-     */
+-    public void updateUserHistory(User user) {
+-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+-        um.updateHistory(user, LocalDateTime.now().format(formatter));
+-    }
+-
+-    /**
+-     * Return whether the user is admin.
+-     *
+-     * @param user the targeted user
+-     * @return whether the user is admin
+-     */
+-    public boolean isAdmin(User user) {
+-        return um.getRole(user);
+-    }
+-
+-    /**
+-     * Changes the user's password.
+-     *
+-     * @param user        the targeted user
+-     * @param newPassword the new password
+-     */
+-    public void changePassword(User user, String newPassword) {
+-        um.changePassword(user, newPassword);
+-    }
+-
+-    /**
+-     * Likes or dislikes the video.
+-     *
+-     * @param v    the video being rated
+-     * @param like whether to like or dislike
+-     */
+-    public void rateVideo(Video v,String userUniqueID, boolean like) {
+-        um.rateVideo(v, userUniqueID, like);
+-    }
+-
+-}
+Index: phase1/src/presenters/MenuPresenter.java
+===================================================================
+diff --git a/phase1/src/presenters/MenuPresenter.java b/phase1/src/presenters/MenuPresenter.java
+deleted file mode 100644
+--- a/phase1/src/presenters/MenuPresenter.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,173 +0,0 @@
+-package presenters;
+-
+-import entities.User;
+-import usecase.AdminManager;
+-import usecase.NonAdminManager;
+-import usecase.UserManager;
+-import usecase.VideoManager;
+-
+-import java.util.List;
+-
+-/**
+- * Responsible for formatting and outputting data to the user
+- *
+- * @author Daniel Xu, Wing Zou
+- * @version 1.0
+- * @since 2022-07-21
+- */
+-public class MenuPresenter {
+-    private final UserManager um;
+-    private final AdminManager am;
+-    private final NonAdminManager nm;
+-    private final VideoManager vm;
+-
+-    /**
+-     * Constructs a menu presenter with a record of all the users and videos.
+-     *
+-     * @param um this is the user manager which keep tracks of all the users
+-     * @param vm this is the video manager which keep tracks of all the videos
+-     */
+-    public MenuPresenter(UserManager um, VideoManager vm) {
+-        this.um = um;
+-        this.vm = vm;
+-        this.am = new AdminManager(um, vm);
+-        this.nm = new NonAdminManager(vm);
+-    }
+-
+-    /**
+-     * Displays the user's login history.
+-     *
+-     * @param user the target user
+-     */
+-    public void displayLoginHistory(User user) {
+-        System.out.println(um.getHistory(user));
+-        System.out.println("\n");
+-    }
+-
+-    /**
+-     * Displays all the banned/unbanned users.
+-     *
+-     * @param banStatus whether to display banned or unbanned users
+-     */
+-    public void displayUsers(boolean banStatus) {
+-
+-        if (banStatus) {
+-            displayAlert("Here are all the banned users");
+-        } else {
+-            displayAlert("Here are all the unbanned users");
+-        }
+-        displayList(am.returnUsersByBan(um.getAllUsers(), banStatus));
+-    }
+-
+-    /**
+-     * Displays all the users.
+-     */
+-    public void displayUsers() {
+-        displayAlert("Here are all the users");
+-        displayList(am.returnUsers(um.getAllUsers()));
+-    }
+-
+-    /**
+-     * Displays all the videos uploaded by user.
+-     */
+-    public void displayVideos(User user) {
+-        displayAlert("Here are all the videos uploaded by " + um.getUserName(user));
+-        displayList(nm.displayAllVideos(user, vm.getVids()));
+-    }
+-
+-    /**
+-     * Displays an alert.
+-     *
+-     * @param message the message being displayed
+-     */
+-    public void displayAlert(String message) {
+-        System.out.println(alertText(message));
+-    }
+-
+-    /**
+-     * Displays an error.
+-     *
+-     * @param message the message being displayed
+-     */
+-    public void displayError(String message) {
+-        System.out.println(errorText(message));
+-    }
+-
+-    /**
+-     * Displays a request to the user.
+-     *
+-     * @param message the message being displayed
+-     */
+-    public void displayRequest(String message) {
+-        System.out.println(requestText(message));
+-    }
+-
+-    /**
+-     * Displays a menu option.
+-     *
+-     * @param message the message being displayed
+-     */
+-    public void displayMenuOption(String message) {
+-        System.out.println(menuOption(message));
+-    }
+-
+-    /**
+-     * Displays a list.
+-     *
+-     * @param list the list being displayed
+-     */
+-    public void displayList(List<String> list) {
+-        for (String str : list) {
+-            System.out.println(str);
+-        }
+-    }
+-
+-    /*
+-     * Formats the text for request.
+-     *
+-     * @param input the text to be formatted
+-     * @return the formatted text
+-     */
+-    private String requestText(String input) {
+-        String symbol = "=";
+-        int num = input.length();
+-        return "\n" + input + "\n" + symbol.repeat(num) + "\n";
+-    }
+-
+-    /*
+-     * Formats the text for menu option.
+-     *
+-     * @param input the text to be formatted
+-     * @return the formatted text
+-     */
+-    private String menuOption(String input) {
+-        int num = input.length();
+-        StringBuilder decorator = new StringBuilder();
+-        decorator.append("*".repeat(num));
+-        return decorator + "\n" + input + "\n" + decorator;
+-    }
+-
+-    /*
+-     * Formats the text for alert.
+-     *
+-     * @param input the text to be formatted
+-     * @return the formatted text
+-     */
+-    private String alertText(String input) {
+-        String symbol = "-";
+-        int num = input.length();
+-        return "\n" + symbol.repeat(num) + "\n" + input + "\n" + symbol.repeat(num) + "\n";
+-    }
+-
+-    /*
+-     * Formats the text for error.
+-     *
+-     * @param input the text to be formatted
+-     * @return the formatted text
+-     */
+-    private String errorText(String input) {
+-        String symbol = "#";
+-        int num = input.length();
+-        return "\n" + symbol.repeat(num) + "\n" + input + "\n" + symbol.repeat(num) + "\n";
+-    }
+-}
+Index: phase1/src/usecase/VideoManager.java
+===================================================================
+diff --git a/phase1/src/usecase/VideoManager.java b/phase1/src/usecase/VideoManager.java
+deleted file mode 100644
+--- a/phase1/src/usecase/VideoManager.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,168 +0,0 @@
+-package usecase;
+-
+-import entities.Ratings;
+-import entities.Video;
+-
+-import java.time.LocalDateTime;
+-import java.util.ArrayList;
+-import java.util.UUID;
+-
+-
+-/**
+- * Use case class responsible for interacting with the Video entity class
+- *
+- * @author Kate Ma
+- * @version 1.0
+- * @since 2022-07-23
+- */
+-
+-public class VideoManager {
+-    private ArrayList<Video> vids = new ArrayList<>();
+-
+-    /**
+-     * Return all videos.
+-     *
+-     * @return all videos
+-     */
+-    public ArrayList<Video> getVids() {
+-        return vids;
+-    }
+-
+-    /**
+-     * Set all videos.
+-     *
+-     * @param videos a list of videos
+-     */
+-    public void setVids(ArrayList<Video> videos) {
+-        vids = videos;
+-    }
+-
+-    /**
+-     * Upload a video with the following properties.
+-     *
+-     * @param uploader    the name of the person uploading video
+-     * @param title       the title of the video
+-     * @param description what the video is about
+-     * @param categories  categories video falls under
+-     * @param vidLink     a link to the video
+-     */
+-    public void uploadVideo(String uploader, String title, String description, ArrayList<String> categories, String vidLink) {
+-
+-        ArrayList<String> vidID = new ArrayList<>();
+-
+-        if (!vids.isEmpty()) {
+-            for (Video v : vids) {
+-                vidID.add(v.getUniqueID());
+-            }
+-        }
+-
+-
+-        String uniqueID = UUID.randomUUID().toString();
+-
+-
+-        while (vidID.contains(uniqueID)) {
+-            uniqueID = UUID.randomUUID().toString();
+-
+-        }
+-        Ratings ratings = new Ratings();
+-        Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString());
+-        vids.add(v1);
+-    }
+-
+-
+-    /**
+-     * Delete a video.
+-     *
+-     * @param v target video
+-     * @return whether deletion was successful
+-     */
+-    public boolean deleteVideo(Video v) {
+-        vids.remove(v);
+-        return true;
+-    }
+-
+-    /**
+-     * Return a video by uniqueID.
+-     *
+-     * @param uniqueID the uniqueID of the video
+-     * @return video with correspond UniqueID
+-     */
+-    public Video getByUniqueID(String uniqueID) {
+-        for (Video v : vids) {
+-            if (uniqueID.equalsIgnoreCase(v.getUniqueID())) {
+-                return v;
+-            }
+-        }
+-        return null;
+-    }
+-
+-    /**
+-     * Return a list of videos uploaded by uploader.
+-     *
+-     * @param uploader the name of the person who uploaded video
+-     * @return all the videos the uploader has uploaded
+-     */
+-    public ArrayList<Video> getByUploader(String uploader) {
+-        ArrayList<Video> vid_list = new ArrayList<>();
+-        for (Video v : vids) {
+-
+-            if (uploader.equalsIgnoreCase(v.getUploader())) {
+-                vid_list.add(v);
+-
+-            }
+-
+-        }
+-        return vid_list;
+-    }
+-
+-    /**
+-     * Return a list of videos that contains name in the title.
+-     *
+-     * @param name the title of the video
+-     * @return all the videos that correspond to the title
+-     */
+-    public ArrayList<Video> getByName(String name) {
+-        ArrayList<Video> videoList = new ArrayList<>();
+-        for (Video vid : vids) {
+-            if ((vid.getName().toLowerCase()).contains((name).toLowerCase())) {
+-                videoList.add(vid);
+-            }
+-        }
+-        return videoList;
+-    }
+-
+-    /**
+-     * Return a list of videos with the following categories.
+-     *
+-     * @param categories the categories of the video
+-     * @return all the videos belonging to the same categories
+-     */
+-    public ArrayList<Video> getByCategory(ArrayList<String> categories) {
+-        ArrayList<Video> videoList = new ArrayList<>();
+-        for (Video vid : vids) {
+-
+-            if (vid.getCategories().containsAll(categories)) {
+-
+-                videoList.add(vid);
+-            }
+-        }
+-
+-        return videoList;
+-    }
+-
+-    /**
+-     * Return a list of video names.
+-     *
+-     * @param videos the list of videos
+-     * @return list of video names
+-     */
+-    public ArrayList<String> getVideoNames(ArrayList<Video> videos) {
+-        ArrayList<String> names = new ArrayList<>();
+-        for (Video vid : videos) {
+-            names.add(vid.getName());
+-        }
+-
+-        return names;
+-    }
+-
+-}
+Index: phase1/src/controllers/NonAdminHandler.java
+===================================================================
+diff --git a/phase1/src/controllers/NonAdminHandler.java b/phase1/src/controllers/NonAdminHandler.java
+deleted file mode 100644
+--- a/phase1/src/controllers/NonAdminHandler.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,95 +0,0 @@
+-package controllers;
+-
+-import entities.User;
+-import usecase.NonAdminManager;
+-import usecase.UserManager;
+-import usecase.VideoManager;
+-
+-import java.util.ArrayList;
+-
+-/**
+- * Responsible for handling non admin users' choices.
+- *
+- * @author Daniel Xu, Wing Zou
+- * @version 1.0
+- * @since 2022-07-15
+- */
+-public class NonAdminHandler extends UserActionHandler {
+-
+-    private final NonAdminManager nm;
+-
+-    /**
+-     * Constructs a non admin handler with a record of all the users and videos.
+-     *
+-     * @param um this is the user manager which keep tracks of all the users
+-     * @param vm this is the video manager which keep tracks of all the videos
+-     */
+-    public NonAdminHandler(UserManager um, VideoManager vm) {
+-        super(um);
+-        nm = new NonAdminManager(vm);
+-    }
+-
+-    /**
+-     * Uploads a video with currentUser, title, description, categories and vidlink.
+-     *
+-     * @param currentUser the current user
+-     * @param title       the title of the video
+-     * @param description the description of the video
+-     * @param categories  the categories of the video
+-     * @param vidLink     the video link
+-     */
+-    public boolean uploadVideo(User currentUser, String title, String description, ArrayList<String> categories, String vidLink) {
+-        if (title.equals("") || vidLink.equals("")){
+-            return false;
+-        } else if (categories.isEmpty()){
+-            nm.uploadVideo(currentUser, title, description, new ArrayList<>(), vidLink);
+-        } else {
+-            nm.uploadVideo(currentUser, title, description, categories, vidLink);
+-        }
+-        return true;
+-    }
+-
+-    /**
+-     * Deletes a video using user and uniqueID.
+-     *
+-     * @param user     the current user
+-     * @param uniqueID the video ID
+-     * @return whether the deletion was successful
+-     */
+-    public boolean deleteVideo(User user, String uniqueID) {
+-        return nm.deleteVideo(user, uniqueID);
+-    }
+-
+-    /**
+-     * Edits the title of the video.
+-     *
+-     * @param user     the current user
+-     * @param uniqueID the video ID
+-     * @param newTitle the new title
+-     */
+-    public void editTitle(User user, String uniqueID, String newTitle) {
+-        nm.editTitle(user, uniqueID, newTitle);
+-    }
+-
+-    /**
+-     * Edits the categories of the video.
+-     *
+-     * @param user     the current user
+-     * @param uniqueID the video ID
+-     * @param newCate  the new categories
+-     */
+-    public void editCategories(User user, String uniqueID, ArrayList<String> newCate) {
+-        nm.editCategories(user, uniqueID, newCate);
+-    }
+-
+-    /**
+-     * Edits the description of the video.
+-     *
+-     * @param user     the current user
+-     * @param uniqueID the video ID
+-     * @param newDes   the new description
+-     */
+-    public void editDescription(User user, String uniqueID, String newDes) {
+-        nm.editDescription(user, uniqueID, newDes);
+-    }
+-}
+Index: phase1/src/usecase/RandomComparator.java
+===================================================================
+diff --git a/phase1/src/usecase/RandomComparator.java b/phase1/src/usecase/RandomComparator.java
+deleted file mode 100644
+--- a/phase1/src/usecase/RandomComparator.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,17 +0,0 @@
+-package usecase;
+-
+-import entities.Video;
+-
+-import java.util.*;
+-
+-/**
+- * This comparator class is responsible for comparing two videos and returning a random ordering (used to shuffle)
+- * @author Benedek Balla
+- */
+-
+-public class RandomComparator implements Comparator<Video> {
+-    public int compare(Video v1, Video v2) {
+-        Random rand = new Random();
+-        return rand.nextInt(2 + 2) - 2; // generates random int in range [-1, 1]
+-    }
+-}
+\ No newline at end of file
+Index: phase1/src/controllers/AdminHandler.java
+===================================================================
+diff --git a/phase1/src/controllers/AdminHandler.java b/phase1/src/controllers/AdminHandler.java
+deleted file mode 100644
+--- a/phase1/src/controllers/AdminHandler.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,135 +0,0 @@
+-package controllers;
+-
+-import entities.User;
+-import usecase.AdminManager;
+-import usecase.UserManager;
+-import usecase.VideoManager;
+-
+-import java.util.ArrayList;
+-import java.util.Objects;
+-
+-/**
+- * Responsible for handling admin users' actions.
+- *
+- * @author Daniel Xu
+- * @version 1.0
+- * @since 2022-07-21
+- */
+-public class AdminHandler extends UserActionHandler {
+-    private final AdminManager am;
+-    private final ArrayList<User> all_users;
+-
+-    /**
+-     * Constructs an admin handler with a record of all the users and videos.
+-     *
+-     * @param um this is the user manager which keep tracks of all the users
+-     * @param vm this is the video manager which keep tracks of all the videos
+-     */
+-    public AdminHandler(UserManager um, VideoManager vm) {
+-        super(um);
+-        am = new AdminManager(um, vm);
+-        all_users = um.getAllUsers();
+-    }
+-
+-    /**
+-     * Create a new admin user account if appropriate.
+-     * Returns whether the creation of an admin user using username and password was successful.
+-     *
+-     * @param username the username of a user
+-     * @param password the password of a user
+-     * @return whether account creation was successful
+-     */
+-    public boolean createAdminUser(String username, String password) {
+-
+-        // Iterates through the list to check if the username already exist in the database using useCase method.
+-        if (!(Objects.isNull(all_users))) {
+-            for (User u : all_users) {
+-                if (am.validateUserName(u, username)) {
+-                    return false;
+-                }
+-            }
+-        }
+-
+-        // Creates a new user through useCase method
+-        User newUser = am.instantiateUser(username, password, true);
+-        updateUserHistory(newUser);
+-        um.updateData(newUser);
+-        return true;
+-    }
+-
+-    /**
+-     * Deletes the user with name.
+-     * Returns whether the user deleted was the current user.
+-     *
+-     * @param currentUser the user that is currently logged in
+-     * @param name        a name of the user to be deleted
+-     * @return whether the user deleted was the current user
+-     */
+-    public boolean deleteUser(User currentUser, String name) {
+-
+-        // Iterates through the list to check if the user exist in the database
+-        for (User user : all_users) {
+-            if (am.validateUserName(user, name)) {
+-
+-                // Checks if the user being deleted is the current user
+-                if (am.validateUserName(currentUser, name)) {
+-                    am.deleteUser(user);
+-                    return true;
+-                }
+-                am.deleteUser(user);
+-                return false;
+-            }
+-        }
+-        return false;
+-    }
+-
+-    /**
+-     * Return whether the banning of a user with currentUser and name was successful.
+-     * Bans the user with name if appropriate.
+-     *
+-     * @param currentUser the user that is currently logged in
+-     * @param name        a name of the user to be banned
+-     * @return whether the banning of a user using currentUser and name was successful
+-     */
+-    public boolean banUser(User currentUser, String name) {
+-
+-        // Iterates through the list to see if there is a user with matching name
+-        for (User user : all_users) {
+-            if (am.validateUserName(user, name)) {
+-
+-                // Check if the user is the current user or if the user is an admin user
+-                if (am.validateUserName(currentUser, name) || (am.getRole(user))) {
+-                    return false;
+-                } else if (!(am.validateBanStatus(user))) { // Check if the user is unbanned
+-                    am.banUser(user);
+-                    return true;
+-                }
+-            }
+-        }
+-        return false;
+-    }
+-
+-    /**
+-     * Return whether the unbanning of a user using name was successful.
+-     * Unbans the user with name if appropriate.
+-     *
+-     * @param name the name of the user to be unbanned
+-     * @return whether the unbanning process was successful
+-     */
+-    public boolean unBanUser(String name) {
+-
+-        // Iterates through the list to see if a user with name exist in the database
+-        for (User user : all_users) {
+-            if (am.validateUserName(user, name)) {
+-
+-                // Check if the user is already banned
+-                if (am.validateBanStatus(user)) {
+-                    am.unbanUser(user);
+-                    return true;
+-                }
+-                return false;
+-            }
+-        }
+-        return false;
+-    }
+-}
+\ No newline at end of file
+Index: phase1/src/usecase/VideoRatingComparator.java
+===================================================================
+diff --git a/phase1/src/usecase/VideoRatingComparator.java b/phase1/src/usecase/VideoRatingComparator.java
+deleted file mode 100644
+--- a/phase1/src/usecase/VideoRatingComparator.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,29 +0,0 @@
+-package usecase;
+-
+-import entities.Video;
+-
+-import java.util.*;
+-
+-/**
+- * This comparator class is responsible for comparing two videos and returning an ordering based on rating
+- * (used to reorder by rating)
+- * @author Benedek Balla
+- */
+-
+-public class VideoRatingComparator implements Comparator<Video> {
+-    public int compare(Video v1, Video v2) {
+-        Integer v1Likes = v1.getRatings().getTotalLikes() - v1.getRatings().getTotalDislikes();
+-        Integer v2Likes = v2.getRatings().getTotalLikes() - v2.getRatings().getTotalDislikes();
+-        int i = v1Likes.compareTo(v2Likes);
+-        if (i == 0) {
+-            return 0;
+-        }
+-        else if (i > 0) {
+-            return 1;
+-        }
+-        else {
+-            return -1;
+-        }
+-    }
+-
+-}
+Index: phase1/src/entities/NonAdminUser.java
+===================================================================
+diff --git a/phase1/src/entities/NonAdminUser.java b/phase1/src/entities/NonAdminUser.java
+deleted file mode 100644
+--- a/phase1/src/entities/NonAdminUser.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,40 +0,0 @@
+-package entities;
+-
+-import java.util.HashSet;
+-
+-/**
+- * This represents non admin user.
+- *
+- * @author Daniel Xu
+- * @version 1.0
+- * @since 2022-07-21
+- */
+-
+-public class NonAdminUser extends User {
+-
+-    /**
+-     * Constructs a non admin user using username and password.
+-     *
+-     * @param userName the username
+-     * @param password the password
+-     */
+-    public NonAdminUser(String userName, String password) {
+-        super(userName, password);
+-        this.setAdminInd(false);
+-    }
+-
+-    /**
+-     * Constructs a non admin user using username, password, ban status and login history.
+-     *
+-     * @param userName     the username
+-     * @param password     the password
+-     * @param banStatus    the ban status
+-     * @param loginHistory the login history
+-     */
+-    public NonAdminUser(String userName, String password, boolean banStatus, HashSet<String> loginHistory) {
+-        super(userName, password, banStatus, loginHistory);
+-        this.setAdminInd(false);
+-    }
+-
+-}
+-
+Index: phase1/src/userInterfaces/PlaylistMenu.java
+===================================================================
+diff --git a/phase1/src/userInterfaces/PlaylistMenu.java b/phase1/src/userInterfaces/PlaylistMenu.java
+deleted file mode 100644
+--- a/phase1/src/userInterfaces/PlaylistMenu.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,263 +0,0 @@
+-package userInterfaces;
+-
+-import controllers.UserActionHandler;
+-import entities.Playlist;
+-import entities.User;
+-import presenters.MenuPresenter;
+-import presenters.PlaylistPresenter;
+-import usecase.PlaylistManager;
+-import controllers.PlaylistMenuActions;
+-import usecase.UserManager;
+-import usecase.VideoManager;
+-import java.util.ArrayList;
+-import java.util.Objects;
+-import java.util.Scanner;
+-
+-/**
+- * Class responsible for playlist menus and sub menus
+- * @authors akmar
+- */
+-
+-public class PlaylistMenu {
+-
+-    /*
+-     * This class holds the menu options for actions related to playlist
+-     * Controller Class
+-     * */
+-    VideoManager vmm; // May need to add the VM usage into VBP
+-    PlaylistManager pmm;
+-    UserManager um;
+-    PlaylistMenuActions pma;
+-    PlaylistPresenter pp;
+-    MenuPresenter menuPresenter;
+-    MenuDisplayer menuDisplayer;
+-    UserActionHandler userActionHandler;
+-    Scanner sc = new Scanner(System.in);
+-
+-    /**
+-     * Constructor for playlist menu
+-     * @param menuPresenter call presenter for output
+-     * @param vm video manager to access videos in playlist
+-     * @param pma playlist menu actions to control usecases to be used for UI
+-     * @param pmm playlist manager, used by pma for actions
+-     * @param um user used by pma to check user logic
+-     * @param userActionHandler used by menuDisplayer
+-     * @param menuDisplayer used to output choices
+-     */
+-    public PlaylistMenu(MenuPresenter menuPresenter, VideoManager vm, PlaylistMenuActions pma, PlaylistManager pmm, UserManager um, UserActionHandler userActionHandler, MenuDisplayer menuDisplayer) {
+-        this.vmm = vm;
+-        this.pmm = pmm;
+-        this.um = um;
+-        this.menuPresenter = menuPresenter;
+-        this.userActionHandler = userActionHandler;
+-        this.pma = pma;
+-        this.pp = new PlaylistPresenter();
+-        this.menuDisplayer = menuDisplayer;
+-    }
+-
+-    /**
+-     * Main Playlist Menu, used to find a playlist
+-     * @param user user who will access the menu
+-     */
+-
+-    public void playlistBrowseMenu(User user) {
+-        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+-                "\n1 - Search Playlist by name \n2 - Create New Playlist \n3 - Display All Playlists \n4 - Return");
+-
+-        switch (option) {
+-            case 1:
+-                menuPresenter.displayRequest("Enter the name of the playlist: ");
+-                String plname = sc.nextLine();
+-                Playlist pl = pma.SearchPlaylist(plname);
+-                checkPlaylist(pl, user, menuPresenter,  "No playlists can be found with that name, try again");
+-                playlistManageMenu(user, pl);
+-                break;
+-            case 2:
+-                menuPresenter.displayRequest("Enter the name of the playlist you want to create: ");
+-                plname = sc.nextLine();
+-                pl = pma.CreateNewPlaylist(user, plname);
+-
+-                checkPlaylist(pl, user, menuPresenter,  "Playlist Already Exists");
+-                menuPresenter.displayAlert("Successfully created: " + pl.getPlaylistName());
+-                playlistManageMenu(user, pl);
+-                break;
+-            case 3:
+-                ArrayList<Playlist> pl_list = pma.pl_list();
+-                pp.listPlaylistNames(pl_list, pmm);
+-                int sub_option = menuDisplayer.getUserActionChoice("Do you want to " + "\n1 - Choose Playlist from list" +
+-                        "\n2 - Return");
+-                switch (sub_option) {
+-                    case 1:
+-                        menuPresenter.displayAlert("Choose playlist based on number: ");
+-                        int i = sc.nextInt();
+-                        pl = pma.pl_list().get(i);
+-                        playlistManageMenu(user, pl);
+-                        break;
+-                    case 2:
+-                        playlistBrowseMenu(user);
+-                        break;
+-                    default:
+-                        menuPresenter.displayError("Invalid input");
+-                        playlistBrowseMenu(user);
+-                }
+-                break;
+-            case 4:
+-                menuDisplayer.callMenu(user);
+-                break;
+-        }
+-    }
+-
+-    /**
+-     * playlistManageMenu is used for actions on the chosen playlist by the user
+-     * @param user the user that is making changes to playlist
+-     * @param pl the playlist being changed/viewed
+-     */
+-
+-    public void playlistManageMenu(User user, Playlist pl) {
+-        int option3 = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+-                "\n 1 - View Playlist \n 2 - Add Video to Playlist \n 3 - Remove Video from Playlist \n 4 - Reorder Playlist " +
+-                "\n 5 - Like Playlist \n 6 -  Return");
+-        String VidName;
+-        boolean result;
+-        switch (option3) {
+-            case 1:
+-                viewPlaylist(user, pl);
+-                break;
+-            case 2:
+-                menuPresenter.displayRequest("Please enter the name of the video you would like to add to the playlist ");
+-                sc.nextLine();
+-                VidName = sc.nextLine();
+-                result = pma.AddDeleteFromPlaylist(VidName, user, pl, true);
+-                if (result) {
+-                    menuPresenter.displayAlert("Successfully added " + VidName + " to playlist");
+-                } else {
+-                    menuPresenter.displayAlert("Unsuccessful in adding " + VidName + " to playlist");
+-                }
+-                playlistManageMenu(user, pl);
+-                break;
+-            case 3:
+-                menuPresenter.displayRequest("Please enter the name of the video you would like to remove from the playlist ");
+-                sc.nextLine();
+-                VidName = sc.nextLine();
+-                System.out.println(VidName);
+-                result = pma.AddDeleteFromPlaylist(VidName, user, pl, false);
+-                if (result) {
+-                    menuPresenter.displayAlert("Successfully removed " + VidName + " to " + pl.getPlaylistName());
+-                } else {
+-                    menuPresenter.displayAlert("Unsuccessful in removing " + VidName + " to " + pl.getPlaylistName());
+-                }
+-                playlistManageMenu(user, pl);
+-                break;
+-            case 4:
+-                ReorderPlaylist(user, pl);
+-                break;
+-            case 5:
+-                int option2 = menuDisplayer.getUserActionChoice("Do you want to like this playlist? "
+-                        + " \n 1 - Yes \n 2 - No");
+-                switch (option2) {
+-                    case 1:
+-                        pma.likePlaylist(pl);
+-                        menuPresenter.displayAlert("You have successfully liked the playlist");
+-                        playlistManageMenu(user, pl);
+-                        break;
+-                    case 2:
+-                        menuPresenter.displayAlert("You did not like this playlist");
+-                        playlistManageMenu(user, pl);
+-                        break;
+-                }
+-            case 6:
+-                playlistBrowseMenu(user);
+-                break;
+-        }
+-    }
+-
+-    /**
+-     * view playlist to see what is inside the playlist including likes, videos and ability to change the name
+-     * @param user user viewing/making changes to the playlist
+-     * @param pl playlist being viewed/made changes to
+-     */
+-    public void viewPlaylist(User user, Playlist pl) {
+-        int option = menuDisplayer.getUserActionChoice("Which Action would you like to perform " +
+-                "\n1 - View Video Names in Playlist \n2 - View How Many Likes " + pma.playlistName(pl) + " has" +
+-                "\n3 - Change Playlist Name \n4 -  Return ");
+-
+-        switch (option) {
+-            case 1:
+-                ArrayList<String> vidname = pma.videosinPL(pl);
+-                pp.listStringNames(vidname);
+-                viewPlaylist(user, pl);
+-                break;
+-            case 2:
+-                String ratings = pma.getRatings(pl);
+-                menuPresenter.displayAlert(ratings);
+-                viewPlaylist(user, pl);
+-                break;
+-            case 3:
+-                boolean check = pma.isUser(user,pl);
+-                if (check) { //checks if current user also created the playlist
+-                    menuPresenter.displayRequest("Please enter the name you would like to change " + pma.playlistName(pl) + " to: ");
+-                    String PlName = sc.nextLine();
+-                    pl.setPlaylistName(PlName);
+-                } else menuPresenter.displayError("You do not have permission to change this Playlist's name");
+-                viewPlaylist(user, pl);
+-                break;
+-            case 4:
+-                playlistManageMenu(user, pl);
+-                break;
+-        }
+-
+-    }
+-
+-    /**
+-     * ReorderPlaylist is the menu where you choose which reorder method to use
+-     * @param user checks if user is able to make changes to playlist
+-     * @param pl playlist being reordered
+-     */
+-    public void ReorderPlaylist(User user, Playlist pl) {
+-        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+-                "\n 1 - Reorder Playlist Alphabetically \n 2 - Reorder Playlist by Video Rating \n 3 - Shuffle Playlist  \n 4 -  Return");
+-        boolean check = pma.isUser(user,pl);
+-        if (check) {
+-            menuPresenter.displayError("You do not have permission to change the order");
+-            playlistManageMenu(user, pl);
+-        } else {
+-
+-            switch (option) {
+-                case 1:
+-                    pma.reorderPL(pl,"name");
+-                    menuPresenter.displayAlert("You have successfully ordered " + pma.playlistName(pl) + " by alphabetical order!");
+-                    ReorderPlaylist(user,pl);
+-                    break;
+-                case 2:
+-                    pma.reorderPL(pl,"rating");
+-                    menuPresenter.displayAlert("You have successfully ordered " + pma.playlistName(pl) + " by descending ratings order!");
+-                    ReorderPlaylist(user,pl);
+-                    break;
+-                case 3:
+-                    pma.reorderPL(pl,"shuffle");
+-                    menuPresenter.displayAlert("You have successfully shuffled " + pma.playlistName(pl));
+-                    ReorderPlaylist(user,pl);
+-                    break;
+-                case 4:
+-                    playlistManageMenu(user, pl);
+-                    break;
+-
+-            }
+-        }
+-    }
+-
+-    /**
+-     * helper function used to give error messages
+-     * @param pl playlist being checked
+-     * @param user user that interacts with playlist
+-     * @param mp presenter used to output prompts
+-     * @param errorMsg message to display
+-     */
+-    void checkPlaylist(Playlist pl, User user, MenuPresenter mp,  String errorMsg) {
+-        if (Objects.isNull(pl)) {
+-            mp.displayAlert(errorMsg);
+-            playlistBrowseMenu(user);
+-        }
+-    }
+-
+-}
+Index: phase1/src/userInterfaces/MenuDisplayer.java
+===================================================================
+diff --git a/phase1/src/userInterfaces/MenuDisplayer.java b/phase1/src/userInterfaces/MenuDisplayer.java
+deleted file mode 100644
+--- a/phase1/src/userInterfaces/MenuDisplayer.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,269 +0,0 @@
+-package userInterfaces;
+-
+-import controllers.AdminHandler;
+-import controllers.NonAdminHandler;
+-import controllers.UserActionHandler;
+-import entities.User;
+-import gateways.DataManager;
+-import presenters.MenuPresenter;
+-import usecase.PlaylistManager;
+-import controllers.PlaylistMenuActions;
+-import usecase.UserManager;
+-import usecase.VideoManager;
+-
+-import java.util.*;
+-
+-/**
+- * Responsible for displaying the different menus and interacting with users.
+- *
+- * @author Daniel Xu
+- * @version 1.0
+- * @since 2022-07-15
+- */
+-public class MenuDisplayer {
+-    private final Scanner sc = new Scanner(System.in);
+-    private final UserActionHandler userActionHandler;
+-    private final DataManager dataManager;
+-    private final UserManager um;
+-    private final VideoManager vm;
+-    private final MenuPresenter menuPresenter;
+-    private final VideoManagementMenuDisplayer vmmDisplayer;
+-    private final PlaylistMenu pmd;
+-
+-    /**
+-     * Constructs a menu displayer with a record of all the users and videos.
+-     *
+-     * @param um the user manager for managing users
+-     * @param vm the video manager for managing videos
+-     * @param pm the playlist manager for managing playlists
+-     */
+-    public MenuDisplayer(UserManager um, VideoManager vm, PlaylistManager pm) {
+-        this.um = um;
+-        this.vm = vm;
+-        PlaylistMenuActions pma = new PlaylistMenuActions(pm, vm);
+-        this.userActionHandler = new UserActionHandler(um);
+-        this.dataManager = new DataManager(um, vm, pm);
+-        this.menuPresenter = new MenuPresenter(um, vm);
+-        this.vmmDisplayer = new VideoManagementMenuDisplayer(menuPresenter, this, vm, userActionHandler, pm);
+-        this.pmd = new PlaylistMenu(menuPresenter, vm, pma, pm, um, userActionHandler, this);
+-    }
+-
+-    /**
+-     * This menu navigates the user to login or create account
+-     */
+-    public void startMenu() {
+-        User currentUser;
+-        String[] info;
+-
+-
+-
+-        // Gets user's choice to log in, create a new account or exit program
+-        switch (getUserActionChoice("Type 1 to login, 2 to create account, 3 to exit")) {
+-
+-            case 1:
+-                // Takes in a username and password and tries to log in
+-                info = getLoginInfo();
+-                currentUser = userActionHandler.loginUser(info[0], info[1]);
+-                checkNoUserFound(currentUser, "Login was unsuccessful");
+-                userActionHandler.updateUserHistory(currentUser);
+-                if (userActionHandler.isAdmin(currentUser)) {
+-                    menuPresenter.displayAlert("you are now logged in to an admin account");
+-                    adminMenu(currentUser);
+-                } else {
+-                    menuPresenter.displayAlert("you are now logged in to a non-admin account");
+-                    nonAdminMenu(currentUser);
+-                }
+-                break;
+-            case 2:
+-                // Takes in username and password and tries to create a new account
+-                info = getLoginInfo();
+-                currentUser = userActionHandler.createUser(info[0], info[1]);
+-                checkNoUserFound(currentUser, "Account creation was not successful");
+-                userActionHandler.updateUserHistory(currentUser);
+-                menuPresenter.displayAlert("A new account has been successfully created");
+-                nonAdminMenu(currentUser);
+-                break;
+-            case 3:
+-                // Saves all the data and exits the program
+-                dataManager.saveData("phase1/datasets/Data.csv");
+-                dataManager.saveVideoData("phase1/datasets/VideoData.csv");
+-                dataManager.savePlayListData("phase1/datasets/PlaylistData.csv");
+-                System.exit(0);
+-                break;
+-            default:
+-                menuPresenter.displayError("Invalid choice, please try again!");
+-                startMenu();
+-        }
+-    }
+-
+-
+-    /*
+-     * This menu navigates the user to perform actions done by non admin users
+-     *
+-     * @param user the current user
+-     */
+-    private void nonAdminMenu(User user) {
+-        int result = getUserActionChoice("Please input one of the following number to proceed " +
+-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Browse Videos \n 5 - View Playlists \n 6 - " +
+-                "Upload/delete/edit videos");
+-
+-        NonAdminHandler nonAdminHandler = new NonAdminHandler(um, vm);
+-
+-        if (result == 6) {
+-            vmmDisplayer.videoActionMenu(user, nonAdminHandler);
+-        } else {
+-            basicUserMenu(user, result);
+-        }
+-    }
+-
+-    /*
+-     * This menu navigates the user to perform actions done by admin users
+-     *
+-     * @param user the current user
+-     */
+-    private void adminMenu(User user) {
+-        int result = getUserActionChoice("Please input one of the following number to proceed " +
+-                "\n 1 - Change Password \n 2 - Check login history \n 3 - Log out \n 4 - Browse Videos \n 5 - View Playlists \n 6 - Create AdminUser \n" +
+-                " 7 - Delete User \n 8 - Ban User \n 9 - UnBan User");
+-        AdminHandler adminHandler = new AdminHandler(um, vm);
+-        String[] info;
+-        String target;
+-        switch (result) {
+-            case 6:
+-                info = getLoginInfo();
+-                if (adminHandler.createAdminUser(info[0], info[1])) {
+-                    menuPresenter.displayAlert("Account has been successfully created");
+-                } else {
+-                    menuPresenter.displayAlert("Account creation was unsuccessful");
+-                }
+-                adminMenu(user);
+-                break;
+-            case 7:
+-                menuPresenter.displayUsers();
+-                menuPresenter.displayRequest("Please enter the username of the user you wish to delete");
+-
+-                // Check if current user is deleted
+-                if (adminHandler.deleteUser(user, sc.nextLine())) {
+-                    startMenu();
+-                }
+-                menuPresenter.displayAlert("Deletion was successful");
+-                adminMenu(user);
+-                break;
+-            case 8:
+-                // Displays unbanned users
+-                menuPresenter.displayUsers(false);
+-                menuPresenter.displayRequest("Please enter the name of the user that you wish to ban");
+-                target = sc.nextLine();
+-                if (adminHandler.banUser(user, target)) {
+-                    menuPresenter.displayAlert("The user " + target + " has been " +
+-                            "successfully banned");
+-                } else {
+-                    menuPresenter.displayError("The ban operation was unsuccessful");
+-                }
+-                adminMenu(user);
+-                break;
+-            case 9:
+-                // Displays banned users
+-                menuPresenter.displayUsers(true);
+-                menuPresenter.displayRequest("Please enter the name of the user that you wish to unban");
+-                target = sc.nextLine();
+-                if (adminHandler.unBanUser(target)) {
+-                    menuPresenter.displayAlert("The user " + target + "has been " +
+-                            "unbanned");
+-                } else {
+-                    menuPresenter.displayError("Unban was unsuccessful");
+-                }
+-                adminMenu(user);
+-                break;
+-            default:
+-                basicUserMenu(user, result);
+-        }
+-    }
+-
+-    /*
+-     * This is a basic menu that navigates the user to perform actions done by all users
+-     *
+-     * @param user    the current user
+-     * @param choice  the action that user wish to perform
+-     * @param isAdmin the type of user
+-     */
+-    private void basicUserMenu(User user, int choice) {
+-        switch (choice) {
+-            case 1:
+-                menuPresenter.displayRequest("Please enter a new password");
+-                userActionHandler.changePassword(user, sc.nextLine());
+-                menuPresenter.displayAlert("Password change was successful");
+-                callMenu(user);
+-                break;
+-            case 2:
+-                menuPresenter.displayAlert("Checking history:");
+-                menuPresenter.displayLoginHistory(user);
+-                callMenu(user);
+-                break;
+-            case 3:
+-                startMenu();
+-                break;
+-            case 4:
+-                vmmDisplayer.videoBrowseMenu(user);
+-                break;
+-            case 5:
+-                pmd.playlistBrowseMenu(user);
+-                break;
+-        }
+-    }
+-
+-    /**
+-     * This method decides which user menu to call
+-     *
+-     * @param user the current user
+-     */
+-    protected void callMenu(User user) {
+-        if (userActionHandler.isAdmin(user)) {
+-            adminMenu(user);
+-        } else {
+-            nonAdminMenu(user);
+-        }
+-    }
+-
+-    /**
+-     * This method takes in the user and return user's choice of action
+-     *
+-     * @param text the text to be displayed
+-     * @return the choice that the user made
+-     */
+-    protected int getUserActionChoice(String text) {
+-        Scanner sc = new Scanner(System.in);
+-        menuPresenter.displayMenuOption(text);
+-        if (sc.hasNextInt()) {
+-            return (sc.nextInt());
+-        } else {
+-            return 0;
+-        }
+-    }
+-
+-    /*
+-     * This method checks whether a user is found
+-     *
+-     * @param currentUser the current user
+-     * @param message     the message to be displayed
+-     */
+-    private void checkNoUserFound(User currentUser, String message) {
+-        if (Objects.isNull(currentUser)) {
+-            menuPresenter.displayError(message);
+-            startMenu();
+-        }
+-    }
+-
+-    /*
+-     * This method takes in and returns the name and password
+-     *
+-     * @return the username and password
+-     */
+-    private String[] getLoginInfo() {
+-        menuPresenter.displayRequest("Please enter a username: ");
+-        String username = sc.nextLine();
+-        menuPresenter.displayRequest("Please enter a password: ");
+-        String password = sc.nextLine();
+-        return new String[]{username, password};
+-    }
+-}
+Index: phase1/test/PlaylistTest.java
+===================================================================
+diff --git a/phase1/test/PlaylistTest.java b/phase1/test/PlaylistTest.java
+deleted file mode 100644
+--- a/phase1/test/PlaylistTest.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,82 +0,0 @@
+-import entities.NonAdminUser;
+-import entities.Playlist;
+-import entities.Video;
+-import org.junit.Test;
+-import usecase.PlaylistManager;
+-import usecase.VideoManager;
+-
+-import java.util.ArrayList;
+-import java.util.Arrays;
+-import java.util.List;
+-
+-import static org.junit.Assert.assertEquals;
+-import static org.junit.Assert.assertTrue;
+-
+-public class PlaylistTest {
+-
+-    private static final Playlist play = new Playlist("Music", 0 , new ArrayList<>(Arrays.asList("2", "1", "3")), "k");
+-    private static final Playlist play_dup = new Playlist("Music1", 0, new ArrayList<>(Arrays.asList("1", "3")), "k1");
+-    private static final PlaylistManager PM = new PlaylistManager(new ArrayList<>(Arrays.asList(play, play_dup)));
+-    private static final VideoManager VM = new VideoManager();
+-    @Test
+-    public void reorderPlaylistByRatingTest() {
+-        Playlist result1 = PM.getPlaylistByName("Music");
+-        Playlist expect1 = new Playlist( "Music", 0 ,  new ArrayList<>(Arrays.asList("2", "1", "3")),"k");
+-        assertTrue(result1.equals(expect1));
+-        Playlist result2 = PM.reorderPlaylistByRating(play, VM);
+-        Playlist expect2 = new Playlist( "Music", 0 ,  new ArrayList<>(Arrays.asList("1", "3", "2")),"k");
+-        assertTrue(result2.equals(expect2));
+-    }
+-
+-    @Test
+-    public void reorderPlaylistByNameTest() {
+-        Playlist result1 = PM.getPlaylistByName("Music");
+-        Playlist expect1 = new Playlist( "Music", 0 ,  new ArrayList<>(Arrays.asList("2", "1", "3")),"k");
+-        assertTrue(result1.equals(expect1));
+-        Playlist result2 = PM.reorderPlaylistByName(play);
+-        Playlist expect2 = new Playlist( "Music", 0 ,  new ArrayList<>(Arrays.asList("1", "2", "3")),"k");
+-        assertTrue(result2.equals(expect2));
+-    }
+-    @Test
+-    public void addToPlaylistTest() {
+-        Playlist play = new Playlist("Music", "k");
+-        ArrayList<String> cates = new ArrayList<>(List.of("energizing"));
+-        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("0", "0"));
+-        Video v = new Video("k", "popmusic", "amazing music", cates, "url", "1", ratings, "today");
+-        PlaylistManager PM = new PlaylistManager();
+-        PM.addPlaylist(play);
+-        assertTrue(PM.addToPlaylist(play, v));
+-        assertEquals(1, play.getUniqueIDs().size());
+-    }
+-
+-    @Test
+-    public void likePlaylistTest() {
+-        PlaylistManager PM = new PlaylistManager();
+-        Playlist play = new Playlist("Music", "k");
+-        PM.likePlaylist(play);
+-        assertEquals(1, play.getLikes());
+-    }
+-
+-    @Test
+-    public void deleteFromPlaylistTest() {
+-        Playlist play2 = new Playlist("Music", 0 , new ArrayList<>(Arrays.asList("2", "1", "3")), "k");
+-        Playlist play_dup2 = new Playlist("Music1", 0, new ArrayList<>(Arrays.asList("1", "3")), "k1");
+-
+-        PlaylistManager PM2 = new PlaylistManager(new ArrayList<>(Arrays.asList(play2, play_dup2)));
+-
+-        NonAdminUser u1 = new NonAdminUser("k","123");
+-        ArrayList<String> cates2 = new ArrayList<>(List.of("fun"));
+-        ArrayList<String> ratings2 = new ArrayList<>(Arrays.asList("2", "0"));
+-        Video v2 = new Video("t", "rockmusic", "amazing music", cates2, "url", "2", ratings2, "today");
+-
+-        assertEquals(3, play2.getUniqueIDs().size());
+-
+-        assertTrue(PM2.deleteFromPlaylist(u1,play2, v2));
+-        assertEquals(2, play2.getUniqueIDs().size());
+-
+-
+-    }
+-}
+-
+-
+-
+Index: phase1/src/entities/Playlist.java
+===================================================================
+diff --git a/phase1/src/entities/Playlist.java b/phase1/src/entities/Playlist.java
+deleted file mode 100644
+--- a/phase1/src/entities/Playlist.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,187 +0,0 @@
+-package entities;
+-
+-import java.util.*;
+-
+-/**
+- * This class defines a playlist and stores all the associated data.
+- *
+- * @author Benedek Balla, Shu Fan Nicholas Au, Wing Zou
+- * @version 1.0
+- * @since 2022-07-15
+- */
+-public class Playlist implements Iterable<String> {
+-
+-    private String name;
+-    private int likes;
+-    private ArrayList<String> uniqueIDs;
+-    private final String userName;
+-
+-    /**
+-     * Constructs a PlayList using playlistName and userName.
+-     *
+-     * @param playlistName the playlistName
+-     * @param userName     the username of the person creating this Playlist.
+-     */
+-    public Playlist(String playlistName, String userName) {
+-        this.name = playlistName;
+-        likes = 0;
+-        uniqueIDs = new ArrayList<>();
+-        this.userName = userName;
+-    }
+-
+-
+-    /**
+-     * Constructs a PlayList using playlistName and userName.
+-     *
+-     * @param playlistName the name of the Playlist
+-     * @param likes        the number of likes to the Playlist
+-     * @param uniqueIDs    the list of uniqueIDs of videos stored in the Playlist.
+-     * @param userName     the username of the person creating this Playlist.
+-     */
+-    public Playlist(String playlistName, int likes, ArrayList<String> uniqueIDs, String userName) {
+-        this.name = playlistName;
+-        this.likes = likes;
+-        this.uniqueIDs = uniqueIDs;
+-        this.userName = userName;
+-    }
+-
+-    /**
+-     * Returns the name of the Playlist
+-     *
+-     * @return the name of the Playlist
+-     */
+-    public String getPlaylistName() {
+-        return name;
+-    }
+-
+-    /**
+-     * Sets the name of the Playlist.
+-     *
+-     * @param name the name of the Playlist
+-     */
+-    public void setPlaylistName(String name) {
+-        this.name = name;
+-    }
+-
+-    /**
+-     * Returns the number of likes of the Playlist.
+-     *
+-     * @return the number of likes of the Playlist.
+-     */
+-    public int getLikes() {
+-        return likes;
+-    }
+-
+-    /**
+-     * Sets the number of likes of the Playlist.
+-     *
+-     * @param likes the number of likes of the Playlist.
+-     */
+-    public void setLikes(int likes) {
+-        this.likes = likes;
+-    }
+-
+-    /**
+-     * Returns the list of uniqueIDs of videos stored in the Playlist.
+-     *
+-     * @return the list of uniqueIDs of videos stored in the Playlist.
+-     */
+-
+-    public ArrayList<String> getUniqueIDs() {
+-        return uniqueIDs;
+-    }
+-
+-    /**
+-     * Returns the username of the person creating this Playlist.
+-     *
+-     * @return the username of the person creating this Playlist.
+-     */
+-    public String getUserName() {
+-        return userName;
+-    }
+-
+-    /**
+-     * Sets the list of uniqueIDs of videos stored in the Playlist.
+-     *
+-     * @param uniqueIDs the list of uniqueIDs of videos stored in the Playlist.
+-     */
+-    public void setUniqueIDs(ArrayList<String> uniqueIDs) {
+-        this.uniqueIDs = uniqueIDs;
+-    }
+-
+-    /**
+-     * add a video into the Playlist
+-     *
+-     * @param uniqueID the uniqueID of the added video.
+-     */
+-    public void addUniqueID(String uniqueID) {
+-        this.uniqueIDs.add(uniqueID);
+-    }
+-
+-    /**
+-     * remove a video from the Playlist
+-     *
+-     * @param uniqueID the uniqueID of the remove video.
+-     */
+-    public void removeUniqueID(String uniqueID) {
+-        uniqueIDs.remove(uniqueID);
+-    }
+-
+-    /**
+-     * Return the string representation of Playlist.
+-     *
+-     * @return the string representation of Playlist.
+-     */
+-    @Override
+-    public String toString() {
+-        Iterator<String> it1 = uniqueIDs.iterator();
+-        StringBuilder s1 = new StringBuilder();
+-        while (it1.hasNext()) {
+-            s1.append(it1.next()).append("/");
+-        }
+-
+-        return this.getPlaylistName() + "," + this.getLikes() + "," + s1 + "," + this.getUserName();
+-    }
+-
+-    /**
+-     * Return whether p is equal to this playlist.
+-     *
+-     * @param p the target playlist
+-     * @return whether p is equal to this playlist
+-     */
+-    public boolean equals(Playlist p) {
+-        if (p.getUniqueIDs().size() == this.getUniqueIDs().size()) {
+-
+-            for (String uniqueID : p.getUniqueIDs()) {
+-                if (!this.getUniqueIDs().contains(uniqueID)) {
+-                    return false;
+-                }
+-            }
+-            return true;
+-
+-        } else {
+-            return false;
+-        }
+-
+-    }
+-
+-    @Override
+-    public Iterator<String> iterator() {
+-        return new PlaylistIterator();
+-    }
+-
+-    private class PlaylistIterator implements Iterator<String> {
+-        private int current = 0;
+-
+-        public boolean hasNext() {
+-            return current < uniqueIDs.size();
+-        }
+-
+-        public String next() {
+-            String uniqueID = uniqueIDs.get(current);
+-            current += 1;
+-            return uniqueID;
+-        }
+-    }
+-
+-}
+Index: phase1/src/userInterfaces/VideoManagementMenuDisplayer.java
+===================================================================
+diff --git a/phase1/src/userInterfaces/VideoManagementMenuDisplayer.java b/phase1/src/userInterfaces/VideoManagementMenuDisplayer.java
+deleted file mode 100644
+--- a/phase1/src/userInterfaces/VideoManagementMenuDisplayer.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,232 +0,0 @@
+-package userInterfaces;
+-
+-import controllers.NonAdminHandler;
+-import controllers.PlaylistMenuActions;
+-import controllers.UserActionHandler;
+-import entities.Playlist;
+-import entities.User;
+-import entities.Video;
+-import presenters.MenuPresenter;
+-import presenters.VideoBrowsePresenter;
+-import usecase.PlaylistManager;
+-import usecase.VideoManager;
+-
+-import java.util.ArrayList;
+-import java.util.Arrays;
+-import java.util.Scanner;
+-
+-/**
+- * Responsible for displaying different menu and interacting with user to perform actions related to video.
+- *
+- * @author Daniel Xu
+- * @version 1.0
+- * @since 2022-07-15
+- */
+-public class VideoManagementMenuDisplayer {
+-    private final VideoBrowsePresenter vp;
+-    private final PlaylistMenuActions pma;
+-    private final MenuPresenter menuPresenter;
+-    private final MenuDisplayer menuDisplayer;
+-    private final UserActionHandler userActionHandler;
+-    private final Scanner sc = new Scanner(System.in);
+-
+-    /**
+-     * Constructs a userInterfaces.VideoManagementMenuDisplayer
+-     *
+-     * @param menuPresenter     the Presenter class that format and displays information to the user
+-     * @param menuDisplayer     the main menu that this menu will interact with
+-     * @param vm                the video manager that manages videos
+-     * @param userActionHandler the user action handler that handles user actions
+-     * @param pmm               the playlist manager that manages playlists
+-     */
+-    public VideoManagementMenuDisplayer(MenuPresenter menuPresenter, MenuDisplayer menuDisplayer, VideoManager vm,
+-                                        UserActionHandler userActionHandler, PlaylistManager pmm) {
+-        this.menuPresenter = menuPresenter;
+-        this.menuDisplayer = menuDisplayer;
+-        this.userActionHandler = userActionHandler;
+-        this.pma = new PlaylistMenuActions(pmm,vm);
+-        this.vp = new VideoBrowsePresenter(vm);
+-    }
+-
+-    /**
+-     * This menu navigates the user to perform actions related to video browsing
+-     *
+-     * @param user the current user using the menu
+-     */
+-    protected void videoBrowseMenu(User user) {
+-        int result = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+-                "\n 1 - Browse by name \n 2 - Browse by categories \n 3 - Browse by uploader \n 4 - Return");
+-
+-        ArrayList<Video> videos;
+-        switch (result) {
+-            case 1:
+-                menuPresenter.displayRequest("Please enter the name of the video");
+-                videos = userActionHandler.browseByName(sc.nextLine());
+-                viewVideo(videos, user);
+-                break;
+-            case 2:
+-                menuPresenter.displayRequest("Please enter the name of the categories, type CONTINUE to proceed");
+-                ArrayList<String> categories = new ArrayList<>();
+-                while (true) {
+-                    String item = sc.nextLine();
+-                    if (item.equals("CONTINUE")) {
+-                        break;
+-                    }
+-                    categories.add(item);
+-                }
+-                videos = userActionHandler.browseByCategories(categories);
+-                viewVideo(videos, user);
+-                break;
+-            case 3:
+-                menuPresenter.displayRequest("Please enter the name of the uploader");
+-                videos = userActionHandler.browseByUploader(sc.nextLine());
+-                viewVideo(videos, user);
+-                break;
+-            case 4:
+-                menuDisplayer.callMenu(user);
+-                break;
+-            default:
+-                menuPresenter.displayError("Invalid choice, try again");
+-                videoBrowseMenu(user);
+-        }
+-    }
+-
+-    /**
+-     * This method is used to choose and display the video that the user selects
+-     *
+-     * @param videos list of videos
+-     * @param user   the current user
+-     */
+-    protected void viewVideo(ArrayList<Video> videos, User user) {
+-        vp.listVideos(videos);
+-        if (videos.size() == 0) {
+-            menuPresenter.displayAlert("No video can be found, try again");
+-            videoBrowseMenu(user);
+-        }
+-        Scanner sc = new Scanner(System.in);
+-        menuPresenter.displayRequest("Please enter a number to choose video you want to view");
+-        if (sc.hasNextInt()) {
+-            int choice = sc.nextInt();
+-            if (choice >= 0 && choice < videos.size()) {
+-                vp.displayVideo(videos.get(choice));
+-                userVideoInteraction(videos.get(choice), user);
+-            } else {
+-                menuPresenter.displayError("Please select a valid video");
+-                viewVideo(videos, user);
+-            }
+-        } else {
+-            menuPresenter.displayError("Invalid input, try again");
+-            viewVideo(videos, user);
+-        }
+-    }
+-
+-    /**
+-     * This method is used for the user to interact with the video
+-     *
+-     * @param video list of videos
+-     * @param user  the current user
+-     */
+-    public void userVideoInteraction(Video video, User user) {
+-        int option = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+-                "\n 1 - Like the video \n 2 - Dislike the video \n 3 - Add to playlist \n 4 - Return");
+-
+-        switch (option) {
+-            case 1:
+-                userActionHandler.rateVideo(video, true);
+-                menuPresenter.displayAlert("You have liked the video");
+-                break;
+-            case 2:
+-                userActionHandler.rateVideo(video, false);
+-                menuPresenter.displayAlert("You have disliked the video");
+-                break;
+-            case 3:
+-                menuPresenter.displayRequest("Please enter a playlist name");
+-                String name = sc.nextLine();
+-                Playlist pl = pma.SearchPlaylist(name);
+-                pma.AddDeleteFromPlaylist(video,user,pl,true);
+-                break;
+-            case 4:
+-                menuDisplayer.callMenu(user);
+-            default:
+-                menuPresenter.displayError("Invalid input");
+-                userVideoInteraction(video, user);
+-        }
+-        userVideoInteraction(video, user);
+-    }
+-
+-    /**
+-     * This menu navigates the user to perform actions on specific videos
+-     *
+-     * @param user            the current user using the menu
+-     * @param nonAdminHandler controller that dictates what happens when a video action is performed
+-     */
+-
+-    public void videoActionMenu(User user, NonAdminHandler nonAdminHandler) {
+-
+-        int result = menuDisplayer.getUserActionChoice("Please input one of the following number to proceed " +
+-                "\n 1 - View all the videos uploaded by " + user.getUserName() + " \n 2 - Upload a video " +
+-                "\n 3 - Delete a video \n 4 - Edit the title of a video " +
+-                "\n 5 - Edit the categories of a video \n 6 - Edit the description of a video" +
+-                "\n 7 - Return");
+-        String uniqueID;
+-
+-        switch (result) {
+-            case 1:
+-                menuPresenter.displayVideos(user);
+-                break;
+-            case 2:
+-                menuPresenter.displayRequest("Enter video title: ");
+-                String title = sc.nextLine();
+-                menuPresenter.displayRequest("Enter video description (optional): ");
+-                String description = sc.nextLine();
+-                menuPresenter.displayRequest("Enter video categories seperated by commas (optional): ");
+-                ArrayList<String> categories = new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
+-                menuPresenter.displayRequest("Enter video path: ");
+-                String vidlink = sc.nextLine();
+-                boolean upload = nonAdminHandler.uploadVideo(user, title, description, categories, vidlink);
+-                if (upload){
+-                    menuPresenter.displayAlert("Upload successful");
+-                } else {
+-                    menuPresenter.displayAlert("Upload unsuccessful, title or video path cannot be blank");
+-                }
+-
+-                break;
+-            case 3:
+-                menuPresenter.displayRequest("Enter uniqueID of the video you want to be deleted: ");
+-                uniqueID = sc.nextLine();
+-                if (nonAdminHandler.deleteVideo(user, uniqueID)) {
+-                    menuPresenter.displayAlert("Delete successful");
+-                } else {
+-                    menuPresenter.displayError("Delete unsuccessful");
+-                }
+-                break;
+-            case 4:
+-                menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
+-                uniqueID = sc.nextLine();
+-                menuPresenter.displayRequest("Enter new title: ");
+-                String newTitle = sc.nextLine();
+-                nonAdminHandler.editTitle(user, uniqueID, newTitle);
+-                break;
+-            case 5:
+-                menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
+-                uniqueID = sc.nextLine();
+-                menuPresenter.displayRequest("Enter new categories seperated by commas: ");
+-                ArrayList<String> newCate = new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
+-                nonAdminHandler.editCategories(user, uniqueID, newCate);
+-                break;
+-            case 6:
+-                menuPresenter.displayRequest("Enter uniqueID of the video you want to edit: ");
+-                uniqueID = sc.nextLine();
+-                menuPresenter.displayRequest("Enter new description: ");
+-                String newDes = sc.nextLine();
+-                nonAdminHandler.editDescription(user, uniqueID, newDes);
+-                break;
+-            case 7:
+-                menuDisplayer.callMenu(user);
+-            default:
+-                menuPresenter.displayError("Invalid input, try again");
+-                videoActionMenu(user, nonAdminHandler);
+-        }
+-        menuDisplayer.callMenu(user);
+-    }
+-}
+Index: phase1/src/gateways/DataManager.java
+===================================================================
+diff --git a/phase1/src/gateways/DataManager.java b/phase1/src/gateways/DataManager.java
+deleted file mode 100644
+--- a/phase1/src/gateways/DataManager.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,172 +0,0 @@
+-package gateways;
+-
+-import entities.Playlist;
+-import entities.Ratings;
+-import entities.User;
+-import entities.Video;
+-import usecase.PlaylistManager;
+-import usecase.UserManager;
+-import usecase.VideoManager;
+-
+-import java.util.*;
+-import java.io.*;
+-
+-/**
+- * This class is responsible for reading and writing data from and to the csv files contained in phase1/datasets
+- *
+- * @author Benedek Balla, Shu Fan Nicholas Au
+- */
+-public class DataManager {
+-
+-    private final UserManager um;
+-    private final VideoManager vm;
+-    private final PlaylistManager pm;
+-
+-    public DataManager(UserManager um, VideoManager vm, PlaylistManager pm) {
+-        this.um = um;
+-        this.vm = vm;
+-        this.pm = pm;
+-    }
+-
+-    /**
+-     * Reads User data from phase1/datasets/Data.csv into the program by instantiating Users and adding them
+-     * into the list of all Users within UserManager.
+-     *
+-     * @param filePath the path to Data.csv
+-     */
+-    public void loadData(String filePath) {
+-        ArrayList<User> users = um.getAllUsers();
+-        try {
+-            Scanner scanner = new Scanner(new FileInputStream(filePath));
+-            String[] record;
+-
+-            while (scanner.hasNextLine()) {
+-                record = scanner.nextLine().split(",");
+-                if (record[3].equals("true")) {
+-                    User adminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
+-                            new HashSet<>(Arrays.asList(record[4].split("/"))), true);
+-                    users.add(adminUser);
+-                } else {
+-                    User nonAdminUser = um.instantiateUser(record[0], record[1], Boolean.parseBoolean(record[2]),
+-                            new HashSet<>(Arrays.asList(record[4].split("/"))), false);
+-                    users.add(nonAdminUser);
+-                }
+-            }
+-            scanner.close();
+-        } catch (FileNotFoundException e) {
+-            System.out.println("An error occurred.");
+-        }
+-    }
+-
+-    /**
+-     * Writes User data from the list of all users within UserManager to phase1/datasets/Data.csv
+-     *
+-     * @param filePath the path to Data.csv
+-     */
+-    public void saveData(String filePath) {
+-        ArrayList<User> users = um.getAllUsers();
+-        try {
+-            FileWriter writer = new FileWriter(filePath, false);
+-
+-            for (User user : users) {
+-                writer.write(user.toString() + "\n");
+-            }
+-
+-            writer.close();
+-        } catch (IOException e) {
+-            System.out.println("An error occurred.");
+-        }
+-    }
+-
+-    /**
+-     * Writes Video data from the list of all videos within VideoManager to phase1/datasets/VideoData.csv
+-     *
+-     * @param filePath the path to VideoData.csv
+-     */
+-    public void saveVideoData(String filePath) {
+-        ArrayList<Video> videos = vm.getVids();
+-        try {
+-            FileWriter writer = new FileWriter(filePath, false);
+-
+-            for (Video video : videos) {
+-                writer.write(video.toString() + "\n");
+-            }
+-
+-            writer.close();
+-        } catch (IOException e) {
+-            System.out.println("An error occurred.");
+-        }
+-    }
+-
+-    /**
+-     * Reads Video data from phase1/datasets/VideoData.csv into the program by instantiating Videos and adding them
+-     * into the list of all Videos within VideoManager.
+-     *
+-     * @param filePath the path to VideoData.csv
+-     */
+-    public void loadVideoData(String filePath) {
+-        ArrayList<Video> videos = vm.getVids();
+-        try {
+-            Scanner scanner = new Scanner(new FileInputStream(filePath));
+-            String[] record;
+-
+-            while (scanner.hasNextLine()) {
+-                record = scanner.nextLine().split(",");
+-                HashMap<String, Boolean>  ratingsMap = new HashMap<>();
+-                for (String ratingString: new ArrayList<>(Arrays.asList(record[6].split("/")))){
+-                    ArrayList<String> ratingSplit = new ArrayList<>(Arrays.asList(ratingString.split("=")));
+-                    ratingsMap.put(ratingSplit.get(0), Boolean.parseBoolean(ratingSplit.get(1)));
+-                }
+-                Video video = new Video(record[0], record[1], record[2], new ArrayList<>(Arrays.asList(record[3].split("/"))), record[4], record[5], new Ratings(ratingsMap), record[7]);
+-                videos.add(video);
+-            }
+-            scanner.close();
+-        } catch (FileNotFoundException e) {
+-            System.out.println("An error occurred.");
+-        }
+-    }
+-
+-    /**
+-     * Writes Playlist data from the list of all playlists within PlaylistManager to phase1/datasets/PlaylistData.csv
+-     *
+-     * @param filePath the path to PlaylistData.csv
+-     */
+-    public void savePlayListData(String filePath) {
+-        ArrayList<Playlist> playlists = pm.getPlaylists();
+-        try {
+-            FileWriter writer = new FileWriter(filePath, false);
+-
+-            for (Playlist playlist : playlists) {
+-                writer.write(playlist.toString() + "\n");
+-            }
+-
+-            writer.close();
+-        } catch (IOException e) {
+-            System.out.println("An error occurred.");
+-        }
+-    }
+-
+-    /**
+-     * Reads Playlist data from phase1/datasets/PlaylistData.csv into the program by instantiating Playlists and adding
+-     * them into the list of all Playlists within PlaylistManager.
+-     *
+-     * @param filePath the path to PlaylistData.csv
+-     */
+-    public void loadPlaylistData(String filePath) {
+-        ArrayList<Playlist> playlists = pm.getPlaylists();
+-        try {
+-            Scanner scanner = new Scanner(new FileInputStream(filePath));
+-            String[] record;
+-
+-            while (scanner.hasNextLine()) {
+-                record = scanner.nextLine().split(",");
+-                Playlist p = new Playlist(record[0], Integer.parseInt(record[1]), new ArrayList<>(Arrays.asList(record[2].split("/"))), record[3]);
+-                playlists.add(p);
+-            }
+-            scanner.close();
+-        } catch (FileNotFoundException e) {
+-            System.out.println("An error occurred.");
+-        }
+-    }
+-
+-}
+Index: phase1/src/usecase/AdminManager.java
+===================================================================
+diff --git a/phase1/src/usecase/AdminManager.java b/phase1/src/usecase/AdminManager.java
+deleted file mode 100644
+--- a/phase1/src/usecase/AdminManager.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,73 +0,0 @@
+-package usecase;
+-
+-import entities.AdminUser;
+-import entities.User;
+-
+-import java.util.ArrayList;
+-
+-/**
+- * This class is responsible for performing all actions pertaining to the AdminUser class.
+- * @author Benedek Balla, Daniel Xu, ...
+- */
+-public class AdminManager extends UserManager {
+-
+-    private final ArrayList<User> users;
+-
+-    public AdminManager(UserManager um, VideoManager vm) {
+-        super(vm);
+-        users = um.getAllUsers();
+-    }
+-
+-    /**
+-     * Sets user ban status to true
+-     * @param user of type User
+-     */
+-    public void banUser(User user) {
+-        user.setBanStatus(true);
+-    }
+-
+-    /**
+-     * Sets user ban status to false
+-     * @param user of type User
+-     */
+-    public void unbanUser(User user) {
+-        user.setBanStatus(false);
+-    }
+-
+-    /**
+-     * Removes the user from the arraylist of users
+-     * @param user of type User
+-     */
+-    public void deleteUser(User user) {
+-        users.remove(user);
+-    }
+-
+-    /**
+-     *
+-     * @param users of type Users
+-     * @param displayBan ban status of user
+-     * @return List of usernames corresponding to the displayBan
+-     */
+-    public ArrayList<String> returnUsersByBan(ArrayList<User> users, boolean displayBan) {
+-        ArrayList<String> newList = new ArrayList<>();
+-        for (User user : users) {
+-            if ((displayBan == user.getBanStatus()) && !(user instanceof AdminUser)) {
+-                newList.add("Username: " + user.getUserName());
+-            }
+-        }
+-        return newList;
+-    }
+-
+-    /**
+-     *
+-     * @param users contains items of type User
+-     * @return List of all usernames in users
+-     */
+-    public ArrayList<String> returnUsers(ArrayList<User> users) {
+-        ArrayList<String> newList = new ArrayList<>();
+-        for (User user : users) {
+-            newList.add("Username: " + user.getUserName());
+-        }
+-        return newList;
+-    }
+-}
+Index: phase1/src/usecase/NonAdminManager.java
+===================================================================
+diff --git a/phase1/src/usecase/NonAdminManager.java b/phase1/src/usecase/NonAdminManager.java
+deleted file mode 100644
+--- a/phase1/src/usecase/NonAdminManager.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,117 +0,0 @@
+-package usecase;
+-
+-import entities.User;
+-import entities.Video;
+-
+-import java.util.ArrayList;
+-/**
+- * Responsible for specific actions that only pertain to non-admin users.
+- *
+- * @author Wing Zou
+- * @version 1.0
+- * @since 2022-07-15
+- */
+-public class NonAdminManager extends UserManager {
+-    private final VideoEditor ve;
+-
+-    /**
+-     * Responsible for managing non admin users
+-     *
+-     * @param vm the video manager that manages videos
+-     */
+-    public NonAdminManager(VideoManager vm) {
+-        super(vm);
+-        ve = new VideoEditor();
+-    }
+-
+-    /**
+-     * Uploads a video with user, title, description, categories and vidlink
+-     *
+-     * @param user        of type User
+-     * @param title       name of the video being uploaded
+-     * @param description what the video is about
+-     * @param categories  what genres the video belongs to
+-     * @param vidLink     link to the video
+-     */
+-    public void uploadVideo(User user, String title, String description, ArrayList<String> categories, String vidLink) {
+-        vm.uploadVideo(user.getUserName(), title, description, categories, vidLink);
+-    }
+-
+-    /**
+-     * Deletes a video with user and uniqueID
+-     *
+-     * @param user     of type User
+-     * @param uniqueID identifier of the video
+-     * @return if deletion was successful or not
+-     */
+-    public boolean deleteVideo(User user, String uniqueID) {
+-        for (Video video : vm.getVids()) {
+-            if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
+-                return vm.deleteVideo(video);
+-            }
+-        }
+-        return false;
+-    }
+-
+-    /**
+-     * Edits the title of the video with uniqueID and user to newTitle
+-     *
+-     * @param user     of type User
+-     * @param uniqueID identifier of the video
+-     * @param newTitle the title user wants to change to
+-     */
+-    public void editTitle(User user, String uniqueID, String newTitle) {
+-        for (Video video : vm.getVids()) {
+-            if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
+-                ve.editTitle(video, newTitle);
+-            }
+-        }
+-    }
+-
+-    /**
+-     * Edits the categories of the video with uniqueID and user to newCate
+-     *
+-     * @param user     of type User
+-     * @param uniqueID identifier of the video
+-     * @param newCate  genres the user wants to change to
+-     */
+-    public void editCategories(User user, String uniqueID, ArrayList<String> newCate) {
+-        for (Video video : vm.getVids()) {
+-            if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
+-                ve.editCategories(video, newCate);
+-            }
+-        }
+-    }
+-
+-    /**
+-     * Edits the description of the video with uniqueID and user to newDes
+-     *
+-     * @param user     of type User
+-     * @param uniqueID identifier of the video
+-     * @param newDes   description the user wants to change to
+-     */
+-    public void editDescription(User user, String uniqueID, String newDes) {
+-        for (Video video : vm.getVids()) {
+-            if (video.getUploader().equals(user.getUserName()) && video.getUniqueID().equals(uniqueID)) {
+-                ve.editDescription(video, newDes);
+-            }
+-        }
+-    }
+-
+-    /**
+-     * Collects all the videos the user has uploaded
+-     *
+-     * @param user of type User
+-     * @param vids collection of all the videos uploaded
+-     * @return the title and ID of all the videos uploaded by user
+-     */
+-    public ArrayList<String> displayAllVideos(User user, ArrayList<Video> vids) {
+-        ArrayList<String> newList = new ArrayList<>();
+-        for (Video video : vids) {
+-            if (user.getUserName().equals(video.getUploader())) {
+-                newList.add("Title: " + video.getName() + " (ID: " + video.getUniqueID() + ")");
+-            }
+-        }
+-        return newList;
+-    }
+-}
+Index: phase1/test/AdminManagerTest.java
+===================================================================
+diff --git a/phase1/test/AdminManagerTest.java b/phase1/test/AdminManagerTest.java
+deleted file mode 100644
+--- a/phase1/test/AdminManagerTest.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,86 +0,0 @@
+-import entities.NonAdminUser;
+-import entities.User;
+-import org.junit.Test;
+-import usecase.AdminManager;
+-import usecase.UserManager;
+-import usecase.VideoManager;
+-import org.junit.BeforeClass;
+-
+-import java.util.ArrayList;
+-
+-import static org.junit.Assert.*;
+-
+-public class AdminManagerTest {
+-    private static final VideoManager VM = new VideoManager();
+-    private static final UserManager UM = new UserManager(VM);
+-    private static final NonAdminUser u1 = new NonAdminUser("k", "1");
+-    private static final AdminManager AM = new AdminManager(UM, VM);
+-
+-    @BeforeClass
+-    public static void setUp() {
+-
+-        UM.updateData(u1);
+-    }
+-
+-    @Test
+-    public void banUserTest() {
+-        VideoManager VM = new VideoManager();
+-        UserManager UM = new UserManager(VM);
+-        NonAdminUser u1 = new NonAdminUser("k", "1");
+-        AdminManager AM = new AdminManager(UM, VM);
+-        AM.banUser(u1);
+-        assertTrue(u1.getBanStatus());
+-    }
+-
+-    @Test
+-    public void UnbanUserTest() {
+-        VideoManager VM = new VideoManager();
+-        UserManager UM = new UserManager(VM);
+-        NonAdminUser u1 = new NonAdminUser("k", "1");
+-        u1.setBanStatus(true);
+-        AdminManager AM = new AdminManager(UM, VM);
+-        AM.unbanUser(u1);
+-        assertFalse(u1.getBanStatus());
+-    }
+-
+-    @Test
+-    public void deleteUserTest() {
+-
+-        AM.deleteUser(u1);
+-        assertTrue(UM.getAllUsers().isEmpty());
+-    }
+-
+-    @Test
+-    public void returnUsersbyBanTest() {
+-        VideoManager VM = new VideoManager();
+-        UserManager UM = new UserManager(VM);
+-        ArrayList<User> users = new ArrayList<>();
+-        NonAdminUser u1 = new NonAdminUser("k", "1");
+-        u1.setBanStatus(true);
+-        NonAdminUser u2 = new NonAdminUser("a", "1");
+-        users.add(u1);
+-        users.add(u2);
+-        AdminManager AM = new AdminManager(UM, VM);
+-        ArrayList<String> usersReturned = new ArrayList<>();
+-        usersReturned.add("Username: k");
+-        assertEquals(usersReturned, AM.returnUsersByBan(users, true));
+-    }
+-
+-    @Test
+-    public void returnUsersTest() {
+-        VideoManager VM = new VideoManager();
+-        UserManager UM = new UserManager(VM);
+-        ArrayList<User> users = new ArrayList<>();
+-        NonAdminUser u1 = new NonAdminUser("k", "1");
+-        NonAdminUser u2 = new NonAdminUser("a", "1");
+-        users.add(u1);
+-        users.add(u2);
+-        AdminManager AM = new AdminManager(UM, VM);
+-        ArrayList<String> usersReturned = new ArrayList<>();
+-        usersReturned.add("Username: k");
+-        usersReturned.add("Username: a");
+-        assertEquals(usersReturned, AM.returnUsers(users));
+-    }
+-
+-
+-}
+Index: phase1/test/VideoTest.java
+===================================================================
+diff --git a/phase1/test/VideoTest.java b/phase1/test/VideoTest.java
+deleted file mode 100644
+--- a/phase1/test/VideoTest.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,93 +0,0 @@
+-import entities.Video;
+-import org.junit.*;
+-import usecase.VideoManager;
+-
+-
+-import java.util.ArrayList;
+-
+-import static org.junit.Assert.*;
+-
+-
+-import java.util.Arrays;
+-import java.util.*;
+-import java.lang.*;
+-
+-public class VideoTest {
+-    private static final VideoManager VM = new VideoManager();
+-
+-    @BeforeClass
+-    public static void setUp() {
+-        ArrayList<String> cates = new ArrayList<>();
+-        cates.add("humour");
+-        VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
+-    }
+-
+-    @Test
+-    public void VidGetterTest() {
+-        Video v1 = new Video("Akmar", "Top NBA Highlights", "These are the top NBA highlights of 2022",
+-                new ArrayList<>(Arrays.asList("NBA", "Basketball", "2022")), "C://Users/Akmar/Videos/NBAhighlights2022.mp4",
+-                "VidNo1", new ArrayList<>(Arrays.asList("35", "10")), "March 23, 2021");
+-        assertEquals("Akmar", v1.getUploader());
+-        assertEquals("Top NBA Highlights", v1.getName());
+-        assertEquals("These are the top NBA highlights of 2022", v1.getDescription());
+-        assertEquals("March 23, 2021", v1.getDate_upload());
+-        assertEquals("VidNo1", v1.getUniqueID());
+-        assertEquals("C://Users/Akmar/Videos/NBAhighlights2022.mp4", v1.getContent());
+-        assertEquals(new ArrayList<>(Arrays.asList("35", "10")), v1.getRatings());
+-        assertEquals(new ArrayList<>(Arrays.asList("NBA", "Basketball", "2022")), v1.getCategories());
+-
+-    }
+-
+-    @Test
+-    public void uploadVideoTest() {
+-        VideoManager VM = new VideoManager();
+-        ArrayList<String> cates = new ArrayList<>();
+-        cates.add("humour");
+-        VM.uploadVideo("K", "hello", "greatvideo", cates, "url");
+-        ArrayList<String> ratings = new ArrayList<>();
+-        ratings.add("0");
+-        ratings.add("0");
+-        Video v1 = new Video("K", "hello", "greatvideo", cates, "url", VM.getVids().get(0).getUniqueID(),
+-                ratings, VM.getVids().get(0).getDate_upload());
+-        assertTrue(VM.getVids().get(0).equals(v1));
+-    }
+-
+-    @Test
+-    public void deleteVideoTest() {
+-
+-        assertTrue(VM.deleteVideo(VM.getByName("hello").get(0)));
+-    }
+-
+-    @Test
+-    public void getByIDTest() {
+-
+-        assertEquals(VM.getVids().get(0), VM.getByUniqueID(VM.getVids().get(0).getUniqueID()));
+-    }
+-
+-    @Test
+-    public void getByUploaderTest() {
+-
+-        assertEquals(VM.getVids(), VM.getByUploader(VM.getVids().get(0).getUploader()));
+-    }
+-
+-    @Test
+-    public void getByNameTest() {
+-
+-        assertEquals(VM.getVids(), VM.getByName(VM.getVids().get(0).getName()));
+-    }
+-
+-    @Test
+-    public void getByCategoryTest() {
+-
+-        assertEquals(VM.getVids(), VM.getByCategory(VM.getVids().get(0).getCategories()));
+-    }
+-
+-    @Test
+-    public void getVidNamesTest() {
+-
+-        ArrayList<String> names = new ArrayList<>(List.of("hello"));
+-        assertEquals(names, VM.getVideoNames(VM.getVids()));
+-    }
+-
+-
+-}
+Index: phase1/test/VideoEditorTest.java
+===================================================================
+diff --git a/phase1/test/VideoEditorTest.java b/phase1/test/VideoEditorTest.java
+deleted file mode 100644
+--- a/phase1/test/VideoEditorTest.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,52 +0,0 @@
+-import entities.Video;
+-import org.junit.Test;
+-import usecase.VideoEditor;
+-
+-import java.util.ArrayList;
+-
+-import static org.junit.Assert.*;
+-
+-import java.lang.*;
+-
+-public class VideoEditorTest {
+-
+-    @Test
+-    public void editTitleTest() {
+-        VideoEditor VE = new VideoEditor();
+-        ArrayList<String> cates = new ArrayList<>();
+-        cates.add("humour");
+-        ArrayList<String> ratings = new ArrayList<>();
+-        ratings.add("0");
+-        ratings.add("0");
+-        Video v1 = new Video("K", "things", "nice", cates, "url", "ID", ratings, "today");
+-        VE.editTitle(v1, "new");
+-        assertEquals("new", v1.getName());
+-    }
+-
+-    @Test
+-    public void editDescriptionTest() {
+-        VideoEditor VE = new VideoEditor();
+-        ArrayList<String> cates = new ArrayList<>();
+-        cates.add("humour");
+-        ArrayList<String> ratings = new ArrayList<>();
+-        ratings.add("0");
+-        ratings.add("0");
+-        Video v1 = new Video("K", "things", "nice", cates, "url", "ID", ratings, "today");
+-        VE.editDescription(v1, "newdescrip");
+-        assertEquals("newdescrip", v1.getDescription());
+-    }
+-
+-    @Test
+-    public void editCategoriesTest() {
+-        VideoEditor VE = new VideoEditor();
+-        ArrayList<String> cates = new ArrayList<>();
+-        cates.add("nothumour");
+-        ArrayList<String> ratings = new ArrayList<>();
+-        ratings.add("0");
+-        ratings.add("0");
+-        Video v1 = new Video("K", "things", "nice", cates, "url", "ID", ratings, "today");
+-        VE.editCategories(v1, cates);
+-        assertEquals(cates, v1.getCategories());
+-    }
+-}
+-
+Index: phase1/test/UserManagerTest.java
+===================================================================
+diff --git a/phase1/test/UserManagerTest.java b/phase1/test/UserManagerTest.java
+deleted file mode 100644
+--- a/phase1/test/UserManagerTest.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,99 +0,0 @@
+-import entities.AdminUser;
+-import entities.NonAdminUser;
+-import entities.Video;
+-import org.junit.*;
+-import usecase.UserManager;
+-import usecase.VideoManager;
+-
+-import java.util.ArrayList;
+-import java.util.Arrays;
+-import java.util.List;
+-
+-
+-import static org.junit.Assert.*;
+-
+-public class UserManagerTest {
+-    private static final VideoManager VM = new VideoManager();
+-    private static final UserManager UM = new UserManager(VM);
+-
+-    @BeforeClass
+-    public static void setUp() {
+-        NonAdminUser u1 = new NonAdminUser("k", "1");
+-        UM.updateData(u1);
+-
+-        ArrayList<String> cates = new ArrayList<>(List.of("serious"));
+-        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("10", "0"));
+-        ArrayList<Video> vids = new ArrayList<>();
+-        Video v1 = new Video("k", "popmusic", "amazing music", cates, "url", "1", ratings, "today");
+-        vids.add(v1);
+-        VM.setVids(vids);
+-    }
+-
+-    @Test
+-    public void testValidateUser() {
+-
+-        NonAdminUser u1 = new NonAdminUser("k", "1");
+-        assertTrue(u1.equals(UM.validateUser("k", "1")));
+-
+-    }
+-
+-    @Test
+-    public void testChangePass() {
+-        VideoManager VM = new VideoManager();
+-        UserManager UM = new UserManager(VM);
+-        NonAdminUser u1 = new NonAdminUser("a", "b");
+-        UM.changePassword(u1, "new");
+-        assertEquals("new", u1.getPassword());
+-
+-    }
+-
+-    @Test
+-    public void testInstantiateUser() {
+-        VideoManager VM = new VideoManager();
+-        UserManager UM = new UserManager(VM);
+-        NonAdminUser u1 = new NonAdminUser("a", "b");
+-        assertTrue(u1.equals(UM.instantiateUser("a", "b", false)));
+-    }
+-
+-    @Test
+-    public void testValidateUsername() {
+-        VideoManager VM = new VideoManager();
+-        UserManager UM = new UserManager(VM);
+-        NonAdminUser u1 = new NonAdminUser("a", "b");
+-        assertTrue(UM.validateUserName(u1, "a"));
+-    }
+-
+-    @Test
+-    public void testvalidateBanStatus() {
+-        VideoManager VM = new VideoManager();
+-        UserManager UM = new UserManager(VM);
+-        NonAdminUser u1 = new NonAdminUser("a", "b");
+-        u1.setBanStatus(true);
+-        assertTrue(UM.validateBanStatus(u1));
+-    }
+-
+-    @Test
+-    public void testUpdateData() {
+-
+-        NonAdminUser u1 = new NonAdminUser("k", "1");
+-        assertTrue(u1.equals(UM.getAllUsers().get(0)));
+-    }
+-
+-    @Test
+-    public void testGetRole() {
+-        VideoManager VM = new VideoManager();
+-        UserManager UM = new UserManager(VM);
+-        AdminUser u1 = new AdminUser("a", "b");
+-        assertTrue(UM.getRole(u1));
+-    }
+-
+-    @Test
+-    public void testReturnVids() {
+-
+-        ArrayList<String> cates = new ArrayList<>(List.of("serious"));
+-        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("10", "0"));
+-        Video v1 = new Video("k", "popmusic", "amazing music", cates, "url", "1", ratings, "today");
+-        ArrayList<String> names = new ArrayList<>(List.of("popmusic"));
+-        assertTrue(v1.equals(UM.returnVideos(names, "name").get(0)));
+-    }
+-}
+Index: phase1/src/entities/Ratings.java
+===================================================================
+diff --git a/phase1/src/entities/Ratings.java b/phase1/src/entities/Ratings.java
+deleted file mode 100644
+--- a/phase1/src/entities/Ratings.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,78 +0,0 @@
+-package entities;
+-
+-import java.util.ArrayList;
+-import java.util.HashMap;
+-import java.util.Map;
+-
+-/**
+- * THIS IS FOR PHASE 2
+- */
+-public class Ratings {
+-    private HashMap<String, Boolean> ratings; // 0 = dislike, 1 = like
+-
+-    public Ratings(HashMap<String, Boolean> ratings){
+-        this.ratings = ratings;
+-    } // userUniqueID, like/dislike
+-    public Ratings(){
+-        this.ratings = new HashMap<>(ratings);
+-    }
+-
+-    public HashMap<String, Boolean> getRatings() {
+-        return ratings;
+-    }
+-
+-    public Integer getTotalLikes() {
+-        int count = 0;
+-        for (Boolean like: ratings.values()){
+-            if (like.equals(true)){
+-                count++;
+-            }
+-        }
+-        return count;
+-    }
+-
+-    public Integer getTotalDislikes(){
+-        int count = 0;
+-        for (Boolean like: ratings.values()){
+-            if (like.equals(false)){
+-                count++;
+-            }
+-        }
+-        return count;
+-    }
+-    public boolean containsRating(String userUniqueID){
+-        return ratings.containsKey(userUniqueID);
+-    }
+-
+-    public void addRating(String userUniqueID, Boolean like){
+-        ratings.put(userUniqueID, like);
+-    }
+-
+-    public void editRating (String userUniqueID, Boolean like){
+-            ratings.replace(userUniqueID, like);
+-    }
+-
+-    public void deleteRating(String userUniqueID){
+-        ratings.remove(userUniqueID);
+-    }
+-
+-    public ArrayList<String> getLikeUserUniqueIDs() {
+-        ArrayList<String> likeUserUniqueIDs = new ArrayList<>();
+-        for (String key: ratings.keySet()){
+-            if (ratings.get(key).equals(true)){
+-                likeUserUniqueIDs.add(key);
+-            }
+-        }
+-        return likeUserUniqueIDs;
+-    }
+-    public ArrayList<String> getDislikeUserUniqueIDs() {
+-        ArrayList<String> DislikeUserUniqueIDs = new ArrayList<>();
+-        for (String key: ratings.keySet()){
+-            if (ratings.get(key).equals(false)){
+-                DislikeUserUniqueIDs.add(key);
+-            }
+-        }
+-        return DislikeUserUniqueIDs;
+-    }
+-
+-}
+Index: phase1/src/usecase/PlaylistManager.java
+===================================================================
+diff --git a/phase1/src/usecase/PlaylistManager.java b/phase1/src/usecase/PlaylistManager.java
+deleted file mode 100644
+--- a/phase1/src/usecase/PlaylistManager.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,237 +0,0 @@
+-package usecase;
+-
+-import entities.Playlist;
+-import entities.User;
+-import entities.Video;
+-
+-import java.util.*;
+-
+-/**
+- * This class is responsible for performing all direct interactions with the Playlist entity class.
+- * @author Benedek Balla, Shu Fan Nicholas Au, Akmar
+- */
+-public class PlaylistManager {
+-    private ArrayList<Playlist> playlists;
+-
+-    /**
+-     * Initialize empty ArrayList for playlists
+-     */
+-    public PlaylistManager() {
+-        this.playlists = new ArrayList<Playlist>();
+-    }
+-
+-    /**
+-     * Initialize playlists with an existing ArrayList
+-     * @param playlists list of playlists
+-     */
+-    public PlaylistManager(ArrayList<Playlist> playlists){
+-        this.playlists = playlists;
+-    }
+-
+-    /**
+-     * Add playlist object to playlists
+-     * @param pl playlist object
+-     */
+-    public void addPlaylist(Playlist pl) {
+-        playlists.add(pl);
+-    }
+-
+-    /**
+-     * Set playlists equal to input list of playlists
+-     * @param playlists new list of playlists
+-     */
+-    public void setPlaylists(ArrayList<Playlist> playlists) {
+-        this.playlists = playlists;
+-    }
+-
+-    /**
+-     * Get list of playlists
+-     * @return playlists
+-     */
+-    public ArrayList<Playlist> getPlaylists() {
+-        return playlists;
+-    }
+-
+-    /**
+-     * Add a specified Video object to a specified Playlist object
+-     * @param pl Playlist to be added to
+-     * @param vid Video to be added
+-     * @return boolean indicating if operation was successful
+-     */
+-    public boolean addToPlaylist(Playlist pl, Video vid) {
+-        String vidid = vid.getUniqueID();
+-        ArrayList<String> videos = pl.getUniqueIDs();
+-
+-        for (String uniqueID : videos) {
+-            if (uniqueID.equals(vidid)) {
+-                return false;
+-            }
+-        }
+-        pl.addUniqueID(vidid);
+-        return true;
+-    }
+-
+-    /**
+-     * Delete a Video from a Playlist created by a User
+-     * @param user The user who wants to delete the video
+-     * @param pl the playlist they want to delete from
+-     * @param vid the video they want to delete
+-     * @return boolean indicating if the operation was successful
+-     */
+-    public boolean deleteFromPlaylist(User user, Playlist pl, Video vid) {
+-
+-        ArrayList<String> videos = pl.getUniqueIDs();
+-        for (String uniqueID : videos) {
+-            if (uniqueID.equals(vid.getUniqueID())) {
+-                if((user.getUserName()).equals(pl.getUserName())) {
+-                    pl.removeUniqueID(vid.getUniqueID());
+-                    return true;
+-                }
+-                return false;
+-            }
+-        }
+-        return false;
+-    }
+-
+-
+-    /**
+-     * Return the name of each video within the specified playlist.
+-     * @param playlistName name of the playlist to be viewed
+-     * @param vm VideoManager used to access video names using the uniqueID
+-     * @return ArrayList<String> of video names
+-     */
+-    public ArrayList<String> namesInPlaylist(String playlistName, VideoManager vm) {
+-        Playlist playlist = getPlaylistByName(playlistName);
+-        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+-        ArrayList<String> videoName = new ArrayList<>();
+-        try {
+-            for (String uniqueID : uniqueIDs) {
+-                videoName.add(vm.getByUniqueID(uniqueID).getName());
+-            }
+-            return videoName;
+-        } catch (Exception e) {
+-            return videoName;
+-        }
+-    }
+-
+-    /**
+-     * Return the Playlist object corresponding to the name of the playlist.
+-     * @param playlistName the name of the playlist to be returned
+-     * @return Playlist the Playlist object corresponding to the name
+-     */
+-    public Playlist getPlaylistByName(String playlistName) {
+-        for (int i = 0; i < playlists.size(); i++) {
+-            if (playlists.get(i).getPlaylistName().equalsIgnoreCase(playlistName)) {
+-                return playlists.get(i);
+-            }
+-        }
+-        return null;
+-    }
+-
+-    /**
+-     * Reorder the specified playlist using the VideoRatingComparator and return the new Playlist object.
+-     * @param playlist the name of the playlist to be reordered
+-     * @param vm VideoManager to access Video objects
+-     * @return Playlist after reordering
+-     */
+-    public Playlist reorderPlaylistByRating(Playlist playlist, VideoManager vm) {
+-        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+-        ArrayList<Video> videos = new ArrayList<>();
+-        try {
+-            for (String uniqueID : uniqueIDs) {
+-                videos.add(vm.getByUniqueID(uniqueID));
+-            }
+-            Collections.sort(videos, new VideoRatingComparator());
+-
+-            ArrayList<String> newUniqueIDs = new ArrayList<>();
+-            for (Video video : videos) {
+-                newUniqueIDs.add(video.getUniqueID());
+-            }
+-            playlist.setUniqueIDs(newUniqueIDs);
+-            return playlist;
+-        } catch (Exception e) {
+-            return playlist;
+-        }
+-    }
+-
+-    /**
+-     * Reorder the specified playlist by name and return the new Playlist object.
+-     * @param playlist the name of the playlist to be reordered
+-     * @return Playlist after reordering
+-     */
+-    public Playlist reorderPlaylistByName(Playlist playlist) {
+-        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+-        Collections.sort(uniqueIDs);
+-        playlist.setUniqueIDs(uniqueIDs);
+-        return playlist;
+-    }
+-
+-    /**
+-     * Reorder the specified playlist using the RandomComparator and return the new Playlist object.
+-     * @param playlist the name of the playlist to be reordered
+-     * @param vm VideoManager to access Video objects
+-     * @return Playlist after reordering
+-     */
+-    public Playlist shufflePlaylist(Playlist playlist, VideoManager vm) {
+-        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+-        ArrayList<Video> videos = new ArrayList<>();
+-        try {
+-            for (String uniqueID : uniqueIDs) {
+-                videos.add(vm.getByUniqueID(uniqueID));
+-            }
+-            ArrayList<String> newUniqueIDs = new ArrayList<>();
+-            for (Video video : videos) {
+-                newUniqueIDs.add(video.getUniqueID());
+-            }
+-            playlist.setUniqueIDs(newUniqueIDs);
+-            return playlist;
+-        } catch (Exception e) {
+-            return playlist;
+-        }
+-    }
+-
+-    /**
+-     * Increment the likes of a playlist by one
+-     * @param playlist the playlist to be liked
+-     */
+-    public void likePlaylist(Playlist playlist) {
+-        playlist.setLikes(playlist.getLikes() + 1);
+-    }
+-
+-    /**
+-     * Get the name of the playlist
+-     * @param pl the playlist
+-     * @return String name of playlist
+-     */
+-    public String getPlName(Playlist pl){
+-        return pl.getPlaylistName();
+-    }
+-
+-    /**
+-     * Get the ratings of a playlist
+-     * @param pl the playlist
+-     * @return String the String of the form "_(playlist name)_ has _(x)_ likes!"
+-     */
+-    public String getRatings(Playlist pl) {
+-        int numlike = pl.getLikes();
+-        String outline = pl.getPlaylistName() + " has " + numlike + " likes! ";
+-        return outline;
+-    }
+-
+-
+-    /**
+-     * Check if playlist name already exists
+-     * @param playlistName name of the playlist to check
+-     * @return boolean indicating if name already exists
+-     */
+-
+-    public boolean checkPlaylistByName(String playlistName) {
+-        for (int i = 0; i < playlists.size(); i++) {
+-            if (playlists.get(i).getPlaylistName().equalsIgnoreCase(playlistName)) {
+-                return true;
+-            }
+-        }
+-        return false;
+-    }
+-
+-}
+Index: phase1/datasets/PlaylistData.csv
+===================================================================
+diff --git a/phase1/datasets/PlaylistData.csv b/phase1/datasets/PlaylistData.csv
+deleted file mode 100644
+--- a/phase1/datasets/PlaylistData.csv	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,5 +0,0 @@
+-hi,0,0665353f-6446-48ad-8628-864986d2fc5e/,ban
+-new,0,/0665353f-6446-48ad-8628-864986d2fc5e/,ban
+-i,0,,ban
+-new_list,0,,Admin
+-anarcysts_vids,0,0665353f-6446-48ad-8628-864986d2fc5e/,anarcyst
+Index: phase1/src/controllers/PlaylistMenuActions.java
+===================================================================
+diff --git a/phase1/src/controllers/PlaylistMenuActions.java b/phase1/src/controllers/PlaylistMenuActions.java
+deleted file mode 100644
+--- a/phase1/src/controllers/PlaylistMenuActions.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,184 +0,0 @@
+-package controllers;
+-
+-import entities.Playlist;
+-import entities.User;
+-import entities.Video;
+-import usecase.PlaylistManager;
+-import usecase.UserManager;
+-import usecase.VideoManager;
+-
+-import java.util.ArrayList;
+-
+-/** This class is a controller responsible for implementing playlist
+- * related methods and logic and feeding it to playlist menu
+- * @author akmar
+- */
+-public class PlaylistMenuActions {
+-
+-    private final PlaylistManager pm;
+-    private final UserManager um;
+-    private final VideoManager vm;
+-
+-    /**
+-     * Contructor for this class to use the same manager inputs
+-     * @param pm playlistmanager used to call playlist actions
+-     * @param vm videomanager used to change videos within the playlist
+-     */
+-    public PlaylistMenuActions(PlaylistManager pm, VideoManager vm){
+-        this.pm = pm;
+-        this.vm = vm;
+-        this.um = new UserManager(vm);
+-    }
+-
+-    /**
+-     * Used to search all playlists by playlist name and return the playlist with the corresponding name
+-     * @param plname name of playlist you want to search
+-     * @return playlist of corresponding name or null
+-     */
+-    public Playlist SearchPlaylist(String plname) {
+-        return pm.getPlaylistByName(plname);
+-    }
+-
+-    /**
+-     * get the list of all playlists
+-     * @return list of playlists
+-     */
+-
+-    public ArrayList<Playlist> pl_list(){
+-        return pm.getPlaylists();
+-    }
+-
+-    /**
+-     * Get the name of the playlist
+-     * @param pl playlist we want name of
+-     * @return String playlistname
+-     */
+-    public String playlistName(Playlist pl){
+-        return pm.getPlName(pl);
+-    }
+-
+-    /**
+-     * add a like to the playlist
+-     * @param pl playlist we want to like
+-     */
+-
+-    public void likePlaylist(Playlist pl){
+-        pm.likePlaylist(pl);
+-    }
+-
+-    /**
+-     * get the number of likes on a playlist
+-     * @param pl playlist we want to see likes for
+-     * @return string of the number of ratings playlist has
+-     */
+-    public String getRatings(Playlist pl){
+-        return pm.getRatings(pl);
+-    }
+-
+-    /**
+-     * Condensed logic to see if the user that is accessing the current playlist
+-     * and the creator of the playlist are the same individual
+-     * @param user user that is accessing the playlist
+-     * @param pl playlist being accessed
+-     * @return true is user and playlist creator are the same user
+-     */
+-
+-    public boolean isUser(User user,Playlist pl){
+-        String user_name = um.getUserName(user);
+-        String pl_name = pm.getPlName(pl);
+-        return user_name.equals(pl_name);
+-    }
+-
+-    /**
+-     * returns the names of videos in the playlist
+-     * @param pl playlist we want videos from
+-     * @return Arraylist of video names in the playlist
+-     */
+-    public ArrayList<String> videosinPL(Playlist pl){
+-        String name = playlistName(pl);
+-        return pm.namesInPlaylist(name, vm);
+-    }
+-
+-    /**
+-     * Creates new playlist if there is none with the same name
+-     * @param user person who creates playlist
+-     * @param plname name of the playlist
+-     * @return the playlist that just gets created
+-     */
+-    public Playlist CreateNewPlaylist(User user, String plname) {
+-        String user_name = um.getUserName(user);
+-        boolean check =  pm.checkPlaylistByName(plname);
+-        if (check) {
+-            return null;
+-        }
+-        Playlist new_playlist = new Playlist(plname, user_name);
+-        pm.addPlaylist(new_playlist);
+-        return new_playlist;
+-    }
+-
+-    /**
+-     * Adds or deletes video from playlist
+-     * @param Vidname name of the video that is being add/removed
+-     * @param user user that is doing the add/removing
+-     * @param pl playlist that the video is being added or removed from
+-     * @param Add whether its add or remove
+-     * @return true or false depending on whether the operation was completed
+-     *
+-     */
+-    public boolean AddDeleteFromPlaylist(String Vidname, User user, Playlist pl, boolean Add) {
+-
+-        ArrayList<Video> vids = vm.getByName(Vidname);
+-        if(vids.isEmpty()){
+-            return false;
+-        }
+-        Video vid = vids.get(0);
+-        boolean result;
+-        if (Add) {
+-            result = pm.addToPlaylist(pl, vid);
+-        } else {
+-            result = pm.deleteFromPlaylist(user, pl, vid);
+-        }
+-        return result;
+-    }
+-
+-    /**
+-     * Adds or deletes video from playlist
+-     * @param vid video that is being add/removed
+-     * @param user user that is doing the add/removing
+-     * @param pl playlist that the video is being added or removed from
+-     * @param Add whether its add or remove
+-     * @return true or false depending on whether the operation was completed
+-     *
+-     */
+-    public boolean AddDeleteFromPlaylist(Video vid,User user, Playlist pl, boolean Add) {
+-        boolean result;
+-        if (Add) {
+-            result = pm.addToPlaylist(pl,vid);
+-        } else {
+-            result = pm.deleteFromPlaylist(user,pl, vid);
+-        }
+-        return result;
+-    }
+-
+-    /**
+-     * reorders playlist based on which method is used
+-     * @param pl playlist being reordered
+-     * @param choice which reorder method
+-     */
+-    public void reorderPL(Playlist pl, String choice){
+-        switch (choice) {
+-            case "name":
+-                pm.reorderPlaylistByName(pl);
+-                break;
+-            case "rating":
+-                pm.reorderPlaylistByRating(pl, vm);
+-                break;
+-            case "shuffle":
+-                pm.shufflePlaylist(pl, vm);
+-                break;
+-        }
+-    }
+-
+-
+-
+-}
+Index: phase1/src/usecase/UserManager.java
+===================================================================
+diff --git a/phase1/src/usecase/UserManager.java b/phase1/src/usecase/UserManager.java
+deleted file mode 100644
+--- a/phase1/src/usecase/UserManager.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,233 +0,0 @@
+-package usecase;
+-
+-import entities.*;
+-
+-import java.util.*;
+-
+-/**
+- * This class is responsible for performing all direct interactions with the User entity classes.
+- *
+- * @author Benedek Balla, Daniel Xu, ...
+- * @version 1.0
+- * @since 2022-07-15
+- */
+-public class UserManager {
+-    VideoManager vm;
+-    private final VideoEditor ve = new VideoEditor();
+-    private ArrayList<User> users;
+-
+-    /**
+-     * This constructs a user manager that manages user.
+-     *
+-     * @param vm video manager for managing videos
+-     */
+-    public UserManager(VideoManager vm) {
+-        this.vm = vm;
+-        users = new ArrayList<>();
+-    }
+-
+-    /**
+-     * Validate and return a user.
+-     *
+-     * @param username username
+-     * @param password password
+-     * @return validated user
+-     */
+-    public User validateUser(String username, String password) {
+-        if (Objects.isNull(users)) {
+-            return null;
+-        } else {
+-            for (User user : users) {
+-                if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
+-                    if (!user.getBanStatus()) {
+-                        return user;
+-                    }
+-                }
+-            }
+-        }
+-        return null;
+-    }
+-
+-    /**
+-     * Changes the user's password.
+-     *
+-     * @param user     target user
+-     * @param password the new password user wants to change to
+-     */
+-    public void changePassword(User user, String password) {
+-        user.setPassword(password);
+-    }
+-
+-    /**
+-     * Returns the user login history.
+-     *
+-     * @param user target user
+-     * @return login history of user
+-     */
+-    public List<String> getHistory(User user) {
+-        List<String> history = new ArrayList<>(user.getLoginHistory());
+-        Collections.sort(history);
+-        return history;
+-    }
+-
+-    /**
+-     * Updates the user's login history.
+-     *
+-     * @param user target user
+-     * @param date new login date to add
+-     */
+-    public void updateHistory(User user, String date) {
+-        user.getLoginHistory().add(date);
+-    }
+-
+-    // Overloaded instantiateUser methods
+-
+-    /**
+-     * Instantiate a new user with the following properties.
+-     *
+-     * @param userName    of the user
+-     * @param password    of the user
+-     * @param banStatus   of the user
+-     * @param history     of the user
+-     * @param adminStatus of the user
+-     * @return User object for the new user
+-     */
+-    public User instantiateUser(String userName, String password, boolean banStatus, HashSet<String> history,
+-                                boolean adminStatus) {
+-        if (adminStatus) {
+-            return new AdminUser(userName, password, banStatus, history);
+-        } else {
+-            return new NonAdminUser(userName, password, banStatus, history);
+-        }
+-    }
+-
+-    /**
+-     * Instantiate a new user with the following properties.
+-     *
+-     * @param userName    of the user
+-     * @param password    of the user
+-     * @param adminStatus of the user
+-     * @return User object for the new user
+-     */
+-    public User instantiateUser(String userName, String password, boolean adminStatus) {
+-        if (adminStatus) {
+-            return new AdminUser(userName, password);
+-        } else {
+-            return new NonAdminUser(userName, password);
+-        }
+-    }
+-
+-    /**
+-     * Returns whether user's name is equal to name.
+-     *
+-     * @param user target user
+-     * @param name name
+-     * @return if the username of user matches name
+-     */
+-    public boolean validateUserName(User user, String name) {
+-        return user.getUserName().equals(name);
+-    }
+-
+-    /**
+-     * Returns user's ban status.
+-     *
+-     * @param user target user
+-     * @return the ban status of the user
+-     */
+-    public boolean validateBanStatus(User user) {
+-        return user.getBanStatus();
+-    }
+-
+-    /**
+-     * Adds user to the list of all users.
+-     *
+-     * @param user target user
+-     */
+-    public void updateData(User user) {
+-        users.add(user);
+-    }
+-
+-    /**
+-     * Return all users.
+-     *
+-     * @return all user
+-     */
+-    public ArrayList<User> getAllUsers() {
+-        return users;
+-    }
+-
+-
+-    public void setAllUsers(ArrayList<User> allUsers) {
+-        users = allUsers;
+-    }
+-
+-    /**
+-     * Return whether user is admin.
+-     *
+-     * @param user target user
+-     * @return whether user is admin
+-     */
+-    public boolean getRole(User user) {
+-        return user.isAdminInd();
+-    }
+-
+-    /**
+-     * Rates a video. If the parameter "like" is true, change the video's ratings to like if the video
+-     * is not originally liked by that uniqueID, or else delete that rating for the video.
+-     * If the parameter "dislike" is true, change the video's ratings to dislike if the video
+-     * is not originally disliked by that uniqueID, or else delete that rating for the video.
+-     *
+-     * @param v    target video
+-     * @param like whether to like the video or not
+-     */
+-    public void rateVideo(Video v, String userUniqueID, boolean like) {
+-        if (like) {
+-            if (!ve.currentRatingOfUserUniqueID(v, userUniqueID).equals(1)){
+-                ve.likeVideo(v, userUniqueID);
+-            }
+-            else{
+-                ve.deleteRating(v, userUniqueID);
+-            }
+-        } else {
+-            if (!ve.currentRatingOfUserUniqueID(v, userUniqueID).equals(0)){
+-                ve.dislikeVideo(v, userUniqueID);
+-            }
+-            else{
+-                ve.deleteRating(v, userUniqueID);
+-            }
+-        }
+-    }
+-
+-    /**
+-     * Return list of videos.
+-     *
+-     * @param info   list of names/category/uploader
+-     * @param method collect videos by name/category/uploader
+-     * @return list of videos corresponding to the name/category/uploader
+-     */
+-    public ArrayList<Video> returnVideos(ArrayList<String> info, String method) {
+-        switch (method) {
+-            case "name":
+-                return vm.getByName(info.get(0));
+-
+-            case "category":
+-                return vm.getByCategory(info);
+-
+-            case "uploader":
+-                return vm.getByUploader(info.get(0));
+-
+-            default:
+-                return new ArrayList<>();
+-        }
+-    }
+-
+-    /**
+-     * Return user's username.
+-     *
+-     * @param user target user
+-     * @return username
+-     */
+-    public String getUserName(User user) {
+-        return user.getUserName();
+-    }
+-}
+\ No newline at end of file
+Index: phase1/src/entities/User.java
+===================================================================
+diff --git a/phase1/src/entities/User.java b/phase1/src/entities/User.java
+deleted file mode 100644
+--- a/phase1/src/entities/User.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,146 +0,0 @@
+-package entities;
+-
+-import java.util.HashSet;
+-import java.util.Iterator;
+-
+-/**
+- * This represents user.
+- *
+- * @author Daniel Xu, Wing Zou
+- * @version 1.0
+- * @since 2022-07-21
+- */
+-
+-public abstract class User {
+-    private final String userName;
+-    private String password;
+-    private HashSet<String> loginHistory;
+-    private boolean banStatus;
+-    private boolean adminInd;
+-
+-    /**
+-     * Constructs a user using username and password.
+-     *
+-     * @param userName the username
+-     * @param password the password
+-     */
+-    public User(String userName, String password) {
+-        this.userName = userName;
+-        this.password = password;
+-        this.banStatus = false;
+-        this.loginHistory = new HashSet<>();
+-    }
+-
+-    /**
+-     * Constructs a user using username, password, ban status and login history.
+-     *
+-     * @param userName     the username
+-     * @param password     the password
+-     * @param banStatus    the ban status
+-     * @param loginHistory the login history
+-     */
+-    public User(String userName, String password, boolean banStatus, HashSet<String> loginHistory) {
+-        this(userName, password);
+-        this.banStatus = banStatus;
+-        this.loginHistory = loginHistory;
+-    }
+-
+-    /**
+-     * Returns whether the user is an admin.
+-     *
+-     * @return whether the user is an admin
+-     */
+-    public boolean isAdminInd() {
+-        return adminInd;
+-    }
+-
+-    /**
+-     * Sets user as admin or non admin.
+-     *
+-     * @param adminInd whether the user is an admin
+-     */
+-    public void setAdminInd(boolean adminInd) {
+-        this.adminInd = adminInd;
+-    }
+-
+-    /**
+-     * Return the username.
+-     *
+-     * @return the username
+-     */
+-    public String getUserName() {
+-        return userName;
+-    }
+-
+-    /**
+-     * Return the password.
+-     *
+-     * @return the password
+-     */
+-    public String getPassword() {
+-        return password;
+-    }
+-
+-    /**
+-     * Sets the password.
+-     *
+-     * @param password the password
+-     */
+-    public void setPassword(String password) {
+-        this.password = password;
+-    }
+-
+-    /**
+-     * Return the login history.
+-     *
+-     * @return the login history
+-     */
+-    public HashSet<String> getLoginHistory() {
+-        return loginHistory;
+-    }
+-
+-    /**
+-     * Return the ban status.
+-     *
+-     * @return the ban status
+-     */
+-    public boolean getBanStatus() {
+-        return banStatus;
+-    }
+-
+-    /**
+-     * Sets the ban status.
+-     *
+-     * @param banStatus the ban status
+-     */
+-    public void setBanStatus(boolean banStatus) {
+-        this.banStatus = banStatus;
+-    }
+-
+-    /**
+-     * Return whether user are equal to this user.
+-     *
+-     * @param user the targeted user
+-     * @return whether user are equal to this user
+-     */
+-    public boolean equals(User user) {
+-        return (user.userName.equals(this.userName) && (user.password.equals(this.password) && (user.banStatus == this.banStatus) &&
+-                (user.loginHistory.equals(this.loginHistory)) && (user.isAdminInd() == this.isAdminInd())));
+-    }
+-
+-    /**
+-     * Return the string representation of user.
+-     *
+-     * @return the string representation of user
+-     */
+-    @Override
+-    public String toString() {
+-        Iterator<String> it = loginHistory.iterator();
+-        StringBuilder s = new StringBuilder();
+-        while (it.hasNext()) {
+-            s.append(it.next()).append("/");
+-        }
+-        // https://www.geeksforgeeks.org/how-to-iterate-hashset-in-java/#:~:text=First%2C%20we%20make%20an%20iterator,Next()%20method%20in%20Java.
+-        return this.getUserName() + "," + this.getPassword() + "," + this.getBanStatus() + "," + this.isAdminInd() + "," + s;
+-    }
+-}
+Index: phase1/src/usecase/VideoEditor.java
+===================================================================
+diff --git a/phase1/src/usecase/VideoEditor.java b/phase1/src/usecase/VideoEditor.java
+deleted file mode 100644
+--- a/phase1/src/usecase/VideoEditor.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,110 +0,0 @@
+-package usecase;
+-
+-import entities.Video;
+-
+-import java.util.ArrayList;
+-
+-/**
+- * This class is responsible for performing all direct interactions with the User entity classes.
+- *
+- * @author Daniel Xu, ...
+- * @version 1.0
+- * @since 2022-07-23
+- */
+-public class VideoEditor {
+-
+-    /**
+-     * Edits the video title.
+-     *
+-     * @param v        target video
+-     * @param newTitle the new title user wants their video to be
+-     */
+-    public void editTitle(Video v, String newTitle) {
+-        v.setName(newTitle);
+-    }
+-
+-    /**
+-     * Edits the categories.
+-     *
+-     * @param v       target video
+-     * @param newCate the new categories that user wants their video to be
+-     */
+-    public void editCategories(Video v, ArrayList<String> newCate) {
+-        v.setCategories(newCate);
+-    }
+-
+-    /**
+-     * @param v      target user
+-     * @param newDes the new description user wants their video to be
+-     */
+-    public void editDescription(Video v, String newDes) {
+-        v.setDescription(newDes);
+-    }
+-
+-    /**
+-     * Likes the video
+-     *
+-     * @param v target video
+-     */
+-    public void likeVideo(Video v, String userUniqueID){
+-        if (v.getRatings().containsRating(userUniqueID)){
+-            v.getRatings().editRating(userUniqueID, true);
+-        }
+-        else{
+-            v.getRatings().addRating(userUniqueID, true);
+-        }
+-    }
+-
+-    /**
+-     * Dislikes the video.
+-     *
+-     * @param v the target video
+-     */
+-    public void dislikeVideo(Video v,  String userUniqueID){
+-        if (v.getRatings().containsRating(userUniqueID)){
+-            v.getRatings().editRating(userUniqueID, false);
+-        }
+-        else{
+-            v.getRatings().addRating(userUniqueID, false);
+-        }
+-    }
+-
+-    public void deleteRating(Video v, String userUniqueID){
+-        if (v.getRatings().containsRating(userUniqueID)){
+-            v.getRatings().deleteRating(userUniqueID);
+-        }
+-    }
+-
+-    // return current Rating of the uniqueID. 0 = dislike, 1 = like, 2 = null
+-    public Integer currentRatingOfUserUniqueID(Video v, String userUniqueID){
+-        if (v.getRatings().getRatings().containsKey(userUniqueID)){
+-            if (v.getRatings().getRatings().get(userUniqueID)){
+-                return 1;
+-            }
+-            else{
+-                return 0;
+-            }
+-        }
+-        else{
+-            return 2;
+-        }
+-    }
+-
+-    public void getTotalLikes(Video v){
+-        v.getRatings().getTotalLikes();
+-    }
+-
+-    public void getTotalDislikes(Video v){
+-        v.getRatings().getTotalDislikes();
+-    }
+-
+-    /**
+-     * Return the video's information.
+-     *
+-     * @param vid target video
+-     * @return video's information
+-     */
+-    public String[] returnVideoInformation(Video vid) {
+-        return new String[]{vid.getName(), vid.getUploader(), vid.getDescription(), vid.getDate_upload(), vid.getContent(), vid.getRatings().getTotalLikes().toString(),  vid.getRatings().getTotalDislikes().toString()};
+-    }
+-}
+\ No newline at end of file
+Index: phase1/datasets/Data.csv
+===================================================================
+diff --git a/phase1/datasets/Data.csv b/phase1/datasets/Data.csv
+deleted file mode 100644
+--- a/phase1/datasets/Data.csv	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,8 +0,0 @@
+-Admin,Admin,false,true,2022-07-23 23:27:28/2022-07-22 22:02:07/2022-07-22 22:02:58/2022-07-22 22:17:12/2022-07-23 22:24:25/2022-07-23 22:25:47/2022-07-23 23:48:17/2022-08-03 20:16:31/2022-07-22 22:05:51/2022-07-21 22:10:15/2022-07-23 09:12:02/
+-Dxniel,1,false,false,2022-07-21 22:32:13/2022-07-21 22:20:47/2022-07-21 22:35:36/2022-07-22 22:02:02/2022-07-21 22:25:14/2022-07-22 15:55:56/2022-07-21 22:10:57/2022-07-21 23:29:23/
+-anarcyst,2,false,false,2022-07-22 16:00:23/2022-07-21 23:27:36/2022-07-23 23:48:37/
+-Benedek,3,false,false,2022-07-21 23:27:54/
+-kvte,4,false,false,2022-07-21 23:28:13/
+-Nicholas,5,false,false,2022-07-21 23:28:26/
+-Wing,1,false,false,2022-07-22 22:06:25/2022-07-21 23:28:33/
+-Admin2,Admin2,false,true,2022-07-23 22:25:52/2022-07-23 22:25:02/2022-07-23 22:26:23/
+Index: phase1/datasets/VideoData.csv
+===================================================================
+diff --git a/phase1/datasets/VideoData.csv b/phase1/datasets/VideoData.csv
+deleted file mode 100644
+--- a/phase1/datasets/VideoData.csv	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,3 +0,0 @@
+-ban,newtitle,newdd,new/funny/,new,0665353f-6446-48ad-8628-864986d2fc5e,6/0/,2022-07-18T20:17:03.105441700
+-Wing,1,1,1/,1,d8ca56dd-fdec-4abe-9bb9-408402401102,0/0/,2022-07-22T22:07:14.294078600
+-anarcyst,Why I hate Nintendo,I speak at length about how Nintendo consistently rips people off due to good-will of the past and how they fail to embrace modernization,gaming/pokemon/nintendo/cheap/online/internet/anarcyst/,www.youtube.com/u/anarcyst/videolink,1bc0ae3c-6f27-4fa8-88c1-e2ab5c75f252,0/0/,2022-07-23T23:52:21.818647700
+Index: phase1/src/entities/Video.java
+===================================================================
+diff --git a/phase1/src/entities/Video.java b/phase1/src/entities/Video.java
+deleted file mode 100644
+--- a/phase1/src/entities/Video.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,202 +0,0 @@
+-package entities;
+-
+-import java.util.ArrayList;
+-import java.util.Iterator;
+-import java.util.Map;
+-
+-/**
+- * This represents video.
+- *
+- * @author Daniel Xu
+- * @version 1.0
+- * @since 2022-07-21
+- */
+-public class Video implements Comparable<Video> {
+-    private final String content;
+-    private final String uniqueID;
+-    private String description;
+-    private ArrayList<String> categories;
+-    private String name;
+-    private final String uploader;
+-    private final String date_upload;
+-    private Ratings ratings;
+-
+-    /**
+-     * Constructs a video with uploader, name, description, categories, content, uniqueID, ratings and date_upload.
+-     *
+-     * @param uploader    the uploader of the video
+-     * @param name        the name of the video
+-     * @param description the description of the video
+-     * @param categories  the categories of the video
+-     * @param content     the content of the video
+-     * @param uniqueID    the unique ID for the video
+-     * @param ratings     the ratings for the video
+-     * @param date_upload the date the video is uploaded
+-     */
+-    public Video(String uploader, String name, String description, ArrayList<String> categories, String content, String uniqueID,
+-                 Ratings ratings, String date_upload) {
+-        this.name = name;
+-        this.uploader = uploader;
+-        this.content = content;
+-        this.date_upload = date_upload;
+-
+-        this.description = description;
+-        this.categories = categories;
+-        this.uniqueID = uniqueID;
+-        this.ratings = ratings;
+-    }
+-
+-    /**
+-     * Returns the content of the video.
+-     *
+-     * @return the content of the video
+-     */
+-    public String getContent() {
+-        return content;
+-    }
+-
+-    /**
+-     * Return the video's rating.
+-     *
+-     * @return video rating
+-     */
+-    public Ratings getRatings() {
+-        return ratings;
+-    }
+-
+-    /**
+-     * Return the uniqueID.
+-     *
+-     * @return the uniqueID
+-     */
+-    public String getUniqueID() {
+-        return uniqueID;
+-    }
+-
+-    /**
+-     * Return the video description.
+-     *
+-     * @return the video description
+-     */
+-    public String getDescription() {
+-        return description;
+-    }
+-
+-    /**
+-     * Returns the video name.
+-     *
+-     * @return video name
+-     */
+-    public String getName() {
+-        return name;
+-    }
+-
+-    /**
+-     * Returns the uploader.
+-     *
+-     * @return the uploader
+-     */
+-    public String getUploader() {
+-        return uploader;
+-    }
+-
+-    /**
+-     * Return the date the video is uploaded.
+-     *
+-     * @return the date the video is uploaded.
+-     */
+-    public String getDate_upload() {
+-        return date_upload;
+-    }
+-
+-    /**
+-     * Return the video categories.
+-     *
+-     * @return the video categories
+-     */
+-    public ArrayList<String> getCategories() {
+-        return categories;
+-    }
+-
+-    // Setters - We will allow users/programs change these data fields
+-
+-    /**
+-     * Sets the description of the video.
+-     *
+-     * @param description the description of the video
+-     */
+-    public void setDescription(String description) {
+-        this.description = description;
+-    }
+-
+-    /**
+-     * Sets the name of the video.
+-     *
+-     * @param name the name of the video
+-     */
+-    public void setName(String name) {
+-        this.name = name;
+-    }
+-
+-    /**
+-     * Sets the categories of the video.
+-     *
+-     * @param categories the video's categories
+-     */
+-    public void setCategories(ArrayList<String> categories) {
+-        this.categories = categories;
+-    }
+-
+-    /**
+-     * Return whether v is equal to this video.
+-     *
+-     * @param v the target video
+-     * @return whether v is equal to this video
+-     */
+-    public boolean equals(Video v) {
+-        return (v.getUploader().equals(this.getUploader()) && v.getName().equals(this.getName()) && v.getContent().equals(this.getContent()) &&
+-                v.getCategories().equals(this.getCategories()) && v.getUniqueID().equals(this.getUniqueID()) && v.getDescription().equals(this.description) &&
+-                v.getDate_upload().equals(this.date_upload) && v.getRatings().equals(this.getRatings()));
+-    }
+-
+-    /**
+-     * Compares v to this video and returns the result.
+-     *
+-     * @param v the video being compared
+-     * @return the result of v comparing with this video
+-     */
+-    @Override
+-    public int compareTo(Video v) {
+-        int i = this.getName().compareTo(v.getName());
+-        return Integer.compare(i, 0);
+-    }
+-
+-    /**
+-     * Returns the string representation of the video.
+-     *
+-     * @return the string representation of the video
+-     */
+-    @Override
+-    public String toString() {
+-        Iterator<String> it1 = categories.iterator();
+-        StringBuilder s1 = new StringBuilder();
+-        while (it1.hasNext()) {
+-            s1.append(it1.next()).append("/");
+-        }
+-
+-        StringBuilder s2 = new StringBuilder();
+-        for (Map.Entry<String, Boolean> set: ratings.getRatings().entrySet()){
+-            s2.append(set.getKey() + "=" + set.getValue() + "/");
+-        }
+-//
+-//        Iterator<String> it2 = ratings.iterator();
+-//        StringBuilder s2 = new StringBuilder();
+-//        while (it2.hasNext()) {
+-//            s2.append(it2.next()).append("/");
+-//        }
+-
+-        return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," +
+-                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
+-    }
+-}
+-
+Index: phase1/src/presenters/PlaylistPresenter.java
+===================================================================
+diff --git a/phase1/src/presenters/PlaylistPresenter.java b/phase1/src/presenters/PlaylistPresenter.java
+deleted file mode 100644
+--- a/phase1/src/presenters/PlaylistPresenter.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,25 +0,0 @@
+-package presenters;
+-
+-import entities.Playlist;
+-import usecase.PlaylistManager;
+-
+-import java.util.ArrayList;
+-
+-public class PlaylistPresenter {
+-
+-
+-    public void listPlaylistNames(ArrayList<Playlist> playlists,PlaylistManager pm) {
+-        int num = 0;
+-        for (Playlist playlist : playlists) {
+-            System.out.println("\n" + num + ". " + pm.getPlName(playlist));
+-            num++;
+-        }
+-    }
+-    public void listStringNames(ArrayList<String> strlist) {
+-        int num = 0;
+-        for (String str : strlist) {
+-            System.out.println("\n" + num + ". " + str);
+-            num++;
+-        }
+-    }
+-}
+Index: phase1/src/usecase/VideoNameComparator.java
+===================================================================
+diff --git a/phase1/src/usecase/VideoNameComparator.java b/phase1/src/usecase/VideoNameComparator.java
+deleted file mode 100644
+--- a/phase1/src/usecase/VideoNameComparator.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,26 +0,0 @@
+-package usecase;
+-
+-import entities.Video;
+-
+-import java.util.*;
+-
+-/**
+- * This comparator class is responsible for comparing two videos and returning an alphabetical ordering based on
+- * their names (used to reorder according to name)
+- * @author Benedek Balla
+- */
+-
+-public class VideoNameComparator implements Comparator<Video>{
+-    public int compare(Video v1, Video v2) {
+-        int i = v1.getName().compareTo(v2.getName());
+-        if (i == 0) {
+-            return 0;
+-        }
+-        else if (i > 0) {
+-            return 1;
+-        }
+-        else {
+-            return -1;
+-        }
+-    }
+-}
+Index: phase1/test/NonAdminManagerTest.java
+===================================================================
+diff --git a/phase1/test/NonAdminManagerTest.java b/phase1/test/NonAdminManagerTest.java
+deleted file mode 100644
+--- a/phase1/test/NonAdminManagerTest.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,72 +0,0 @@
+-import entities.NonAdminUser;
+-import entities.Video;
+-import org.junit.Test;
+-import usecase.NonAdminManager;
+-import usecase.VideoManager;
+-
+-import java.util.ArrayList;
+-import java.util.Arrays;
+-import java.util.List;
+-
+-import static org.junit.Assert.*;
+-
+-import org.junit.BeforeClass;
+-
+-public class NonAdminManagerTest {
+-    private static final VideoManager VM = new VideoManager();
+-    private static final NonAdminManager NAM = new NonAdminManager(VM);
+-    private static final NonAdminUser u1 = new NonAdminUser("k", "1");
+-
+-    @BeforeClass
+-    public static void setUp_UploadVid() {
+-
+-        NAM.uploadVideo(u1, "vid", "", new ArrayList<>(), "url");
+-        ArrayList<String> ratings = new ArrayList<>();
+-        ratings.add("0");
+-        ratings.add("0");
+-        Video v1 = new Video("k", "vid", "", new ArrayList<>(), "url", VM.getVids().get(0).getUniqueID(),
+-                ratings, VM.getVids().get(0).getDate_upload());
+-        assertTrue(VM.getVids().get(0).equals(v1));
+-    }
+-
+-
+-    @Test
+-    public void deleteVideoTest() {
+-
+-
+-        assertTrue(NAM.deleteVideo(u1, VM.getVids().get(0).getUniqueID()));
+-
+-
+-    }
+-
+-    @Test
+-    public void editTitleTest() {
+-
+-        NAM.editTitle(u1, VM.getVids().get(0).getUniqueID(), "new");
+-        assertEquals("new", VM.getVids().get(0).getName());
+-
+-    }
+-
+-    @Test
+-    public void editCategoriesTest() {
+-
+-        ArrayList<String> newCates = new ArrayList<>(List.of("newCate"));
+-        NAM.editCategories(u1, VM.getVids().get(0).getUniqueID(), newCates);
+-        assertEquals(newCates, VM.getVids().get(0).getCategories());
+-
+-    }
+-
+-    @Test
+-    public void editDescriptionTest() {
+-
+-        NAM.editDescription(u1, VM.getVids().get(0).getUniqueID(), "newDescrip");
+-        assertEquals("newDescrip", VM.getVids().get(0).getDescription());
+-
+-    }
+-    @Test
+-    public void displayAllVidsTest(){
+-        Video v1 = new Video("k","vid","great",new ArrayList<>(List.of("funny")),"url","ID",
+-                new ArrayList<>(Arrays.asList("0","0")),"today");
+-        assertEquals("Title: vid (ID: ID)",NAM.displayAllVideos(u1, new ArrayList<>(List.of(v1))).get(0));
+-    }
+-}
+Index: phase1/README.md
+===================================================================
+diff --git a/phase1/README.md b/phase1/README.md
+deleted file mode 100644
+--- a/phase1/README.md	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,188 +0,0 @@
+-# READ ME
+-
+-Group 249 - Akmar, Wing, Daniel, Benedek, Nicholas, Kate
+-
+----
+-
+-**CSC207 Summer 2022 Phase 1 - Video Entertainment System** is group 0249's initial implementation of their CSC207 project. It aims to cover all of the required functionality for phase 1 specifications whilst still following clean architecture and SOLID principles. The program serves as a video entertainment system that has the ability to store persistent data about users, videos, and playlists. Each video created will have a unique ID, ensuring that all videos are unique even if they have similar features such as title or urls; video objects store real urls that lead to videos on the internet. Each playlist consists of existing videos in the system.
+-
+-## Quick Start 
+-1. Set SDK to Amazon Coretto 11
+-2. Run Main.Main
+-3. At the start menu, user can choose to create a new non-admin account or log into an existing account.
+-    * One provided admin user's login credentials are:
+-        * **Username:** admin
+-        * **Password:** admin
+-4. There will be separate menus for admin and non-admin
+-   * Non-admin user menu gives the user the option to:
+-     * Change their **own** password
+-     * Check their **own** login history
+-     * Log out of their **own** account
+-     * Browse videos by name, categories, and uploader
+-     * View all videos uploaded by themselves plus upload/delete/edit their own videos
+-       * In the case of uploading videos, the description and categories are optional. Press enter to skip it.
+-       * In order to edit or delete videos, the non-admin user needs to input the unique ID of the video. The view all videos function lists all the videos with their corresponding unique IDs.
+-       * Non-admin users can only delete and edit their own videos
+-     * Create/display playlists and browse playlists by name
+-   * Admin user menu gives the user the action to:
+-     * Change their **own** password
+-     * Check their **own** login history
+-     * Log out of their **own** account
+-     * Create a new admin account
+-     * Delete a user
+-     * Ban a user
+-     * Unban a user
+-     * Browse videos by name, categories, and uploader
+-     * Create/display playlists and browse playlists by name
+-5. When you log out, you will be returned to the login menu 
+-    * **You Must Exit Program by inputting 3 in order for the session history to be saved**
+-
+-## 2.2 Video Browse Menu
+-* **Browse** videos by name, categories, and uploader
+-   * For **browse by name**, input keywords in the video title (not case sensitive)
+-   * For **browse by category**, input a category name then press enter to input the next category name. Input **CONTINUE** to began search.
+-   * For **browse by uploader**, input the uploader name
+-   * After browsing, a list of video will be presented
+-      * Select a video by entering the number associated with each video
+-      * User can like, dislike or add the video to a playlist. Select **return** to return to the user menu
+-   * View all videos uploaded by themselves plus upload/delete/edit their own videos
+-      * In the case of uploading videos, the description and categories are optional. Press enter to skip it.
+-      * In order to edit or delete videos, the non-admin user needs to input the unique ID of the video. The view all videos function lists all the videos with their corresponding unique IDs.
+-      * Non-admin users can only delete and edit their own videos
+-
+-## 2.3 Playlist Menu
+-Playlists are a collection of videos that are created by a user.  Playlists may be used by users other than the creator but any changes to the playlist can only be made by the user that created the playlist.  Future functionality will give Admin's the right to change playlists, users ability to copy playlists and an autoplay playlist (automatically play video after video)
+-
+-* Selecting Playlist 
+-  * **Search Playlist By Name**
+-    * Will return a playlist if you know its exact name
+-    * After getting the playlist you will be able to access the playlist submenu
+-    * If you didn't enter an existing playlist name, you will be returned to the beginning of this menu
+-  * **Create New Playlist**
+-    * Can enter the name of a playlist to create
+-    * If the name already exists, playlist creation will fail
+-    * Once playlist is created, you will be able to access the playlist submenu
+-  * **View All Playlists** 
+-    * This lists all existing playlists
+-    * User can input a number to select a playlist among the entire list
+-    * Once playlist is selected, you will be able to access the playlist submenu
+-* Playlist Submenu
+-  * **View Playlist**
+-    * This will take you to the following submenu:
+-    1. **View Video Names in Playlist**
+-       * This will allow you to see which videos are in the playlist
+-    2. **View Playlist Likes**
+-       * This will show the playlist ratings
+-    3. **Change Playlist Name**
+-       * Allows you to change playlist name
+-       * If you did not create the playlist you will be unsuccessful
+-  * **Add Video to Playlist**
+-  * **Delete Video From Playlist**
+-    * The above two actions will allow the user to add and delete videos from the playlist if they were the creator of the playlist
+-    * You may have to press enter twice here if the program doesn't continue immediately after entering the video name
+-  * **Reorder Playlist**
+-    * This will take you to the following submenu
+-    1. **Reorder Playlist Alphabetically**
+-       * The order of the videos inside the playlist is organized from A-Z
+-       * This is useful for video series with a naming convention and order such as educational content or vod's
+-    2. **Reorder Playlist by Rating**
+-       * This order of the videos inside the playlist is organized by highest rating first
+-       * This is useful if you want to see popular videos earlier
+-    3. **Shuffle Playlist**
+-       * This will randomize the order of videos inside the playlist
+-       * This is useful for playlists with music or random content
+-  * **Like Playlist**
+-    * You can like the playlist (no functionality at the moment but will be implemented in future rating system)
+-
+-
+-# 3. Potential Additions for Phase 2
+-* Expanded Ratings System
+-* Usage of database tables for data storage
+-* "viewing" video will open the url on system browser
+-* Expanded UI
+-* Expand Video Actions
+-* Expand Playlist Actions
+-  * Include Rating System
+-  * Favourites
+-  * Allow users to copy playlists
+-  * Allow admins to have access to change playlists even if they are not the creators
+-  * Index playlist items by uniqueID so that name changes and whatnot will not adverse affect playlist
+-  * Have autoplay when viewing playlist
+-  * Create Menu System for adding video (perhaps recently watched)
+-  * Create Menu System for deleting video (listing videos in the playlist)
+-
+-
+-# 4. Unit Tests:
+-* AdminManagerTest
+-  * Tests banning and unbanning of users
+-  * Tests user deletion
+-  * Tests the returning of users based on ban status
+-  * Tests the returning of all users inputted
+-* NonAdminManagerTest
+-  * Tests the ability to upload a video
+-  * Tests deletion of a video
+-  * Tests the ability to manipulate attributes of a video
+-* PlaylistTest
+-  * Tests the successfulness of adding a video to a playlist
+-  * Tests the various strategies of reordering a playlist
+-    * Name
+-    * Random shuffle
+-    * Rating
+-  * Tests the deletion of a video from a playlist
+-  * Tests liking a playlist
+-* UserManagerTest
+-  * Tests to see if the login credentials matches a user in the system
+-  * Tests to validate parts of a user login
+-    * Username
+-    * Ban status
+-  * Tests that the correct videos which correspond to either a name, category or
+-    uploader are returned
+-* VideoEditorTest
+-  * Tests that fields of the Video class can be edited
+-* VideoTest
+-  * Tests that uploading a video is successful
+-  * Tests that video deletion can be completed
+-  * Tests getting the correct Videos by Category, Uploader, Name, ID
+-
+-# 5. Data
+-
+-We have 3 data files `datasets/Data.csv`, `datasets/PlaylistData.csv`, `datasets/VideoData.csv` which stores various information corresponding to our program.  They are in `.csv` and are delimited by commas.
+-
+-`datasets/Data.csv` includes user data in the form:
+-
+-`[anarcyst,2,false,false,2022-07-22 16:00:23/2022-07-21 23:27:36/2022-07-23 23:48:37/]`
+-This is interpreted as:
+-`[Username,Password,isBanned?,isAdmin?,loginhistory]`
+-
+-`datasets/PlaylistData.csv` includes playlist data in the form:
+-`[anarcysts_vids,0,0665353f-6446-48ad-8628-864986d2fc5e/,anarcyst]`
+-This is interpreted as:
+-`[PlaylistName,NumberofLikes,VideoUniqueIDs,UploaderUsername]`
+-
+-`datasets/VideoData.csv` includes video data in the form:
+-`[anarcyst,Why I hate Nintendo,I speak at length about how Nintendo consistently rips people off due to good-will of the past and how they fail to embrace modernization,gaming/pokemon/nintendo/cheap/online/internet/anarcyst/,www.youtube.com/u/anarcyst/videolink,1bc0ae3c-6f27-4fa8-88c1-e2ab5c75f252,0/0/,2022-07-23T23:52:21.818647700]`
+-
+-This is interpreted as:
+-`[UploaderUserName,VideoName,VideoDescription,Categories,ContentLocation,UniqueID,ratings,upload_date]`
+-
+-
+-# 6. UML Diagram
+-
+-Unlocked green lock: public
+-
+-Locked orange lock: private
+-
+-Key: protected
+-
+-Grey circle: Package protected
+-
+-
+-## Contributors
+-|Name|Email Address|
+-|----|-------------|
+-|Akmar|akmar.chowdhury@mail.utoronto.ca|
+-|Wing|wing.zou@mail.utoronto.ca|
+-|Daniel|danielx.xu@mail.utoronto.ca|
+-|Benedek|b.balla@mail.utoronto.ca|
+-|Nicholas|nicholas.au@mail.utoronto.ca|
+-|Kate|katee.ma@mail.utoronto.ca|
+\ No newline at end of file
+Index: phase1/src/presenters/VideoBrowsePresenter.java
+===================================================================
+diff --git a/phase1/src/presenters/VideoBrowsePresenter.java b/phase1/src/presenters/VideoBrowsePresenter.java
+deleted file mode 100644
+--- a/phase1/src/presenters/VideoBrowsePresenter.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,58 +0,0 @@
+-package presenters;
+-
+-import entities.Video;
+-import usecase.VideoEditor;
+-import usecase.VideoManager;
+-
+-import java.util.ArrayList;
+-
+-/**
+- * Responsible for formatting and outputting video related data to the user.
+- *
+- * @author Daniel Xu
+- * @version 1.0
+- * @since 2022-07-15
+- */
+-public class VideoBrowsePresenter {
+-    private final VideoEditor ve;
+-    private final VideoManager vm;
+-
+-    /**
+-     * Constructs a video browse presenter.
+-     *
+-     * @param vm video manager
+-     */
+-    public VideoBrowsePresenter(VideoManager vm) {
+-        this.vm = vm;
+-        this.ve = new VideoEditor();
+-    }
+-
+-    /**
+-     * Formats and displays list of videos to the user.
+-     *
+-     * @param videos the videos being listed
+-     */
+-    public void listVideos(ArrayList<Video> videos) {
+-        int num = 0;
+-        for (String video : vm.getVideoNames(videos)) {
+-            System.out.println(num + ". " + video);
+-            num++;
+-        }
+-    }
+-
+-    /**
+-     * Displays the video to the user.
+-     *
+-     * @param video the video being displayed
+-     */
+-    public void displayVideo(Video video) {
+-        String[] information = ve.returnVideoInformation(video);
+-        System.out.println("\nTitle: " + information[0]);
+-        System.out.println("Uploader : " + information[1]);
+-        System.out.println("Description: " + information[2]);
+-        System.out.println("Date Uploaded : " + information[3]);
+-        System.out.println("Content : " + information[4]);
+-        System.out.println("Likes : " + information[5]);
+-        System.out.println("Dislikes : " + information[6] + "\n");
+-    }
+-}
+\ No newline at end of file
+Index: phase1/src/Main.java
+===================================================================
+diff --git a/phase1/src/Main.java b/phase1/src/Main.java
+deleted file mode 100644
+--- a/phase1/src/Main.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,25 +0,0 @@
+-import gateways.DataManager;
+-import usecase.PlaylistManager;
+-import usecase.UserManager;
+-import usecase.VideoManager;
+-import userInterfaces.MenuDisplayer;
+-
+-import java.io.IOException;
+-
+-public class Main {
+-    public static void main(String[] args) throws IOException {
+-
+-        VideoManager vm = new VideoManager();
+-        UserManager um = new UserManager(vm);
+-        PlaylistManager pm = new PlaylistManager();
+-
+-        DataManager sm = new DataManager(um, vm, pm);
+-        sm.loadData("phase1/datasets/Data.csv"); //Read data from Data.csv
+-        sm.loadVideoData("phase1/datasets/VideoData.csv"); //Read data from VideoData.csv
+-        sm.loadPlaylistData("phase1/datasets/PlaylistData.csv"); //Read data from PlaylistData.csv
+-
+-        MenuDisplayer md = new MenuDisplayer(um, vm, pm);
+-        md.startMenu();
+-
+-    }
+-}
+\ No newline at end of file
+Index: phase1/src/entities/AdminUser.java
+===================================================================
+diff --git a/phase1/src/entities/AdminUser.java b/phase1/src/entities/AdminUser.java
+deleted file mode 100644
+--- a/phase1/src/entities/AdminUser.java	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
++++ /dev/null	(revision d15ef085497d39797f5f772b6d27028035b7d0b2)
+@@ -1,39 +0,0 @@
+-package entities;
+-
+-import java.util.HashSet;
+-
+-
+-/**
+- * This represents admin user.
+- *
+- * @author Daniel Xu, Wing Zou
+- * @version 1.0
+- * @since 2022-07-21
+- */
+-public class AdminUser extends User {
+-
+-    /**
+-     * Constructs an admin user using username and password.
+-     *
+-     * @param userName the username
+-     * @param password the password
+-     */
+-    public AdminUser(String userName, String password) {
+-        super(userName, password);
+-        this.setAdminInd(true);
+-    }
+-
+-    /**
+-     * Constructs an admin user using username, password, ban status and login history.
+-     *
+-     * @param userName     the username
+-     * @param password     the password
+-     * @param banStatus    the ban status
+-     * @param loginHistory the login history
+-     */
+-    public AdminUser(String userName, String password, boolean banStatus, HashSet<String> loginHistory) {
+-        super(userName, password, banStatus, loginHistory);
+-        this.setAdminInd(true);
+-    }
+-
+-}
