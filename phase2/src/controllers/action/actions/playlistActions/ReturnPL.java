@@ -1,4 +1,4 @@
-package controllers.action.actions.playlistMenu;
+package controllers.action.actions.playlistActions;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;

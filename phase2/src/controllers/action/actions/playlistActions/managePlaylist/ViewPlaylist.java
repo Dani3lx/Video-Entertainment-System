@@ -1,4 +1,4 @@
-package controllers.action.actions.playlistMenu.managePlaylist;
+package controllers.action.actions.playlistActions.managePlaylist;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -9,11 +9,9 @@ import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.PlaylistsMenuFactory;
-import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
-import java.util.Objects;
 
 
 public class ViewPlaylist extends MenuAction implements Action {

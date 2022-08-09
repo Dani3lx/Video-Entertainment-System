@@ -1,4 +1,4 @@
-package controllers.action.actions.playlistMenu.orderPlaylist;
+package controllers.action.actions.playlistActions.orderPlaylist;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;

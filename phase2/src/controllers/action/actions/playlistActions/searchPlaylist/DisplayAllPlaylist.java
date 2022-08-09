@@ -1,4 +1,4 @@
-package controllers.action.actions.playlistMenu.searchPlaylist;
+package controllers.action.actions.playlistActions.searchPlaylist;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
@@ -12,7 +12,6 @@ import userInterfaces.menuFactories.PlaylistsMenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

@@ -1,10 +1,9 @@
-package controllers.action.actions.playlistMenu.managePlaylist;
+package controllers.action.actions.playlistActions.managePlaylist;
 
 import controllers.action.actionFactories.Action;
 import controllers.action.actions.MenuAction;
 import entities.Playlist;
 import entities.User;
-import entities.Video;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.menuEnums.MenuEnums;
@@ -12,7 +11,6 @@ import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.PlaylistsMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

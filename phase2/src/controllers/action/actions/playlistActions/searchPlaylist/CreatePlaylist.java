@@ -1,4 +1,4 @@
-package controllers.action.actions.playlistMenu.searchPlaylist;
+package controllers.action.actions.playlistActions.searchPlaylist;
 
 
 import controllers.action.actionFactories.Action;
@@ -14,7 +14,6 @@ import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
-import java.util.Objects;
 
 public class CreatePlaylist extends MenuAction implements Action {
 
