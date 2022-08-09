@@ -45,9 +45,11 @@ public class VideoEditor {
     }
 
     /**
-     * Likes the video
+     * Like the video if the video is not originally liked by that user, delete that rating
+     * for the video by that user if it is originally liked.
      *
      * @param v target video
+     * @param user target user
      */
     public void likeVideo(Video v, User user){
             if (!this.currentRatingOfUser(v, user).equals(1)){
@@ -64,9 +66,11 @@ public class VideoEditor {
     }
 
     /**
-     * Dislikes the video.
+     * Dislike the video if the video is not originally disliked by that user, delete that rating
+     * for the video by that user if it is originally disliked
      *
      * @param v the target video
+     * @param user the target user
      */
     public void dislikeVideo(Video v,  User user){
         if (!this.currentRatingOfUser(v, user).equals(0)){
