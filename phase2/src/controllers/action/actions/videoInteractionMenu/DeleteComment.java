@@ -5,12 +5,11 @@ import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import usecase.runtimeDataManager.NonAdminManager;
+import usecase.runtimeDataManager.UserManager;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
-
-import java.util.List;
 
 public class DeleteComment extends MenuAction {
     public DeleteComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
@@ -35,7 +34,13 @@ public class DeleteComment extends MenuAction {
 
     @Override
     public void next(){
-        MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
-        userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
+        UserManager UM = new UserManager(vm);
+        if (!UM.getRole(currentUser)) {
+            MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
+            userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
+        }else{
+            MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
+            userMenuFactory.getMenu(MenuEnums.ADMIN).run();
+        }
     }
 }

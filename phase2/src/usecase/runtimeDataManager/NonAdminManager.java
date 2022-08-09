@@ -114,7 +114,7 @@ public class NonAdminManager extends UserManager {
     }
 
     public Boolean editComment(String uniqueID, User user, String newComm) {
-        ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
+        List<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
         for (Comments c : comments) {
             if (c.getCommenter().equals(user.getUserName())) {
                 ve.editComment(c,newComm);
