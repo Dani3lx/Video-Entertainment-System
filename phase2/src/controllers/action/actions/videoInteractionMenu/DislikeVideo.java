@@ -12,10 +12,10 @@ import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
-public class LikeVideo extends MenuAction implements Action {
+public class DislikeVideo extends MenuAction implements Action {
     private final Video video;
 
-    public LikeVideo(UserPrompt userPrompt, User user, MenuPresenter mp, LanguagePresenter lp, Video video) {
+    public DislikeVideo(UserPrompt userPrompt, User user, MenuPresenter mp, LanguagePresenter lp, Video video) {
 
         this.userPrompt = userPrompt;
         this.currentUser = user;
@@ -27,8 +27,8 @@ public class LikeVideo extends MenuAction implements Action {
     @Override
     public void run() {
         VideoEditor ve = new VideoEditor();
-        ve.likeVideo(video, currentUser);
-        mp.displayAlert(LanguagePresenter.AlertTextType.LIKEVIDEO);
+        ve.dislikeVideo(video, currentUser);
+        mp.displayAlert(LanguagePresenter.AlertTextType.DISLIKEVIDEO);
         next();
     }
 
@@ -42,4 +42,3 @@ public class LikeVideo extends MenuAction implements Action {
         }
     }
 }
-
