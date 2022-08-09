@@ -9,6 +9,9 @@ public interface LanguagePresenter {
         VIDEOSTUDIO,
         PLAYLIST,
         VIDEO,
+        PLAYLISTMANAGE,
+        PLAYLISTVIEW,
+        PLAYLISTORDER,
         VIDEOINTERACTION
     }
 
@@ -23,6 +26,8 @@ public interface LanguagePresenter {
         BANNED,
         UNBANNED,
         RESULT,
+        SUCCESS,
+        ALLPLAYLISTS,
         EDIT,
         EDITCOMMENT,
         DELETECOMMENT,
@@ -36,6 +41,7 @@ public interface LanguagePresenter {
         UNBANNED,
         EDIT,
         NORESULT,
+        INVALIDUSER,
         EDITCOMMENT,
         DELETECOMMENT,
     }
@@ -49,6 +55,7 @@ public interface LanguagePresenter {
         UNBANUSER,
         CATEGORY,
         UPLOADER,
+        PLAYLIST,
         EDITVIDEO,
         TITLE,
         DESCRIPTION,

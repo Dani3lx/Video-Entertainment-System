@@ -29,6 +29,6 @@ public class BrowseByName extends VideoBrowseMenuAction implements Action {
 
     @Override
     public void next() {
-        nextMenu(videos, video, currentUser, lp, mp);
+        nextMenu(videos, video, currentUser);
     }
 }
