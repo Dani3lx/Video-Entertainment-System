@@ -1,17 +1,17 @@
 package controllers.action.actions.videoInteractionMenu;
+
 import controllers.action.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import usecase.runtimeDataManager.NonAdminManager;
-import usecase.runtimeDataManager.UserManager;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
-public class EditComment extends MenuAction {
 
-    public EditComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
+public class AddComment extends MenuAction {
+    public AddComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         currentUser = user;
         this.userPrompt = userPrompt;
         this.lp = lp;
@@ -21,13 +21,14 @@ public class EditComment extends MenuAction {
     @Override
     public void run() {
         NonAdminManager NAM = new NonAdminManager(vm);
-        String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.EDITCOMMENT);
-        String newComm = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.NEWCOMMENT);
 
-        if (NAM.editComment(uniqueID, currentUser, newComm)){
-            mp.displayAlert(LanguagePresenter.AlertTextType.EDITCOMMENT);
+        String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.ADDCOMMENT);
+        String Comm = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.COMMENT);
+
+        if (NAM.addComment(uniqueID,currentUser, Comm)){
+            mp.displayAlert(LanguagePresenter.AlertTextType.ADDCOMMENT);
         } else {
-            mp.displayError(LanguagePresenter.ErrorTextType.EDITCOMMENT);
+            mp.displayError(LanguagePresenter.ErrorTextType.ADDCOMMENT);
         }
         next();
     }

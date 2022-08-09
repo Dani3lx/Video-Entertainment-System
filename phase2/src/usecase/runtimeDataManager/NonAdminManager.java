@@ -140,6 +140,16 @@ public class NonAdminManager extends UserManager {
         return false;
     }
 
+    public Boolean addComment(String uniqueID, User user, String comment){
+        ArrayList<Video> vids = new ArrayList<>(vm.getVids());
+        for (Video v: vids){
+            if (v.getUniqueID().equals(uniqueID)){
+                return CM.addComment(v,user.getUserName(),comment);
+            }
+        }
+        return false;
+    }
+
     /**
      * Collects all the videos the user has uploaded
      *
