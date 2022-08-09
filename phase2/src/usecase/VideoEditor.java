@@ -114,9 +114,6 @@ public class VideoEditor {
         v.getRatings().getTotalDislikes();
     }
 
-    public void editComment(Comments c, String newComm) {
-        c.setComment(newComm);
-    }
 
     /**
      * Return the video's information.

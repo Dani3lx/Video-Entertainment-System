@@ -15,7 +15,7 @@ import java.util.List;
 public class VideoInteractionMenu implements Menu {
     private final UserPrompt userPrompt;
     private final ActionFactory actionFactory;
-    private final List<String> actionList = List.of(new String[]{"like video", "dislike video", "add comment", "delete comment", "edit comment"});
+    private final List<String> actionList = List.of(new String[]{"like video", "dislike video", "add comment", "delete comment", "edit comment","view comments"});
 
     public VideoInteractionMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, Video video) {
         actionFactory = new VideoInteractionActionFactory(userPrompt, user, lp, mp, video);

@@ -32,6 +32,8 @@ public interface LanguagePresenter {
         EDITCOMMENT,
         DELETECOMMENT,
         ADDCOMMENT,
+
+        DISPLAYCOMMENT,
         LIKEVIDEO,
         DISLIKEVIDEO
     }

@@ -54,6 +54,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "The user has deleted the comment successfully";
             case ADDCOMMENT:
                 return "The user has added the comment successfully";
+            case DISPLAYCOMMENT:
+                return "Here are the comments:";
             case LIKEVIDEO:
                 return "You have liked this video.";
             case DISLIKEVIDEO:

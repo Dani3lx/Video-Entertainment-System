@@ -1,10 +1,6 @@
 package controllers.action.actionFactories;
 
-import controllers.action.actions.videoInteractionMenu.DeleteComment;
-import controllers.action.actions.videoInteractionMenu.DislikeVideo;
-import controllers.action.actions.videoInteractionMenu.EditComment;
-import controllers.action.actions.videoInteractionMenu.LikeVideo;
-import controllers.action.actions.videoInteractionMenu.AddComment;
+import controllers.action.actions.videoInteractionMenu.*;
 
 import entities.User;
 import entities.Video;
@@ -40,6 +36,8 @@ public class VideoInteractionActionFactory implements ActionFactory {
                 return new EditComment(userPrompt, user, lp, mp,video);
             case "add comment":
                 return new AddComment(userPrompt,user,lp,mp,video);
+            case "view comments":
+                return new ViewComment(userPrompt,user, lp, mp, video);
             default:
                 return null;
         }

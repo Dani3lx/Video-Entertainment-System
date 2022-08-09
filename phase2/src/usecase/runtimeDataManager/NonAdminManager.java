@@ -117,7 +117,7 @@ public class NonAdminManager extends UserManager {
         List<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
         for (Comments c : comments) {
             if (c.getCommenter().equals(user.getUserName())) {
-                ve.editComment(c,newComm);
+                CM.editComment(c,newComm);
                 c.setComment_date(LocalDateTime.now().toString());
                 return true;
             }

@@ -16,6 +16,10 @@ public class CommentManager {
         return instance;
     }
 
+    public void editComment(Comments c, String newComm) {
+        c.setComment(newComm);
+    }
+
     public Boolean deleteComment(Video v, Comments c){
         ArrayList<Comments> coms = v.getComments();
         coms.remove(c);
