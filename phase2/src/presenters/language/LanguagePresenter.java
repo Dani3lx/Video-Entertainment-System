@@ -32,6 +32,8 @@ public interface LanguagePresenter {
         EDITCOMMENT,
         DELETECOMMENT,
         ADDCOMMENT,
+        LIKEVIDEO,
+        DISLIKEVIDEO
     }
 
     enum ErrorTextType {

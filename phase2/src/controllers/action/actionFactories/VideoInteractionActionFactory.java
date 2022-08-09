@@ -2,6 +2,7 @@ package controllers.action.actionFactories;
 
 import controllers.action.actions.videoInteractionMenu.DeleteComment;
 import controllers.action.actions.videoInteractionMenu.EditComment;
+import controllers.action.actions.videoInteractionMenu.LikeVideo;
 import entities.User;
 import entities.Video;
 import presenters.language.LanguagePresenter;
@@ -27,7 +28,7 @@ public class VideoInteractionActionFactory implements ActionFactory {
     public Action getAction(String type) {
         switch (type) {
             case "like video":
-                return null;
+                return new LikeVideo(userPrompt, user, mp, lp, video);
             case "dislike video":
                 return null;
             case "delete comment":
