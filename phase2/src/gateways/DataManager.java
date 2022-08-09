@@ -113,6 +113,11 @@ public class DataManager {
 
             while (scanner.hasNextLine()) {
                 record = scanner.nextLine().split(",");
+                HashMap<String, Boolean>  ratingsMap = new HashMap<>();
+                for (String ratingString: new ArrayList<>(Arrays.asList(record[6].split("/")))){
+                    ArrayList<String> ratingSplit = new ArrayList<>(Arrays.asList(ratingString.split("=")));
+                    ratingsMap.put(ratingSplit.get(0), Boolean.parseBoolean(ratingSplit.get(1)));
+                }
                 ArrayList<Comments> comments = new ArrayList<>();
                 String[] indComment = record[8].split("/");
 
@@ -122,7 +127,7 @@ public class DataManager {
 
                     comments.add(comment);
                 }
-                Video video = new Video(record[0], record[1], record[2], new ArrayList<>(Arrays.asList(record[3].split("/"))), record[4], record[5], new Ratings(new ArrayList<>(Arrays.asList((record[6]).split("/")))), record[7],comments);
+                Video video = new Video(record[0], record[1], record[2], new ArrayList<>(Arrays.asList(record[3].split("/"))), record[4], record[5], new Ratings(ratingsMap), record[7],comments);
                 videos.add(video);
             }
             scanner.close();

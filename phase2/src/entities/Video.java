@@ -2,6 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * This represents video.
@@ -63,17 +64,17 @@ public class Video implements Comparable<Video> {
     /**
      * Return the video's rating.
      *
-     * @return int video rating
+     * @return video rating
      */
-    public int getRating() {
-        return ratings.getTotalLikes();
+    public Ratings getRatings() {
+        return ratings;
     }
 
-    /**
-     * Return list of usernames who liked the video.
-     * @return ArrayList<String> of usernames
-     */
-    public ArrayList<String> getRatingUsers() { return ratings.getLikeUserName(); }
+//    /**
+//     * Return list of usernames who liked the video.
+//     * @return ArrayList<String> of usernames
+//     */
+//    public ArrayList<String> getRatingUsers() { return ratings.getLikeUserName(); }
 
     /**
      * Return the uniqueID.
@@ -181,20 +182,20 @@ public class Video implements Comparable<Video> {
         this.comments.remove(comment);
     }
 
-    /**
-     * Likes the video.
-     */
-    public void addLikes() {
-        ratings.addLikes();
-    }
-
-    public void addLikes(String username) {
-        ratings.addLikes(username);
-    }
-
-    /**
-     * Dislikes the video.
-     */
+//    /**
+//     * Likes the video.
+//     */
+//    public void addLikes() {
+//        ratings.addLikes();
+//    }
+//
+//    public void addLikes(String username) {
+//        ratings.addLikes(username);
+//    }
+//
+//    /**
+//     * Dislikes the video.
+//     */
 //    public void addDislikes() {
 //        ratings.addDislikes("Need to be fixed");
 //    }
@@ -208,7 +209,7 @@ public class Video implements Comparable<Video> {
     public boolean equals(Video v) {
         return (v.getUploader().equals(this.getUploader()) && v.getName().equals(this.getName()) && v.getContent().equals(this.getContent()) &&
                 v.getCategories().equals(this.getCategories()) && v.getUniqueID().equals(this.getUniqueID()) && v.getDescription().equals(this.description) &&
-                v.getDate_upload().equals(this.date_upload) && v.getRating() == this.getRating());
+                v.getDate_upload().equals(this.date_upload) && v.getRatings().equals(this.getRatings()));
     }
 
     /**
@@ -236,7 +237,11 @@ public class Video implements Comparable<Video> {
             s1.append(it1.next()).append("/");
         }
 
-        // old style ratings
+        StringBuilder s2 = new StringBuilder();
+        for (Map.Entry<String, Boolean> set: ratings.getRatings().entrySet()){
+            s2.append(set.getKey() + "=" + set.getValue() + "/");
+        }
+//
 //        Iterator<String> it2 = ratings.iterator();
 //        StringBuilder s2 = new StringBuilder();
 //        while (it2.hasNext()) {
@@ -244,8 +249,7 @@ public class Video implements Comparable<Video> {
 //        }
 
         return this.getUploader() + "," + this.getName() + "," + this.getDescription() + "," +
-                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + this.getRating() + "," + this.getDate_upload();
-        // this should be changed from s2 to this.getRatings() since I implemented toString for new Ratings class
+                s1 + "," + this.getContent() + "," + this.getUniqueID() + "," + s2 + "," + this.getDate_upload();
     }
 }
 

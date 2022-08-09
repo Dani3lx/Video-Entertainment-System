@@ -45,28 +45,60 @@ public class VideoEditor {
     }
 
     /**
-     * Likes the video if the user hasn't liked it already.
-     * @param user user who likes video
+     * Likes the video
+     *
      * @param v target video
      */
-    public void likeVideo(Video v, String user) {
-        ArrayList<String> usernames = v.getRatingUsers();
-        for (String username : usernames) {
-            if (user.equals(username)) {
-                return;
-            }
+    public void likeVideo(Video v, String userUniqueID){
+        if (v.getRatings().containsRating(userUniqueID)){
+            v.getRatings().editRating(userUniqueID, true);
         }
-        v.addLikes(user);
+        else{
+            v.getRatings().addRating(userUniqueID, true);
+        }
     }
 
-//    /**
-//     * Dislikes the video.
-//     *
-//     * @param v the target video
-//     */
-//    public void dislikeVideo(Video v) {
-//        v.addDislikes();
-//    }
+    /**
+     * Dislikes the video.
+     *
+     * @param v the target video
+     */
+    public void dislikeVideo(Video v,  String userUniqueID){
+        if (v.getRatings().containsRating(userUniqueID)){
+            v.getRatings().editRating(userUniqueID, false);
+        }
+        else{
+            v.getRatings().addRating(userUniqueID, false);
+        }
+    }
+
+    public void deleteRating(Video v, String userUniqueID){
+        if (v.getRatings().containsRating(userUniqueID)){
+            v.getRatings().deleteRating(userUniqueID);
+        }
+    }
+
+    // return current Rating of the uniqueID. 0 = dislike, 1 = like, 2 = null
+    public Integer currentRatingOfUserUniqueID(Video v, String userUniqueID){
+        if (v.getRatings().getRatings().containsKey(userUniqueID)){
+            if (v.getRatings().getRatings().get(userUniqueID)){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            return 2;
+        }
+    }
+    public void getTotalLikes(Video v){
+        v.getRatings().getTotalLikes();
+    }
+
+    public void getTotalDislikes(Video v){
+        v.getRatings().getTotalDislikes();
+    }
 
     public void editComment(Comments c, String newComm) {
         c.setComment(newComm);
@@ -84,7 +116,7 @@ public class VideoEditor {
                 lp.getVideoDataText(LanguagePresenter.VideoDataType.DESCRIPTION) + vid.getDescription(),
                 lp.getVideoDataText(LanguagePresenter.VideoDataType.DATEUPLOADED) + vid.getDate_upload(),
                 lp.getVideoDataText(LanguagePresenter.VideoDataType.CONTENT) + vid.getContent(),
-                lp.getVideoDataText(LanguagePresenter.VideoDataType.LIKES) + Integer.toString(vid.getRating()),
-                lp.getVideoDataText(LanguagePresenter.VideoDataType.DISLIKES) + "0"};
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.LIKES) + vid.getRatings().getTotalLikes().toString(),
+                lp.getVideoDataText(LanguagePresenter.VideoDataType.DISLIKES) + vid.getRatings().getTotalDislikes().toString()};
     }
 }
