@@ -49,12 +49,12 @@ public class VideoEditor {
      *
      * @param v target video
      */
-    public void likeVideo(Video v, String userUniqueID){
-        if (v.getRatings().containsRating(userUniqueID)){
-            v.getRatings().editRating(userUniqueID, true);
+    public void likeVideo(Video v, User user){
+        if (v.getRatings().containsRating(user.getUserName())){
+            v.getRatings().editRating(user.getUserName(), true);
         }
         else{
-            v.getRatings().addRating(userUniqueID, true);
+            v.getRatings().addRating(user.getUserName(), true);
         }
     }
 
@@ -63,25 +63,25 @@ public class VideoEditor {
      *
      * @param v the target video
      */
-    public void dislikeVideo(Video v,  String userUniqueID){
-        if (v.getRatings().containsRating(userUniqueID)){
-            v.getRatings().editRating(userUniqueID, false);
+    public void dislikeVideo(Video v,  User user){
+        if (v.getRatings().containsRating(user.getUserName())){
+            v.getRatings().editRating(user.getUserName(), false);
         }
         else{
-            v.getRatings().addRating(userUniqueID, false);
+            v.getRatings().addRating(user.getUserName(), false);
         }
     }
 
-    public void deleteRating(Video v, String userUniqueID){
-        if (v.getRatings().containsRating(userUniqueID)){
-            v.getRatings().deleteRating(userUniqueID);
+    public void deleteRating(Video v, User user){
+        if (v.getRatings().containsRating(user.getUserName())){
+            v.getRatings().deleteRating(user.getUserName());
         }
     }
 
     // return current Rating of the uniqueID. 0 = dislike, 1 = like, 2 = null
-    public Integer currentRatingOfUserUniqueID(Video v, String userUniqueID){
-        if (v.getRatings().getRatings().containsKey(userUniqueID)){
-            if (v.getRatings().getRatings().get(userUniqueID)){
+    public Integer currentRatingOfUser(Video v, User user){
+        if (v.getRatings().getRatings().containsKey(user.getUserName())){
+            if (v.getRatings().getRatings().get(user.getUserName())){
                 return 1;
             }
             else{

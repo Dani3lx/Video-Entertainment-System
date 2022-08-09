@@ -200,23 +200,23 @@ public class UserManager {
      * is not originally disliked by that uniqueID, or else delete that rating for the video.
      *
      * @param v    target video
-     * @param userUniqueID user uniqueID of user
+     * @param user user
      * @param like whether to like the video or not
      */
-    public void rateVideo(Video v, String userUniqueID, boolean like) {
+    public void rateVideo(Video v, User user, boolean like) {
         if (like) {
-            if (!ve.currentRatingOfUserUniqueID(v, userUniqueID).equals(1)){
-                ve.likeVideo(v, userUniqueID);
+            if (!ve.currentRatingOfUser(v, user).equals(1)){
+                ve.likeVideo(v, user);
             }
             else{
-                ve.deleteRating(v, userUniqueID);
+                ve.deleteRating(v, user);
             }
         } else {
-            if (!ve.currentRatingOfUserUniqueID(v, userUniqueID).equals(0)){
-                ve.dislikeVideo(v, userUniqueID);
+            if (!ve.currentRatingOfUser(v, user).equals(0)){
+                ve.dislikeVideo(v, user);
             }
             else{
-                ve.deleteRating(v, userUniqueID);
+                ve.deleteRating(v, user);
             }
         }
     }
