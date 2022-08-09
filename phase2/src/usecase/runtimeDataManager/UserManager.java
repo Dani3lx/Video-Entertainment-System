@@ -197,14 +197,10 @@ public class UserManager {
      * Rates a video.
      *
      * @param v    target video
-     * @param like whether to like the video or not
+     * @param username username of user
      */
-    public void rateVideo(Video v, boolean like) {
-        if (like) {
-            ve.likeVideo(v);
-        } else {
-            ve.dislikeVideo(v);
-        }
+    public void rateVideo(Video v, String username) {
+        ve.likeVideo(v, username);
     }
 
 

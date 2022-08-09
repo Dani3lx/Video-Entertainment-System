@@ -1,4 +1,4 @@
-package phase2features;
+package entities;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,10 +23,15 @@ public class Ratings {
         likeUserName.add(username);
         totalLikes += 1;
     }
-    public void addDislikes(String username){
-        likeUserName.add(username);
+
+    public void addLikes(){
         totalLikes += 1;
     }
+
+//    public void addDislikes(String username){
+//        likeUserName.add(username);
+//        totalLikes += 1;
+//    }
 
     public ArrayList<String> getLikeUserName() {
         return likeUserName;
