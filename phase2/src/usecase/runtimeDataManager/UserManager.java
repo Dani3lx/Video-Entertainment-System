@@ -1,7 +1,6 @@
 package usecase.runtimeDataManager;
 
 import entities.*;
-import usecase.VideoEditor;
 
 import java.util.*;
 
@@ -14,7 +13,6 @@ import java.util.*;
  */
 public class UserManager {
     static VideoManager vm = VideoManager.getInstance();
-    private final VideoEditor ve = new VideoEditor();
     private ArrayList<User> users;
 
     private static UserManager instance;
@@ -181,15 +179,6 @@ public class UserManager {
     }
 
     /**
-     * Sets all users.
-     *
-     * @param allUsers list of all users
-     */
-    public void setAllUsers(ArrayList<User> allUsers) {
-        users = allUsers;
-    }
-
-    /**
      * Return whether user is admin.
      *
      * @param user target user
@@ -197,24 +186,6 @@ public class UserManager {
      */
     public boolean getRole(User user) {
         return user.isAdminInd();
-    }
-
-    /**
-     * Rates a video. If the parameter "like" is true, change the video's ratings to like if the video
-     * is not originally liked by that uniqueID, or else delete that rating for the video.
-     * If the parameter "dislike" is true, change the video's ratings to dislike if the video
-     * is not originally disliked by that uniqueID, or else delete that rating for the video.
-     *
-     * @param v    target video
-     * @param user user
-     * @param like whether to like the video or not
-     */
-    public void rateVideo(Video v, User user, boolean like) {
-        if (like) {
-            ve.likeVideo(v, user);
-        } else {
-            ve.dislikeVideo(v, user);
-        }
     }
 
     /**
