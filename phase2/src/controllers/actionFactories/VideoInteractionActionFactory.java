@@ -8,7 +8,9 @@ import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import userInterfaces.userPrompt.UserPrompt;
 
-
+/**
+ * A concrete action factory that creates video interaction related actions base on type.
+ */
 public class VideoInteractionActionFactory implements ActionFactory {
     private final User user;
     private final LanguagePresenter lp;
@@ -16,6 +18,15 @@ public class VideoInteractionActionFactory implements ActionFactory {
     private final UserPrompt userPrompt;
     private final Video video;
 
+    /**
+     * Creates a video interaction action factory with the given user prompt, user, language presenter, menu presenter and video.
+     *
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     * @param video      a video
+     */
     public VideoInteractionActionFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, Video video) {
         this.userPrompt = userPrompt;
         this.user = user;
@@ -24,6 +35,12 @@ public class VideoInteractionActionFactory implements ActionFactory {
         this.video = video;
     }
 
+    /**
+     * Generates and returns an action base on the type.
+     *
+     * @param type the type of action
+     * @return an action with the given type
+     */
     public Action getAction(String type) {
         switch (type) {
             case "like video":
@@ -33,11 +50,11 @@ public class VideoInteractionActionFactory implements ActionFactory {
             case "delete comment":
                 return new DeleteComment(userPrompt, user, lp, mp, video);
             case "edit comment":
-                return new EditComment(userPrompt, user, lp, mp,video);
+                return new EditComment(userPrompt, user, lp, mp, video);
             case "add comment":
-                return new AddComment(userPrompt,user,lp,mp,video);
+                return new AddComment(userPrompt, user, lp, mp, video);
             case "view comments":
-                return new ViewComment(userPrompt,user, lp, mp, video);
+                return new ViewComment(userPrompt, user, lp, mp, video);
             default:
                 return null;
         }
