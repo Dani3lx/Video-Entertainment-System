@@ -177,7 +177,7 @@ public class PlaylistManager {
             for (String uniqueID : uniqueIDs) {
                 videos.add(vm.getByUniqueID(uniqueID));
             }
-            Collections.sort(videos, new VideoRatingComparator());
+            videos.sort(new VideoRatingComparator());
 
             ArrayList<String> newUniqueIDs = new ArrayList<>();
             for (Video video : videos) {
@@ -230,7 +230,7 @@ public class PlaylistManager {
             for (String uniqueID : uniqueIDs) {
                 videos.add(vm.getByUniqueID(uniqueID));
             }
-            Collections.sort(videos, new RandomComparator());
+            videos.sort(new RandomComparator());
 
             ArrayList<String> newUniqueIDs = new ArrayList<>();
             for (Video video : videos) {
@@ -300,12 +300,7 @@ public class PlaylistManager {
     public boolean validatePlaylistAction(Playlist pl,String username){
         boolean validate;
         String pl_user = pl.getUserName();
-        if (pl_user.equals(username)){
-            validate = true;
-        }
-        else {
-            validate = false;
-        }
+        validate = pl_user.equals(username);
         return validate;
     }
 
