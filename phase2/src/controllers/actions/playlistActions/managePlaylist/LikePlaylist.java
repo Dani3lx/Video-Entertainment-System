@@ -16,10 +16,10 @@ import java.util.List;
 
 public class LikePlaylist extends MenuAction implements Action {
 
-    MenuFactory playlistsMenuFactory;
-    public Playlist pl;
+    private final MenuFactory playlistsMenuFactory;
+    private final Playlist pl;
 
-    public LikePlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
+    public LikePlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
@@ -27,14 +27,16 @@ public class LikePlaylist extends MenuAction implements Action {
         currentUser = user;
         playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, pl);
     }
+
     @Override
-    public void run(){
-        pm.likePlaylist(pl); //todo will need to add current user when user is implemented
+    public void run() {
+        pm.likePlaylist(pl);
         mp.displayAlert(LanguagePresenter.AlertTextType.SUCCESS);
         next();
     }
+
     @Override
-    public void next(){
+    public void next() {
         playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTMANAGE).run();
     }
 }
