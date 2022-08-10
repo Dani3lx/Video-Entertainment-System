@@ -1,8 +1,8 @@
 package userInterfaces.menus.playlistsMenu;
 
-import controllers.action.actionFactories.Action;
-import controllers.action.actionFactories.ActionFactory;
-import controllers.action.actionFactories.PlaylistActionFactory;
+import controllers.actionFactories.Action;
+import controllers.actionFactories.ActionFactory;
+import controllers.actionFactories.PlaylistActionFactory;
 import entities.Playlist;
 import entities.User;
 import presenters.language.LanguagePresenter;
