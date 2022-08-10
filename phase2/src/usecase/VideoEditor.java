@@ -86,13 +86,27 @@ public class VideoEditor {
         }
     }
 
+    /**
+     * Delete a user's rating of a video
+     *
+     * @param v the target video
+     * @param user the target user
+     */
     public void deleteRating(Video v, User user){
         if (v.getRatings().containsRating(user.getUserName())){
             v.getRatings().deleteRating(user.getUserName());
         }
     }
 
-    // return current Rating of the user. 0 = dislike, 1 = like, 2 = null
+    /**
+     * Return an Integer representing the current state of the user, either like, dislike, or no
+     * current rating of the respective user.
+     *
+     * @param v the target video
+     * @param user the target user
+     * @return Return the current rating of a user to the video. 0 represent dislike,
+     *         1 represent like, 2 represent no current rating.
+     */
     public Integer currentRatingOfUser(Video v, User user){
         if (v.getRatings().getRatings().containsKey(user.getUserName())){
             if (v.getRatings().getRatings().get(user.getUserName())){
@@ -106,12 +120,12 @@ public class VideoEditor {
             return 2;
         }
     }
-    public void getTotalLikes(Video v){
-        v.getRatings().getTotalLikes();
+    public Integer getTotalLikes(Video v){
+        return v.getRatings().getTotalLikes();
     }
 
-    public void getTotalDislikes(Video v){
-        v.getRatings().getTotalDislikes();
+    public Integer getTotalDislikes(Video v){
+        return v.getRatings().getTotalDislikes();
     }
 
 
