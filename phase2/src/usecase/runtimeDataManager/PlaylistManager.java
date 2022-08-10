@@ -177,7 +177,8 @@ public class PlaylistManager {
      * @return Playlist after reordering
      */
     public Playlist reorderPlaylistByRating(Playlist playlist, VideoManager vm) {
-        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+        Playlist new_pl = playlist;
+        ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         ArrayList<Video> videos = new ArrayList<>();
         try {
             for (String uniqueID : uniqueIDs) {
@@ -189,10 +190,10 @@ public class PlaylistManager {
             for (Video video : videos) {
                 newUniqueIDs.add(video.getUniqueID());
             }
-            playlist.setUniqueIDs(newUniqueIDs);
-            return playlist;
+            new_pl.setUniqueIDs(newUniqueIDs);
+            return new_pl;
         } catch (Exception e) {
-            return playlist;
+            return new_pl;
         }
     }
 
@@ -202,10 +203,11 @@ public class PlaylistManager {
      * @return Playlist after reordering
      */
     public Playlist reorderPlaylistByName(Playlist playlist) {
-        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+        Playlist new_pl = playlist;
+        ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         Collections.sort(uniqueIDs);
-        playlist.setUniqueIDs(uniqueIDs);
-        return playlist;
+        new_pl.setUniqueIDs(uniqueIDs);
+        return new_pl;
     }
 
     /**
@@ -215,7 +217,8 @@ public class PlaylistManager {
      * @return Playlist after reordering
      */
     public Playlist shufflePlaylist(Playlist playlist, VideoManager vm) {
-        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+        Playlist new_pl = playlist;
+        ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         ArrayList<Video> videos = new ArrayList<>();
         try {
             for (String uniqueID : uniqueIDs) {
@@ -227,10 +230,10 @@ public class PlaylistManager {
             for (Video video : videos) {
                 newUniqueIDs.add(video.getUniqueID());
             }
-            playlist.setUniqueIDs(newUniqueIDs);
-            return playlist;
+            new_pl.setUniqueIDs(newUniqueIDs);
+            return new_pl;
         } catch (Exception e) {
-            return playlist;
+            return new_pl;
         }
     }
 

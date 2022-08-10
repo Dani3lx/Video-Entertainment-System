@@ -39,7 +39,7 @@ public class ReorderLikesPlaylist extends MenuAction implements Action {
         }
         else{
             Playlist sorted_pl = pm.reorderPlaylistByRating(pl,vm);
-            String old_name = pm.getPlName(pl);
+            String old_name = pm.getPlName(sorted_pl);
             pm.setPlName(sorted_pl,old_name + "_rating_sorted");
             pm.addPlaylist(sorted_pl);
             mp.displayAlert(LanguagePresenter.AlertTextType.SUCCESS);

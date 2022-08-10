@@ -39,7 +39,7 @@ public class ReorderABCPlaylist extends MenuAction implements Action {
         }
         else{
             Playlist sorted_pl = pm.reorderPlaylistByName(pl);
-            String old_name = pm.getPlName(pl);
+            String old_name = pm.getPlName(sorted_pl);
             pm.setPlName(sorted_pl,old_name + "_abc_sorted");
             pm.addPlaylist(sorted_pl);
             mp.displayAlert(LanguagePresenter.AlertTextType.SUCCESS);

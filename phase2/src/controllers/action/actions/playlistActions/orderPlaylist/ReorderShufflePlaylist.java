@@ -39,8 +39,8 @@ public class ReorderShufflePlaylist extends MenuAction implements Action {
         }
         else{
             Playlist sorted_pl = pm.shufflePlaylist(pl,vm);
-            String old_name = pm.getPlName(pl);
-            pm.setPlName(sorted_pl,old_name + "_rating_sorted");
+            String old_name = pm.getPlName(sorted_pl);
+            pm.setPlName(sorted_pl,old_name + "_shuffled");
             pm.addPlaylist(sorted_pl);
             mp.displayAlert(LanguagePresenter.AlertTextType.SUCCESS);
             playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, List.of(sorted_pl));
