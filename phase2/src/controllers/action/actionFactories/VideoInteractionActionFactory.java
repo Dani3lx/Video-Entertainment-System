@@ -31,9 +31,9 @@ public class VideoInteractionActionFactory implements ActionFactory {
             case "dislike video":
                 return new DislikeVideo(userPrompt, user, mp, lp, video);
             case "delete comment":
-            //todo    return new DeleteComment(userPrompt, user, lp, mp);
+                return new DeleteComment(userPrompt, user, lp, mp, video);
             case "edit comment":
-            //todo    return new EditComment(userPrompt, user, lp, mp);
+                return new EditComment(userPrompt, user, lp, mp,video);
             case "add comment":
                 return new AddComment(userPrompt,user,lp,mp,video);
             case "view comments":
