@@ -198,15 +198,35 @@ public class PlaylistManager {
     }
 
     /**
-     * Reorder the specified playlist by name and return the new Playlist object.
+     * Reorder the specified playlist by uniqueIDs and return the new Playlist object.
      * @param playlist the name of the playlist to be reordered
      * @return Playlist after reordering
      */
     public Playlist reorderPlaylistByName(Playlist playlist) {
-        Playlist new_pl = playlist;
-        ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
+        Playlist new_pl = new Playlist(playlist.getPlaylistName(), playlist.getLikes(),
+                new ArrayList<>(), playlist.getUserName());
+        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
         Collections.sort(uniqueIDs);
         new_pl.setUniqueIDs(uniqueIDs);
+        return new_pl;
+    }
+
+    public Playlist reorderPlaylistByName(Playlist playlist, VideoManager vm) {
+        Playlist new_pl = new Playlist(playlist.getPlaylistName(), playlist.getLikes(),
+                new ArrayList<>(), playlist.getUserName());
+        ArrayList<String> unsortedUniqueIDs = playlist.getUniqueIDs();
+        ArrayList<String> sortedUniqueIDs = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>();
+
+        for (String id : unsortedUniqueIDs) { names.add(vm.getByUniqueID(id).getName()); }
+
+        Collections.sort(names);
+
+        for (String name : names) {
+            sortedUniqueIDs.add(vm.getByName(name).get(0).getUniqueID());
+        }
+
+        new_pl.setUniqueIDs(sortedUniqueIDs);
         return new_pl;
     }
 

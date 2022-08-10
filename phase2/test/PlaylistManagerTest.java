@@ -50,6 +50,12 @@ public class PlaylistManagerTest {
         videoIDs.add(v2.getUniqueID());
 
         playlist.setUniqueIDs(videoIDs);
+
+        // Initialize VM
+        ArrayList<Video> videos = new ArrayList<>();
+        videos.add(v1);
+        videos.add(v2);
+        VM.setVids(videos);
     }
 
 
@@ -71,7 +77,9 @@ public class PlaylistManagerTest {
 
     @Test
     public void reorderPlaylistByNameTest() {
-        Playlist result = PM.reorderPlaylistByName(playlist);
+
+
+        Playlist result = PM.reorderPlaylistByName(playlist, VM);
         Playlist expected = new Playlist("name", 0,
                 new ArrayList<>(Arrays.asList("uniqueID2", "uniqueID1")), "user");
         assertEquals(result.getUniqueIDs(), expected.getUniqueIDs());
