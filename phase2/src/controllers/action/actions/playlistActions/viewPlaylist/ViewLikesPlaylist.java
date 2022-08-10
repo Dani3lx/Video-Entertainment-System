@@ -30,9 +30,8 @@ public class ViewLikesPlaylist extends MenuAction implements Action {
     }
     @Override
     public void run(){
-        String plname = pm.getPlName(pl);
-        ArrayList<String> vidname = pm.namesInPlaylist(plname,vm);
-        mp.displayList(vidname);
+        String numlikes = pm.getRatings(pl);
+        mp.displayList(List.of(numlikes));
         next();
     }
     @Override

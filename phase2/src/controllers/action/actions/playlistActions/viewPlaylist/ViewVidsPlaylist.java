@@ -11,6 +11,7 @@ import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.PlaylistsMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,10 +28,13 @@ public class ViewVidsPlaylist extends MenuAction implements Action {
         currentUser = user;
         playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, pl);
     }
+
+
     @Override
     public void run(){
-        String numlikes = pm.getRatings(pl);
-        mp.displayList(List.of(numlikes));
+        String plname = pm.getPlName(pl);
+        ArrayList<String> vidname = pm.namesInPlaylist(plname,vm);
+        mp.displayList(vidname);
         next();
     }
     @Override
