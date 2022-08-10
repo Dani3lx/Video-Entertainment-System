@@ -4,9 +4,7 @@ import controllers.actions.MenuAction;
 import entities.Playlist;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import userInterfaces.menuFactories.Menu;
-import userInterfaces.menuFactories.MenuFactory;
-import userInterfaces.menuFactories.PlaylistsMenuFactory;
+
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
