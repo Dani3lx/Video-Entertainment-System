@@ -13,14 +13,25 @@ import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
 
-public class PlaylistsMenuFactory implements MenuFactory{
+/**
+ * A concrete menu factory that generates playlist related menus.
+ */
+public class PlaylistsMenuFactory implements MenuFactory {
     private final User user;
     private final UserPrompt userPrompt;
     private final LanguagePresenter lp;
     private final MenuPresenter mp;
     private final List<Playlist> playlists;
 
-
+    /**
+     * Creates a playlist menu factory with the given user prompt, user, language presenter, menu presenter and playlists.
+     *
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     * @param playlists  a list of playlists
+     */
     public PlaylistsMenuFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> playlists) {
         this.user = user;
         this.userPrompt = userPrompt;
@@ -29,6 +40,12 @@ public class PlaylistsMenuFactory implements MenuFactory{
         this.playlists = playlists;
     }
 
+    /**
+     * Generate and return a playlist related menu base on the MenuEnums type.
+     *
+     * @param type the type of menu to generate
+     * @return a menu with the given type
+     */
     public Menu getMenu(MenuEnums type) {
 
         switch (type) {
