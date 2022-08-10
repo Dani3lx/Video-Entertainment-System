@@ -14,14 +14,6 @@ import java.util.ArrayList;
 
 public class CommentManager {
 
-    private static CommentManager instance;
-
-    public static CommentManager getInstance(){
-        if (instance == null)
-            instance = new CommentManager();
-        return instance;
-    }
-
     /**
      * Edit existing comment.
      * @param c comment to be edited
@@ -55,7 +47,6 @@ public class CommentManager {
      * @return true to indicate operation was successful
      */
     public Boolean addComment(Video v, String commenter, String comment){
-        ArrayList<Comments> coms = v.getComments();
         v.addComment(new Comments(commenter,comment, LocalDateTime.now().toString()));
         return true;
     }
