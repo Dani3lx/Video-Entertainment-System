@@ -121,6 +121,13 @@ public class NonAdminManager extends UserManager {
         return false;
     }
 
+    /**
+     * Edit comments by a user of a video accessed through its uniqueID
+     * @param uniqueID of video to be edited
+     * @param user accessing the video
+     * @param newComm contents of new comment
+     * @return boolean if the operation was successful
+     */
     public Boolean editComment(String uniqueID, User user, String newComm) {
         ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
         for (Comments c : comments) {
@@ -132,6 +139,12 @@ public class NonAdminManager extends UserManager {
         return false;
     }
 
+    /**
+     * Delete comments by user of specific video accessed through uniqueID
+     * @param uniqueID of video
+     * @param user accessing video
+     * @return boolean if the operation was successful
+     */
     public Boolean deleteComment(String uniqueID, User user){
 
         ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
@@ -144,6 +157,13 @@ public class NonAdminManager extends UserManager {
         return false;
     }
 
+    /**
+     * Add comment by user to video corresponding to uniqueID
+     * @param uniqueID of video
+     * @param user user adding comment
+     * @param comment contents of the comment to be added
+     * @return boolean if the operation was successful
+     */
     public Boolean addComment(String uniqueID, User user, String comment){
         ArrayList<Video> vids = new ArrayList<>(vm.getVids());
         for (Video v: vids){
