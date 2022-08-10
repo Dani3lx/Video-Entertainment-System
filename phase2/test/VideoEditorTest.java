@@ -29,11 +29,6 @@ public class VideoEditorTest {
     }
     @Test
     public void editTitleTest() {
-//        VideoEditor VE = new VideoEditor();
-//        ArrayList<String> cates = new ArrayList<>();
-//        cates.add("humour");
-//        Ratings r = new Ratings();
-//        Video v1 = new Video("K", "things", "nice", cates, "url", "ID", r, "today",new ArrayList<Comments>(List.of(new Comments("", "", ""))));
         VE.editTitle(v1, "new");
         assertEquals("new", v1.getName());
     }
@@ -68,7 +63,7 @@ public class VideoEditorTest {
 
     @Test
     public void currentRatingTest(){
-        assertEquals(Integer.valueOf(1),VE.currentRatingOfUser(v1, u1));
+        assertEquals(Integer.valueOf(0),VE.currentRatingOfUser(v1, u1));
 
     }
 

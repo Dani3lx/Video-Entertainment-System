@@ -13,16 +13,28 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-// Not a controller class, but acts as a UI controller.
+/**
+ * Login a user.
+ */
 public class UserLogin extends MenuAction implements Action {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public UserLogin(UserPrompt userPrompt, LanguagePresenter lp, MenuPresenter mp){
+    /**
+     * Creates an userlogin with the given user prompt, language presenter, and menu presenter.
+     *
+     * @param userPrompt the program's user prompt
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     */
+    public UserLogin(UserPrompt userPrompt, LanguagePresenter lp, MenuPresenter mp) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
     }
 
+    /**
+     * Logs the user in.
+     */
     public void run() {
         // Takes in a username and password and tries to log in
         String username = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.USERNAME);
@@ -31,6 +43,9 @@ public class UserLogin extends MenuAction implements Action {
         next();
     }
 
+    /**
+     * Go to the next menu.
+     */
     public void next() {
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
         if (Objects.isNull(currentUser)) {
