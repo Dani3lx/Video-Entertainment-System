@@ -68,11 +68,11 @@ public class PlaylistManager {
      * @return list of strings
      */
     public List<String> getPlaylistNames(){
-        List<String> pl_names = null;
+        List<String> pl_names = new ArrayList<String>();
         int i = 0;
         for(Playlist playlist : playlists){
-            pl_names.set(i, playlist.getPlaylistName());
-            i++;
+            String pl_name = playlist.getPlaylistName();
+            pl_names.add(pl_name);
         }
         return pl_names;
     }

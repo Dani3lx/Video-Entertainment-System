@@ -19,32 +19,37 @@ public class SearchPlaylist extends MenuAction implements Action {
 
     private boolean found_pl;
     MenuFactory playlistsMenuFactory;
+    MenuFactory userMenuFactory;
 
     public SearchPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
         currentUser = user;
+        userMenuFactory = new UserMenuFactory(userPrompt,currentUser,lp,mp);
     }
     @Override
     public void run(){
         String plname = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PLAYLIST);
         Playlist pl = pm.getPlaylistByName(plname);
-        System.out.println("hi");
+
         /* Check if Playlist Exists*/
         if (Objects.isNull(pl)){
             mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);
             found_pl = false;
-        }
-        else{found_pl=true;}
-        /*Adding playlist to future menus*/
-        playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp,List.of(pl));
+            next();
 
-        next();
+        }
+        else{found_pl=true;
+            /*Adding playlist to future menus*/
+            playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp,List.of(pl));
+            next();
+        }
+
     }
     @Override
     public void next(){
-        MenuFactory userMenuFactory = new UserMenuFactory(userPrompt,currentUser,lp,mp);
+
 
         if (found_pl){
             playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTMANAGE).run();
