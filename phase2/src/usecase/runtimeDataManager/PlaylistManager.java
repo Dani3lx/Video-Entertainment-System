@@ -15,6 +15,10 @@ public class PlaylistManager {
     private ArrayList<Playlist> playlists;
     private static PlaylistManager instance;
 
+    /**
+     * Instantiate new PlaylistManager if not yet created, or return instance
+     * @return PlaylistManager if it already exists
+     */
     public static PlaylistManager getInstance(){
         if (instance == null) {
             instance = new PlaylistManager();

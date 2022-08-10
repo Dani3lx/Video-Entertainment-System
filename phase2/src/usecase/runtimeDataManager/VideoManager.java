@@ -22,12 +22,19 @@ public class VideoManager{
     private ArrayList<Video> vids;
     private static VideoManager instance;
 
+    /**
+     * Instantiate new VideoManager if not yet created, or return instance
+     * @return VideoManager if it already exists
+     */
     public static VideoManager getInstance(){
         if (instance == null)
             instance = new VideoManager();
         return instance;
     }
 
+    /**
+     * Instantiate new VideoManager
+     */
     public VideoManager(){
         vids = new ArrayList<>();
     }

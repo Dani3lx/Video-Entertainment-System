@@ -24,7 +24,10 @@ public class UserManager {
         users = new ArrayList<>();
     }
 
-
+    /**
+     * Instantiate new UserManager if not yet created, or return instance
+     * @return UserManager if it already exists
+     */
     public static UserManager getInstance() {
         if (instance == null)
             instance = new UserManager();
