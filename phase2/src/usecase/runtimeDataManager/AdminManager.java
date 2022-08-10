@@ -14,6 +14,9 @@ public class AdminManager extends UserManager {
 
     private final ArrayList<User> users;
 
+    /**
+     * Instantiate new AdminManager
+     */
     public AdminManager() {
         super();
         UserManager um = UserManager.getInstance();

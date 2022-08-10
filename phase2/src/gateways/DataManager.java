@@ -23,6 +23,9 @@ public class DataManager {
     private final VideoManager vm = VideoManager.getInstance();
     private final PlaylistManager pm = PlaylistManager.getInstance();
 
+    /**
+     * Instantiate new DataManager
+     */
     public DataManager() {}
 
     /**

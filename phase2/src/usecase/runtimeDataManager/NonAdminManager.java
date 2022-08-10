@@ -5,9 +5,7 @@ import entities.User;
 import entities.Video;
 import usecase.VideoEditor;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,8 +21,6 @@ public class NonAdminManager extends UserManager {
 
     /**
      * Responsible for managing non admin users
-     *
-     // * @param vm the video manager that manages videos
      */
     public NonAdminManager() {
         super();

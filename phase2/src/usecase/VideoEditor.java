@@ -1,6 +1,5 @@
 package usecase;
 
-import entities.Comments;
 import entities.User;
 import entities.Video;
 import presenters.language.LanguagePresenter;
@@ -120,14 +119,6 @@ public class VideoEditor {
             return 2;
         }
     }
-    public Integer getTotalLikes(Video v){
-        return v.getRatings().getTotalLikes();
-    }
-
-    public Integer getTotalDislikes(Video v){
-        return v.getRatings().getTotalDislikes();
-    }
-
 
     /**
      * Return the video's information.
