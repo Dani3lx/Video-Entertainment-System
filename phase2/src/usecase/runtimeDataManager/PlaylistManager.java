@@ -1,7 +1,6 @@
 package usecase.runtimeDataManager;
 
 import entities.Playlist;
-import entities.User;
 import entities.Video;
 import usecase.VideoRatingComparator;
 import usecase.RandomComparator;
@@ -69,7 +68,6 @@ public class PlaylistManager {
      */
     public List<String> getPlaylistNames(){
         List<String> pl_names = new ArrayList<>();
-        int i = 0;
         for(Playlist playlist : playlists){
             String pl_name = playlist.getPlaylistName();
             pl_names.add(pl_name);
@@ -82,58 +80,33 @@ public class PlaylistManager {
      * Add a specified Video object to a specified Playlist object
      * @param pl Playlist to be added to
      * @param vid Video to be added
-     * @return boolean indicating if operation was successful
      */
-    public boolean addToPlaylist(Playlist pl, Video vid) {
+    public void addToPlaylist(Playlist pl, Video vid) {
         String vidid = vid.getUniqueID();
         ArrayList<String> videos = pl.getUniqueIDs();
 
         for (String uniqueID : videos) {
             if (uniqueID.equals(vidid)) {
-                return false;
+                return;
             }
         }
         pl.addUniqueID(vidid);
-        return true;
     }
 
     /**
      * Delete a Video from a Playlist created by a User
-     * @param user The user who wants to delete the video
      * @param pl the playlist they want to delete from
      * @param vid the video they want to delete
-     * @return boolean indicating if the operation was successful
      */
-    public boolean deleteFromPlaylist(User user, Playlist pl, Video vid) {
-
-        ArrayList<String> videos = pl.getUniqueIDs();
-        for (String uniqueID : videos) {
-            if (uniqueID.equals(vid.getUniqueID())) {
-                if((user.getUserName()).equals(pl.getUserName())) {
-                    pl.removeUniqueID(vid.getUniqueID());
-                    return true;
-                }
-                return false;
-            }
-        }
-        return false;
-    }
-    /**
-     * Delete a Video from a Playlist created by a User
-     * @param pl the playlist they want to delete from
-     * @param vid the video they want to delete
-     * @return boolean indicating if the operation was successful
-     */
-    public boolean deleteFromPlaylist(Playlist pl, Video vid) {
+    public void deleteFromPlaylist(Playlist pl, Video vid) {
 
         ArrayList<String> videos = pl.getUniqueIDs();
         for (String uniqueID : videos) {
             if (uniqueID.equals(vid.getUniqueID())) {
                     pl.removeUniqueID(vid.getUniqueID());
-                    return true;
+                    return;
             }
         }
-        return false;
     }
 
     /**
