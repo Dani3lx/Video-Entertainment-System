@@ -78,10 +78,22 @@ public class Ratings {
         return count;
     }
 
+    /**
+     * Returns whether a userName liked/disliked or didn't liked/disliked a video.
+     *
+     * @param userName the name of the user
+     * @return boolean of weather a username liked/disliked or didn't liked/disliked a video.
+     */
     public boolean containsRating(String userName){
         return ratings.containsKey(userName);
     }
 
+    /**
+     * Returns whether a userName liked/disliked or didn't liked/disliked a video.
+     *
+     * @param userName the name of the user
+     * @return boolean of weather a username liked/disliked or didn't liked/disliked a video.
+     */
     public void addRating(String userName, Boolean like){
         ratings.put(userName, like);
     }
