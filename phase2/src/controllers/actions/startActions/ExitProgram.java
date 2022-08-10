@@ -8,11 +8,7 @@ import gateways.DataManager;
  * Exits the program.
  */
 public class ExitProgram extends MenuAction implements Action {
-    private final DataManager dataManager;
-
-    public ExitProgram() {
-        dataManager = new DataManager(um, vm, pm);
-    }
+    private final DataManager dataManager = new DataManager();
 
     /**
      * Saves the data.
