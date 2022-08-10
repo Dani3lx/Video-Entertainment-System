@@ -1,4 +1,5 @@
 package controllers.actions.videoInteractionMenu;
+
 import controllers.actionFactories.Action;
 
 import controllers.actions.MenuAction;
@@ -15,20 +16,19 @@ import userInterfaces.userPrompt.UserPrompt;
 
 public class DeleteComment extends MenuAction implements Action {
     private final Video v;
+
     public DeleteComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, Video v) {
         currentUser = user;
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
-        this.v=v;
+        this.v = v;
     }
 
     @Override
     public void run() {
         NonAdminManager NAM = new NonAdminManager();
-
-        //String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.DELETECOMMENT);
-        if (NAM.deleteComment(v.getUniqueID(),currentUser)){
+        if (NAM.deleteComment(v.getUniqueID(), currentUser)) {
             mp.displayAlert(LanguagePresenter.AlertTextType.DELETECOMMENT);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.DELETECOMMENT);
@@ -37,12 +37,12 @@ public class DeleteComment extends MenuAction implements Action {
     }
 
     @Override
-    public void next(){
+    public void next() {
 
         if (!um.getRole(currentUser)) {
             MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
             userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
-        }else{
+        } else {
             MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
             userMenuFactory.getMenu(MenuEnums.ADMIN).run();
         }

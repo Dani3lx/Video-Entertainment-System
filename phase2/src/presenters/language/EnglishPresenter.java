@@ -138,14 +138,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Enter new video title";
             case DESCRIPTION:
                 return "Enter new video description";
-            case EDITCOMMENT:
-                return "Enter the uniqueID of the video whose comment you'd like to edit";
             case NEWCOMMENT:
                 return "Enter the new comment:";
-            case DELETECOMMENT:
-                return "Enter the uniqueID of the video whose comment you'd like to delete:";
-            case ADDCOMMENT:
-                return "Enter the uniqueID of the video you'd like to comment on:";
             case COMMENT:
                 return "Enter the comment:";
             case VIDLINK:
