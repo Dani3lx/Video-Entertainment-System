@@ -89,19 +89,31 @@ public class Ratings {
     }
 
     /**
-     * Returns whether a userName liked/disliked or didn't liked/disliked a video.
+     * Return whether a userName liked/disliked or didn't liked/disliked a video.
      *
      * @param userName the name of the user
+     * @param like true represent liked, false represent disliked
      * @return boolean of weather a username liked/disliked or didn't liked/disliked a video.
      */
     public void addRating(String userName, Boolean like){
         ratings.put(userName, like);
     }
 
+    /**
+     * Edit a rating with the respective userName.
+     *
+     * @param userName the name of the user
+     * @param like true represent liked, false represent disliked
+     */
     public void editRating (String userName, Boolean like){
         ratings.replace(userName, like);
     }
 
+    /**
+     * Delete a rating with the respective userName.
+     *
+     * @param userName the name of the user
+     */
     public void deleteRating(String userName){
         ratings.remove(userName);
     }
