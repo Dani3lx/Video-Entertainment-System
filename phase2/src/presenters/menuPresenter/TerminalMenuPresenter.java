@@ -6,58 +6,12 @@ import java.util.List;
 
 /**
  * Responsible for formatting and outputting data to the user
- *
- * @author Daniel Xu, Wing Zou
- * @version 1.0
- * @since 2022-07-21
  */
 public class TerminalMenuPresenter implements MenuPresenter{
     private final LanguagePresenter lp;
     public TerminalMenuPresenter(LanguagePresenter lp){
         this.lp = lp;
     }
-
-
-    /**
-     * Displays the user's login history.
-     *
-     * @param user the target user
-     */
-//    public void displayLoginHistory(User user) {
-//        System.out.println(um.getHistory(user));
-//        System.out.println("\n");
-//    }
-
-    /**
-     * Displays all the banned/unbanned users.
-     *
-     * @param banStatus whether to display banned or unbanned users
-     */
-//    public void displayUsers(boolean banStatus) {
-//
-//        if (banStatus) {
-//            displayAlert("Here are all the banned users");
-//        } else {
-//            displayAlert("Here are all the unbanned users");
-//        }
-//        displayList(am.returnUsersByBan(um.getAllUsers(), banStatus));
-//    }
-
-    /**
-     * Displays all the users.
-     */
-//    public void displayUsers() {
-//        displayAlert("Here are all the users");
-//        displayList(am.returnUsers(um.getAllUsers()));
-//    }
-
-    /**
-     * Displays all the videos uploaded by user.
-     */
-//    public void displayVideos(User user) {
-//        displayAlert("Here are all the videos uploaded by " + um.getUserName(user));
-//        displayList(nm.displayAllVideos(user, vm.getVids()));
-//    }
 
     /**
      * Displays an alert.
@@ -113,7 +67,7 @@ public class TerminalMenuPresenter implements MenuPresenter{
         }
     }
 
-    /*
+    /**
      * Formats the text for request.
      *
      * @param input the text to be formatted
@@ -125,7 +79,7 @@ public class TerminalMenuPresenter implements MenuPresenter{
         return "\n" + input + "\n" + symbol.repeat(num) + "\n";
     }
 
-    /*
+    /**
      * Formats the text for menu option.
      *
      * @param input the text to be formatted
@@ -138,7 +92,7 @@ public class TerminalMenuPresenter implements MenuPresenter{
         return decorator + "\n" + input + "\n" + decorator;
     }
 
-    /*
+    /**
      * Formats the text for alert.
      *
      * @param input the text to be formatted
@@ -150,7 +104,7 @@ public class TerminalMenuPresenter implements MenuPresenter{
         return "\n" + symbol.repeat(num) + "\n" + input + "\n" + symbol.repeat(num) + "\n";
     }
 
-    /*
+    /**
      * Formats the text for error.
      *
      * @param input the text to be formatted

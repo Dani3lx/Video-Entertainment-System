@@ -1,6 +1,13 @@
 package presenters.language;
 
+/**
+ * All requests and responses
+ */
 public interface LanguagePresenter {
+
+    /**
+     * Integer requests
+     */
     enum ChoiceTextType {
         START,
         ADMIN,
@@ -15,6 +22,9 @@ public interface LanguagePresenter {
         VIDEOINTERACTION
     }
 
+    /**
+     * Good responses
+     */
     enum AlertTextType {
         CREATEACCOUNT,
         CHANGEPASSWORD,
@@ -40,6 +50,9 @@ public interface LanguagePresenter {
         DELETEVIDEO,
     }
 
+    /**
+     * Bad responses
+     */
     enum ErrorTextType {
         INVALIDINPUT,
         CREATEACCOUNT,
@@ -56,6 +69,9 @@ public interface LanguagePresenter {
         DELETEVIDEO,
     }
 
+    /**
+     * String requests
+     */
     enum RequestTextType {
         USERNAME,
         PASSWORD,
@@ -78,6 +94,9 @@ public interface LanguagePresenter {
         DELETEVIDEO,
     }
 
+    /**
+     * Responses involving video data
+     */
     enum VideoDataType{
         TITLE,
         LIKES,
@@ -88,12 +107,28 @@ public interface LanguagePresenter {
         CONTENT,
     }
 
+    /**
+     * Returns a request for user to enter an integer
+     */
     String getChoiceText(ChoiceTextType type);
 
+    /**
+     * Returns a good response
+     */
     String getAlertText(AlertTextType type);
 
+    /**
+     * Returns a bad response
+     */
     String getErrorText(ErrorTextType type);
 
+    /**
+     * Returns a request for user to enter a string
+     */
     String getRequestText(RequestTextType type);
+
+    /**
+     * Returns a response involving video data
+     */
     String getVideoDataText(VideoDataType type);
 }

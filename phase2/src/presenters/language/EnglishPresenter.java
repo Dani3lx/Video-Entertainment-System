@@ -1,6 +1,16 @@
 package presenters.language;
 
+/**
+ * Stores all English responses and requests
+ */
 public class EnglishPresenter implements LanguagePresenter {
+
+    /**
+     *  Stores integer input requests after menu options are given
+     *
+     * @param var the enum type
+     * @return the corresponding string
+     */
     public String getChoiceText(ChoiceTextType var) {
         switch (var) {
             case START:
@@ -30,6 +40,12 @@ public class EnglishPresenter implements LanguagePresenter {
         }
     }
 
+    /**
+     *  Stores alert messages after a certain action
+     *
+     * @param type the enum type
+     * @return the corresponding string
+     */
     public String getAlertText(AlertTextType type) {
         switch (type) {
             case CREATEACCOUNT:
@@ -79,6 +95,12 @@ public class EnglishPresenter implements LanguagePresenter {
         }
     }
 
+    /**
+     *  Stores error messages after a certain action
+     *
+     * @param type the enum type
+     * @return the corresponding string
+     */
     public String getErrorText(ErrorTextType type) {
         switch (type) {
             case INVALIDINPUT:
@@ -112,6 +134,12 @@ public class EnglishPresenter implements LanguagePresenter {
         }
     }
 
+    /**
+     *  Stores string input requests
+     *
+     * @param type the enum type
+     * @return the corresponding string
+     */
     public String getRequestText(RequestTextType type) {
         switch (type) {
             case USERNAME:
@@ -151,6 +179,12 @@ public class EnglishPresenter implements LanguagePresenter {
         }
     }
 
+    /**
+     *  Stores data stored in a video
+     *
+     * @param type the enum type
+     * @return the corresponding string
+     */
     public String getVideoDataText(VideoDataType type) {
         switch(type){
             case UPLOADER:

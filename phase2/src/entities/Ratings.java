@@ -62,7 +62,6 @@ public class Ratings {
         return count;
     }
 
-
     /**
      * Returns the number of dislikes for the video.
      *
@@ -117,44 +116,4 @@ public class Ratings {
     public void deleteRating(String userName){
         ratings.remove(userName);
     }
-
-    public ArrayList<String> getLikeUserName() {
-        ArrayList<String> likeUserNames = new ArrayList<>();
-        for (String key: ratings.keySet()){
-            if (ratings.get(key).equals(true)){
-                likeUserNames.add(key);
-            }
-        }
-        return likeUserNames;
-    }
-
-    public ArrayList<String> getDislikeUserNames() {
-        ArrayList<String> DislikeUserNames = new ArrayList<>();
-        for (String key: ratings.keySet()){
-            if (ratings.get(key).equals(false)){
-                DislikeUserNames.add(key);
-            }
-        }
-        return DislikeUserNames;
-    }
-
-//    @Override
-//    public String toString(){
-//        Iterator<String> keys = ratings.keySet().iterator();
-//        Iterator<Boolean> values = ratings.values().iterator();
-//
-//        StringBuilder s1 = new StringBuilder();
-//        StringBuilder s2 = new StringBuilder();
-//
-//        while (keys.hasNext()) {
-//            s1.append(keys.next()).append("/");
-//        }
-//
-//        while (values.hasNext()) {
-//            s2.append(values.next()).append("/");
-//        }
-//
-//        return s1 + "," + s2;
-//    }
-
 }
