@@ -1,5 +1,8 @@
 package userInterfaces.menuEnums;
 
+/**
+ * Menus that can be used.
+ */
 public enum MenuEnums {
     START,
     ADMIN,
