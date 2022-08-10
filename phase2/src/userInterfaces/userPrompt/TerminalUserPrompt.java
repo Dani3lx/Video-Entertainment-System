@@ -7,16 +7,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A terminal user prompt that handles taking in user inputs.
+ */
 public class TerminalUserPrompt implements UserPrompt {
-    MenuPresenter mp;
-    Scanner sc;
+    private final MenuPresenter mp;
+    private Scanner sc;
 
-    public TerminalUserPrompt(MenuPresenter mp){
+    /**
+     * Creates a terminal user prompt with the given menu presenter.
+     *
+     * @param mp the program's menu presenter
+     */
+    public TerminalUserPrompt(MenuPresenter mp) {
         this.mp = mp;
     }
 
+    /**
+     * Request and returns the user's choice base on the choices and type through the terminal.
+     *
+     * @param type    type of choices
+     * @param choices the choices
+     * @return the user's choice
+     */
     public int getUserChoice(LanguagePresenter.ChoiceTextType type, List<String> choices) {
-        while (true){
+        while (true) {
             sc = new Scanner(System.in);
             mp.displayChoiceOption(type, choices);
             if (sc.hasNextInt()) {
@@ -29,22 +44,24 @@ public class TerminalUserPrompt implements UserPrompt {
         }
     }
 
+    /**
+     * Request and returns the user's string input base on the request type through the terminal.
+     *
+     * @param type the type of request
+     * @return the user's input
+     */
     public String getUserStringInput(LanguagePresenter.RequestTextType type) {
         sc = new Scanner(System.in);
         mp.displayRequest(type);
         return sc.nextLine();
     }
 
-    public int getUserIntInput(LanguagePresenter.RequestTextType type) {
-        sc = new Scanner(System.in);
-        mp.displayRequest(type);
-        if (sc.hasNextInt()) {
-            return (sc.nextInt());
-        } else {
-            return -1;
-        }
-    }
-
+    /**
+     * Request and returns multiple user inputs base on the request base on the request type through the terminal.
+     *
+     * @param type the type of request
+     * @return the user's inputs
+     */
     public List<String> getMultipleInputs(LanguagePresenter.RequestTextType type) {
         sc = new Scanner(System.in);
         mp.displayRequestMultiple(type);
