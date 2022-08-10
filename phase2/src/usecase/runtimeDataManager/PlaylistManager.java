@@ -139,7 +139,7 @@ public class PlaylistManager {
     /**
      * Return the name of each video within the specified playlist.
      * @param playlistName name of the playlist to be viewed
-     * @param vm VideoManager used to access video names using the uniqueID
+     // * @param vm VideoManager used to access video names using the uniqueID
      * @return ArrayList<String> of video names
      */
     public ArrayList<String> namesInPlaylist(String playlistName) {
@@ -174,7 +174,7 @@ public class PlaylistManager {
     /**
      * Reorder the specified playlist using the VideoRatingComparator and return the new Playlist object.
      * @param playlist the name of the playlist to be reordered
-     * @param vm VideoManager to access Video objects
+     // * @param vm VideoManager to access Video objects
      * @return Playlist after reordering
      */
     public Playlist reorderPlaylistByRating(Playlist playlist) {
@@ -236,7 +236,7 @@ public class PlaylistManager {
     /**
      * Reorder the specified playlist using the RandomComparator and return the new Playlist object.
      * @param playlist the name of the playlist to be reordered
-     * @param vm VideoManager to access Video objects
+     // * @param vm VideoManager to access Video objects
      * @return Playlist after reordering
      */
     public Playlist shufflePlaylist(Playlist playlist) {

@@ -61,7 +61,7 @@ public class PlaylistManagerTest {
 
     @Test
     public void reorderPlaylistByRatingTest() {
-        Playlist result = PM.reorderPlaylistByRating(playlist, VM);
+        Playlist result = PM.reorderPlaylistByRating(playlist);
         Playlist expected = new Playlist("name", 0,
                 new ArrayList<>(Arrays.asList("uniqueID2", "uniqueID1")), "user");
         assertEquals(result.getUniqueIDs(), expected.getUniqueIDs());
@@ -79,7 +79,7 @@ public class PlaylistManagerTest {
     public void reorderPlaylistByNameTest() {
 
 
-        Playlist result = PM.reorderPlaylistByName(playlist, VM);
+        Playlist result = PM.reorderPlaylistByName(playlist);
         Playlist expected = new Playlist("name", 0,
                 new ArrayList<>(Arrays.asList("uniqueID2", "uniqueID1")), "user");
         assertEquals(result.getUniqueIDs(), expected.getUniqueIDs());

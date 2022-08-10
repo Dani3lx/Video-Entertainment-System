@@ -33,7 +33,7 @@ public class ViewVidsPlaylist extends MenuAction implements Action {
     @Override
     public void run(){
         String plname = pm.getPlName(pl);
-        ArrayList<String> vidname = pm.namesInPlaylist(plname,vm);
+        ArrayList<String> vidname = pm.namesInPlaylist(plname);
         mp.displayList(vidname);
         next();
     }
