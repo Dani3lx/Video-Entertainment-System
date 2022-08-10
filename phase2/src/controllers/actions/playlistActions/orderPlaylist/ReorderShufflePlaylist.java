@@ -1,7 +1,7 @@
-package controllers.action.actions.playlistActions.orderPlaylist;
+package controllers.actions.playlistActions.orderPlaylist;
 
-import controllers.action.actionFactories.Action;
-import controllers.action.actions.MenuAction;
+import controllers.actionFactories.Action;
+import controllers.actions.MenuAction;
 import entities.Playlist;
 import entities.User;
 import presenters.language.LanguagePresenter;
@@ -38,7 +38,7 @@ public class ReorderShufflePlaylist extends MenuAction implements Action {
             next();
         }
         else{
-            Playlist sorted_pl = pm.shufflePlaylist(pl);
+            Playlist sorted_pl = pm.shufflePlaylist(pl,username);
             String old_name = pm.getPlName(sorted_pl);
             pm.setPlName(sorted_pl,old_name + "_shuffled");
             pm.addPlaylist(sorted_pl);
