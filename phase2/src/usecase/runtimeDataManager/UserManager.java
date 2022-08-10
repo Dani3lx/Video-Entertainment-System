@@ -13,7 +13,7 @@ import java.util.*;
  * @since 2022-07-15
  */
 public class UserManager {
-    static VideoManager vm;
+    static VideoManager vm = VideoManager.getInstance();
     private final VideoEditor ve = new VideoEditor();
     private ArrayList<User> users;
 
@@ -22,17 +22,16 @@ public class UserManager {
     /**
      * This constructs a user manager that manages user.
      *
-     * @param vm video manager for managing videos
+     // *  @param vm video manager for managing videos
      */
-    public UserManager(VideoManager vm) {
-        UserManager.vm = vm;
+    public UserManager() {
         users = new ArrayList<>();
     }
 
 
     public static UserManager getInstance() {
         if (instance == null)
-            instance = new UserManager(vm);
+            instance = new UserManager();
 
         return instance;
     }

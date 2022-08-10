@@ -17,9 +17,9 @@ import java.util.List;
 
 public class CreatePlaylist extends MenuAction implements Action {
 
-    MenuFactory playlistsMenuFactory;
+    private MenuFactory playlistsMenuFactory;
     private boolean check;
-    public CreatePlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
+    public CreatePlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;

@@ -24,10 +24,10 @@ public class NonAdminManager extends UserManager {
     /**
      * Responsible for managing non admin users
      *
-     * @param vm the video manager that manages videos
+     // * @param vm the video manager that manages videos
      */
-    public NonAdminManager(VideoManager vm) {
-        super(vm);
+    public NonAdminManager() {
+        super();
         ve = new VideoEditor();
         CM = new CommentManager();
     }

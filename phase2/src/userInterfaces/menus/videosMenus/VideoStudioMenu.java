@@ -29,7 +29,7 @@ public class VideoStudioMenu implements Menu {
      * @param mp         the program's menu presenter
      */
     public VideoStudioMenu(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
-        actionFactory = new VideoStudioActionFactory(userPrompt, user, lp, mp, null);
+        actionFactory = new VideoStudioActionFactory(userPrompt, user, lp, mp);
         this.userPrompt = userPrompt;
     }
 

@@ -16,21 +16,23 @@ import java.util.List;
 
 public class ViewPlaylist extends MenuAction implements Action {
 
-    MenuFactory playlistsMenuFactory;
+    private final MenuFactory playlistsMenuFactory;
 
-    public ViewPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
+    public ViewPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
         currentUser = user;
         playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, pl);
     }
+
     @Override
-    public void run(){
+    public void run() {
         next();
     }
+
     @Override
-    public void next(){
+    public void next() {
         playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTVIEW).run();
     }
 }

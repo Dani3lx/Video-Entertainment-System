@@ -14,22 +14,22 @@ import userInterfaces.userPrompt.UserPrompt;
 
 public class AddComment extends MenuAction {
     private final Video v;
+
     public AddComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, Video v) {
         currentUser = user;
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
-        this.v=v;
+        this.v = v;
     }
 
     @Override
     public void run() {
-        NonAdminManager NAM = new NonAdminManager(vm);
+        NonAdminManager NAM = new NonAdminManager();
 
-        //String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.ADDCOMMENT);
         String Comm = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.COMMENT);
 
-        if (NAM.addComment(v.getUniqueID(),currentUser, Comm)){
+        if (NAM.addComment(v.getUniqueID(), currentUser, Comm)) {
             mp.displayAlert(LanguagePresenter.AlertTextType.ADDCOMMENT);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.ADDCOMMENT);
@@ -42,7 +42,7 @@ public class AddComment extends MenuAction {
         if (!um.getRole(currentUser)) {
             MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
             userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
-        }else{
+        } else {
             MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
             userMenuFactory.getMenu(MenuEnums.ADMIN).run();
         }

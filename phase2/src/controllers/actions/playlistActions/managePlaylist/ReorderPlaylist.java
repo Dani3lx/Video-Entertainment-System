@@ -15,22 +15,23 @@ import java.util.List;
 
 
 public class ReorderPlaylist extends MenuAction implements Action {
+    private final MenuFactory playlistsMenuFactory;
 
-    MenuFactory playlistsMenuFactory;
-
-    public ReorderPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
+    public ReorderPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
         currentUser = user;
         playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, pl);
     }
+
     @Override
-    public void run(){
+    public void run() {
         next();
     }
+
     @Override
-    public void next(){
+    public void next() {
         playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTORDER).run();
     }
 }

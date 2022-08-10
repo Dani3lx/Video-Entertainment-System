@@ -13,24 +13,20 @@ import java.util.*;
 import java.io.*;
 
 /**
- * This class is responsible for reading and writing data from and to the csv files contained in phase1/datasets
+ * This class is responsible for reading and writing data from and to the csv files contained in phase2/datasets
  *
  * @author Benedek Balla, Shu Fan Nicholas Au
  */
 public class DataManager {
 
-    private final UserManager um;
-    private final VideoManager vm;
-    private final PlaylistManager pm;
+    private final UserManager um = UserManager.getInstance();
+    private final VideoManager vm = VideoManager.getInstance();
+    private final PlaylistManager pm = PlaylistManager.getInstance();
 
-    public DataManager(UserManager um, VideoManager vm, PlaylistManager pm) {
-        this.um = um;
-        this.vm = vm;
-        this.pm = pm;
-    }
+    public DataManager() {}
 
     /**
-     * Reads User data from phase1/datasets/Data.csv into the program by instantiating Users and adding them
+     * Reads User data from phase2/datasets/Data.csv into the program by instantiating Users and adding them
      * into the list of all Users within UserManager.
      *
      * @param filePath the path to Data.csv
@@ -60,7 +56,7 @@ public class DataManager {
     }
 
     /**
-     * Writes User data from the list of all users within UserManager to phase1/datasets/Data.csv
+     * Writes User data from the list of all users within UserManager to phase2/datasets/Data.csv
      *
      * @param filePath the path to Data.csv
      */
@@ -80,7 +76,7 @@ public class DataManager {
     }
 
     /**
-     * Writes Video data from the list of all videos within VideoManager to phase1/datasets/VideoData.csv
+     * Writes Video data from the list of all videos within VideoManager to phase2/datasets/VideoData.csv
      *
      * @param filePath the path to VideoData.csv
      */
@@ -100,7 +96,7 @@ public class DataManager {
     }
 
     /**
-     * Reads Video data from phase1/datasets/VideoData.csv into the program by instantiating Videos and adding them
+     * Reads Video data from phase2/datasets/VideoData.csv into the program by instantiating Videos and adding them
      * into the list of all Videos within VideoManager.
      *
      * @param filePath the path to VideoData.csv
@@ -113,11 +109,17 @@ public class DataManager {
 
             while (scanner.hasNextLine()) {
                 record = scanner.nextLine().split(",");
+
+                // Read Ratings
+
                 HashMap<String, Boolean>  ratingsMap = new HashMap<>();
                 for (String ratingString: new ArrayList<>(Arrays.asList(record[6].split("/")))){
                     ArrayList<String> ratingSplit = new ArrayList<>(Arrays.asList(ratingString.split("=")));
                     ratingsMap.put(ratingSplit.get(0), Boolean.parseBoolean(ratingSplit.get(1)));
                 }
+
+                // Read Comments
+
                 ArrayList<Comments> comments = new ArrayList<>();
                 String[] indComment = record[8].split("/");
 
@@ -127,6 +129,9 @@ public class DataManager {
 
                     comments.add(comment);
                 }
+
+                // Instantiate Video
+
                 Video video = new Video(record[0], record[1], record[2], new ArrayList<>(Arrays.asList(record[3].split("/"))), record[4], record[5], new Ratings(ratingsMap), record[7],comments);
                 videos.add(video);
             }
@@ -137,7 +142,7 @@ public class DataManager {
     }
 
     /**
-     * Writes Playlist data from the list of all playlists within PlaylistManager to phase1/datasets/PlaylistData.csv
+     * Writes Playlist data from the list of all playlists within PlaylistManager to phase2/datasets/PlaylistData.csv
      *
      * @param filePath the path to PlaylistData.csv
      */
@@ -157,7 +162,7 @@ public class DataManager {
     }
 
     /**
-     * Reads Playlist data from phase1/datasets/PlaylistData.csv into the program by instantiating Playlists and adding
+     * Reads Playlist data from phase2/datasets/PlaylistData.csv into the program by instantiating Playlists and adding
      * them into the list of all Playlists within PlaylistManager.
      *
      * @param filePath the path to PlaylistData.csv
