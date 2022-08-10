@@ -23,7 +23,7 @@ public class BanUser extends MenuAction implements Action {
 
     @Override
     public void run(){
-        AdminManager am = new AdminManager(um, vm);
+        AdminManager am = new AdminManager();
 
         // Displays all unbanned users and asks for input to ban a user
         mp.displayAlert(LanguagePresenter.AlertTextType.UNBANNEDUSERS);

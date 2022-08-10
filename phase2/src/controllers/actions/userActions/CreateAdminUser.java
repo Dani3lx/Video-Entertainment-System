@@ -28,7 +28,7 @@ public class CreateAdminUser extends MenuAction implements Action {
     public void run() {
         String username = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.USERNAME);
         String password = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PASSWORD);
-        AdminManager am = new AdminManager(um, vm);
+        AdminManager am = new AdminManager();
         if (um.noUserExist(username)) {
             // Creates a new user through useCase method
             User newUser = am.instantiateUser(username, password, true);

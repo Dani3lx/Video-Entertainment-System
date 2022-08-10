@@ -22,7 +22,7 @@ public class ViewVideoUploaded extends MenuAction implements Action {
 
     @Override
     public void run(){
-        NonAdminManager nam = new NonAdminManager(vm);
+        NonAdminManager nam = new NonAdminManager();
         mp.displayAlert(LanguagePresenter.AlertTextType.VIDEOSUPLOADED);
         mp.displayList(nam.ReturnUserVideos(currentUser, vm.getVids()));
         next();

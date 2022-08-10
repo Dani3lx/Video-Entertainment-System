@@ -24,7 +24,7 @@ public class UploadVideo extends MenuAction implements Action {
 
     @Override
     public void run(){
-        NonAdminManager nam = new NonAdminManager(vm);
+        NonAdminManager nam = new NonAdminManager();
 
         // Asks for all the required inputs to upload a video
         String title = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.TITLE);
