@@ -14,14 +14,20 @@ import java.util.List;
 
 public class CommentManagerTest {
     private static final CommentManager CM = new CommentManager();
-    private static final VideoManager VM = new VideoManager();
+    private static final Ratings r = new Ratings();
+    private static final Video v = new Video("k", "vid", "", new ArrayList<>(), "url", "unique",
+            r, "today",new ArrayList<Comments>(List.of(new Comments("", "", ""))));
     @BeforeClass
     public static void addCommentSetup(){
-        VM.uploadVideo("k","cool vid","amazing way to spend 25min", new ArrayList<>(List.of("humour")),"url");
-        assertTrue(CM.addComment(VM.getVids().get(0),"person","nice"));
-        assertTrue(CM.addComment(VM.getVids().get(0),"person2","good"));
 
-        assertEquals("nice",VM.getVids().get(0).getComments().get(0).getComment());
+//        VM.getVids().add(new Video("k", "vid", "", new ArrayList<>(), "url", VM.getVids().get(0).getUniqueID(),
+//                r, VM.getVids().get(0).getDate_upload(),new ArrayList<Comments>(List.of(new Comments("", "", "")))));
+//        VM.uploadVideo("k","cool vid","amazing way to spend 25min", new ArrayList<>(List.of("humour")),"url");
+        assertTrue(CM.addComment(v,"person","nice"));
+        assertTrue(CM.addComment(v,"person2","good"));
+//        System.out.println(VM.getVids().get(0).getComments().get(0).getComment());
+
+        assertEquals("nice",v.getComments().get(1).getComment());
     }
 
     @Test
@@ -32,7 +38,9 @@ public class CommentManagerTest {
     }
     @Test
     public void deleteCommentTest(){
-        CM.deleteComment(VM.getVids().get(0),VM.getVids().get(0).getComments().get(0));
-        assertTrue(VM.getVids().get(0).getComments().isEmpty());
+        CM.deleteComment(v,v.getComments().get(0));
+        assertEquals("person",v.getComments().get(0).getCommenter());
+        assertEquals("person2",v.getComments().get(1).getCommenter());
+
     }
 }
