@@ -37,7 +37,7 @@ public class UserLogout extends MenuAction implements Action {
     }
 
     /**
-     * Go to the next menu.
+     * Go to the next appropriate menu.
      */
     public void next() {
         userMenuFactory.getMenu(MenuEnums.START).run();

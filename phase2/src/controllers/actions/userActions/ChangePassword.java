@@ -42,7 +42,7 @@ public class ChangePassword extends MenuAction implements Action {
     }
 
     /**
-     * Go to the next menu.
+     * Go to the next appropriate menu.
      */
     @Override
     public void next() {
