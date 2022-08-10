@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * This represents video.
  *
- * @author Daniel Xu
+ * @author Daniel Xu, Benedek Balla
  * @version 1.0
  * @since 2022-07-21
  */
