@@ -25,7 +25,7 @@ public class DeleteComment extends MenuAction implements Action {
 
     @Override
     public void run() {
-        NonAdminManager NAM = new NonAdminManager(vm);
+        NonAdminManager NAM = new NonAdminManager();
 
         //String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.DELETECOMMENT);
         if (NAM.deleteComment(v.getUniqueID(),currentUser)){

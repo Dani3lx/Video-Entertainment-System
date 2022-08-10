@@ -22,7 +22,7 @@ public class EditComment extends MenuAction {
 
     @Override
     public void run() {
-        NonAdminManager NAM = new NonAdminManager(vm);
+        NonAdminManager NAM = new NonAdminManager();
 //        String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.EDITCOMMENT);
         String newComm = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.NEWCOMMENT);
 

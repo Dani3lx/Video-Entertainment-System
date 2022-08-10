@@ -22,7 +22,7 @@ public class DeleteVideo extends MenuAction implements Action {
 
     @Override
     public void run(){
-        NonAdminManager nam = new NonAdminManager(vm);
+        NonAdminManager nam = new NonAdminManager();
 
         // Asks for uniqueID of video that needs to be deleted
         String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.DELETEVIDEO);
