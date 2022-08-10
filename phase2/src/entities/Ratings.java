@@ -15,7 +15,7 @@ public class Ratings {
         this.ratings = ratings;
     } // userName, like/dislike
     public Ratings(){
-        this.ratings = new HashMap<>(ratings);
+        this.ratings = new HashMap<>();
     }
 
     public HashMap<String, Boolean> getRatings() {

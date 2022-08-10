@@ -41,8 +41,16 @@ public class NonAdminManager extends UserManager {
      * @param categories  what genres the video belongs to
      * @param vidLink     link to the video
      */
-    public void uploadVideo(User user, String title, String description, ArrayList<String> categories, String vidLink) {
-        vm.uploadVideo(user.getUserName(), title, description, categories, vidLink);
+    public boolean uploadVideo(User user, String title, String description, List<String> categories, String vidLink) {
+        ArrayList<String> cat = new ArrayList<>(categories);
+        if (title.equals("") || vidLink.equals("")){
+            return false;
+        } else if (categories.isEmpty()){
+            vm.uploadVideo(user.getUserName(), title, description, new ArrayList<>(), vidLink);
+        } else {
+            vm.uploadVideo(user.getUserName(), title, description, cat, vidLink);
+        }
+        return true;
     }
 
     /**

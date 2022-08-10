@@ -35,7 +35,9 @@ public interface LanguagePresenter {
 
         DISPLAYCOMMENT,
         LIKEVIDEO,
-        DISLIKEVIDEO
+        DISLIKEVIDEO,
+        UPLOADVIDEO,
+        DELETEVIDEO,
     }
 
     enum ErrorTextType {
@@ -50,6 +52,8 @@ public interface LanguagePresenter {
         EDITCOMMENT,
         DELETECOMMENT,
         ADDCOMMENT,
+        UPLOADVIDEO,
+        DELETEVIDEO,
     }
 
     enum RequestTextType {
@@ -70,6 +74,8 @@ public interface LanguagePresenter {
         DELETECOMMENT,
         ADDCOMMENT,
         COMMENT,
+        VIDLINK,
+        DELETEVIDEO,
     }
 
     enum VideoDataType{
@@ -79,7 +85,7 @@ public interface LanguagePresenter {
         DESCRIPTION,
         UPLOADER,
         DATEUPLOADED,
-        CONTENT
+        CONTENT,
     }
 
     String getChoiceText(ChoiceTextType type);
