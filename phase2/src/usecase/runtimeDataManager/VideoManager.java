@@ -13,7 +13,7 @@ import java.util.UUID;
 /**
  * Use case class responsible for interacting with the Video entity class
  *
- * @author Kate Ma
+ * @author Kate Ma, Daniel
  * @version 1.0
  * @since 2022-07-23
  */
@@ -50,8 +50,6 @@ public class VideoManager{
         vids = videos;
     }
 
-
-    // todo: create a builder for video
     /**
      * Upload a video with the following properties.
      *
@@ -80,7 +78,6 @@ public class VideoManager{
         Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString(), comments);
         vids.add(v1);
     }
-
 
     /**
      * Delete a video.
