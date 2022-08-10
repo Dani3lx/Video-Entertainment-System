@@ -7,7 +7,6 @@ import entities.Playlist;
 import entities.User;
 import entities.Video;
 import presenters.MenuPresenter;
-import presenters.VideoBrowsePresenter;
 import usecase.PlaylistManager;
 import usecase.VideoManager;
 

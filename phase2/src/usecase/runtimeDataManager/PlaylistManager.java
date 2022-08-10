@@ -68,11 +68,11 @@ public class PlaylistManager {
      * @return list of strings
      */
     public List<String> getPlaylistNames(){
-        List<String> pl_names = null;
+        List<String> pl_names = new ArrayList<String>();
         int i = 0;
         for(Playlist playlist : playlists){
-            pl_names.set(i, playlist.getPlaylistName());
-            i++;
+            String pl_name = playlist.getPlaylistName();
+            pl_names.add(pl_name);
         }
         return pl_names;
     }
@@ -169,6 +169,22 @@ public class PlaylistManager {
         }
         return null;
     }
+    /**
+     * Deep clones the playlist
+     * @param pl the playlist to be clones
+     * @param username username of the individual cloning the playlist
+     * @return cloned playlist, does not add to playlist collection
+     */
+    public Playlist clonePlaylist(Playlist pl,String username){
+
+        String pl_name = pl.getPlaylistName() + "_clone";
+        int pl_likes = pl.getLikes();
+        ArrayList<String> pl_vids = pl.getUniqueIDs();
+
+        Playlist new_pl = new Playlist(pl_name,pl_likes,pl_vids,username);
+
+        return new_pl;
+    }
 
     /**
      * Reorder the specified playlist using the VideoRatingComparator and return the new Playlist object.
@@ -176,8 +192,9 @@ public class PlaylistManager {
      * @param vm VideoManager to access Video objects
      * @return Playlist after reordering
      */
-    public Playlist reorderPlaylistByRating(Playlist playlist, VideoManager vm) {
-        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+    public Playlist reorderPlaylistByRating(Playlist playlist, VideoManager vm, String username) {
+        Playlist new_pl = clonePlaylist(playlist,username);
+        ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         ArrayList<Video> videos = new ArrayList<>();
         try {
             for (String uniqueID : uniqueIDs) {
@@ -189,23 +206,42 @@ public class PlaylistManager {
             for (Video video : videos) {
                 newUniqueIDs.add(video.getUniqueID());
             }
-            playlist.setUniqueIDs(newUniqueIDs);
-            return playlist;
+            new_pl.setUniqueIDs(newUniqueIDs);
+            return new_pl;
         } catch (Exception e) {
-            return playlist;
+            return new_pl;
         }
     }
 
     /**
-     * Reorder the specified playlist by name and return the new Playlist object.
+     * Reorder the specified playlist by uniqueIDs and return the new Playlist object.
      * @param playlist the name of the playlist to be reordered
      * @return Playlist after reordering
      */
-    public Playlist reorderPlaylistByName(Playlist playlist) {
+    public Playlist reorderPlaylistByName(Playlist playlist, String username) {
+        Playlist new_pl = clonePlaylist(playlist,username);
         ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
         Collections.sort(uniqueIDs);
-        playlist.setUniqueIDs(uniqueIDs);
-        return playlist;
+        new_pl.setUniqueIDs(uniqueIDs);
+        return new_pl;
+    }
+
+    public Playlist reorderPlaylistByName(Playlist playlist, VideoManager vm, String username) {
+        Playlist new_pl = clonePlaylist(playlist,username);
+        ArrayList<String> unsortedUniqueIDs = playlist.getUniqueIDs();
+        ArrayList<String> sortedUniqueIDs = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>();
+
+        for (String id : unsortedUniqueIDs) { names.add(vm.getByUniqueID(id).getName()); }
+
+        Collections.sort(names);
+
+        for (String name : names) {
+            sortedUniqueIDs.add(vm.getByName(name).get(0).getUniqueID());
+        }
+
+        new_pl.setUniqueIDs(sortedUniqueIDs);
+        return new_pl;
     }
 
     /**
@@ -214,8 +250,9 @@ public class PlaylistManager {
      * @param vm VideoManager to access Video objects
      * @return Playlist after reordering
      */
-    public Playlist shufflePlaylist(Playlist playlist, VideoManager vm) {
-        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
+    public Playlist shufflePlaylist(Playlist playlist, VideoManager vm, String username) {
+        Playlist new_pl = clonePlaylist(playlist,username);
+        ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         ArrayList<Video> videos = new ArrayList<>();
         try {
             for (String uniqueID : uniqueIDs) {
@@ -227,10 +264,10 @@ public class PlaylistManager {
             for (Video video : videos) {
                 newUniqueIDs.add(video.getUniqueID());
             }
-            playlist.setUniqueIDs(newUniqueIDs);
-            return playlist;
+            new_pl.setUniqueIDs(newUniqueIDs);
+            return new_pl;
         } catch (Exception e) {
-            return playlist;
+            return new_pl;
         }
     }
 

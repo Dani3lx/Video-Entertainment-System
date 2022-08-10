@@ -14,11 +14,17 @@ public class EnglishPresenter implements LanguagePresenter {
             case VIDEOSTUDIO:
                 return "Welcome to the video studio, please select one of the following action to proceed.";
             case PLAYLIST:
-                return "Welcome to the playlist system, please select one of the following action to proceed.";
+                return "Welcome to the playlist browse menu, please select one of the following action to proceed.";
             case VIDEO:
                 return "Here are the videos";
             case VIDEOINTERACTION:
                 return "Welcome to the video interaction menu, please select one of the following action to proceed.";
+            case PLAYLISTVIEW:
+                return "Welcome to the view playlist options menu, please select one of the following actions to proceed.";
+            case PLAYLISTORDER:
+                return "Welcome to the playlist reordering menu, please select one of the following actions to proceed.";
+            case PLAYLISTMANAGE:
+                return "Welcome to the playlist management menu, please select one of the following actions to proceed.";
             default:
                 return "";
         }
@@ -64,6 +70,10 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Video uploaded successfully";
             case DELETEVIDEO:
                 return "Video deleted successfully";
+            case SUCCESS:
+                return "Your action has been completed successfully";
+            case ALLPLAYLISTS:
+                return "Here is the playlist directory.  Please enter the name of the playlist you would like to access.";
             default:
                 return "";
         }
@@ -95,6 +105,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Video was not successfully uploaded, title or video path cannot be blank";
             case DELETEVIDEO:
                 return "Video was not successfully deleted";
+            case INVALIDUSER:
+                return "You do not have sufficient permissions to access this content.";
             default:
                 return "";
         }
@@ -138,6 +150,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Enter the comment:";
             case VIDLINK:
                 return "Enter the video path";
+            case PLAYLIST:
+                return "Enter the playlist's name";
             default:
                 return "";
         }
