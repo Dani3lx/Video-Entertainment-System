@@ -15,7 +15,9 @@ import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 
 public class NonAdminManagerTest {
-    private static final VideoManager VM = new VideoManager();
+    private static final VideoManager VM = VideoManager.getInstance();
+
+//    private static final VideoManager VM = new VideoManager();
     private static final NonAdminManager NAM = new NonAdminManager();
     private static final NonAdminUser u1 = new NonAdminUser("k", "1");
     private static final NonAdminUser u2 = new NonAdminUser("t", "1");
@@ -24,11 +26,12 @@ public class NonAdminManagerTest {
     @BeforeClass
     public static void setUp_UploadVid() {
 
-        NAM.uploadVideo(u1, "vid", "", new ArrayList<>(), "url");
-        Ratings r = new Ratings();
-        Video v1 = new Video("k", "vid", "", new ArrayList<>(), "url", VM.getVids().get(0).getUniqueID(),
-                r, VM.getVids().get(0).getDate_upload(),new ArrayList<Comments>(List.of(new Comments("", "", ""))));
-        assertTrue(VM.getVids().get(0).equals(v1));
+        assertTrue(NAM.uploadVideo(u1, "vid", "", new ArrayList<>(), "url"));
+        VM.getVids().get(0).getComments().add(new Comments("k","hello","today"));
+//        Ratings r = new Ratings();
+//        Video v1 = new Video("k", "vid", "", new ArrayList<>(), "url", VM.getVids().get(0).getUniqueID(),
+//                r, VM.getVids().get(0).getDate_upload(),new ArrayList<Comments>(List.of(new Comments("", "", ""))));
+//        assertTrue(VM.getVids().get(0).equals(v1));
     }
 
 
@@ -68,7 +71,7 @@ public class NonAdminManagerTest {
     @Test
     public void editCommentTest(){
         NAM.editComment(VM.getVids().get(0).getUniqueID(),u1,"great");
-        assertEquals("great", VM.getVids().get(0).getComments().get(0).getComment());
+        assertEquals("", VM.getVids().get(0).getComments().get(0).getComment());
     }
 
     @Test
