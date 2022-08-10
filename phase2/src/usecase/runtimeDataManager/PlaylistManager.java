@@ -142,7 +142,8 @@ public class PlaylistManager {
      * @param vm VideoManager used to access video names using the uniqueID
      * @return ArrayList<String> of video names
      */
-    public ArrayList<String> namesInPlaylist(String playlistName, VideoManager vm) {
+    public ArrayList<String> namesInPlaylist(String playlistName) {
+        VideoManager vm = VideoManager.getInstance();
         Playlist playlist = getPlaylistByName(playlistName);
         ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
         ArrayList<String> videoName = new ArrayList<>();
@@ -176,7 +177,8 @@ public class PlaylistManager {
      * @param vm VideoManager to access Video objects
      * @return Playlist after reordering
      */
-    public Playlist reorderPlaylistByRating(Playlist playlist, VideoManager vm) {
+    public Playlist reorderPlaylistByRating(Playlist playlist) {
+        VideoManager vm = VideoManager.getInstance();
         Playlist new_pl = playlist;
         ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         ArrayList<Video> videos = new ArrayList<>();
@@ -202,7 +204,7 @@ public class PlaylistManager {
      * @param playlist the name of the playlist to be reordered
      * @return Playlist after reordering
      */
-    public Playlist reorderPlaylistByName(Playlist playlist) {
+    public Playlist reorderPlaylistByUniqueID(Playlist playlist) {
         Playlist new_pl = new Playlist(playlist.getPlaylistName(), playlist.getLikes(),
                 new ArrayList<>(), playlist.getUserName());
         ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
@@ -211,7 +213,8 @@ public class PlaylistManager {
         return new_pl;
     }
 
-    public Playlist reorderPlaylistByName(Playlist playlist, VideoManager vm) {
+    public Playlist reorderPlaylistByName(Playlist playlist) {
+        VideoManager vm = VideoManager.getInstance();
         Playlist new_pl = new Playlist(playlist.getPlaylistName(), playlist.getLikes(),
                 new ArrayList<>(), playlist.getUserName());
         ArrayList<String> unsortedUniqueIDs = playlist.getUniqueIDs();
@@ -236,7 +239,8 @@ public class PlaylistManager {
      * @param vm VideoManager to access Video objects
      * @return Playlist after reordering
      */
-    public Playlist shufflePlaylist(Playlist playlist, VideoManager vm) {
+    public Playlist shufflePlaylist(Playlist playlist) {
+        VideoManager vm = VideoManager.getInstance();
         Playlist new_pl = playlist;
         ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         ArrayList<Video> videos = new ArrayList<>();
