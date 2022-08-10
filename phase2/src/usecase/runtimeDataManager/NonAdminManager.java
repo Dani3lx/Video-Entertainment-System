@@ -41,8 +41,16 @@ public class NonAdminManager extends UserManager {
      * @param categories  what genres the video belongs to
      * @param vidLink     link to the video
      */
-    public void uploadVideo(User user, String title, String description, ArrayList<String> categories, String vidLink) {
-        vm.uploadVideo(user.getUserName(), title, description, categories, vidLink);
+    public boolean uploadVideo(User user, String title, String description, List<String> categories, String vidLink) {
+        ArrayList<String> cat = new ArrayList<>(categories);
+        if (title.equals("") || vidLink.equals("")){
+            return false;
+        } else if (categories.isEmpty()){
+            vm.uploadVideo(user.getUserName(), title, description, new ArrayList<>(), vidLink);
+        } else {
+            vm.uploadVideo(user.getUserName(), title, description, cat, vidLink);
+        }
+        return true;
     }
 
     /**
@@ -114,29 +122,25 @@ public class NonAdminManager extends UserManager {
     }
 
     public Boolean editComment(String uniqueID, User user, String newComm) {
-        List<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
+        ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
         for (Comments c : comments) {
             if (c.getCommenter().equals(user.getUserName())) {
-                ve.editComment(c,newComm);
-                c.setComment_date(LocalDateTime.now().toString());
-                return true;
+                return CM.editComment(c,newComm);
+
             }
         }
         return false;
     }
 
     public Boolean deleteComment(String uniqueID, User user){
-        ArrayList<Video> vids = new ArrayList<>(vm.getVids());
-        for (Video v: vids){
-            if (v.getUniqueID().equals(uniqueID)){
-                ArrayList<Comments> coms = v.getComments();
-                for (Comments c: coms){
-                    if (c.getCommenter().equals(user.getUserName())){
-                        return CM.deleteComment(v, c);
-                    }
-                }
+
+        ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
+        for (Comments c: comments){
+            if (c.getCommenter().equals(user.getUserName())){
+                return CM.deleteComment(vm.getByUniqueID(uniqueID), c);
             }
         }
+
         return false;
     }
 

@@ -54,6 +54,16 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "The user has deleted the comment successfully";
             case ADDCOMMENT:
                 return "The user has added the comment successfully";
+            case DISPLAYCOMMENT:
+                return "Here are the comments:";
+            case LIKEVIDEO:
+                return "You have liked this video.";
+            case DISLIKEVIDEO:
+                return "You have disliked this video.";
+            case UPLOADVIDEO:
+                return "Video uploaded successfully";
+            case DELETEVIDEO:
+                return "Video deleted successfully";
             default:
                 return "";
         }
@@ -81,6 +91,10 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Deletion of comment has not been successful";
             case  ADDCOMMENT:
                 return "Addition of comment has not been successful";
+            case UPLOADVIDEO:
+                return "Video was not successfully uploaded, title or video path cannot be blank";
+            case DELETEVIDEO:
+                return "Video was not successfully deleted";
             default:
                 return "";
         }
@@ -106,10 +120,12 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Please enter the name of the uploader";
             case EDITVIDEO:
                 return "Enter uniqueID of the video you want to edit";
+            case DELETEVIDEO:
+                return "Enter uniqueID of the video you want to delete";
             case TITLE:
-                return "Enter new title";
+                return "Enter new video title";
             case DESCRIPTION:
-                return "Enter new description";
+                return "Enter new video description";
             case EDITCOMMENT:
                 return "Enter the uniqueID of the video whose comment you'd like to edit";
             case NEWCOMMENT:
@@ -120,6 +136,8 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Enter the uniqueID of the video you'd like to comment on:";
             case COMMENT:
                 return "Enter the comment:";
+            case VIDLINK:
+                return "Enter the video path";
             default:
                 return "";
         }

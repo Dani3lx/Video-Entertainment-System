@@ -1,4 +1,6 @@
+import entities.Comments;
 import entities.NonAdminUser;
+import entities.Ratings;
 import entities.Video;
 import org.junit.Test;
 import usecase.runtimeDataManager.NonAdminManager;
@@ -16,16 +18,16 @@ public class NonAdminManagerTest {
     private static final VideoManager VM = new VideoManager();
     private static final NonAdminManager NAM = new NonAdminManager(VM);
     private static final NonAdminUser u1 = new NonAdminUser("k", "1");
+    private static final NonAdminUser u2 = new NonAdminUser("t", "1");
+
 
     @BeforeClass
     public static void setUp_UploadVid() {
 
         NAM.uploadVideo(u1, "vid", "", new ArrayList<>(), "url");
-        ArrayList<String> ratings = new ArrayList<>();
-        ratings.add("0");
-        ratings.add("0");
+        Ratings r = new Ratings();
         Video v1 = new Video("k", "vid", "", new ArrayList<>(), "url", VM.getVids().get(0).getUniqueID(),
-                ratings, VM.getVids().get(0).getDate_upload());
+                r, VM.getVids().get(0).getDate_upload(),new ArrayList<Comments>(List.of(new Comments("", "", ""))));
         assertTrue(VM.getVids().get(0).equals(v1));
     }
 
@@ -64,9 +66,26 @@ public class NonAdminManagerTest {
 
     }
     @Test
-    public void displayAllVidsTest(){
-        Video v1 = new Video("k","vid","great",new ArrayList<>(List.of("funny")),"url","ID",
-                new ArrayList<>(Arrays.asList("0","0")),"today");
-        assertEquals("Title: vid (ID: ID)",NAM.ReturnUserVideos(u1, new ArrayList<>(List.of(v1))).get(0));
+    public void editCommentTest(){
+        NAM.editComment(VM.getVids().get(0).getUniqueID(),u1,"great");
+        assertEquals("great", VM.getVids().get(0).getComments().get(0).getComment());
     }
+
+    @Test
+    public void deleteCommentTest(){
+        assertTrue(NAM.deleteComment(VM.getVids().get(0).getUniqueID(), u1));
+    }
+
+    @Test
+    public void addCommentTest(){
+        NAM.addComment(VM.getVids().get(0).getUniqueID(),u2,"hello");
+        assertEquals("hello", VM.getVids().get(0).getComments().get(1).getComment());
+    }
+
+//    @Test
+//    public void displayAllVidsTest(){
+//        Video v1 = new Video("k","vid","great",new ArrayList<>(List.of("funny")),"url","ID",
+//                new ArrayList<>(Arrays.asList("0","0")),"today");
+//        assertEquals("Title: vid (ID: ID)",NAM.ReturnUserVideos(u1, new ArrayList<>(List.of(v1))).get(0));
+//    }
 }

@@ -205,19 +205,9 @@ public class UserManager {
      */
     public void rateVideo(Video v, User user, boolean like) {
         if (like) {
-            if (!ve.currentRatingOfUser(v, user).equals(1)){
-                ve.likeVideo(v, user);
-            }
-            else{
-                ve.deleteRating(v, user);
-            }
+            ve.likeVideo(v, user);
         } else {
-            if (!ve.currentRatingOfUser(v, user).equals(0)){
-                ve.dislikeVideo(v, user);
-            }
-            else{
-                ve.deleteRating(v, user);
-            }
+            ve.dislikeVideo(v, user);
         }
     }
 

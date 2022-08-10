@@ -1,20 +1,21 @@
 package controllers.action.actions.videoInteractionMenu;
-import controllers.action.actions.MenuAction;
-import controllers.action.actionFactories.Action;
 
+import controllers.action.actions.MenuAction;
+import entities.Comments;
 import entities.User;
 import entities.Video;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
-import usecase.runtimeDataManager.NonAdminManager;
-import usecase.runtimeDataManager.UserManager;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
-public class EditComment extends MenuAction {
+
+import java.util.ArrayList;
+
+public class ViewComment extends MenuAction {
     private final Video v;
-    public EditComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, Video v) {
+    public ViewComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, Video v) {
         currentUser = user;
         this.userPrompt = userPrompt;
         this.lp = lp;
@@ -24,15 +25,14 @@ public class EditComment extends MenuAction {
 
     @Override
     public void run() {
-        NonAdminManager NAM = new NonAdminManager(vm);
-//        String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.EDITCOMMENT);
-        String newComm = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.NEWCOMMENT);
-
-        if (NAM.editComment(v.getUniqueID(), currentUser, newComm)){
-            mp.displayAlert(LanguagePresenter.AlertTextType.EDITCOMMENT);
-        } else {
-            mp.displayError(LanguagePresenter.ErrorTextType.EDITCOMMENT);
+        mp.displayAlert(LanguagePresenter.AlertTextType.DISPLAYCOMMENT);
+        ArrayList<Comments> coms = vm.getByUniqueID(v.getUniqueID()).getComments();
+        ArrayList<String> com_strs = new ArrayList<>();
+        for (Comments c: coms){
+            String str = c.getCommenter()+": "+c.getComment()+" "+c.getComment_date();
+            com_strs.add(str);
         }
+        mp.displayList(com_strs);
         next();
     }
 

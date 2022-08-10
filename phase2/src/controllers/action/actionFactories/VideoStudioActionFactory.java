@@ -1,9 +1,6 @@
 package controllers.action.actionFactories;
 
-import controllers.action.actions.videoStudioActions.EditCategories;
-import controllers.action.actions.videoStudioActions.EditDescription;
-import controllers.action.actions.videoStudioActions.EditTitle;
-import controllers.action.actions.videoStudioActions.ViewVideoUploaded;
+import controllers.action.actions.videoStudioActions.*;
 import entities.User;
 import entities.Video;
 import presenters.language.LanguagePresenter;
@@ -30,7 +27,9 @@ public class VideoStudioActionFactory implements ActionFactory {
             case "view videos uploaded":
                 return new ViewVideoUploaded(userPrompt, user, lp, mp);
             case "upload video":
+                return new UploadVideo(userPrompt, user, lp, mp);
             case "delete video":
+                return new DeleteVideo(userPrompt, user, lp, mp);
             case "edit title":
                 return new EditTitle(userPrompt, user, lp, mp);
             case "edit categories":

@@ -122,7 +122,7 @@ public class DataManager {
                 String[] indComment = record[8].split("/");
 
                 for (String s : indComment) {
-                    String[] commentAttributes = s.split(":");
+                    String[] commentAttributes = s.split(";");
                     Comments comment = new Comments(commentAttributes[0], commentAttributes[1], commentAttributes[2]);
 
                     comments.add(comment);
