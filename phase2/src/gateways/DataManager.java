@@ -19,15 +19,11 @@ import java.io.*;
  */
 public class DataManager {
 
-    private final UserManager um;
-    private final VideoManager vm;
-    private final PlaylistManager pm;
+    private final UserManager um = UserManager.getInstance();
+    private final VideoManager vm = VideoManager.getInstance();
+    private final PlaylistManager pm = PlaylistManager.getInstance();
 
-    public DataManager(UserManager um, VideoManager vm, PlaylistManager pm) {
-        this.um = um;
-        this.vm = vm;
-        this.pm = pm;
-    }
+    public DataManager() {}
 
     /**
      * Reads User data from phase1/datasets/Data.csv into the program by instantiating Users and adding them

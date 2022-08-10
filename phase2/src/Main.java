@@ -19,7 +19,7 @@ public class Main {
         UserManager um = UserManager.getInstance();
         PlaylistManager pm = PlaylistManager.getInstance();
 
-        DataManager sm = new DataManager(um, vm, pm);
+        DataManager sm = new DataManager();
         sm.loadData("phase2/datasets/Data.csv"); //Read data from Data.csv
         sm.loadVideoData("phase2/datasets/VideoData.csv"); //Read data from VideoData.csv
         sm.loadPlaylistData("phase2/datasets/PlaylistData.csv"); //Read data from PlaylistData.csv

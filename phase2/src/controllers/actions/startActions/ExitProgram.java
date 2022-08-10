@@ -5,10 +5,8 @@ import controllers.actions.MenuAction;
 import gateways.DataManager;
 
 public class ExitProgram extends MenuAction implements Action {
-    DataManager dataManager;
-    public ExitProgram() {
-        dataManager = new DataManager(um, vm, pm);
-    }
+    DataManager dataManager = new DataManager();
+    public ExitProgram() {}
 
     @Override
     public void run() {
