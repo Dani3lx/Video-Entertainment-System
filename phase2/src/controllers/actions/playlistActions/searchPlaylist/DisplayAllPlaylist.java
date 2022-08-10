@@ -15,7 +15,7 @@ import userInterfaces.userPrompt.UserPrompt;
 import java.util.List;
 import java.util.Objects;
 
-public class DisplayAllPlaylist extends MenuAction implements Action {
+public class DisplayAllPlaylist extends PlaylistSearchAction implements Action {
 
     MenuFactory playlistsMenuFactory;
     private boolean found_pl;
@@ -32,20 +32,11 @@ public class DisplayAllPlaylist extends MenuAction implements Action {
         mp.displayAlert(LanguagePresenter.AlertTextType.ALLPLAYLISTS);
         List<String> pl_list = pm.getPlaylistNames();
         mp.displayList(pl_list);
-        /*User Will Type Playlist name*/
-        String plname = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PLAYLIST);
-        Playlist pl = pm.getPlaylistByName(plname);
 
-        if (Objects.isNull(pl)) {
-
-            mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);
-            found_pl = false;
-            next();
-        } else {
-            found_pl = true;
-            playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, List.of(pl));
-            next();
-        }
+        Playlist pl = playlistSearch(userPrompt,mp);
+        found_pl = playlistExists(pl);
+        playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp,List.of(pl));
+        next();
     }
 
     @Override
