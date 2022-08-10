@@ -21,8 +21,6 @@ public class UserManager {
 
     /**
      * This constructs a user manager that manages user.
-     *
-     // *  @param vm video manager for managing videos
      */
     public UserManager() {
         users = new ArrayList<>();
@@ -36,6 +34,11 @@ public class UserManager {
         return instance;
     }
 
+    /**
+     * Checks if user exists in list of all users
+     * @param username of user to be checked
+     * @return boolean indicating if user exists or not
+     */
     public boolean noUserExist(String username) {
         if (!(Objects.isNull(users))) {
             for (User u : users) {
@@ -177,7 +180,11 @@ public class UserManager {
         return users;
     }
 
-
+    /**
+     * Sets all users.
+     *
+     * @param allUsers list of all users
+     */
     public void setAllUsers(ArrayList<User> allUsers) {
         users = allUsers;
     }
@@ -209,7 +216,6 @@ public class UserManager {
             ve.dislikeVideo(v, user);
         }
     }
-
 
     /**
      * Return user's username.
