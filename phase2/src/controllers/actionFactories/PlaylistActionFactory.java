@@ -21,6 +21,9 @@ import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
 
+/**
+ * A concrete action factory that creates playlist related actions base on type.
+ */
 public class PlaylistActionFactory implements ActionFactory {
     private final User user;
     private final LanguagePresenter lp;
