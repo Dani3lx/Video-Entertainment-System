@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class UserManagerTest {
-    private static final VideoManager VM = new VideoManager();
+    private static final VideoManager VM = VideoManager.getInstance();
     private static final UserManager UM = new UserManager();
 
     @BeforeClass
@@ -37,6 +37,7 @@ public class UserManagerTest {
 
     @Test
     public void testChangePass() {
+        VideoManager VM = new VideoManager();
         UserManager UM = new UserManager();
         NonAdminUser u1 = new NonAdminUser("a", "b");
         UM.changePassword(u1, "new");
@@ -46,6 +47,7 @@ public class UserManagerTest {
 
     @Test
     public void testInstantiateUser() {
+        VideoManager VM = new VideoManager();
         UserManager UM = new UserManager();
         NonAdminUser u1 = new NonAdminUser("a", "b");
         assertTrue(u1.equals(UM.instantiateUser("a", "b", false)));
@@ -53,6 +55,7 @@ public class UserManagerTest {
 
     @Test
     public void testValidateUsername() {
+        VideoManager VM = new VideoManager();
         UserManager UM = new UserManager();
         NonAdminUser u1 = new NonAdminUser("a", "b");
         assertTrue(UM.validateUserName(u1, "a"));
@@ -60,6 +63,7 @@ public class UserManagerTest {
 
     @Test
     public void testvalidateBanStatus() {
+        VideoManager VM = new VideoManager();
         UserManager UM = new UserManager();
         NonAdminUser u1 = new NonAdminUser("a", "b");
         u1.setBanStatus(true);
@@ -75,6 +79,7 @@ public class UserManagerTest {
 
     @Test
     public void testGetRole() {
+        VideoManager VM = new VideoManager();
         UserManager UM = new UserManager();
         AdminUser u1 = new AdminUser("a", "b");
         assertTrue(UM.getRole(u1));
