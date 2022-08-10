@@ -58,11 +58,11 @@ public class PlaylistActionFactory implements ActionFactory {
         switch (type) {
             /* Find Playlist Actions*/
             case "search playlist":
-                return new SearchPlaylist(userPrompt, user, lp, mp, null);
+                return new SearchPlaylist(userPrompt, user, lp, mp);
             case "create new playlist":
                 return new CreatePlaylist(userPrompt, user, lp, mp);
             case "display all playlists":
-                return new DisplayAllPlaylist(userPrompt, user, lp, mp, null);
+                return new DisplayAllPlaylist(userPrompt, user, lp, mp);
             /*Playlist Management Actions*/
             case "view playlist":
                 return new ViewPlaylist(userPrompt, user, lp, mp, playlists);
@@ -91,7 +91,7 @@ public class PlaylistActionFactory implements ActionFactory {
             case "return to user menu":
                 return new Return(userPrompt, user, lp, mp);
             case "return to playlist search":
-                return new ReturnPL(userPrompt, user, lp, mp, playlists);
+                return new ReturnPL(userPrompt, user, lp, mp);
             case "return to playlist menu":
                 return new ReturnPLsub(userPrompt, user, lp, mp, playlists);
             default:

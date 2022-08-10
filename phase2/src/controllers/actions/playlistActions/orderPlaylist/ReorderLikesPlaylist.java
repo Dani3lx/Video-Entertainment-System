@@ -1,7 +1,6 @@
 package controllers.actions.playlistActions.orderPlaylist;
 
 import controllers.actionFactories.Action;
-import controllers.actions.MenuAction;
 import entities.Playlist;
 import entities.User;
 import presenters.language.LanguagePresenter;
@@ -14,7 +13,7 @@ import userInterfaces.userPrompt.UserPrompt;
 import java.util.List;
 
 
-public class ReorderLikesPlaylist extends MenuAction implements Action {
+public class ReorderLikesPlaylist extends PlaylistOrderAction implements Action {
 
     private MenuFactory playlistsMenuFactory;
     private final Playlist pl;
@@ -29,22 +28,9 @@ public class ReorderLikesPlaylist extends MenuAction implements Action {
 
     @Override
     public void run() {
-        /* Validate if user can make changes*/
-        String username = um.getUserName(currentUser);
-        boolean validate = pm.validatePlaylistAction(pl, username);
-        if (!validate) {
-            mp.displayError(LanguagePresenter.ErrorTextType.INVALIDUSER);
-            playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, List.of(pl));
-            next();
-        } else {
-            Playlist sorted_pl = pm.reorderPlaylistByRating(pl, username);
-            String old_name = pm.getPlName(sorted_pl);
-            pm.setPlName(sorted_pl, old_name + "_rating_sorted");
-            pm.addPlaylist(sorted_pl);
-            mp.displayAlert(LanguagePresenter.AlertTextType.SUCCESS);
-            playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, List.of(sorted_pl));
-            next();
-        }
+        Playlist sorted_pl = playlistOrderRun("by_rating",pl);
+        playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, List.of(sorted_pl));
+        next();
     }
 
     @Override

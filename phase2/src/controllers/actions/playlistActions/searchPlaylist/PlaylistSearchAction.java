@@ -3,22 +3,20 @@ package controllers.actions.playlistActions.searchPlaylist;
 import controllers.actions.MenuAction;
 import entities.Playlist;
 import presenters.language.LanguagePresenter;
-import presenters.menuPresenter.MenuPresenter;
-
+import userInterfaces.menuEnums.MenuEnums;
+import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
-import java.util.List;
 import java.util.Objects;
 
 public abstract class PlaylistSearchAction extends MenuAction{
 
-    public Playlist playlistSearch(UserPrompt userPrompt, MenuPresenter mp) {
+    protected Playlist playlistSearch(UserPrompt userPrompt) {
         String plname = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PLAYLIST);
-        Playlist pl = pm.getPlaylistByName(plname);
-        return pl;
+        return pm.getPlaylistByName(plname);
     }
 
-    public boolean playlistExists(Playlist pl){
+    protected boolean playlistExists(Playlist pl){
         boolean found_pl;
         if (Objects.isNull(pl)) {
             mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);
@@ -27,6 +25,19 @@ public abstract class PlaylistSearchAction extends MenuAction{
             found_pl = true;
         }
         return found_pl;
+    }
+
+    protected void nextMenu(boolean check, MenuFactory playlistsMenuFactory, MenuFactory userMenuFactory){
+        if (!check){
+            playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTMANAGE).run();
+        }
+        else{
+            if (um.getRole(currentUser)){
+                userMenuFactory.getMenu(MenuEnums.ADMIN).run();
+            } else {
+                userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
+            }
+        }
     }
 
 }

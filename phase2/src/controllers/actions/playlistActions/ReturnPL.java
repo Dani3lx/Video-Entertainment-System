@@ -16,7 +16,7 @@ import java.util.List;
 public class ReturnPL extends MenuAction implements Action {
 
     MenuFactory playlistsMenuFactory;
-    public ReturnPL(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
+    public ReturnPL(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
