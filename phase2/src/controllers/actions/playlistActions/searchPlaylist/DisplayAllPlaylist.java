@@ -11,6 +11,7 @@ import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DisplayAllPlaylist extends PlaylistSearchAction implements Action {
 
@@ -33,9 +34,18 @@ public class DisplayAllPlaylist extends PlaylistSearchAction implements Action {
         mp.displayList(pl_list);
 
         Playlist pl = playlistSearch(userPrompt);
-        found_pl = playlistExists(pl);
-        playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp,List.of(pl));
-        next();
+
+        if (Objects.isNull(pl)) {
+            mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);
+            found_pl = false;
+            next();
+        } else {
+            found_pl = true;
+            mp.displayAlert(LanguagePresenter.AlertTextType.SUCCESS);
+            found_pl = playlistExists(pl);
+            playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, List.of(pl));
+            next();
+        }
     }
 
     @Override

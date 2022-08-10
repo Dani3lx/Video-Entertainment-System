@@ -21,18 +21,21 @@ public abstract class PlaylistSearchAction extends MenuAction{
         if (Objects.isNull(pl)) {
             mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);
             found_pl = false;
+            next();
         } else {
             found_pl = true;
         }
         return found_pl;
     }
 
-    protected void nextMenu(boolean check, MenuFactory playlistsMenuFactory, MenuFactory userMenuFactory){
-        if (!check){
+    protected void nextMenu(boolean check, MenuFactory playlistsMenuFactory,MenuFactory userMenuFactory){
+
+        if (check){
+            System.out.println("check2");
             playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTMANAGE).run();
         }
         else{
-            if (um.getRole(currentUser)){
+            if (um.getRole(currentUser)) {
                 userMenuFactory.getMenu(MenuEnums.ADMIN).run();
             } else {
                 userMenuFactory.getMenu(MenuEnums.NONADMIN).run();

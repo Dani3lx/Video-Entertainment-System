@@ -2,7 +2,6 @@ package controllers.actions.playlistActions;
 
 import controllers.actionFactories.Action;
 import controllers.actions.MenuAction;
-import entities.Playlist;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
@@ -10,8 +9,6 @@ import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.PlaylistsMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
-
-import java.util.List;
 
 public class ReturnPL extends MenuAction implements Action {
 

@@ -28,7 +28,6 @@ public abstract class PlaylistOrderAction extends MenuAction {
                     pm.setPlName(sorted_pl, old_name + "_shuffled");
             }
             Playlist sorted_pl = pm.reorderPlaylistByName(pl, username);
-            pm.setPlName(sorted_pl, old_name + "_abc_sorted");
             pm.addPlaylist(sorted_pl);
             mp.displayAlert(LanguagePresenter.AlertTextType.SUCCESS);
             return sorted_pl;

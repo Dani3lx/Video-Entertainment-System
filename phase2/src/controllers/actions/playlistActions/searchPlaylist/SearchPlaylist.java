@@ -11,6 +11,7 @@ import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SearchPlaylist extends PlaylistSearchAction implements Action {
 
@@ -28,13 +29,24 @@ public class SearchPlaylist extends PlaylistSearchAction implements Action {
     @Override
     public void run(){
         Playlist pl = playlistSearch(userPrompt);
-        found_pl = playlistExists(pl);
-        playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp,List.of(pl));
-        next();
+
+        if (Objects.isNull(pl)) {
+            mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);
+            found_pl = false;
+            System.out.println("check1");
+            next();
+        } else {
+            found_pl = true;
+            found_pl = playlistExists(pl);
+            playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, List.of(pl));
+            next();
+        }
+
 
     }
     @Override
     public void next(){
+
         nextMenu(found_pl,playlistsMenuFactory,userMenuFactory);
     }
 }
