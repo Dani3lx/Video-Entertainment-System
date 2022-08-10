@@ -11,9 +11,8 @@ import userInterfaces.menus.videosMenus.VideoInteractionMenu;
 import userInterfaces.menus.videosMenus.VideoStudioMenu;
 import userInterfaces.userPrompt.UserPrompt;
 
-import java.util.List;
 
-public class VideosMenuFactory implements MenuFactory{
+public class VideosMenuFactory implements MenuFactory {
     private final User user;
     private final UserPrompt userPrompt;
     private final LanguagePresenter lp;
@@ -21,13 +20,13 @@ public class VideosMenuFactory implements MenuFactory{
     private final Video video;
 
     /**
-     * Factory that returns menus that require a video/videos to be passed around.
+     * Creates a playlist menu factory with the given user prompt, user, language presenter, menu presenter and video.
      *
-     * @param userPrompt
-     * @param user
-     * @param lp
-     * @param mp
-     * @param video
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     * @param video      a video
      */
     public VideosMenuFactory(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, Video video) {
         this.user = user;
