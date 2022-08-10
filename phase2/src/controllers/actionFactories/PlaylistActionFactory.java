@@ -60,7 +60,7 @@ public class PlaylistActionFactory implements ActionFactory {
             case "search playlist":
                 return new SearchPlaylist(userPrompt, user, lp, mp, null);
             case "create new playlist":
-                return new CreatePlaylist(userPrompt, user, lp, mp, null);
+                return new CreatePlaylist(userPrompt, user, lp, mp);
             case "display all playlists":
                 return new DisplayAllPlaylist(userPrompt, user, lp, mp, null);
             /*Playlist Management Actions*/

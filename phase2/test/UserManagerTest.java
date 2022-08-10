@@ -1,6 +1,4 @@
-import entities.AdminUser;
-import entities.NonAdminUser;
-import entities.Video;
+import entities.*;
 import org.junit.*;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
@@ -22,9 +20,9 @@ public class UserManagerTest {
         UM.updateData(u1);
 
         ArrayList<String> cates = new ArrayList<>(List.of("serious"));
-        ArrayList<String> ratings = new ArrayList<>(Arrays.asList("10", "0"));
+        Ratings r = new Ratings();
         ArrayList<Video> vids = new ArrayList<>();
-        Video v1 = new Video("k", "popmusic", "amazing music", cates, "url", "1", ratings, "today");
+        Video v1 = new Video("k", "popmusic", "amazing music", cates, "url", "1", r, "today", new ArrayList<Comments>(List.of(new Comments("", "", ""))));
         vids.add(v1);
         VM.setVids(vids);
     }
