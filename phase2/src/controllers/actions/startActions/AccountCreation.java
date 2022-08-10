@@ -14,9 +14,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * Creates a new user account.
+ */
 public class AccountCreation extends MenuAction implements Action {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    /**
+     * Creates a new accountcreation with the given user prompt, user, language presenter and menu presenter.
+     *
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     */
     public AccountCreation(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         currentUser = user;
         this.userPrompt = userPrompt;
@@ -24,6 +35,9 @@ public class AccountCreation extends MenuAction implements Action {
         this.mp = mp;
     }
 
+    /**
+     *
+     */
     public void run() {
         String username = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.USERNAME);
         String password = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PASSWORD);
