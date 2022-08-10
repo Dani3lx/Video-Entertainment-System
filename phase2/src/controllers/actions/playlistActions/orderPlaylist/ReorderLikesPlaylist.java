@@ -1,7 +1,7 @@
-package controllers.actions.playlistActions.orderPlaylist;
+package controllers.action.actions.playlistActions.orderPlaylist;
 
-import controllers.actionFactories.Action;
-import controllers.actions.MenuAction;
+import controllers.action.actionFactories.Action;
+import controllers.action.actions.MenuAction;
 import entities.Playlist;
 import entities.User;
 import presenters.language.LanguagePresenter;
@@ -38,7 +38,7 @@ public class ReorderLikesPlaylist extends MenuAction implements Action {
             next();
         }
         else{
-            Playlist sorted_pl = pm.reorderPlaylistByRating(pl,vm,username);
+            Playlist sorted_pl = pm.reorderPlaylistByRating(pl);
             String old_name = pm.getPlName(sorted_pl);
             pm.setPlName(sorted_pl,old_name + "_rating_sorted");
             pm.addPlaylist(sorted_pl);

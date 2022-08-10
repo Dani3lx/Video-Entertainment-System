@@ -20,7 +20,7 @@ public class PlaylistManagerTest {
 //    private static final Playlist play = new Playlist("Music", 0 , new ArrayList<>(Arrays.asList("2", "1", "3")), "k");
 //    private static final Playlist play_dup = new Playlist("Music1", 0, new ArrayList<>(Arrays.asList("1", "3")), "k1");
 //    private static final PlaylistManager PM = new PlaylistManager(new ArrayList<>(Arrays.asList(play, play_dup)));
-    private static final VideoManager VM = new VideoManager();
+    private static final VideoManager VM = VideoManager.getInstance();
     private static final PlaylistManager PM = new PlaylistManager();
     private static final Playlist playlist = new Playlist("name", "user");
 
@@ -61,7 +61,7 @@ public class PlaylistManagerTest {
 
     @Test
     public void reorderPlaylistByRatingTest() {
-        Playlist result = PM.reorderPlaylistByRating(playlist, VM);
+        Playlist result = PM.reorderPlaylistByRating(playlist);
         Playlist expected = new Playlist("name", 0,
                 new ArrayList<>(Arrays.asList("uniqueID2", "uniqueID1")), "user");
         assertEquals(result.getUniqueIDs(), expected.getUniqueIDs());
@@ -77,9 +77,7 @@ public class PlaylistManagerTest {
 
     @Test
     public void reorderPlaylistByNameTest() {
-
-
-        Playlist result = PM.reorderPlaylistByName(playlist, VM);
+        Playlist result = PM.reorderPlaylistByName(playlist);
         Playlist expected = new Playlist("name", 0,
                 new ArrayList<>(Arrays.asList("uniqueID2", "uniqueID1")), "user");
         assertEquals(result.getUniqueIDs(), expected.getUniqueIDs());
@@ -148,7 +146,7 @@ public class PlaylistManagerTest {
 
 
     }
-
+// hello
     @Test
     public void likePlaylistTest() {
         PM.likePlaylist(playlist);
