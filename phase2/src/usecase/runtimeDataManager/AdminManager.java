@@ -15,7 +15,7 @@ public class AdminManager extends UserManager {
     private final ArrayList<User> users;
 
     public AdminManager(UserManager um, VideoManager vm) {
-        super(vm);
+        super();
         users = um.getAllUsers();
     }
 

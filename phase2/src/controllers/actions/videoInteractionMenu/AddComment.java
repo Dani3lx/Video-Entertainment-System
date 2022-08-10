@@ -25,7 +25,7 @@ public class AddComment extends MenuAction {
 
     @Override
     public void run() {
-        NonAdminManager NAM = new NonAdminManager(vm);
+        NonAdminManager NAM = new NonAdminManager();
 
         String Comm = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.COMMENT);
 

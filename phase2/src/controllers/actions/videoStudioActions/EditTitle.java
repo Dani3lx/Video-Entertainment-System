@@ -22,7 +22,7 @@ public class EditTitle extends MenuAction implements Action {
 
     @Override
     public void run(){
-        NonAdminManager nam = new NonAdminManager(vm);
+        NonAdminManager nam = new NonAdminManager();
 
         // Asks for uniqueID of video and the new title for the corresponding video
         String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.EDITVIDEO);
