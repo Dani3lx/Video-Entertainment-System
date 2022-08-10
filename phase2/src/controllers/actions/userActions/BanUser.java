@@ -11,18 +11,31 @@ import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
+/**
+ * Ban a user.
+ */
 public class BanUser extends MenuAction implements Action {
 
-
-    public BanUser(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
+    /**
+     * Creates a BanUser with the given user prompt, user, language presenter and menu presenter.
+     *
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     */
+    public BanUser(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
         currentUser = user;
     }
 
+    /**
+     * Bans a user.
+     */
     @Override
-    public void run(){
+    public void run() {
         AdminManager am = new AdminManager();
 
         // Displays all unbanned users and asks for input to ban a user
@@ -30,7 +43,7 @@ public class BanUser extends MenuAction implements Action {
         mp.displayList(am.returnUsersByBan(um.getAllUsers(), false));
         String username = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.BANUSER);
 
-        if (am.banUser(currentUser, username)){
+        if (am.banUser(currentUser, username)) {
             mp.displayAlert(LanguagePresenter.AlertTextType.BANNED);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.BANNED);
@@ -38,8 +51,11 @@ public class BanUser extends MenuAction implements Action {
         next();
     }
 
+    /**
+     * Go to the next menu.
+     */
     @Override
-    public void next(){
+    public void next() {
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
         userMenuFactory.getMenu(MenuEnums.ADMIN).run();
     }

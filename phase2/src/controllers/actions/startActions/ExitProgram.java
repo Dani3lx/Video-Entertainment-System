@@ -4,12 +4,19 @@ import controllers.actionFactories.Action;
 import controllers.actions.MenuAction;
 import gateways.DataManager;
 
+/**
+ * Exits the program.
+ */
 public class ExitProgram extends MenuAction implements Action {
-    DataManager dataManager;
+    private final DataManager dataManager;
+
     public ExitProgram() {
         dataManager = new DataManager(um, vm, pm);
     }
 
+    /**
+     * Saves the data.
+     */
     @Override
     public void run() {
         dataManager.saveData("phase2/datasets/Data.csv");
@@ -18,7 +25,10 @@ public class ExitProgram extends MenuAction implements Action {
         next();
     }
 
-    public void next(){
+    /**
+     * Exits the program
+     */
+    public void next() {
         System.exit(0);
     }
 }
