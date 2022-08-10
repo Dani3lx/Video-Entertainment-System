@@ -4,7 +4,6 @@ import controllers.UserActionHandler;
 import entities.Playlist;
 import entities.User;
 import presenters.MenuPresenter;
-import presenters.PlaylistPresenter;
 import usecase.PlaylistManager;
 import controllers.PlaylistMenuActions;
 import usecase.UserManager;
