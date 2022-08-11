@@ -12,12 +12,10 @@ This document contains the following Phase 2 submission requirements:
 * Description of how our program does/could follow 7 principles of universal design (Design Document 4)
 
 
-
-Group 249 - Akmar, Wing, Daniel, Benedek, Nicholas, Kate
-
 ---
 
 # CSC207 Summer 2022 Phase 2 - Video Entertainment System 
+Group 0249 - Akmar, Wing, Daniel, Benedek, Nicholas, Kate
 
 ## 1. Phase 2 Features
 * Expanded and Extensible Menu system
