@@ -4,10 +4,6 @@ import java.util.HashSet;
 
 /**
  * This represents non admin user.
- *
- * @author Daniel Xu
- * @version 1.0
- * @since 2022-07-21
  */
 
 public class NonAdminUser extends User {

@@ -5,10 +5,6 @@ import java.util.HashSet;
 
 /**
  * This represents admin user.
- *
- * @author Daniel Xu, Wing Zou
- * @version 1.0
- * @since 2022-07-21
  */
 public class AdminUser extends User {
 

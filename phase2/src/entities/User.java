@@ -5,10 +5,6 @@ import java.util.Iterator;
 
 /**
  * This represents user.
- *
- * @author Daniel Xu, Wing Zou
- * @version 1.0
- * @since 2022-07-21
  */
 
 public abstract class User {

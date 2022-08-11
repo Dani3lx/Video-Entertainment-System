@@ -1,8 +1,7 @@
 package entities;
 
-
 public class Comments{
-    private String commenter;
+    private final String commenter;
     private String comment;
     private String comment_date;
 

@@ -4,10 +4,6 @@ import java.util.*;
 
 /**
  * This class defines a playlist and stores all the associated data.
- *
- * @author Benedek Balla, Shu Fan Nicholas Au, Wing Zou
- * @version 1.0
- * @since 2022-07-15
  */
 public class Playlist implements Iterable<String> {
 

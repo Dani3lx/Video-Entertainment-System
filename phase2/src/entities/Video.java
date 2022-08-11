@@ -6,10 +6,6 @@ import java.util.Map;
 
 /**
  * This represents video.
- *
- * @author Daniel Xu, Benedek Balla
- * @version 1.0
- * @since 2022-07-21
  */
 public class Video implements Comparable<Video> {
     private final String content;
@@ -19,7 +15,7 @@ public class Video implements Comparable<Video> {
     private String name;
     private final String uploader;
     private final String date_upload;
-    private Ratings ratings;
+    private final Ratings ratings;
 
     private ArrayList<Comments> comments;
 
@@ -216,7 +212,7 @@ public class Video implements Comparable<Video> {
 
         StringBuilder s2 = new StringBuilder();
         for (Map.Entry<String, Boolean> set: ratings.getRatings().entrySet()){
-            s2.append(set.getKey() + "=" + set.getValue() + "/");
+            s2.append(set.getKey()).append("=").append(set.getValue()).append("/");
         }
 
         Iterator<Comments> it2 = comments.iterator();

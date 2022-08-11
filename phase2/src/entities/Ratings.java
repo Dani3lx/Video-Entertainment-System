@@ -4,10 +4,6 @@ import java.util.HashMap;
 
 /**
  * This represents Ratings for video.
- *
- * @author Shu Fan Nicholas Au
- * @version 1.0
- * @since 2022-08-05
  */
 public class Ratings {
     /**
