@@ -50,17 +50,22 @@ public class VideoEditorTest {
 
     @Test
     public void dislikeVideoTest(){
-
         VE.dislikeVideo(v1,u1);
-        assertEquals("person",v1.getRatings().getDislikeUserNames().get(0));
+        assertEquals(Integer.valueOf(1),v1.getRatings().getTotalDislikes());
     }
 
     @Test
     public void likeVideoTest(){
         VE.likeVideo(v1,u1);
-        assertEquals("person",v1.getRatings().getLikeUserName().get(0));
-    }
+        assertEquals(Integer.valueOf(1),v1.getRatings().getTotalLikes());
 
+        NonAdminUser u2 = new NonAdminUser("person2","123");
+        VE.likeVideo(v1, u2);
+        assertEquals(Integer.valueOf(2),v1.getRatings().getTotalLikes());
+
+        VE.likeVideo(v1,u1);
+        assertEquals(Integer.valueOf(1),v1.getRatings().getTotalLikes());
+    }
     @Test
     public void currentRatingTest(){
         assertEquals(Integer.valueOf(0),VE.currentRatingOfUser(v1, u1));
