@@ -1,5 +1,8 @@
 package entities;
 
+/**
+ * This represent a video comment.
+ */
 public class Comments {
     private final String commenter;
     private String comment;
