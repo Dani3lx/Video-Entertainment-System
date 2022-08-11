@@ -34,8 +34,7 @@ public class CommentManager {
      * @return true to indicate operation was successful
      */
     public Boolean deleteComment(Video v, Comments c){
-        ArrayList<Comments> coms = v.getComments();
-        coms.remove(c);
+        v.deleteComment(c);
         return true;
     }
 
