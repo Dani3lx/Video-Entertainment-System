@@ -2,8 +2,8 @@ import entities.Comments;
 import entities.NonAdminUser;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import usecase.runtimeDataManager.NonAdminManager;
-import usecase.runtimeDataManager.VideoManager;
+import usecase.runtimedatamanager.NonAdminManager;
+import usecase.runtimedatamanager.VideoManager;
 
 import java.util.ArrayList;
 import java.util.List;

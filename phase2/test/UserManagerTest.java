@@ -1,8 +1,8 @@
 import entities.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import usecase.runtimeDataManager.UserManager;
-import usecase.runtimeDataManager.VideoManager;
+import usecase.runtimedatamanager.UserManager;
+import usecase.runtimedatamanager.VideoManager;
 
 import java.util.ArrayList;
 import java.util.List;

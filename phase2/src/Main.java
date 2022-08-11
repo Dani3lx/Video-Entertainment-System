@@ -1,13 +1,13 @@
 import gateways.DataManager;
 import presenters.language.EnglishPresenter;
 import presenters.language.LanguagePresenter;
-import presenters.menuPresenter.MenuPresenter;
-import presenters.menuPresenter.TerminalMenuPresenter;
-import userInterfaces.menuEnums.MenuEnums;
-import userInterfaces.menuFactories.Menu;
-import userInterfaces.menuFactories.UserMenuFactory;
-import userInterfaces.userPrompt.TerminalUserPrompt;
-import userInterfaces.userPrompt.UserPrompt;
+import presenters.menupresenter.MenuPresenter;
+import presenters.menupresenter.TerminalMenuPresenter;
+import userinterfaces.menuenums.MenuEnums;
+import userinterfaces.menufactories.Menu;
+import userinterfaces.menufactories.UserMenuFactory;
+import userinterfaces.userprompt.TerminalUserPrompt;
+import userinterfaces.userprompt.UserPrompt;
 
 public class Main {
     public static void main(String[] args) {

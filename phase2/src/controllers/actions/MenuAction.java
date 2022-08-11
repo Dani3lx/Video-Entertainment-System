@@ -1,13 +1,13 @@
 package controllers.actions;
 
-import controllers.actionFactories.Action;
+import controllers.actionfactories.Action;
 import entities.User;
 import presenters.language.LanguagePresenter;
-import presenters.menuPresenter.MenuPresenter;
-import usecase.runtimeDataManager.PlaylistManager;
-import usecase.runtimeDataManager.UserManager;
-import usecase.runtimeDataManager.VideoManager;
-import userInterfaces.userPrompt.UserPrompt;
+import presenters.menupresenter.MenuPresenter;
+import usecase.runtimedatamanager.PlaylistManager;
+import usecase.runtimedatamanager.UserManager;
+import usecase.runtimedatamanager.VideoManager;
+import userinterfaces.userprompt.UserPrompt;
 
 /**
  * A menu action.

@@ -3,7 +3,7 @@ import entities.Ratings;
 import entities.Video;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import usecase.runtimeDataManager.VideoManager;
+import usecase.runtimedatamanager.VideoManager;
 
 import java.util.ArrayList;
 

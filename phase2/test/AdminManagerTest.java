@@ -3,8 +3,8 @@ import entities.NonAdminUser;
 import entities.User;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import usecase.runtimeDataManager.AdminManager;
-import usecase.runtimeDataManager.UserManager;
+import usecase.runtimedatamanager.AdminManager;
+import usecase.runtimedatamanager.UserManager;
 
 import java.util.ArrayList;
 
