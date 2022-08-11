@@ -8,10 +8,6 @@ import java.util.ArrayList;
 
 /**
  * This class is responsible for performing all direct interactions with the User entity classes.
- *
- * @author Daniel Xu, ...
- * @version 1.0
- * @since 2022-07-23
  */
 public class VideoEditor {
 
@@ -47,40 +43,36 @@ public class VideoEditor {
      * Like the video if the video is not originally liked by that user, delete that rating
      * for the video by that user if it is originally liked.
      *
-     * @param v target video
+     * @param v    target video
      * @param user target user
      */
-    public void likeVideo(Video v, User user){
-            if (!this.currentRatingOfUser(v, user).equals(1)){
-                if (v.getRatings().containsRating(user.getUserName())){
-                    v.getRatings().editRating(user.getUserName(), true);
-                }
-                else{
-                    v.getRatings().addRating(user.getUserName(), true);
-                }
+    public void likeVideo(Video v, User user) {
+        if (!this.currentRatingOfUser(v, user).equals(1)) {
+            if (v.getRatings().containsRating(user.getUserName())) {
+                v.getRatings().editRating(user.getUserName(), true);
+            } else {
+                v.getRatings().addRating(user.getUserName(), true);
             }
-            else{
-                this.deleteRating(v, user);
-            }
+        } else {
+            this.deleteRating(v, user);
+        }
     }
 
     /**
      * Dislike the video if the video is not originally disliked by that user, delete that rating
      * for the video by that user if it is originally disliked
      *
-     * @param v the target video
+     * @param v    the target video
      * @param user the target user
      */
-    public void dislikeVideo(Video v,  User user){
-        if (!this.currentRatingOfUser(v, user).equals(0)){
-            if (v.getRatings().containsRating(user.getUserName())){
+    public void dislikeVideo(Video v, User user) {
+        if (!this.currentRatingOfUser(v, user).equals(0)) {
+            if (v.getRatings().containsRating(user.getUserName())) {
                 v.getRatings().editRating(user.getUserName(), false);
-            }
-            else{
+            } else {
                 v.getRatings().addRating(user.getUserName(), false);
             }
-        }
-        else{
+        } else {
             this.deleteRating(v, user);
         }
     }
@@ -88,11 +80,11 @@ public class VideoEditor {
     /**
      * Delete a user's rating of a video
      *
-     * @param v the target video
+     * @param v    the target video
      * @param user the target user
      */
-    public void deleteRating(Video v, User user){
-        if (v.getRatings().containsRating(user.getUserName())){
+    public void deleteRating(Video v, User user) {
+        if (v.getRatings().containsRating(user.getUserName())) {
             v.getRatings().deleteRating(user.getUserName());
         }
     }
@@ -101,21 +93,19 @@ public class VideoEditor {
      * Return an Integer representing the current state of the user, either like, dislike, or no
      * current rating of the respective user.
      *
-     * @param v the target video
+     * @param v    the target video
      * @param user the target user
      * @return Return the current rating of a user to the video. 0 represent dislike,
-     *         1 represent like, 2 represent no current rating.
+     * 1 represent like, 2 represent no current rating.
      */
-    public Integer currentRatingOfUser(Video v, User user){
-        if (v.getRatings().getRatings().containsKey(user.getUserName())){
-            if (v.getRatings().getRatings().get(user.getUserName())){
+    public Integer currentRatingOfUser(Video v, User user) {
+        if (v.getRatings().getRatings().containsKey(user.getUserName())) {
+            if (v.getRatings().getRatings().get(user.getUserName())) {
                 return 1;
-            }
-            else{
+            } else {
                 return 0;
             }
-        }
-        else{
+        } else {
             return 2;
         }
     }

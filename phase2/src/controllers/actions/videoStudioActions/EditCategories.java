@@ -37,14 +37,14 @@ public class EditCategories extends MenuAction implements Action {
      * Edits a video's categories.
      */
     @Override
-    public void run(){
+    public void run() {
         NonAdminManager nam = new NonAdminManager();
 
         // Asks for uniqueID of video and the new categories for the corresponding video
         String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.EDITVIDEO);
         List<String> categories = userPrompt.getMultipleInputs(LanguagePresenter.RequestTextType.CATEGORY);
 
-        if (nam.editCategories(currentUser, uniqueID, categories)){
+        if (nam.editCategories(currentUser, uniqueID, categories)) {
             mp.displayAlert(LanguagePresenter.AlertTextType.EDIT);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.EDIT);
@@ -56,7 +56,7 @@ public class EditCategories extends MenuAction implements Action {
      * Navigates to the next appropriate menu.
      */
     @Override
-    public void next(){
+    public void next() {
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
         userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
     }

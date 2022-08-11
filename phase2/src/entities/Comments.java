@@ -1,6 +1,6 @@
 package entities;
 
-public class Comments{
+public class Comments {
     private final String commenter;
     private String comment;
     private String comment_date;
@@ -8,14 +8,14 @@ public class Comments{
     /**
      * Constructs a comment with commenter, comment and comment_date
      *
-     * @param commenter the username who make the comment
-     * @param comment the content of the comment
+     * @param commenter    the username who make the comment
+     * @param comment      the content of the comment
      * @param comment_date the date and time of the comment made.
      */
-    public Comments(String commenter, String comment, String comment_date){
+    public Comments(String commenter, String comment, String comment_date) {
         this.commenter = commenter;
-        this.comment=comment;
-        this.comment_date=comment_date;
+        this.comment = comment;
+        this.comment_date = comment_date;
 
     }
 
@@ -24,7 +24,7 @@ public class Comments{
      *
      * @return the commenter of the comment.
      */
-    public String getCommenter(){
+    public String getCommenter() {
         return commenter;
     }
 
@@ -33,17 +33,8 @@ public class Comments{
      *
      * @return the content of the comment.
      */
-    public String getComment(){
+    public String getComment() {
         return comment;
-    }
-
-    /**
-     * Returns the date and time of the comment made.
-     *
-     * @return the date and time of the comment made.
-     */
-    public String getComment_date(){
-        return comment_date;
     }
 
     /**
@@ -51,8 +42,17 @@ public class Comments{
      *
      * @param comment the content of the comment
      */
-    public void setComment(String comment){
+    public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    /**
+     * Returns the date and time of the comment made.
+     *
+     * @return the date and time of the comment made.
+     */
+    public String getComment_date() {
+        return comment_date;
     }
 
     /**
@@ -60,7 +60,7 @@ public class Comments{
      *
      * @param comment_date the date and time of the comment made.
      */
-    public void setComment_date(String comment_date){
+    public void setComment_date(String comment_date) {
         this.comment_date = comment_date;
     }
 
@@ -70,7 +70,7 @@ public class Comments{
      * @return the string representation of the comment
      */
     @Override
-    public String toString(){
+    public String toString() {
         return commenter + ";" + comment + ";" + comment_date;
     }
 }

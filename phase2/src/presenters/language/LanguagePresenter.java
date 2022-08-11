@@ -6,6 +6,31 @@ package presenters.language;
 public interface LanguagePresenter {
 
     /**
+     * Returns a request for user to enter an integer
+     */
+    String getChoiceText(ChoiceTextType type);
+
+    /**
+     * Returns a good response
+     */
+    String getAlertText(AlertTextType type);
+
+    /**
+     * Returns a bad response
+     */
+    String getErrorText(ErrorTextType type);
+
+    /**
+     * Returns a request for user to enter a string
+     */
+    String getRequestText(RequestTextType type);
+
+    /**
+     * Returns a response involving video data
+     */
+    String getVideoDataText(VideoDataType type);
+
+    /**
      * Integer requests
      */
     enum ChoiceTextType {
@@ -97,7 +122,7 @@ public interface LanguagePresenter {
     /**
      * Responses involving video data
      */
-    enum VideoDataType{
+    enum VideoDataType {
         TITLE,
         LIKES,
         DISLIKES,
@@ -106,29 +131,4 @@ public interface LanguagePresenter {
         DATEUPLOADED,
         CONTENT,
     }
-
-    /**
-     * Returns a request for user to enter an integer
-     */
-    String getChoiceText(ChoiceTextType type);
-
-    /**
-     * Returns a good response
-     */
-    String getAlertText(AlertTextType type);
-
-    /**
-     * Returns a bad response
-     */
-    String getErrorText(ErrorTextType type);
-
-    /**
-     * Returns a request for user to enter a string
-     */
-    String getRequestText(RequestTextType type);
-
-    /**
-     * Returns a response involving video data
-     */
-    String getVideoDataText(VideoDataType type);
 }

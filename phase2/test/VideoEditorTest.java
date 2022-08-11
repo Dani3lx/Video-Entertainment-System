@@ -7,11 +7,10 @@ import org.junit.Test;
 import usecase.VideoEditor;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
-
-import java.lang.*;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class VideoEditorTest {
     private static final VideoEditor VE = new VideoEditor();

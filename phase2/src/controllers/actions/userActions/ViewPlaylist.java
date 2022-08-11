@@ -5,9 +5,9 @@ import controllers.actions.MenuAction;
 import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
+import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.PlaylistsMenuFactory;
-import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.userPrompt.UserPrompt;
 
 /**

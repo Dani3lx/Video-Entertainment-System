@@ -10,10 +10,6 @@ import java.util.List;
 
 /**
  * Responsible for specific actions that only pertain to non-admin users.
- *
- * @author Wing Zou
- * @version 1.0
- * @since 2022-07-15
  */
 public class NonAdminManager extends UserManager {
     private final VideoEditor ve;
@@ -39,9 +35,9 @@ public class NonAdminManager extends UserManager {
      */
     public boolean uploadVideo(User user, String title, String description, List<String> categories, String vidLink) {
         ArrayList<String> cat = new ArrayList<>(categories);
-        if (title.equals("") || vidLink.equals("")){
+        if (title.equals("") || vidLink.equals("")) {
             return false;
-        } else if (categories.isEmpty()){
+        } else if (categories.isEmpty()) {
             vm.uploadVideo(user.getUserName(), title, description, new ArrayList<>(), vidLink);
         } else {
             vm.uploadVideo(user.getUserName(), title, description, cat, vidLink);
@@ -85,9 +81,9 @@ public class NonAdminManager extends UserManager {
     /**
      * Edits the categories of the video with uniqueID and user to newCate
      *
-     * @param user     of type User
-     * @param uniqueID identifier of the video
-     * @param categories  categories the user wants to change to
+     * @param user       of type User
+     * @param uniqueID   identifier of the video
+     * @param categories categories the user wants to change to
      */
     public Boolean editCategories(User user, String uniqueID, List<String> categories) {
         ArrayList<String> newCate = new ArrayList<>(categories);
@@ -119,8 +115,9 @@ public class NonAdminManager extends UserManager {
 
     /**
      * Edit comments by a user of a video
-     * @param v target video to be edited
-     * @param user accessing the video
+     *
+     * @param v       target video to be edited
+     * @param user    accessing the video
      * @param newComm contents of new comment
      * @return boolean if the operation was successful
      */
@@ -128,7 +125,7 @@ public class NonAdminManager extends UserManager {
         ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(v.getUniqueID()).getComments());
         for (Comments c : comments) {
             if (c.getCommenter().equals(user.getUserName())) {
-                return CM.editComment(c,newComm);
+                return CM.editComment(c, newComm);
 
             }
         }
@@ -137,15 +134,16 @@ public class NonAdminManager extends UserManager {
 
     /**
      * Delete comments by user of specific video
-     * @param v target video
+     *
+     * @param v    target video
      * @param user accessing video
      * @return boolean if the operation was successful
      */
-    public Boolean deleteComment(Video v, User user){
+    public Boolean deleteComment(Video v, User user) {
 
         ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(v.getUniqueID()).getComments());
-        for (Comments c: comments){
-            if (c.getCommenter().equals(user.getUserName())){
+        for (Comments c : comments) {
+            if (c.getCommenter().equals(user.getUserName())) {
                 return CM.deleteComment(vm.getByUniqueID(v.getUniqueID()), c);
             }
         }
@@ -155,16 +153,17 @@ public class NonAdminManager extends UserManager {
 
     /**
      * Add comment by user to video corresponding to uniqueID
-     * @param v target video
-     * @param user user adding comment
+     *
+     * @param v       target video
+     * @param user    user adding comment
      * @param comment contents of the comment to be added
      * @return boolean if the operation was successful
      */
-    public Boolean addComment(Video v, User user, String comment){
+    public Boolean addComment(Video v, User user, String comment) {
         ArrayList<Video> vids = new ArrayList<>(vm.getVids());
-        for (Video vid: vids){
-            if (vid.getUniqueID().equals(v.getUniqueID())){
-                return CM.addComment(vid,user.getUserName(),comment);
+        for (Video vid : vids) {
+            if (vid.getUniqueID().equals(v.getUniqueID())) {
+                return CM.addComment(vid, user.getUserName(), comment);
             }
         }
         return false;
