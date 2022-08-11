@@ -6,6 +6,7 @@ import org.junit.Test;
 import usecase.runtimeDataManager.VideoManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -75,6 +76,13 @@ public class VideoManagerTest {
     @Test
     public void getByCategoryTest() {
         assertEquals(VM.getVids().get(0), VM.getByCategory(video.getCategories()).get(0));
+    }
+
+    @Test
+    public void getVideoCommentsTest(){
+        ArrayList<String> a = new ArrayList<>();
+        a.add(":  ");
+        assertEquals(a, VM.getVideoComments(video));
     }
 
 }
