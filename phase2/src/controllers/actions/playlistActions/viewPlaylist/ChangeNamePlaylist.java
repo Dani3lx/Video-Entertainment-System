@@ -16,10 +16,10 @@ import java.util.List;
 
 public class ChangeNamePlaylist extends MenuAction implements Action {
 
-    MenuFactory playlistsMenuFactory;
     public Playlist pl;
+    MenuFactory playlistsMenuFactory;
 
-    public ChangeNamePlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
+    public ChangeNamePlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
@@ -27,23 +27,24 @@ public class ChangeNamePlaylist extends MenuAction implements Action {
         currentUser = user;
         playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, pl);
     }
+
     @Override
-    public void run(){
+    public void run() {
         /* Validate if user can make changes*/
         String username = um.getUserName(currentUser);
-        boolean validate = pm.validatePlaylistAction(pl,username);
-        if (!validate){
+        boolean validate = pm.validatePlaylistAction(pl, username);
+        if (!validate) {
             mp.displayError(LanguagePresenter.ErrorTextType.INVALIDUSER);
             next();
-        }
-        else{
+        } else {
             String plname = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PLAYLIST);
-            pm.setPlName(pl,plname);
+            pm.setPlName(pl, plname);
             next();
         }
     }
+
     @Override
-    public void next(){
+    public void next() {
         playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTVIEW).run();
     }
 }

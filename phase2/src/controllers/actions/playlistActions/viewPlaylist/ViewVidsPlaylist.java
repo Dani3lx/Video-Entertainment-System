@@ -17,10 +17,10 @@ import java.util.List;
 
 public class ViewVidsPlaylist extends MenuAction implements Action {
 
-    MenuFactory playlistsMenuFactory;
     public Playlist pl;
+    MenuFactory playlistsMenuFactory;
 
-    public ViewVidsPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl){
+    public ViewVidsPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
@@ -31,14 +31,15 @@ public class ViewVidsPlaylist extends MenuAction implements Action {
 
 
     @Override
-    public void run(){
+    public void run() {
         String plname = pm.getPlName(pl);
         ArrayList<String> vidname = pm.namesInPlaylist(plname);
         mp.displayList(vidname);
         next();
     }
+
     @Override
-    public void next(){
+    public void next() {
         playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTVIEW).run();
     }
 }

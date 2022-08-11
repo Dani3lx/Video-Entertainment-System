@@ -6,7 +6,7 @@ import presenters.language.LanguagePresenter;
 
 public abstract class PlaylistOrderAction extends MenuAction {
 
-    protected Playlist playlistOrderRun(String order, Playlist pl){
+    protected Playlist playlistOrderRun(String order, Playlist pl) {
 
         /* Validate if user can make changes*/
         String username = um.getUserName(currentUser);
@@ -16,7 +16,7 @@ public abstract class PlaylistOrderAction extends MenuAction {
             mp.displayError(LanguagePresenter.ErrorTextType.INVALIDUSER);
             return pl;
         } else {
-            switch (order){
+            switch (order) {
                 case "by_name":
                     Playlist sorted_pl = pm.reorderPlaylistByName(pl, username);
                     pm.setPlName(sorted_pl, old_name + "_name_sorted");

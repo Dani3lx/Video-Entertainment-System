@@ -15,29 +15,29 @@ import java.util.List;
 
 public class CreatePlaylist extends PlaylistSearchAction implements Action {
 
+    MenuFactory userMenuFactory;
     private MenuFactory playlistsMenuFactory;
     private boolean found_pl;
 
-    MenuFactory userMenuFactory;
-    public CreatePlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
+    public CreatePlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
         currentUser = user;
-        userMenuFactory = new UserMenuFactory(userPrompt,currentUser,lp,mp);
+        userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
     }
+
     @Override
-    public void run(){
+    public void run() {
         String plname = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PLAYLIST);
         String username = um.getUserName(currentUser);
         /*Check if playlist name exists*/
-        found_pl =  pm.checkPlaylistByName(plname);
-        if (found_pl){
+        found_pl = pm.checkPlaylistByName(plname);
+        if (found_pl) {
             mp.displayError(LanguagePresenter.ErrorTextType.INVALIDINPUT);
             next();
-        }
-        else {
-            Playlist pl = new Playlist(plname,username);
+        } else {
+            Playlist pl = new Playlist(plname, username);
             pm.addPlaylist(pl);
             mp.displayAlert(LanguagePresenter.AlertTextType.SUCCESS);
 
@@ -46,8 +46,9 @@ public class CreatePlaylist extends PlaylistSearchAction implements Action {
             next();
         }
     }
+
     @Override
-    public void next(){
-        nextMenu(!found_pl,playlistsMenuFactory,userMenuFactory);
+    public void next() {
+        nextMenu(!found_pl, playlistsMenuFactory, userMenuFactory);
     }
 }

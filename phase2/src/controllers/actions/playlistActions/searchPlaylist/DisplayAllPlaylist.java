@@ -16,15 +16,15 @@ import java.util.Objects;
 public class DisplayAllPlaylist extends PlaylistSearchAction implements Action {
 
     MenuFactory playlistsMenuFactory;
-    private boolean found_pl;
     MenuFactory userMenuFactory;
+    private boolean found_pl;
 
     public DisplayAllPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
         currentUser = user;
-        userMenuFactory = new UserMenuFactory(userPrompt,currentUser,lp,mp);
+        userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
     }
 
     @Override
@@ -50,6 +50,6 @@ public class DisplayAllPlaylist extends PlaylistSearchAction implements Action {
 
     @Override
     public void next() {
-        nextMenu(found_pl,playlistsMenuFactory,userMenuFactory);
+        nextMenu(found_pl, playlistsMenuFactory, userMenuFactory);
     }
 }

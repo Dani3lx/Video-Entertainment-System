@@ -15,8 +15,8 @@ import java.util.List;
 
 public class ReorderABCPlaylist extends PlaylistOrderAction implements Action {
 
-    private MenuFactory playlistsMenuFactory;
     private final Playlist pl;
+    private MenuFactory playlistsMenuFactory;
 
     public ReorderABCPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl) {
         this.userPrompt = userPrompt;
@@ -28,7 +28,7 @@ public class ReorderABCPlaylist extends PlaylistOrderAction implements Action {
 
     @Override
     public void run() {
-        Playlist sorted_pl = playlistOrderRun("by_name",pl);
+        Playlist sorted_pl = playlistOrderRun("by_name", pl);
         playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, List.of(sorted_pl));
         next();
     }

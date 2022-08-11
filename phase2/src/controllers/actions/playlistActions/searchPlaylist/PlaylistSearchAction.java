@@ -9,14 +9,14 @@ import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.Objects;
 
-public abstract class PlaylistSearchAction extends MenuAction{
+public abstract class PlaylistSearchAction extends MenuAction {
 
     protected Playlist playlistSearch(UserPrompt userPrompt) {
         String plname = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.PLAYLIST);
         return pm.getPlaylistByName(plname);
     }
 
-    protected boolean playlistExists(Playlist pl){
+    protected boolean playlistExists(Playlist pl) {
         boolean found_pl;
         if (Objects.isNull(pl)) {
             mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);
@@ -28,13 +28,12 @@ public abstract class PlaylistSearchAction extends MenuAction{
         return found_pl;
     }
 
-    protected void nextMenu(boolean check, MenuFactory playlistsMenuFactory,MenuFactory userMenuFactory){
+    protected void nextMenu(boolean check, MenuFactory playlistsMenuFactory, MenuFactory userMenuFactory) {
 
-        if (check){
+        if (check) {
             System.out.println("check2");
             playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTMANAGE).run();
-        }
-        else{
+        } else {
             if (um.getRole(currentUser)) {
                 userMenuFactory.getMenu(MenuEnums.ADMIN).run();
             } else {

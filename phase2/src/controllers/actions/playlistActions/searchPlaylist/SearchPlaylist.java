@@ -15,19 +15,20 @@ import java.util.Objects;
 
 public class SearchPlaylist extends PlaylistSearchAction implements Action {
 
-    private boolean found_pl;
     MenuFactory playlistsMenuFactory;
     MenuFactory userMenuFactory;
+    private boolean found_pl;
 
-    public SearchPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
+    public SearchPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
         currentUser = user;
-        userMenuFactory = new UserMenuFactory(userPrompt,currentUser,lp,mp);
+        userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
     }
+
     @Override
-    public void run(){
+    public void run() {
         Playlist pl = playlistSearch(userPrompt);
 
         if (Objects.isNull(pl)) {
@@ -44,9 +45,10 @@ public class SearchPlaylist extends PlaylistSearchAction implements Action {
 
 
     }
-    @Override
-    public void next(){
 
-        nextMenu(found_pl,playlistsMenuFactory,userMenuFactory);
+    @Override
+    public void next() {
+
+        nextMenu(found_pl, playlistsMenuFactory, userMenuFactory);
     }
 }
