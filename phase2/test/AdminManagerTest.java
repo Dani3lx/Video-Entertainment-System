@@ -1,60 +1,48 @@
+import entities.AdminUser;
 import entities.NonAdminUser;
 import entities.User;
 import org.junit.Test;
 import usecase.runtimeDataManager.AdminManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
-import org.junit.BeforeClass;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
 public class AdminManagerTest {
-    private static final VideoManager VM = new VideoManager();
-    private static final UserManager UM = new UserManager();
-    private static final NonAdminUser u1 = new NonAdminUser("k", "1");
-    private static final AdminManager AM = new AdminManager();
+    private final UserManager UM = UserManager.getInstance();
+    private final NonAdminUser u1 = new NonAdminUser("k", "1");
+    private final AdminUser u = new AdminUser("p", "1");
+    private final AdminManager AM = new AdminManager();
 
-    @BeforeClass
-    public static void setUp() {
-
-        UM.updateData(u1);
-    }
 
     @Test
     public void banUserTest() {
-        VideoManager VM = new VideoManager();
-        UserManager UM = new UserManager();
-        NonAdminUser u1 = new NonAdminUser("k", "1");
-        NonAdminUser u = new NonAdminUser("p", "1");
-        AdminManager AM = new AdminManager();
-        AM.banUser(u, "k");
+        UM.updateData(u);
+        UM.updateData(u1);
+        assertTrue(AM.banUser(u, "k"));
         assertTrue(u1.getBanStatus());
     }
 
     @Test
     public void UnbanUserTest() {
-        VideoManager VM = new VideoManager();
-        UserManager UM = new UserManager();
-        NonAdminUser u1 = new NonAdminUser("k", "1");
-        u1.setBanStatus(true);
-        AdminManager AM = new AdminManager();
-        AM.unbanUser("k");
+        UM.updateData(u);
+        UM.updateData(u1);
+        AM.banUser(u, "k");
+        assertTrue(AM.unbanUser("k"));
         assertFalse(u1.getBanStatus());
     }
 
     @Test
     public void deleteUserTest() {
-
-        AM.deleteUser("k");
+        UM.updateData(u1);
+        assertTrue(AM.deleteUser("k"));
         assertTrue(UM.getAllUsers().isEmpty());
     }
 
     @Test
     public void returnUsersbyBanTest() {
-        VideoManager VM = new VideoManager();
-        UserManager UM = new UserManager();
         ArrayList<User> users = new ArrayList<>();
         NonAdminUser u1 = new NonAdminUser("k", "1");
         u1.setBanStatus(true);
@@ -69,8 +57,6 @@ public class AdminManagerTest {
 
     @Test
     public void returnUsersTest() {
-        VideoManager VM = new VideoManager();
-        UserManager UM = new UserManager();
         ArrayList<User> users = new ArrayList<>();
         NonAdminUser u1 = new NonAdminUser("k", "1");
         NonAdminUser u2 = new NonAdminUser("a", "1");
@@ -82,6 +68,4 @@ public class AdminManagerTest {
         usersReturned.add("Username: a");
         assertEquals(usersReturned, AM.returnUsers(users));
     }
-
-
 }

@@ -15,9 +15,6 @@ import userInterfaces.userPrompt.UserPrompt;
 public class Main {
     public static void main(String[] args) {
 
-        VideoManager vm = VideoManager.getInstance();
-        UserManager um = UserManager.getInstance();
-        PlaylistManager pm = PlaylistManager.getInstance();
 
         DataManager sm = new DataManager();
         sm.loadData("phase2/datasets/Data.csv"); //Read data from Data.csv

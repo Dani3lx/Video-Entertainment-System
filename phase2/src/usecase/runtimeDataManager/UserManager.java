@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class UserManager {
     static VideoManager vm = VideoManager.getInstance();
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
 
     private static UserManager instance;
 
@@ -41,11 +41,9 @@ public class UserManager {
      * @return boolean indicating if user exists or not
      */
     public boolean noUserExist(String username) {
-        if (!(Objects.isNull(users))) {
-            for (User u : users) {
-                if (validateUserName(u, username)) {
-                    return false;
-                }
+        for (User u : users) {
+            if (validateUserName(u, username)) {
+                return false;
             }
         }
         return true;
@@ -59,14 +57,10 @@ public class UserManager {
      * @return validated user
      */
     public User validateUser(String username, String password) {
-        if (Objects.isNull(users)) {
-            return null;
-        } else {
-            for (User user : users) {
-                if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
-                    if (!user.getBanStatus()) {
-                        return user;
-                    }
+        for (User user : users) {
+            if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
+                if (!user.getBanStatus()) {
+                    return user;
                 }
             }
         }

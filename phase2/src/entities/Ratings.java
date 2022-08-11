@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.HashMap;
+
 /**
  * This represents Ratings for video.
  *
@@ -10,24 +11,24 @@ import java.util.HashMap;
  */
 public class Ratings {
     /**
-    * This variable ratings is a HashMap. The keys are storing userName with type String. The values
+     * This variable ratings is a HashMap. The keys are storing userName with type String. The values
      * are storing like/dislike with type boolean where true represent like and false represent dislike.
-    */
-    private HashMap<String, Boolean> ratings; // 0 = dislike, 1 = like
+     */
+    private final HashMap<String, Boolean> ratings; // 0 = dislike, 1 = like
 
     /**
      * Constructs a hashmap which stores content of Ratings.
      *
-     * @param ratings  a hashmap which stores content of Ratings.
+     * @param ratings a hashmap which stores content of Ratings.
      */
-    public Ratings(HashMap<String, Boolean> ratings){
+    public Ratings(HashMap<String, Boolean> ratings) {
         this.ratings = ratings;
     } // userName, like/dislike
 
     /**
      * Constructs a hashmap which stores content of Ratings
      */
-    public Ratings(){
+    public Ratings() {
         this.ratings = new HashMap<>();
     }
 
@@ -47,8 +48,8 @@ public class Ratings {
      */
     public Integer getTotalLikes() {
         int count = 0;
-        for (Boolean like: ratings.values()){
-            if (like.equals(true)){
+        for (Boolean like : ratings.values()) {
+            if (like.equals(true)) {
                 count++;
             }
         }
@@ -60,10 +61,10 @@ public class Ratings {
      *
      * @return the number of dislikes for the video.
      */
-    public Integer getTotalDislikes(){
+    public Integer getTotalDislikes() {
         int count = 0;
-        for (Boolean like: ratings.values()){
-            if (like.equals(false)){
+        for (Boolean like : ratings.values()) {
+            if (like.equals(false)) {
                 count++;
             }
         }
@@ -76,7 +77,7 @@ public class Ratings {
      * @param userName the name of the user
      * @return boolean of weather a username liked/disliked or didn't liked/disliked a video.
      */
-    public boolean containsRating(String userName){
+    public boolean containsRating(String userName) {
         return ratings.containsKey(userName);
     }
 
@@ -84,10 +85,9 @@ public class Ratings {
      * Return whether a userName liked/disliked or didn't liked/disliked a video.
      *
      * @param userName the name of the user
-     * @param like true represent liked, false represent disliked
-     * @return boolean of weather a username liked/disliked or didn't liked/disliked a video.
+     * @param like     true represent liked, false represent disliked
      */
-    public void addRating(String userName, Boolean like){
+    public void addRating(String userName, Boolean like) {
         ratings.put(userName, like);
     }
 
@@ -95,9 +95,9 @@ public class Ratings {
      * Edit a rating with the respective userName.
      *
      * @param userName the name of the user
-     * @param like true represent liked, false represent disliked
+     * @param like     true represent liked, false represent disliked
      */
-    public void editRating (String userName, Boolean like){
+    public void editRating(String userName, Boolean like) {
         ratings.replace(userName, like);
     }
 
@@ -106,7 +106,7 @@ public class Ratings {
      *
      * @param userName the name of the user
      */
-    public void deleteRating(String userName){
+    public void deleteRating(String userName) {
         ratings.remove(userName);
     }
 }
