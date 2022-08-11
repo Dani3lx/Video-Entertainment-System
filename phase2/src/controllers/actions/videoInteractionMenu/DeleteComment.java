@@ -43,7 +43,7 @@ public class DeleteComment extends MenuAction implements Action {
     @Override
     public void run() {
         NonAdminManager NAM = new NonAdminManager();
-        if (NAM.deleteComment(v.getUniqueID(), currentUser)) { // todo fix violation of clean arch
+        if (NAM.deleteComment(v, currentUser)) {
             mp.displayAlert(LanguagePresenter.AlertTextType.DELETECOMMENT);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.DELETECOMMENT);
