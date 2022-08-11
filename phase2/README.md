@@ -54,14 +54,26 @@ on the internet. Each playlist consists of existing videos in the system.
     * For **browse by uploader**, input the uploader name
     * After browsing, a list of video will be presented
         * Select a video by entering the number associated with each video
-        * User can like, dislike or add the video to a playlist. Select **return** to return to the user menu
+        * If a valid video was selected, then the video information will be displayed
+          * This includes title, uploader, categories, date uploaded, contents, and their ratings.
+          * The program will then navigate to the video interaction menu.
     * View all videos uploaded by themselves plus upload/delete/edit their own videos
         * In the case of uploading videos, the description and categories are optional. Press enter to skip it.
         * In order to edit or delete videos, the non-admin user needs to input the unique ID of the video. The view all
           videos function lists all the videos with their corresponding unique IDs.
         * Non-admin users can only delete and edit their own videos
 
-## 2.3 Playlist Menu
+
+## 2.3 Video Interaction menu
+
+* **Interact** with the videos by liking, disliking or commenting on the video.
+  * Each user gets to comment once on each video.
+    * That comment can be edited or deleted.
+  * When a user rates a video, all their previous rating on the video will be replaced.
+    * So if a user likes a video and then dislike it later, their like record will be erased.
+  * The user will be returned to their user menu after an action was selected.
+
+## 2.4 Playlist Menu
 
 Playlists are a collection of videos that are created by a user. Playlists may be used by users other than the creator
 but any changes to the playlist can only be made by the user that created the playlist. Future functionality will give
@@ -119,6 +131,7 @@ video after video)
 * "viewing" video will open the url on system browser
 * Expanded UI
 * Expand Video Actions
+* Include more languages
 * Expand Playlist Actions
     * Favourites
     * Allow users to copy playlists
