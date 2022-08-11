@@ -34,7 +34,6 @@ public class SearchPlaylist extends PlaylistSearchAction implements Action {
         if (Objects.isNull(pl)) {
             mp.displayError(LanguagePresenter.ErrorTextType.NORESULT);
             found_pl = false;
-            System.out.println("check1");
             next();
         } else {
             found_pl = true;

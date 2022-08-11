@@ -46,6 +46,7 @@ public class RemoveFromPlaylist extends MenuAction implements Action {
             } else {
                 Video vid = vids.get(0);
                 pm.deleteFromPlaylist(pl, vid);
+                mp.displayAlert(LanguagePresenter.AlertTextType.SUCCESS);
             }
             next();
         }

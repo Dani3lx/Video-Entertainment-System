@@ -94,7 +94,8 @@ The abstract factory will utilize the `run();` and `next();` methods
 
 ### Presenter
 
-
+- how to update presenter
+- other languages
 
 ## UML Diagram
 

@@ -31,7 +31,6 @@ public abstract class PlaylistSearchAction extends MenuAction {
     protected void nextMenu(boolean check, MenuFactory playlistsMenuFactory, MenuFactory userMenuFactory) {
 
         if (check) {
-            System.out.println("check2");
             playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTMANAGE).run();
         } else {
             if (um.getRole(currentUser)) {
