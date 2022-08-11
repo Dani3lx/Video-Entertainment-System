@@ -19,10 +19,7 @@ public class Video implements Comparable<Video> {
     private String name;
     private final String uploader;
     private final String date_upload;
-
-    // private final ArrayList<String> ratings; // old style of ratings
-
-    private Ratings ratings; // new style ratings
+    private Ratings ratings;
 
     private ArrayList<Comments> comments;
 
@@ -69,12 +66,6 @@ public class Video implements Comparable<Video> {
     public Ratings getRatings() {
         return ratings;
     }
-
-//    /**
-//     * Return list of usernames who liked the video.
-//     * @return ArrayList<String> of usernames
-//     */
-//    public ArrayList<String> getRatingUsers() { return ratings.getLikeUserName(); }
 
     /**
      * Return the uniqueID.
@@ -130,10 +121,14 @@ public class Video implements Comparable<Video> {
         return categories;
     }
 
+    /**
+     * Return the whole list of comments for the video.
+     *
+     * @return the whole list of comments for the video
+     */
     public ArrayList<Comments> getComments() {
         return comments;
     }
-// Setters - We will allow users/programs change these data fields
 
     /**
      * Sets the description of the video.
@@ -167,7 +162,7 @@ public class Video implements Comparable<Video> {
     }
 
     /**
-     * Add new comment to comments of video.
+     * Add new comment to comments of this video.
      * @param comment to be added
      */
     public void addComment(Comments comment) {
@@ -175,7 +170,7 @@ public class Video implements Comparable<Video> {
     }
 
     /**
-     * Remove comment from comments of video.
+     * Remove comment from comments of this video.
      * @param comment to be removed
      */
     public void deleteComment(Comments comment) {

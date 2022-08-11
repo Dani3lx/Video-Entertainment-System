@@ -1,13 +1,6 @@
 package entities;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
-import java.util.Map;
-
-/**
- * THIS IS FOR PHASE 2
- */
 /**
  * This represents Ratings for video.
  *
