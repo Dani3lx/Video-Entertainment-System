@@ -44,7 +44,7 @@ public class AddComment extends MenuAction {
 
         String Comm = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.COMMENT);
 
-        if (NAM.addComment(v.getUniqueID(), currentUser, Comm)) { // todo fix violation of clean arch
+        if (NAM.addComment(v, currentUser, Comm)) {
             mp.displayAlert(LanguagePresenter.AlertTextType.ADDCOMMENT);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.ADDCOMMENT);

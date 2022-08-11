@@ -43,7 +43,7 @@ public class EditComment extends MenuAction {
         NonAdminManager NAM = new NonAdminManager();
         String newComm = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.NEWCOMMENT);
 
-        if (NAM.editComment(v.getUniqueID(), currentUser, newComm)) {
+        if (NAM.editComment(v, currentUser, newComm)) {
             mp.displayAlert(LanguagePresenter.AlertTextType.EDITCOMMENT);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.EDITCOMMENT);

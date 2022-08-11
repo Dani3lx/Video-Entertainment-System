@@ -118,14 +118,14 @@ public class NonAdminManager extends UserManager {
     }
 
     /**
-     * Edit comments by a user of a video accessed through its uniqueID
-     * @param uniqueID of video to be edited
+     * Edit comments by a user of a video
+     * @param v target video to be edited
      * @param user accessing the video
      * @param newComm contents of new comment
      * @return boolean if the operation was successful
      */
-    public Boolean editComment(String uniqueID, User user, String newComm) {
-        ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
+    public Boolean editComment(Video v, User user, String newComm) {
+        ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(v.getUniqueID()).getComments());
         for (Comments c : comments) {
             if (c.getCommenter().equals(user.getUserName())) {
                 return CM.editComment(c,newComm);
@@ -136,17 +136,17 @@ public class NonAdminManager extends UserManager {
     }
 
     /**
-     * Delete comments by user of specific video accessed through uniqueID
-     * @param uniqueID of video
+     * Delete comments by user of specific video
+     * @param v target video
      * @param user accessing video
      * @return boolean if the operation was successful
      */
-    public Boolean deleteComment(String uniqueID, User user){
+    public Boolean deleteComment(Video v, User user){
 
-        ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(uniqueID).getComments());
+        ArrayList<Comments> comments = new ArrayList<>(vm.getByUniqueID(v.getUniqueID()).getComments());
         for (Comments c: comments){
             if (c.getCommenter().equals(user.getUserName())){
-                return CM.deleteComment(vm.getByUniqueID(uniqueID), c);
+                return CM.deleteComment(vm.getByUniqueID(v.getUniqueID()), c);
             }
         }
 
@@ -155,16 +155,16 @@ public class NonAdminManager extends UserManager {
 
     /**
      * Add comment by user to video corresponding to uniqueID
-     * @param uniqueID of video
+     * @param v target video
      * @param user user adding comment
      * @param comment contents of the comment to be added
      * @return boolean if the operation was successful
      */
-    public Boolean addComment(String uniqueID, User user, String comment){
+    public Boolean addComment(Video v, User user, String comment){
         ArrayList<Video> vids = new ArrayList<>(vm.getVids());
-        for (Video v: vids){
-            if (v.getUniqueID().equals(uniqueID)){
-                return CM.addComment(v,user.getUserName(),comment);
+        for (Video vid: vids){
+            if (vid.getUniqueID().equals(v.getUniqueID())){
+                return CM.addComment(vid,user.getUserName(),comment);
             }
         }
         return false;

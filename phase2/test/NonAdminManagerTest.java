@@ -70,18 +70,18 @@ public class NonAdminManagerTest {
     }
     @Test
     public void editCommentTest(){
-        NAM.editComment(VM.getVids().get(0).getUniqueID(),u1,"great");
+        NAM.editComment(VM.getVids().get(0),u1,"great");
         assertEquals("", VM.getVids().get(0).getComments().get(0).getComment());
     }
 
     @Test
     public void deleteCommentTest(){
-        assertTrue(NAM.deleteComment(VM.getVids().get(0).getUniqueID(), u1));
+        assertTrue(NAM.deleteComment(VM.getVids().get(0), u1));
     }
 
     @Test
     public void addCommentTest(){
-        NAM.addComment(VM.getVids().get(0).getUniqueID(),u2,"hello");
+        NAM.addComment(VM.getVids().get(0),u2,"hello");
         assertEquals("hello", VM.getVids().get(0).getComments().get(1).getComment());
     }
 
