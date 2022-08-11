@@ -11,10 +11,11 @@ public class ExitProgram extends MenuAction implements Action {
     private final DataManager dataManager = new DataManager();
 
     /**
-     * Saves the data.
+     * Prepares to exit the program.
      */
     @Override
     public void run() {
+        // Saves all the data
         dataManager.saveData("phase2/datasets/Data.csv");
         dataManager.saveVideoData("phase2/datasets/VideoData.csv");
         dataManager.savePlayListData("phase2/datasets/PlaylistData.csv");
@@ -22,7 +23,7 @@ public class ExitProgram extends MenuAction implements Action {
     }
 
     /**
-     * Exits the program
+     * Exits the program.
      */
     public void next() {
         System.exit(0);

@@ -52,7 +52,7 @@ public class UnbanUser extends MenuAction implements Action {
     }
 
     /**
-     * Go to the next menu.
+     * Go to the next appropriate menu.
      */
     @Override
     public void next() {

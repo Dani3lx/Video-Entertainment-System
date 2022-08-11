@@ -55,7 +55,7 @@ public class AccountCreation extends MenuAction implements Action {
     }
 
     /**
-     * Go to the next menu.
+     * Go to the next appropriate menu.
      */
     public void next() {
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);

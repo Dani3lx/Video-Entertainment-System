@@ -33,7 +33,7 @@ public class UserLogin extends MenuAction implements Action {
     }
 
     /**
-     * Logs the user in.
+     * Validates and logs the user in.
      */
     public void run() {
         // Takes in a username and password and tries to log in
@@ -44,7 +44,7 @@ public class UserLogin extends MenuAction implements Action {
     }
 
     /**
-     * Go to the next menu.
+     * Go to the next appropriate menu.
      */
     public void next() {
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
