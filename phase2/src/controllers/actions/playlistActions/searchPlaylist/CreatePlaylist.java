@@ -48,6 +48,6 @@ public class CreatePlaylist extends PlaylistSearchAction implements Action {
     }
     @Override
     public void next(){
-        nextMenu(found_pl,playlistsMenuFactory,userMenuFactory);
+        nextMenu(!found_pl,playlistsMenuFactory,userMenuFactory);
     }
 }
