@@ -12,13 +12,22 @@ import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * This class is responsible for displaying all the playlists in the database
+ */
 public class DisplayAllPlaylist extends PlaylistSearchAction implements Action {
 
-    MenuFactory playlistsMenuFactory;
-    MenuFactory userMenuFactory;
+    private MenuFactory playlistsMenuFactory;
+    private final MenuFactory userMenuFactory;
     private boolean found_pl;
-
+    /**
+     * Creates a constructor with the given user prompt, user, language presenter, menu presenter and associated playlist.
+     *
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     */
     public DisplayAllPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         this.userPrompt = userPrompt;
         this.lp = lp;
@@ -26,7 +35,9 @@ public class DisplayAllPlaylist extends PlaylistSearchAction implements Action {
         currentUser = user;
         userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
     }
-
+    /**
+     * This method is how the abstract factory completes the action this class is responsible for
+     */
     @Override
     public void run() {
         mp.displayAlert(LanguagePresenter.AlertTextType.ALLPLAYLISTS);
@@ -47,7 +58,9 @@ public class DisplayAllPlaylist extends PlaylistSearchAction implements Action {
             next();
         }
     }
-
+    /**
+     * This method is how the program moves from running the action to a new menu display
+     */
     @Override
     public void next() {
         nextMenu(found_pl, playlistsMenuFactory, userMenuFactory);

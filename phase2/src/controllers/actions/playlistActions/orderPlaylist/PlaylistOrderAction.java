@@ -3,9 +3,19 @@ package controllers.actions.playlistActions.orderPlaylist;
 import controllers.actions.MenuAction;
 import entities.Playlist;
 import presenters.language.LanguagePresenter;
-
+/**
+ * This abstract parent class holds code that would be duplicated across all of the
+ * reorder playlist actions.  A switch is used to denote which reordering type is used
+ * and in that switch, the correct playlist manager method is called.
+ * For future reordering options, add a switch case and pm method here
+ */
 public abstract class PlaylistOrderAction extends MenuAction {
-
+    /**
+     *
+     * @param order string used to determine switch case
+     * @param pl playlist being reordered
+     * @return a new playlist that is reordered
+     */
     protected Playlist playlistOrderRun(String order, Playlist pl) {
 
         /* Validate if user can make changes*/

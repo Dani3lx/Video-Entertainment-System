@@ -14,12 +14,22 @@ import userInterfaces.userPrompt.UserPrompt;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class is responsible for viewing videos in a playlist
+ */
 public class ViewVidsPlaylist extends MenuAction implements Action {
 
-    public Playlist pl;
-    MenuFactory playlistsMenuFactory;
-
+    private final Playlist pl;
+    private final MenuFactory playlistsMenuFactory;
+    /**
+     * Creates a constructor with the given user prompt, user, language presenter, menu presenter and associated playlist.
+     *
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     * @param pl         playlist associated with this action
+     */
     public ViewVidsPlaylist(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, List<Playlist> pl) {
         this.userPrompt = userPrompt;
         this.lp = lp;
@@ -29,7 +39,9 @@ public class ViewVidsPlaylist extends MenuAction implements Action {
         playlistsMenuFactory = new PlaylistsMenuFactory(userPrompt, currentUser, lp, mp, pl);
     }
 
-
+    /**
+     * This method is how the abstract factory completes the action this class is responsible for
+     */
     @Override
     public void run() {
         String plname = pm.getPlName(pl);
@@ -37,7 +49,9 @@ public class ViewVidsPlaylist extends MenuAction implements Action {
         mp.displayList(vidname);
         next();
     }
-
+    /**
+     * This method is how the program moves from running the action to a new menu display
+     */
     @Override
     public void next() {
         playlistsMenuFactory.getMenu(MenuEnums.PLAYLISTVIEW).run();
