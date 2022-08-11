@@ -20,7 +20,7 @@ public class CommentManager {
      */
     public Boolean editComment(Comments c, String newComm) {
         c.setComment(newComm);
-        c.setComment_date(LocalDateTime.now().toString());
+        c.setCommentDate(LocalDateTime.now().toString());
         return true;
 
     }

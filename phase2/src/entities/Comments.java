@@ -6,19 +6,19 @@ package entities;
 public class Comments {
     private final String commenter;
     private String comment;
-    private String comment_date;
+    private String commentDate;
 
     /**
      * Constructs a comment with commenter, comment and comment_date
      *
-     * @param commenter    the username who make the comment
-     * @param comment      the content of the comment
-     * @param comment_date the date and time of the comment made.
+     * @param commenter   the username who make the comment
+     * @param comment     the content of the comment
+     * @param commentDate the date and time of the comment made.
      */
-    public Comments(String commenter, String comment, String comment_date) {
+    public Comments(String commenter, String comment, String commentDate) {
         this.commenter = commenter;
         this.comment = comment;
-        this.comment_date = comment_date;
+        this.commentDate = commentDate;
 
     }
 
@@ -54,17 +54,17 @@ public class Comments {
      *
      * @return the date and time of the comment made.
      */
-    public String getComment_date() {
-        return comment_date;
+    public String getCommentDate() {
+        return commentDate;
     }
 
     /**
      * Edit the date and time of the comment made.
      *
-     * @param comment_date the date and time of the comment made.
+     * @param commentDate the date and time of the comment made.
      */
-    public void setComment_date(String comment_date) {
-        this.comment_date = comment_date;
+    public void setCommentDate(String commentDate) {
+        this.commentDate = commentDate;
     }
 
     /**
@@ -74,6 +74,6 @@ public class Comments {
      */
     @Override
     public String toString() {
-        return commenter + ";" + comment + ";" + comment_date;
+        return commenter + ";" + comment + ";" + commentDate;
     }
 }
