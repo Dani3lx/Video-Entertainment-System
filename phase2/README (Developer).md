@@ -57,7 +57,9 @@ a static getInstance() method as well as storing a static instance attribute. Wh
 of the class yet exists in the program, one will be instantiated and returned. If an instance already exists
 within the attribute, it will be returned. In this way, we ensure that only one single instance of each Manager
 exists within the entire program so that all operations performed on the lists of playlists, users, or videos 
-will utilize and modify the same list which will then be saved by DataManager. Furthermore, using this design
+will utilize and modify the same list which will then be saved by DataManager. An example of this pattern is in PlaylistManager, 
+where a VideoManager is required in the method namesInPlaylist(). Thereby, this method calls VideoManager.getInstance()
+ to access a method within the other class to access the names of videos by way of their uniqueIDs. Furthermore, using this design
 pattern eliminates the need to pass the Manager classes around as parameters to constructors within the use case layer, 
 eliminating the code smell of long parameter lists. 
 
