@@ -26,10 +26,6 @@ public class Comments{
         return comment_date;
     }
 
-    public void setCommenter(String commenter){
-        this.commenter = commenter;
-    }
-
     public void setComment(String comment){
         this.comment = comment;
     }
