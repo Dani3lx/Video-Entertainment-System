@@ -6,10 +6,10 @@ import org.junit.Test;
 import usecase.runtimeDataManager.CommentManager;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
-
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CommentManagerTest {
     private static final CommentManager CM = new CommentManager();

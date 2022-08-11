@@ -2,7 +2,7 @@ package usecase;
 
 import entities.Video;
 
-import java.util.*;
+import java.util.Comparator;
 
 /**
  * This comparator class is responsible for comparing two videos and returning an ordering based on rating

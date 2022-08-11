@@ -1,7 +1,7 @@
-import entities.Ratings;
-import entities.Playlist;
-import entities.Video;
 import entities.Comments;
+import entities.Playlist;
+import entities.Ratings;
+import entities.Video;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import usecase.runtimeDataManager.PlaylistManager;

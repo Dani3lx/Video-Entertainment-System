@@ -1,8 +1,13 @@
 package usecase.runtimeDataManager;
 
-import entities.*;
+import entities.AdminUser;
+import entities.NonAdminUser;
+import entities.User;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * This class is responsible for performing all direct interactions with the User entity classes.
@@ -12,9 +17,8 @@ public class UserManager {
      * Video manager that stores all the videos.
      */
     static VideoManager vm = VideoManager.getInstance();
-    private final ArrayList<User> users;
-
     private static UserManager instance;
+    private final ArrayList<User> users;
 
     /**
      * This constructs a user manager that manages user.

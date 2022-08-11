@@ -1,5 +1,6 @@
 import entities.Comments;
 import entities.NonAdminUser;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import usecase.runtimeDataManager.NonAdminManager;
 import usecase.runtimeDataManager.VideoManager;
@@ -7,9 +8,8 @@ import usecase.runtimeDataManager.VideoManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
-import org.junit.BeforeClass;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class NonAdminManagerTest {
     private static final VideoManager VM = VideoManager.getInstance();

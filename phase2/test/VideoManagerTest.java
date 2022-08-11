@@ -1,11 +1,13 @@
-import entities.*;
-import org.junit.*;
+import entities.Comments;
+import entities.Ratings;
+import entities.Video;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import usecase.runtimeDataManager.VideoManager;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
 
-import java.util.*;
-import java.lang.*;
+import static org.junit.Assert.*;
 
 public class VideoManagerTest {
     private static final VideoManager VM = new VideoManager();

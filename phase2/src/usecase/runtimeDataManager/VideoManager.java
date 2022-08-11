@@ -15,8 +15,15 @@ import java.util.UUID;
  */
 
 public class VideoManager {
-    private ArrayList<Video> vids;
     private static VideoManager instance;
+    private ArrayList<Video> vids;
+
+    /**
+     * Instantiate new VideoManager
+     */
+    public VideoManager() {
+        vids = new ArrayList<>();
+    }
 
     /**
      * Instantiate new VideoManager if not yet created, or return instance
@@ -27,13 +34,6 @@ public class VideoManager {
         if (instance == null)
             instance = new VideoManager();
         return instance;
-    }
-
-    /**
-     * Instantiate new VideoManager
-     */
-    public VideoManager() {
-        vids = new ArrayList<>();
     }
 
     /**

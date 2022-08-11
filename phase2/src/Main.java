@@ -3,9 +3,9 @@ import presenters.language.EnglishPresenter;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import presenters.menuPresenter.TerminalMenuPresenter;
-import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.Menu;
+import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.TerminalUserPrompt;
 import userInterfaces.userPrompt.UserPrompt;
 

@@ -1,11 +1,9 @@
 package controllers.actions.videoInteractionMenu;
 
 import controllers.actionFactories.Action;
-
 import controllers.actions.MenuAction;
 import entities.User;
 import entities.Video;
-
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import usecase.runtimeDataManager.NonAdminManager;

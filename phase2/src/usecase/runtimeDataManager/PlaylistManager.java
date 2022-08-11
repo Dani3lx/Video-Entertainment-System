@@ -2,30 +2,19 @@ package usecase.runtimeDataManager;
 
 import entities.Playlist;
 import entities.Video;
-import usecase.VideoRatingComparator;
 import usecase.RandomComparator;
+import usecase.VideoRatingComparator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This class is responsible for performing all direct interactions with the Playlist entity class.
  */
 public class PlaylistManager {
-    private ArrayList<Playlist> playlists;
     private static PlaylistManager instance;
-
-    /**
-     * Instantiate new PlaylistManager if not yet created, or return instance
-     *
-     * @return PlaylistManager if it already exists
-     */
-    public static PlaylistManager getInstance() {
-        if (instance == null) {
-            instance = new PlaylistManager();
-        }
-
-        return instance;
-    }
+    private ArrayList<Playlist> playlists;
 
     /**
      * Initialize empty ArrayList for playlists
@@ -44,6 +33,19 @@ public class PlaylistManager {
     }
 
     /**
+     * Instantiate new PlaylistManager if not yet created, or return instance
+     *
+     * @return PlaylistManager if it already exists
+     */
+    public static PlaylistManager getInstance() {
+        if (instance == null) {
+            instance = new PlaylistManager();
+        }
+
+        return instance;
+    }
+
+    /**
      * Add playlist object to playlists
      *
      * @param pl playlist object
@@ -53,21 +55,21 @@ public class PlaylistManager {
     }
 
     /**
-     * Set playlists equal to input list of playlists
-     *
-     * @param playlists new list of playlists
-     */
-    public void setPlaylists(ArrayList<Playlist> playlists) {
-        this.playlists = playlists;
-    }
-
-    /**
      * Get list of playlists
      *
      * @return playlists
      */
     public ArrayList<Playlist> getPlaylists() {
         return playlists;
+    }
+
+    /**
+     * Set playlists equal to input list of playlists
+     *
+     * @param playlists new list of playlists
+     */
+    public void setPlaylists(ArrayList<Playlist> playlists) {
+        this.playlists = playlists;
     }
 
     /**

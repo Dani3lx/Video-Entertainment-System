@@ -2,7 +2,8 @@ package usecase;
 
 import entities.Video;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Random;
 
 /**
  * This comparator class is responsible for comparing two videos and returning a random ordering (used to shuffle)

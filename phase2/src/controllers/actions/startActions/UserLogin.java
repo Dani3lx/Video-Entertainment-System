@@ -4,9 +4,9 @@ import controllers.actionFactories.Action;
 import controllers.actions.MenuAction;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
+import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
-import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.userPrompt.UserPrompt;
 
 import java.time.LocalDateTime;

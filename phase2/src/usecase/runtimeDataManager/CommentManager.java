@@ -4,7 +4,6 @@ import entities.Comments;
 import entities.Video;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  * This class is responsible for performing all direct interactions with the Comments entity class.

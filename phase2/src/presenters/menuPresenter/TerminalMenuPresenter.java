@@ -7,15 +7,15 @@ import java.util.List;
 /**
  * Responsible for formatting and outputting data to the user
  */
-public class TerminalMenuPresenter implements MenuPresenter{
+public class TerminalMenuPresenter implements MenuPresenter {
     private final LanguagePresenter lp;
-    public TerminalMenuPresenter(LanguagePresenter lp){
+
+    public TerminalMenuPresenter(LanguagePresenter lp) {
         this.lp = lp;
     }
 
     /**
      * Displays an alert.
-     *
      */
     public void displayAlert(LanguagePresenter.AlertTextType type) {
         System.out.println(alertText(lp.getAlertText(type)));
@@ -23,7 +23,6 @@ public class TerminalMenuPresenter implements MenuPresenter{
 
     /**
      * Displays an error.
-     *
      */
     public void displayError(LanguagePresenter.ErrorTextType type) {
         System.out.println(errorText(lp.getErrorText(type)));
@@ -31,7 +30,6 @@ public class TerminalMenuPresenter implements MenuPresenter{
 
     /**
      * Displays a request to the user.
-     *
      */
     public void displayRequest(LanguagePresenter.RequestTextType type) {
         System.out.println(requestText(lp.getRequestText(type)));
@@ -43,7 +41,6 @@ public class TerminalMenuPresenter implements MenuPresenter{
 
     /**
      * Displays a menu option.
-     *
      */
     public void displayChoiceOption(LanguagePresenter.ChoiceTextType type, List<String> actionList) {
         System.out.println(menuOption(lp.getChoiceText(type)));
