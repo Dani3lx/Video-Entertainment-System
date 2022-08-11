@@ -182,24 +182,6 @@ public class Video implements Comparable<Video> {
         this.comments.remove(comment);
     }
 
-//    /**
-//     * Likes the video.
-//     */
-//    public void addLikes() {
-//        ratings.addLikes();
-//    }
-//
-//    public void addLikes(String username) {
-//        ratings.addLikes(username);
-//    }
-//
-//    /**
-//     * Dislikes the video.
-//     */
-//    public void addDislikes() {
-//        ratings.addDislikes("Need to be fixed");
-//    }
-
     /**
      * Return whether v is equal to this video.
      *
