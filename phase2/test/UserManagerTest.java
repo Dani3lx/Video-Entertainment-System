@@ -4,7 +4,6 @@ import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -22,7 +21,7 @@ public class UserManagerTest {
         ArrayList<String> cates = new ArrayList<>(List.of("serious"));
         Ratings r = new Ratings();
         ArrayList<Video> vids = new ArrayList<>();
-        Video v1 = new Video("k", "popmusic", "amazing music", cates, "url", "1", r, "today", new ArrayList<Comments>(List.of(new Comments("", "", ""))));
+        Video v1 = new Video("k", "popmusic", "amazing music", cates, "url", "1", r, "today", new ArrayList<>(List.of(new Comments("", "", ""))));
         vids.add(v1);
         VM.setVids(vids);
     }
@@ -37,7 +36,6 @@ public class UserManagerTest {
 
     @Test
     public void testChangePass() {
-        VideoManager VM = new VideoManager();
         UserManager UM = new UserManager();
         NonAdminUser u1 = new NonAdminUser("a", "b");
         UM.changePassword(u1, "new");
@@ -47,7 +45,6 @@ public class UserManagerTest {
 
     @Test
     public void testInstantiateUser() {
-        VideoManager VM = new VideoManager();
         UserManager UM = new UserManager();
         NonAdminUser u1 = new NonAdminUser("a", "b");
         assertTrue(u1.equals(UM.instantiateUser("a", "b", false)));
@@ -55,7 +52,6 @@ public class UserManagerTest {
 
     @Test
     public void testValidateUsername() {
-        VideoManager VM = new VideoManager();
         UserManager UM = new UserManager();
         NonAdminUser u1 = new NonAdminUser("a", "b");
         assertTrue(UM.validateUserName(u1, "a"));
@@ -63,7 +59,6 @@ public class UserManagerTest {
 
     @Test
     public void testvalidateBanStatus() {
-        VideoManager VM = new VideoManager();
         UserManager UM = new UserManager();
         NonAdminUser u1 = new NonAdminUser("a", "b");
         u1.setBanStatus(true);
@@ -79,7 +74,6 @@ public class UserManagerTest {
 
     @Test
     public void testGetRole() {
-        VideoManager VM = new VideoManager();
         UserManager UM = new UserManager();
         AdminUser u1 = new AdminUser("a", "b");
         assertTrue(UM.getRole(u1));
