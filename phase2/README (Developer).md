@@ -51,7 +51,18 @@ We implemented the following Design Patterns:
 Below we will explain how each design pattern works (using specific class and package names), why we implemented it,
 how it improved our code
 
-5. The Iterator pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and defines the
+3. The Singleton design pattern was implemented in VideoManager, UserManager, PlaylistManager, 
+all within the usercase/runtimedatamanager package. Each of these classes define
+a static getInstance() method as well as storing a static instance attribute. When called, if no instance
+of the class yet exists in the program, one will be instantiated and returned. If an instance already exists
+within the attribute, it will be returned. In this way, we ensure that only one single instance of each Manager
+exists within the entire program so that all operations performed on the lists of playlists, users, or videos 
+will utilize and modify the same list which will then be saved by DataManager. Furthermore, using this design
+pattern eliminates the need to pass the Manager classes around as parameters to constructors within the use case layer, 
+eliminating the code smell of long parameter lists. 
+
+
+5. The Iterator design pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and defines the
 class iterator within, which includes the hasNext() and next() methods. 
 There are a variety of methods in PlaylistManager such as for example
 deleteFromPlaylist that uses a for-each loop to directly iterate over the 
