@@ -14,9 +14,21 @@ import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
+/**
+ * Deletes user comment from a video.
+ */
 public class DeleteComment extends MenuAction implements Action {
     private final Video v;
 
+    /**
+     * Creates a DeleteComment with the given user prompt, user, language presenter, menu presenter and video.
+     *
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     * @param v          the video
+     */
     public DeleteComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, Video v) {
         currentUser = user;
         this.userPrompt = userPrompt;
@@ -25,10 +37,13 @@ public class DeleteComment extends MenuAction implements Action {
         this.v = v;
     }
 
+    /**
+     * Deletes user comment from a video.
+     */
     @Override
     public void run() {
         NonAdminManager NAM = new NonAdminManager();
-        if (NAM.deleteComment(v.getUniqueID(), currentUser)) {
+        if (NAM.deleteComment(v.getUniqueID(), currentUser)) { // todo fix violation of clean arch
             mp.displayAlert(LanguagePresenter.AlertTextType.DELETECOMMENT);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.DELETECOMMENT);
@@ -36,14 +51,15 @@ public class DeleteComment extends MenuAction implements Action {
         next();
     }
 
+    /**
+     * Navigates to the next appropriate menu.
+     */
     @Override
     public void next() {
-
+        MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
         if (!um.getRole(currentUser)) {
-            MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
             userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
         } else {
-            MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
             userMenuFactory.getMenu(MenuEnums.ADMIN).run();
         }
     }
