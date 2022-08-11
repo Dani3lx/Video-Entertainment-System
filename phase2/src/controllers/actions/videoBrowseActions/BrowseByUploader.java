@@ -41,6 +41,7 @@ public class BrowseByUploader extends VideoBrowseMenuAction implements Action {
         video = selectVideo(videos);
         next();
     }
+
     /**
      * Go to the next appropriate menu.
      */

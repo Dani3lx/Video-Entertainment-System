@@ -24,7 +24,7 @@ public class BrowseByName extends VideoBrowseMenuAction implements Action {
      * @param lp         the program's language presenter
      * @param mp         the program's menu presenter
      */
-    public BrowseByName(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp){
+    public BrowseByName(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;

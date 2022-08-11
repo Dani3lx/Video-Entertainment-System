@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 /**
  * This class is responsible for performing all actions pertaining to the AdminUser class.
- *
- * @author Benedek Balla, Daniel Xu, ...
  */
 public class AdminManager extends UserManager {
 
@@ -25,8 +23,9 @@ public class AdminManager extends UserManager {
 
     /**
      * Sets user ban status to true
+     *
      * @param currentUser the user who is logged in
-     * @param username the username of the current user
+     * @param username    the username of the current user
      */
     public boolean banUser(User currentUser, String username) {
         for (User user : users) {
@@ -45,6 +44,7 @@ public class AdminManager extends UserManager {
 
     /**
      * Sets user ban status to false
+     *
      * @param username the username of the current user
      */
     public boolean unbanUser(String username) {
@@ -59,6 +59,7 @@ public class AdminManager extends UserManager {
 
     /**
      * Removes the user from the arraylist of users
+     *
      * @param username the username of the current user
      */
     public boolean deleteUser(String username) {
@@ -73,6 +74,7 @@ public class AdminManager extends UserManager {
 
     /**
      * Return banned or unbanned users
+     *
      * @param users      of type Users
      * @param displayBan ban status of user
      * @return List of usernames corresponding to the displayBan
@@ -89,6 +91,7 @@ public class AdminManager extends UserManager {
 
     /**
      * Return usernames of users
+     *
      * @param users contains items of type User
      * @return List of all usernames in users
      */

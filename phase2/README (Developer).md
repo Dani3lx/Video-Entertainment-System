@@ -59,6 +59,7 @@ can fulfill with some extensions.  We believe that extending our program through
 program to be more in line with the principles.
 
 The Principles:
+
 1. Equitable Use
 2. Flexibility in Use
 3. Simple and Intuitive Use
@@ -107,6 +108,7 @@ Grey circle: Package protected
 
 
 ## Contributors
+
 |Name|Email Address|
 |----|-------------|
 |Akmar|akmar.chowdhury@mail.utoronto.ca|

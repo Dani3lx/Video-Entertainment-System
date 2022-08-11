@@ -6,7 +6,7 @@ package presenters.language;
 public class EnglishPresenter implements LanguagePresenter {
 
     /**
-     *  Stores integer input requests after menu options are given
+     * Stores integer input requests after menu options are given
      *
      * @param var the enum type
      * @return the corresponding string
@@ -41,7 +41,7 @@ public class EnglishPresenter implements LanguagePresenter {
     }
 
     /**
-     *  Stores alert messages after a certain action
+     * Stores alert messages after a certain action
      *
      * @param type the enum type
      * @return the corresponding string
@@ -96,7 +96,7 @@ public class EnglishPresenter implements LanguagePresenter {
     }
 
     /**
-     *  Stores error messages after a certain action
+     * Stores error messages after a certain action
      *
      * @param type the enum type
      * @return the corresponding string
@@ -121,7 +121,7 @@ public class EnglishPresenter implements LanguagePresenter {
                 return "Comment edit of the video has not been successful";
             case DELETECOMMENT:
                 return "Deletion of comment has not been successful";
-            case  ADDCOMMENT:
+            case ADDCOMMENT:
                 return "Addition of comment has not been successful";
             case UPLOADVIDEO:
                 return "Video was not successfully uploaded, title or video path cannot be blank";
@@ -135,7 +135,7 @@ public class EnglishPresenter implements LanguagePresenter {
     }
 
     /**
-     *  Stores string input requests
+     * Stores string input requests
      *
      * @param type the enum type
      * @return the corresponding string
@@ -180,13 +180,13 @@ public class EnglishPresenter implements LanguagePresenter {
     }
 
     /**
-     *  Stores data stored in a video
+     * Stores data stored in a video
      *
      * @param type the enum type
      * @return the corresponding string
      */
     public String getVideoDataText(VideoDataType type) {
-        switch(type){
+        switch (type) {
             case UPLOADER:
                 return "Uploaded by: ";
             case LIKES:

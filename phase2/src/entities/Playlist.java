@@ -1,20 +1,17 @@
 package entities;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * This class defines a playlist and stores all the associated data.
- *
- * @author Benedek Balla, Shu Fan Nicholas Au, Wing Zou
- * @version 1.0
- * @since 2022-07-15
  */
 public class Playlist implements Iterable<String> {
 
+    private final String userName;
     private String name;
     private int likes;
     private ArrayList<String> uniqueIDs;
-    private final String userName;
 
     /**
      * Constructs a PlayList using playlistName and userName.
@@ -92,21 +89,21 @@ public class Playlist implements Iterable<String> {
     }
 
     /**
-     * Returns the username of the person creating this Playlist.
-     *
-     * @return the username of the person creating this Playlist.
-     */
-    public String getUserName() {
-        return userName;
-    }
-
-    /**
      * Sets the list of uniqueIDs of videos stored in the Playlist.
      *
      * @param uniqueIDs the list of uniqueIDs of videos stored in the Playlist.
      */
     public void setUniqueIDs(ArrayList<String> uniqueIDs) {
         this.uniqueIDs = uniqueIDs;
+    }
+
+    /**
+     * Returns the username of the person creating this Playlist.
+     *
+     * @return the username of the person creating this Playlist.
+     */
+    public String getUserName() {
+        return userName;
     }
 
     /**

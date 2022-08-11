@@ -1,21 +1,24 @@
 package usecase.runtimeDataManager;
 
-import entities.*;
+import entities.AdminUser;
+import entities.NonAdminUser;
+import entities.User;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * This class is responsible for performing all direct interactions with the User entity classes.
- *
- * @author Benedek Balla, Daniel Xu, ...
- * @version 1.0
- * @since 2022-07-15
  */
 public class UserManager {
+    /**
+     * Video manager that stores all the videos.
+     */
     static VideoManager vm = VideoManager.getInstance();
-    private ArrayList<User> users;
-
     private static UserManager instance;
+    private final ArrayList<User> users;
 
     /**
      * This constructs a user manager that manages user.
@@ -26,6 +29,7 @@ public class UserManager {
 
     /**
      * Instantiate new UserManager if not yet created, or return instance
+     *
      * @return UserManager if it already exists
      */
     public static UserManager getInstance() {
@@ -37,15 +41,14 @@ public class UserManager {
 
     /**
      * Checks if user exists in list of all users
+     *
      * @param username of user to be checked
      * @return boolean indicating if user exists or not
      */
     public boolean noUserExist(String username) {
-        if (!(Objects.isNull(users))) {
-            for (User u : users) {
-                if (validateUserName(u, username)) {
-                    return false;
-                }
+        for (User u : users) {
+            if (validateUserName(u, username)) {
+                return false;
             }
         }
         return true;
@@ -59,14 +62,10 @@ public class UserManager {
      * @return validated user
      */
     public User validateUser(String username, String password) {
-        if (Objects.isNull(users)) {
-            return null;
-        } else {
-            for (User user : users) {
-                if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
-                    if (!user.getBanStatus()) {
-                        return user;
-                    }
+        for (User user : users) {
+            if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
+                if (!user.getBanStatus()) {
+                    return user;
                 }
             }
         }

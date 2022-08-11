@@ -3,21 +3,15 @@ import presenters.language.EnglishPresenter;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import presenters.menuPresenter.TerminalMenuPresenter;
-import usecase.runtimeDataManager.PlaylistManager;
-import usecase.runtimeDataManager.UserManager;
-import usecase.runtimeDataManager.VideoManager;
-import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.Menu;
+import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.TerminalUserPrompt;
 import userInterfaces.userPrompt.UserPrompt;
 
 public class Main {
     public static void main(String[] args) {
 
-        VideoManager vm = VideoManager.getInstance();
-        UserManager um = UserManager.getInstance();
-        PlaylistManager pm = PlaylistManager.getInstance();
 
         DataManager sm = new DataManager();
         sm.loadData("phase2/datasets/Data.csv"); //Read data from Data.csv

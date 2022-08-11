@@ -6,21 +6,16 @@ import java.util.Map;
 
 /**
  * This represents video.
- *
- * @author Daniel Xu, Benedek Balla
- * @version 1.0
- * @since 2022-07-21
  */
 public class Video implements Comparable<Video> {
     private final String content;
     private final String uniqueID;
+    private final String uploader;
+    private final String date_upload;
+    private final Ratings ratings;
     private String description;
     private ArrayList<String> categories;
     private String name;
-    private final String uploader;
-    private final String date_upload;
-    private Ratings ratings;
-
     private ArrayList<Comments> comments;
 
     /**
@@ -86,12 +81,30 @@ public class Video implements Comparable<Video> {
     }
 
     /**
+     * Sets the description of the video.
+     *
+     * @param description the description of the video
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
      * Returns the video name.
      *
      * @return video name
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Sets the name of the video.
+     *
+     * @param name the name of the video
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -122,33 +135,6 @@ public class Video implements Comparable<Video> {
     }
 
     /**
-     * Return the whole list of comments for the video.
-     *
-     * @return the whole list of comments for the video
-     */
-    public ArrayList<Comments> getComments() {
-        return comments;
-    }
-
-    /**
-     * Sets the description of the video.
-     *
-     * @param description the description of the video
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * Sets the name of the video.
-     *
-     * @param name the name of the video
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Sets the categories of the video.
      *
      * @param categories the video's categories
@@ -157,12 +143,22 @@ public class Video implements Comparable<Video> {
         this.categories = categories;
     }
 
-    public void setComments(ArrayList<Comments> comments){
+    /**
+     * Return the whole list of comments for the video.
+     *
+     * @return the whole list of comments for the video
+     */
+    public ArrayList<Comments> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comments> comments) {
         this.comments = comments;
     }
 
     /**
      * Add new comment to comments of this video.
+     *
      * @param comment to be added
      */
     public void addComment(Comments comment) {
@@ -171,6 +167,7 @@ public class Video implements Comparable<Video> {
 
     /**
      * Remove comment from comments of this video.
+     *
      * @param comment to be removed
      */
     public void deleteComment(Comments comment) {
@@ -215,8 +212,8 @@ public class Video implements Comparable<Video> {
         }
 
         StringBuilder s2 = new StringBuilder();
-        for (Map.Entry<String, Boolean> set: ratings.getRatings().entrySet()){
-            s2.append(set.getKey() + "=" + set.getValue() + "/");
+        for (Map.Entry<String, Boolean> set : ratings.getRatings().entrySet()) {
+            s2.append(set.getKey()).append("=").append(set.getValue()).append("/");
         }
 
         Iterator<Comments> it2 = comments.iterator();

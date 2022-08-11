@@ -42,13 +42,7 @@ public class ViewComment extends MenuAction {
     @Override
     public void run() {
         mp.displayAlert(LanguagePresenter.AlertTextType.DISPLAYCOMMENT);
-        ArrayList<Comments> comments = vm.getByUniqueID(v.getUniqueID()).getComments(); // todo get rid of violation of clean arch
-        ArrayList<String> commentStrings = new ArrayList<>();
-        for (Comments c : comments) {
-            String str = c.getCommenter() + ": " + c.getComment() + " " + c.getComment_date();
-            commentStrings.add(str);
-        }
-        mp.displayList(commentStrings);
+        mp.displayList(vm.getVideoComments(v));
         next();
     }
 

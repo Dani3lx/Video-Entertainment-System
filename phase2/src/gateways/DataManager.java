@@ -1,16 +1,15 @@
 package gateways;
 
-import entities.Comments;
-import entities.Playlist;
-import entities.User;
-import entities.Video;
+import entities.*;
 import usecase.runtimeDataManager.PlaylistManager;
 import usecase.runtimeDataManager.UserManager;
 import usecase.runtimeDataManager.VideoManager;
-import entities.Ratings;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
-import java.io.*;
 
 /**
  * This class is responsible for reading and writing data from and to the csv files contained in phase2/datasets
@@ -26,7 +25,8 @@ public class DataManager {
     /**
      * Instantiate new DataManager
      */
-    public DataManager() {}
+    public DataManager() {
+    }
 
     /**
      * Reads User data from phase2/datasets/Data.csv into the program by instantiating Users and adding them
@@ -115,8 +115,8 @@ public class DataManager {
 
                 // Read Ratings
 
-                HashMap<String, Boolean>  ratingsMap = new HashMap<>();
-                for (String ratingString: new ArrayList<>(Arrays.asList(record[6].split("/")))){
+                HashMap<String, Boolean> ratingsMap = new HashMap<>();
+                for (String ratingString : new ArrayList<>(Arrays.asList(record[6].split("/")))) {
                     ArrayList<String> ratingSplit = new ArrayList<>(Arrays.asList(ratingString.split("=")));
                     ratingsMap.put(ratingSplit.get(0), Boolean.parseBoolean(ratingSplit.get(1)));
                 }
@@ -135,7 +135,7 @@ public class DataManager {
 
                 // Instantiate Video
 
-                Video video = new Video(record[0], record[1], record[2], new ArrayList<>(Arrays.asList(record[3].split("/"))), record[4], record[5], new Ratings(ratingsMap), record[7],comments);
+                Video video = new Video(record[0], record[1], record[2], new ArrayList<>(Arrays.asList(record[3].split("/"))), record[4], record[5], new Ratings(ratingsMap), record[7], comments);
                 videos.add(video);
             }
             scanner.close();

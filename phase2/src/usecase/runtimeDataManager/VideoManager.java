@@ -12,31 +12,28 @@ import java.util.UUID;
 
 /**
  * Use case class responsible for interacting with the Video entity class
- *
- * @author Kate Ma, Daniel
- * @version 1.0
- * @since 2022-07-23
  */
 
-public class VideoManager{
-    private ArrayList<Video> vids;
+public class VideoManager {
     private static VideoManager instance;
-
-    /**
-     * Instantiate new VideoManager if not yet created, or return instance
-     * @return VideoManager if it already exists
-     */
-    public static VideoManager getInstance(){
-        if (instance == null)
-            instance = new VideoManager();
-        return instance;
-    }
+    private ArrayList<Video> vids;
 
     /**
      * Instantiate new VideoManager
      */
-    public VideoManager(){
+    public VideoManager() {
         vids = new ArrayList<>();
+    }
+
+    /**
+     * Instantiate new VideoManager if not yet created, or return instance
+     *
+     * @return VideoManager if it already exists
+     */
+    public static VideoManager getInstance() {
+        if (instance == null)
+            instance = new VideoManager();
+        return instance;
     }
 
     /**
@@ -80,7 +77,7 @@ public class VideoManager{
         }
         Ratings ratings = new Ratings();
         ArrayList<Comments> comments = new ArrayList<>();
-        Comments c = new Comments("","","");
+        Comments c = new Comments("", "", "");
         comments.add(c);
         Video v1 = new Video(uploader, title, description, categories, vidLink, uniqueID, ratings, LocalDateTime.now().toString(), comments);
         vids.add(v1);
@@ -179,6 +176,20 @@ public class VideoManager{
         }
 
         return names;
+    }
+
+    /**
+     * Return a list of comments for a video
+     *
+     * @param vid target video
+     * @return list of comments in strings.
+     */
+    public List<String> getVideoComments(Video vid){
+        ArrayList<String> comments = new ArrayList<>();
+        for (Comments c: vid.getComments()){
+            comments.add(c.getCommenter() + ": "  + c.getComment() + " " + c.getComment_date());
+        }
+        return comments;
     }
 
 }

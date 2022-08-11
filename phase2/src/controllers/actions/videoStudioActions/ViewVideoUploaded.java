@@ -6,9 +6,9 @@ import entities.User;
 import presenters.language.LanguagePresenter;
 import presenters.menuPresenter.MenuPresenter;
 import usecase.runtimeDataManager.NonAdminManager;
+import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
-import userInterfaces.menuEnums.MenuEnums;
 import userInterfaces.userPrompt.UserPrompt;
 
 /**
