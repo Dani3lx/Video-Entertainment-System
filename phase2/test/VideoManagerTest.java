@@ -77,4 +77,11 @@ public class VideoManagerTest {
         assertEquals(VM.getVids().get(0), VM.getByCategory(video.getCategories()).get(0));
     }
 
+    @Test
+    public void getVideoCommentsTest(){
+        ArrayList<String> a = new ArrayList<>();
+        a.add(":  ");
+        assertEquals(a, VM.getVideoComments(video));
+    }
+
 }
