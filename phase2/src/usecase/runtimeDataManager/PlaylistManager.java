@@ -9,7 +9,6 @@ import java.util.*;
 
 /**
  * This class is responsible for performing all direct interactions with the Playlist entity class.
- * @author Benedek Balla, Shu Fan Nicholas Au, Akmar
  */
 public class PlaylistManager {
     private ArrayList<Playlist> playlists;
@@ -17,9 +16,10 @@ public class PlaylistManager {
 
     /**
      * Instantiate new PlaylistManager if not yet created, or return instance
+     *
      * @return PlaylistManager if it already exists
      */
-    public static PlaylistManager getInstance(){
+    public static PlaylistManager getInstance() {
         if (instance == null) {
             instance = new PlaylistManager();
         }
@@ -36,14 +36,16 @@ public class PlaylistManager {
 
     /**
      * Initialize playlists with an existing ArrayList
+     *
      * @param playlists list of playlists
      */
-    public PlaylistManager(ArrayList<Playlist> playlists){
+    public PlaylistManager(ArrayList<Playlist> playlists) {
         this.playlists = playlists;
     }
 
     /**
      * Add playlist object to playlists
+     *
      * @param pl playlist object
      */
     public void addPlaylist(Playlist pl) {
@@ -52,6 +54,7 @@ public class PlaylistManager {
 
     /**
      * Set playlists equal to input list of playlists
+     *
      * @param playlists new list of playlists
      */
     public void setPlaylists(ArrayList<Playlist> playlists) {
@@ -60,6 +63,7 @@ public class PlaylistManager {
 
     /**
      * Get list of playlists
+     *
      * @return playlists
      */
     public ArrayList<Playlist> getPlaylists() {
@@ -68,11 +72,12 @@ public class PlaylistManager {
 
     /**
      * Get list of playlist names
+     *
      * @return list of strings
      */
-    public List<String> getPlaylistNames(){
+    public List<String> getPlaylistNames() {
         List<String> pl_names = new ArrayList<>();
-        for(Playlist playlist : playlists){
+        for (Playlist playlist : playlists) {
             String pl_name = playlist.getPlaylistName();
             pl_names.add(pl_name);
         }
@@ -82,7 +87,8 @@ public class PlaylistManager {
 
     /**
      * Add a specified Video object to a specified Playlist object
-     * @param pl Playlist to be added to
+     *
+     * @param pl  Playlist to be added to
      * @param vid Video to be added
      */
     public void addToPlaylist(Playlist pl, Video vid) {
@@ -99,7 +105,8 @@ public class PlaylistManager {
 
     /**
      * Delete a Video from a Playlist created by a User
-     * @param pl the playlist they want to delete from
+     *
+     * @param pl  the playlist they want to delete from
      * @param vid the video they want to delete
      */
     public void deleteFromPlaylist(Playlist pl, Video vid) {
@@ -107,14 +114,15 @@ public class PlaylistManager {
         ArrayList<String> videos = pl.getUniqueIDs();
         for (String uniqueID : videos) {
             if (uniqueID.equals(vid.getUniqueID())) {
-                    pl.removeUniqueID(vid.getUniqueID());
-                    return;
+                pl.removeUniqueID(vid.getUniqueID());
+                return;
             }
         }
     }
 
     /**
      * Return the name of each video within the specified playlist.
+     *
      * @param playlistName name of the playlist to be viewed
      * @return ArrayList<String> of video names
      */
@@ -135,6 +143,7 @@ public class PlaylistManager {
 
     /**
      * Return the Playlist object corresponding to the name of the playlist.
+     *
      * @param playlistName the name of the playlist to be returned
      * @return Playlist the Playlist object corresponding to the name
      */
@@ -149,28 +158,30 @@ public class PlaylistManager {
 
     /**
      * Return copy playlist of input playlist
-     * @param pl playlist to be copied
+     *
+     * @param pl       playlist to be copied
      * @param username of user copying playlist
      * @return Playlist new copy of playlist pl
      */
-    public Playlist clonePlaylist(Playlist pl,String username){
+    public Playlist clonePlaylist(Playlist pl, String username) {
 
         String pl_name = pl.getPlaylistName() + "_clone";
         int pl_likes = pl.getLikes();
         ArrayList<String> pl_vids = pl.getUniqueIDs();
 
-        return new Playlist(pl_name,pl_likes,pl_vids,username);
+        return new Playlist(pl_name, pl_likes, pl_vids, username);
     }
 
     /**
      * Reorder the specified playlist using the VideoRatingComparator and return the new Playlist object.
+     *
      * @param playlist the name of the playlist to be reordered
      * @param username of user reordering playlist
      * @return Playlist after reordering
      */
-    public Playlist reorderPlaylistByRating(Playlist playlist,String username) {
+    public Playlist reorderPlaylistByRating(Playlist playlist, String username) {
         VideoManager vm = VideoManager.getInstance();
-        Playlist new_pl = clonePlaylist(playlist,username);
+        Playlist new_pl = clonePlaylist(playlist, username);
         ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         ArrayList<Video> videos = new ArrayList<>();
         try {
@@ -192,18 +203,21 @@ public class PlaylistManager {
 
     /**
      * Return a new playlist reordered according to video names of input playlist
+     *
      * @param playlist to be reordered
      * @param username of current user requesting reordering
      * @return new reordered playlist
      */
-    public Playlist reorderPlaylistByName(Playlist playlist,String username) {
+    public Playlist reorderPlaylistByName(Playlist playlist, String username) {
         VideoManager vm = VideoManager.getInstance();
-        Playlist new_pl = clonePlaylist(playlist,username);
+        Playlist new_pl = clonePlaylist(playlist, username);
         ArrayList<String> unsortedUniqueIDs = playlist.getUniqueIDs();
         ArrayList<String> sortedUniqueIDs = new ArrayList<>();
         ArrayList<String> names = new ArrayList<>();
 
-        for (String id : unsortedUniqueIDs) { names.add(vm.getByUniqueID(id).getName()); }
+        for (String id : unsortedUniqueIDs) {
+            names.add(vm.getByUniqueID(id).getName());
+        }
 
         Collections.sort(names);
 
@@ -217,13 +231,14 @@ public class PlaylistManager {
 
     /**
      * Reorder the specified playlist using the RandomComparator and return the new Playlist object.
+     *
      * @param playlist the name of the playlist to be reordered
-     // * @param vm VideoManager to access Video objects
+     *                 // * @param vm VideoManager to access Video objects
      * @return Playlist after reordering
      */
-    public Playlist shufflePlaylist(Playlist playlist,String username) {
+    public Playlist shufflePlaylist(Playlist playlist, String username) {
         VideoManager vm = VideoManager.getInstance();
-        Playlist new_pl = clonePlaylist(playlist,username);
+        Playlist new_pl = clonePlaylist(playlist, username);
         ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         ArrayList<Video> videos = new ArrayList<>();
         try {
@@ -245,6 +260,7 @@ public class PlaylistManager {
 
     /**
      * Increment the likes of a playlist by one
+     *
      * @param playlist the playlist to be liked
      */
     public void likePlaylist(Playlist playlist) {
@@ -253,22 +269,27 @@ public class PlaylistManager {
 
     /**
      * Get the name of the playlist
+     *
      * @param pl the playlist
      * @return String name of playlist
      */
-    public String getPlName(Playlist pl){
+    public String getPlName(Playlist pl) {
         return pl.getPlaylistName();
     }
 
     /**
      * Change the name of the playlist
-     * @param pl the playlist
+     *
+     * @param pl      the playlist
      * @param NewName the new name of the playlist
      */
-    public void setPlName(Playlist pl,String NewName){pl.setPlaylistName(NewName);}
+    public void setPlName(Playlist pl, String NewName) {
+        pl.setPlaylistName(NewName);
+    }
 
     /**
      * Get the ratings of a playlist
+     *
      * @param pl the playlist
      * @return String the String of the form "_(playlist name)_ has _(x)_ likes!"
      */
@@ -279,6 +300,7 @@ public class PlaylistManager {
 
     /**
      * Check if playlist name already exists
+     *
      * @param playlistName name of the playlist to check
      * @return boolean indicating if name already exists
      */
@@ -293,11 +315,12 @@ public class PlaylistManager {
 
     /**
      * Check if user can change playlist
-     * @param pl playlist we want to change
+     *
+     * @param pl       playlist we want to change
      * @param username string name of the individual trying to change the playlist
      * @return boolean indicating if user is allowed to change the playlist
      */
-    public boolean validatePlaylistAction(Playlist pl,String username){
+    public boolean validatePlaylistAction(Playlist pl, String username) {
         boolean validate;
         String pl_user = pl.getUserName();
         validate = pl_user.equals(username);

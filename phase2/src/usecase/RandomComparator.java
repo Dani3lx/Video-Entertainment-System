@@ -6,12 +6,12 @@ import java.util.*;
 
 /**
  * This comparator class is responsible for comparing two videos and returning a random ordering (used to shuffle)
- * @author Benedek Balla
  */
 
 public class RandomComparator implements Comparator<Video> {
     /**
      * Return a random integer: -1, 0, 1
+     *
      * @param v1 the first Video object to be compared.
      * @param v2 the second Video object to be compared.
      * @return int
