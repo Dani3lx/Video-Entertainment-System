@@ -181,4 +181,12 @@ public class VideoManager{
         return names;
     }
 
+    public List<String> getVideoComments(Video vid){
+        ArrayList<String> comments = new ArrayList<>();
+        for (Comments c: vid.getComments()){
+            comments.add(c.toString());
+        }
+        return comments;
+    }
+
 }
