@@ -1,9 +1,9 @@
 package gateways;
 
 import entities.*;
-import usecase.runtimeDataManager.PlaylistManager;
-import usecase.runtimeDataManager.UserManager;
-import usecase.runtimeDataManager.VideoManager;
+import usecase.runtimedatamanager.PlaylistManager;
+import usecase.runtimedatamanager.UserManager;
+import usecase.runtimedatamanager.VideoManager;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
