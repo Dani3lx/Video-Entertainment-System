@@ -95,9 +95,8 @@ public class PlaylistManager {
      */
     public void addToPlaylist(Playlist pl, Video vid) {
         String vidid = vid.getUniqueID();
-        ArrayList<String> videos = pl.getUniqueIDs();
 
-        for (String uniqueID : videos) {
+        for (String uniqueID : pl) {
             if (uniqueID.equals(vidid)) {
                 return;
             }
@@ -113,8 +112,7 @@ public class PlaylistManager {
      */
     public void deleteFromPlaylist(Playlist pl, Video vid) {
 
-        ArrayList<String> videos = pl.getUniqueIDs();
-        for (String uniqueID : videos) {
+        for (String uniqueID : pl) {
             if (uniqueID.equals(vid.getUniqueID())) {
                 pl.removeUniqueID(vid.getUniqueID());
                 return;
@@ -131,10 +129,9 @@ public class PlaylistManager {
     public ArrayList<String> namesInPlaylist(String playlistName) {
         VideoManager vm = VideoManager.getInstance();
         Playlist playlist = getPlaylistByName(playlistName);
-        ArrayList<String> uniqueIDs = playlist.getUniqueIDs();
         ArrayList<String> videoName = new ArrayList<>();
         try {
-            for (String uniqueID : uniqueIDs) {
+            for (String uniqueID : playlist) {
                 videoName.add(vm.getByUniqueID(uniqueID).getName());
             }
             return videoName;
@@ -184,10 +181,9 @@ public class PlaylistManager {
     public Playlist reorderPlaylistByRating(Playlist playlist, String username) {
         VideoManager vm = VideoManager.getInstance();
         Playlist new_pl = clonePlaylist(playlist, username);
-        ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         ArrayList<Video> videos = new ArrayList<>();
         try {
-            for (String uniqueID : uniqueIDs) {
+            for (String uniqueID : new_pl) {
                 videos.add(vm.getByUniqueID(uniqueID));
             }
             videos.sort(new VideoRatingComparator());
@@ -213,11 +209,10 @@ public class PlaylistManager {
     public Playlist reorderPlaylistByName(Playlist playlist, String username) {
         VideoManager vm = VideoManager.getInstance();
         Playlist new_pl = clonePlaylist(playlist, username);
-        ArrayList<String> unsortedUniqueIDs = playlist.getUniqueIDs();
         ArrayList<String> sortedUniqueIDs = new ArrayList<>();
         ArrayList<String> names = new ArrayList<>();
 
-        for (String id : unsortedUniqueIDs) {
+        for (String id : playlist) {
             names.add(vm.getByUniqueID(id).getName());
         }
 
@@ -241,10 +236,9 @@ public class PlaylistManager {
     public Playlist shufflePlaylist(Playlist playlist, String username) {
         VideoManager vm = VideoManager.getInstance();
         Playlist new_pl = clonePlaylist(playlist, username);
-        ArrayList<String> uniqueIDs = new_pl.getUniqueIDs();
         ArrayList<Video> videos = new ArrayList<>();
         try {
-            for (String uniqueID : uniqueIDs) {
+            for (String uniqueID : new_pl) {
                 videos.add(vm.getByUniqueID(uniqueID));
             }
             videos.sort(new RandomComparator());

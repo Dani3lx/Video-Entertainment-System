@@ -46,9 +46,21 @@ We implemented the following Design Patterns:
 2. Abstract Factory for Actions
 3. Singleton for instantiating and passing entity Managers
 4. Dependency Injection 
+5. Iterator for Playlist
 
 Below we will explain how each design pattern works (using specific class and package names), why we implemented it,
 how it improved our code
+
+5. The Iterator pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and defines the
+class iterator within, which includes the hasNext() and next() methods. 
+There are a variety of methods in PlaylistManager such as for example
+deleteFromPlaylist that uses a for-each loop to directly iterate over the 
+String uniqueIDs stored by the Playlist instead of having to first call
+the getUniqueIDs() method. In this way, we can avoid other classes being aware
+of the underlying implementation of Playlist, since Playlist might store a list of Video objects
+like we had it initially, or String UniqueIDs like we do now, without the other classes
+having to change accordingly. Hence, complying with the open-close design
+principle. 
 
 ## 4. Principles of Universal Design
 
