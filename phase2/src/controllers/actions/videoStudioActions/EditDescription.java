@@ -11,8 +11,19 @@ import userInterfaces.menuFactories.MenuFactory;
 import userInterfaces.menuFactories.UserMenuFactory;
 import userInterfaces.userPrompt.UserPrompt;
 
+/**
+ * Edits a video's description.
+ */
 public class EditDescription extends MenuAction implements Action {
 
+    /**
+     * Create a EditDescription with the given user prompt, user, language presenter and menu presenter.
+     *
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     */
     public EditDescription(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         currentUser = user;
         this.userPrompt = userPrompt;
@@ -20,6 +31,9 @@ public class EditDescription extends MenuAction implements Action {
         this.mp = mp;
     }
 
+    /**
+     * Edits the video's description.
+     */
     @Override
     public void run() {
         NonAdminManager nam = new NonAdminManager();
@@ -28,7 +42,7 @@ public class EditDescription extends MenuAction implements Action {
         String uniqueID = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.EDITVIDEO);
         String description = userPrompt.getUserStringInput(LanguagePresenter.RequestTextType.DESCRIPTION);
 
-        if (nam.editDescription(currentUser, uniqueID, description)){
+        if (nam.editDescription(currentUser, uniqueID, description)) {
             mp.displayAlert(LanguagePresenter.AlertTextType.EDIT);
         } else {
             mp.displayError(LanguagePresenter.ErrorTextType.EDIT);
@@ -36,6 +50,9 @@ public class EditDescription extends MenuAction implements Action {
         next();
     }
 
+    /**
+     * Navigates to the next appropriate menu.
+     */
     @Override
     public void next() {
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);

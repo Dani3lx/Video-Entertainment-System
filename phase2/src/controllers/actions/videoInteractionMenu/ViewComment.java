@@ -13,36 +13,54 @@ import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.ArrayList;
 
+/**
+ * View a video's comments.
+ */
 public class ViewComment extends MenuAction {
     private final Video v;
+
+    /**
+     * Creates a ViewComment with the given user prompt, user, language presenter, menu presenter and video.
+     *
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     * @param v          the video
+     */
     public ViewComment(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp, Video v) {
         currentUser = user;
         this.userPrompt = userPrompt;
         this.lp = lp;
         this.mp = mp;
-        this.v=v;
+        this.v = v;
     }
 
+    /**
+     * View the video's comments.
+     */
     @Override
     public void run() {
         mp.displayAlert(LanguagePresenter.AlertTextType.DISPLAYCOMMENT);
-        ArrayList<Comments> coms = vm.getByUniqueID(v.getUniqueID()).getComments();
-        ArrayList<String> com_strs = new ArrayList<>();
-        for (Comments c: coms){
-            String str = c.getCommenter()+": "+c.getComment()+" "+c.getComment_date();
-            com_strs.add(str);
+        ArrayList<Comments> comments = vm.getByUniqueID(v.getUniqueID()).getComments(); // todo get rid of violation of clean arch
+        ArrayList<String> commentStrings = new ArrayList<>();
+        for (Comments c : comments) {
+            String str = c.getCommenter() + ": " + c.getComment() + " " + c.getComment_date();
+            commentStrings.add(str);
         }
-        mp.displayList(com_strs);
+        mp.displayList(commentStrings);
         next();
     }
 
+    /**
+     * Navigates to the next appropriate menu.
+     */
     @Override
     public void next() {
+        MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
         if (!um.getRole(currentUser)) {
-            MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
             userMenuFactory.getMenu(MenuEnums.NONADMIN).run();
-        }else{
-            MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
+        } else {
             userMenuFactory.getMenu(MenuEnums.ADMIN).run();
         }
     }

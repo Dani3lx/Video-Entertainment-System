@@ -13,8 +13,19 @@ import userInterfaces.userPrompt.UserPrompt;
 
 import java.util.List;
 
+/**
+ * Edits the video's categories.
+ */
 public class EditCategories extends MenuAction implements Action {
 
+    /**
+     * Create a EditCategories with the given user prompt, user, language presenter and menu presenter.
+     *
+     * @param userPrompt the program's user prompt
+     * @param user       a user
+     * @param lp         the program's language presenter
+     * @param mp         the program's menu presenter
+     */
     public EditCategories(UserPrompt userPrompt, User user, LanguagePresenter lp, MenuPresenter mp) {
         currentUser = user;
         this.userPrompt = userPrompt;
@@ -22,6 +33,9 @@ public class EditCategories extends MenuAction implements Action {
         this.mp = mp;
     }
 
+    /**
+     * Edits a video's categories.
+     */
     @Override
     public void run(){
         NonAdminManager nam = new NonAdminManager();
@@ -38,6 +52,9 @@ public class EditCategories extends MenuAction implements Action {
         next();
     }
 
+    /**
+     * Navigates to the next appropriate menu.
+     */
     @Override
     public void next(){
         MenuFactory userMenuFactory = new UserMenuFactory(userPrompt, currentUser, lp, mp);
