@@ -178,6 +178,12 @@ public class VideoManager {
         return names;
     }
 
+    /**
+     * Return a list of comments for a video
+     *
+     * @param vid target video
+     * @return list of comments in strings.
+     */
     public List<String> getVideoComments(Video vid){
         ArrayList<String> comments = new ArrayList<>();
         for (Comments c: vid.getComments()){
