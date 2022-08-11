@@ -42,13 +42,7 @@ public class ViewComment extends MenuAction {
     @Override
     public void run() {
         mp.displayAlert(LanguagePresenter.AlertTextType.DISPLAYCOMMENT);
-        ArrayList<Comments> comments = v.getComments();
-        ArrayList<String> commentStrings = new ArrayList<>();
-        for (Comments c : comments) {
-            String str = c.getCommenter() + ": " + c.getComment() + " " + c.getComment_date();
-            commentStrings.add(str);
-        }
-        mp.displayList(commentStrings);
+        mp.displayList(vm.getVideoComments(v));
         next();
     }
 
