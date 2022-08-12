@@ -78,8 +78,11 @@ how it improved our code
    layer,
    eliminating the code smell of long parameter lists.
 
+4. The Dependency Injection design pattern was implemented in many different classes in the program. In the Video class, the objects Ratings, 
+    and Comments were directly applied to the class's constructor. In addition, this design pattern was used in all of the classes located in the menus folder. They took in objects of UserPrompt,
+    MenuPresenter, LanguagePresenter and the User. This allowed for decreased coupling among classes as constructors would not have to be instantiated throughout the program.
 
-5. The Iterator design pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and
+6. The Iterator design pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and
    defines the
    class iterator within, which includes the hasNext() and next() methods.
    There are a variety of methods in PlaylistManager such as for example
@@ -103,12 +106,30 @@ program to be more in line with the principles.
 The Principles:
 
 1. Equitable Use
+
+When creating the GUI, different themes such as dark and high contrast themes could be created so 
+that color-blind users don't need to struggle. 
 2. Flexibility in Use
+
+Our current text based interface allows users to input their responses at their own speed. In the future, 
+we could implement features where users would be able to resize or have various methods of inputting the data.
 3. Simple and Intuitive Use
+
+The program is designed with clear commands and have all possible options listed and numbered to give
+the user a clear understanding of the inputs they are allowed.
 4. Perceptible Information
+
+Features could be implemented to for different modes of presentation of the commands. 
 5. Tolerance for Error
+
+The program will promptly alert the user if their input is invalid. Other modes of input could be implemented for users.
 6. Low Physical Effort
+
+User does not need to move around the terminal as once a command has been received, a new menu will show.
 7. Size and Space for Approach and Use
+
+Only components necessary for the use of this progrma are a computer, keyboard and mouse. The user should be able to 
+comfortably use the program without much trouble.
 
 ## Updating and Extending the program
 
