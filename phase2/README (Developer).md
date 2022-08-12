@@ -140,15 +140,11 @@ how it improved our code
    layer,
    eliminating the code smell of long parameter lists.
 
+4. The Dependency Injection design pattern was implemented in many different classes in the program. In the Video class, the objects Ratings, 
+    and Comments were directly applied to the class's constructor. In addition, this design pattern was used in all of the classes located in the menus folder. They took in objects of UserPrompt,
+    MenuPresenter, LanguagePresenter and the User. This allowed for decreased coupling among classes as constructors would not have to be instantiated throughout the program.
 
-3. The Dependency Injection pattern was used throughout the program. A concrete example would be in the `LikeVideo`
-   class, where we want to modify the video's rating without concerning ourself with the construction of the video. So
-   we utilized dependency injection design pattern where we pass in a video object through the constructor and uses it
-   to perform the action. This way we do not have to use the new operator to create the video instance in the class,
-   preventing hard dependency.
-
-
-4. The Iterator design pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and
+5. The Iterator design pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and
    defines the
    class iterator within, which includes the hasNext() and next() methods.
    There are a variety of methods in PlaylistManager such as for example
@@ -172,30 +168,33 @@ program to be more in line with the principles.
 The Principles:
 
 1. Equitable Use
-    1. Our program is designed to be easy to use with clear and simple interactions that can be picked up easily.
+
+When creating the GUI, different themes such as dark and high contrast themes could be created so 
+that color-blind users don't need to struggle. 
 2. Flexibility in Use
-    1. So far our program only offers English translation, but with our new presenter system, we can easily implement
-       even more languages if we have the time.
+
+Our current text based interface allows users to input their responses at their own speed. In the future, 
+we could implement features where users would be able to resize or have various methods of inputting the data.
 3. Simple and Intuitive Use
-    1. Instructions are written to be short and concise, making it easy to understand regardless of our user's language
-       skills and knowledge.
+
+The program is designed with clear commands and have all possible options listed and numbered to give
+the user a clear understanding of the inputs they are allowed.
 4. Perceptible Information
-    1. Each type of text contains a different style of decoration, which was the best we can come up with for a shell
-       based UI. The user can easily tell when the program sends out an error text, alert text, or request text. This
-       allows our program to effectively communicate the information to the user.
+
+Features could be implemented to for different modes of presentation of the commands. 
 5. Tolerance for Error
-    1. Right now our program does not seem to have much tolerance for error, such as not having a confirmation alert for
-       deleting an admin account and other potential unintended or accidental actions. We could have done better by
-       implementing more safety measure for this sort of actions, such as for extra confirmation from the user or other
-       forms of warnings.
+
+The program will promptly alert the user if their input is invalid. Other modes of input could be implemented for users.
 6. Low Physical Effort
-    1. Since we use a shell based UI, it can be tedious for the user to have to type all the time. We could have
-       improved on this by creating a graphical user interface with buttons and other forms of
-       user inputs that are much less physically demanding.
+
+User does not need to move around the terminal as once a command has been received, a new menu will show.
 7. Size and Space for Approach and Use
     1. If we were to use a graphical user interface, we can implement features such as being able to adjust the contrast
        of the information being presented, which can allow the user to be able to use the program efficiently
        regardless of their viewing angle on their monitor, thus provide more options for user's posture and position.
+
+Only components necessary for the use of this progrma are a computer, keyboard and mouse. The user should be able to 
+comfortably use the program without much trouble.
 
 ## Updating and Extending the program
 
