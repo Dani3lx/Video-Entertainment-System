@@ -189,11 +189,8 @@ The program will promptly alert the user if their input is invalid. Other modes 
 
 User does not need to move around the terminal as once a command has been received, a new menu will show.
 7. Size and Space for Approach and Use
-    1. If we were to use a graphical user interface, we can implement features such as being able to adjust the contrast
-       of the information being presented, which can allow the user to be able to use the program efficiently
-       regardless of their viewing angle on their monitor, thus provide more options for user's posture and position.
 
-Only components necessary for the use of this progrma are a computer, keyboard and mouse. The user should be able to 
+Only components necessary for the use of this program are a computer, keyboard and mouse. The user should be able to 
 comfortably use the program without much trouble.
 
 ## Updating and Extending the program
