@@ -22,10 +22,10 @@ Group 0249 - Akmar, Wing, Daniel, Benedek, Nicholas, Kate
 ## 1. Phase 2 Features
 
 * Overhauled and refactored the menu system for extensibility
-* Implemented a new user interface system such that it is easily swappable between different platform of user
-  interfaces.
-* Implemented a new text system that can offer an easy and efficient way to implement different languages to the
-  program.
+* Implemented a new user interface system to easily swap between different platforms of user
+  interfaces
+* Implemented a generalizable text system which can be extended to implement different languages to the
+  program
 * Expanded Video editing options
 * Implementation of Video Ratings
 * Implementation of Video commenting
@@ -41,38 +41,37 @@ will note how design patterns were implemented and their purpose in the next sec
 decisions and explanations of how our code has significantly improved since Phase 1.
 
 * **Code Organization into well-named packages and/or classes**:
-    * The main problem we had with this category in phase 1 was that some class names does not fit in with the others.
-      For phase 2, not only we did we make sure all the classes in the same package follow the same naming convention,
-      but also improved upon the division of our code into more well organized folders, making everything's really easy
-      to
-      find and organized.
+    * An issue we had with this category in phase 1 was that we failed to follow a structured naming convention.
+      For phase 2, all the classes in the same package follow the same naming convention,
+      and the code is divided into well organized folders.
 * **Code Smells**:
-    * In phase 1 a major code smell we had was the dependency of manager classes across the application. Almost every
-      class except for our entities keeps a reference to the manager classes which is not ideal. To fix this problem, we
-      implemented the singleton design pattern with the manager classes. This allows us to have one instance of the user
+    * In phase 1 a major code smell we encountered was the dependency of manager classes across the application. Most classes,
+      except for entities, reference the manager classes - this code smell would make it difficult to debug our program if there were
+      issues with specific managers as it would be hard to trace. To fix this problem, we
+      implemented the **singleton design pattern** with the manager classes. This allows us to have one instance of the 
       manager classes throughout the whole program, thus we no longer need to pass them around in a parameter, and
       instead call them when they are needed.
-    * The other code smell was the MenuDisplayer class, which is very long, has a lot of duplicated code and responsible
-      for a lot of different responsibilities. To improve upon this, we separated each menu into its own class that all
-      implements the Menu interface. We also generalized the menu system so that instead of having massive switch cases
-      in each menu class, we now just have a run method that takes in user input and calls a corresponding action in a
-      pre-determined action list to perform each menu action. This way each menu class has its own responsibility, and
-      all the long duplicated code are replaced with a small simple algorithm.
-    * The last code smell mentioned in the rubric was the hard coded strings, which we fixed by moving all the
-      hard coded strings into a class called the English presenter, which includes all the general text that the program
-      can output no matter what user interface it is using. Now all the strings are no longer specific to the shell UI
-      and well separated into its own presenter class.
+    * Another code smell we encountered was the MenuPresenter class; it had a lot of code, and much of it included duplicated,
+      hard-coded strings. To eliminate this code smell, we separated each menu into its own class which
+      implements the Menu interface. We also generalized the actions in the menu so that it takes in user input and calls
+      the corresponding action in a pre-determined action list to perform each menu action. This way each menu class has
+      its own responsibility, and all the duplicated code is replaced with an algorithm.
+    * The final major code smell we encountered were the hard coded strings in our presenter class. We eliminated this code smell
+      by creating the EnglishPresenter class and housing all of our text prompts there.  By centralizing all the text output into
+      one class, it is easy to maintain, update and extend such as by adding functionality in other languages.
 * **Design Patterns**:
-    * For phase 1 we did not apply any design patterns. For phase 2 however, we have improved on this category a lot by
-      actively searching for places to implement design patterns to make our code better, and some of them includes the
-      abstract menu factory / factory design pattern for the menus and menu actions, the singleton pattern for the user
-      managers, the iterator pattern for the playlists, and Dependency injection throughout the program. More detail on
-      the next section.
+    * For phase 1 we focused on program functionality and did not apply any design patterns. While we made an error by not
+      implementing design patterns in phase 1, we had scope of the functionality of our program, and we actively utilized
+      design patterns to simplify, organize and easily extend the functionality we already saw in phase 1.
+      We utilized design patterns such as abstract factory / factory design pattern for the menus and menu actions,
+      the singleton pattern for the entity managers, the iterator pattern for the playlists, and Dependency injection 
+      throughout the program. More details about the design patterns can be found in the Design Pattern section (design document 2).
 * **Clean Architecture**:
-    * In phase 1 we had some issues with controllers not acting like controllers as well as some UI not acting
-      like UI. To fix this, we relocated code in our controller classes that seem like business logic to the
-      appropriate use case classes, and took out the data passing part of UI to the controllers. This way each layer is
-      doing exactly what it needs to do, adhering to the clean architecture.
+    * In phase 1, our classes did not separate in to well-defined layers, for example our controller classes served as use case
+      and as UI. To fix this, we utilized design patterns and refactored code in ambiguously defined classes to be separated
+      into classes with defined responsibilities. Examples include relocating code from controller classes to the
+      appropriate use case classes, and took the data passing code of UI classes to the controllers. This way each class
+      is only responsible for its specific tasks.
 * **SOLID**:
     * A principle we needed to improve on was the interface segregation principle. We fixed this by introducing
       interfaces to most of the layers such as one for presenter, one for user inputs, one for menu, menu action and
@@ -81,10 +80,7 @@ decisions and explanations of how our code has significantly improved since Phas
       the menus and menu actions, we can now easily create new menus and menu actions without needing to modify any
       other menu or menu actions, thus it is very open to expansion and close to modification. The same goes to the use
       of factory design pattern for the LanguagePresenter.
-    * Dependency inversion was also improved upon by refactoring our code to adher to the clean architecture as
-      mentioned
-      above.
-    * Single responsibility is also significantly improved upon by separating each menu into its own class, which allow
+    * Single responsibility is improved by separating each menu into its own class, which allow
       each class to be responsible for one menu at a time. We have also made it so that calling and generating menus
       belong to its own factory class, so every step are well separated into different classes each with a specific
       responsibility.
