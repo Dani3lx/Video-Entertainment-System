@@ -2,7 +2,7 @@ import gateways.DataManager;
 import usecase.PlaylistManager;
 import usecase.UserManager;
 import usecase.VideoManager;
-import userInterfaces.MenuDisplayer;
+import userinterfaces.MenuDisplayer;
 
 import java.io.IOException;
 

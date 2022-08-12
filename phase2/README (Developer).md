@@ -140,11 +140,13 @@ how it improved our code
    layer,
    eliminating the code smell of long parameter lists.
 
-4. The Dependency Injection design pattern was implemented in many different classes in the program. In the Video class, the objects Ratings, 
+
+3. The Dependency Injection design pattern was implemented in many different classes in the program. In the Video class, the objects Ratings, 
     and Comments were directly applied to the class's constructor. In addition, this design pattern was used in all of the classes located in the menus folder. They took in objects of UserPrompt,
     MenuPresenter, LanguagePresenter and the User. This allowed for decreased coupling among classes as constructors would not have to be instantiated throughout the program.
 
-5. The Iterator design pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and
+
+4. The Iterator design pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and
    defines the
    class iterator within, which includes the hasNext() and next() methods.
    There are a variety of methods in PlaylistManager such as for example
