@@ -40,7 +40,54 @@ In terms of program functionality, we heavily expanded on the ratings system and
 will note how design patterns were implemented and their purpose in the next section. This section will focus on design
 decisions and explanations of how our code has significantly improved since Phase 1.
 
-* 
+* **Code Organization into well-named packages and/or classes**:
+    * The main problem we had with this category in phase 1 was that some class names does not fit in with the others.
+      For phase 2, not only we did we make sure all the classes in the same package follow the same naming convention,
+      but also improved upon the division of our code into more well organized folders, making everything's really easy
+      to
+      find and organized.
+* **Code Smells**:
+    * In phase 1 a major code smell we had was the dependency of manager classes across the application. Almost every
+      class except for our entities keeps a reference to the manager classes which is not ideal. To fix this problem, we
+      implemented the singleton design pattern with the manager classes. This allows us to have one instance of the user
+      manager classes throughout the whole program, thus we no longer need to pass them around in a parameter, and
+      instead call them when they are needed.
+    * The other code smell was the MenuDisplayer class, which is very long, has a lot of duplicated code and responsible
+      for a lot of different responsibilities. To improve upon this, we separated each menu into its own class that all
+      implements the Menu interface. We also generalized the menu system so that instead of having massive switch cases
+      in each menu class, we now just have a run method that takes in user input and calls a corresponding action in a
+      pre-determined action list to perform each menu action. This way each menu class has its own responsibility, and
+      all the long duplicated code are replaced with a small simple algorithm.
+    * The last code smell mentioned in the rubric was the hard coded strings, which we fixed by moving all the
+      hard coded strings into a class called the English presenter, which includes all the general text that the program
+      can output no matter what user interface it is using. Now all the strings are no longer specific to the shell UI
+      and well separated into its own presenter class.
+* **Design Patterns**:
+    * For phase 1 we did not apply any design patterns. For phase 2 however, we have improved on this category a lot by
+      actively searching for places to implement design patterns to make our code better, and some of them includes the
+      abstract menu factory / factory design pattern for the menus and menu actions, the singleton pattern for the user
+      managers, the iterator pattern for the playlists, and Dependency injection throughout the program. More detail on
+      the next section.
+* **Clean Architecture**:
+    * In phase 1 we had some issues with controllers not acting like controllers as well as some UI not acting
+      like UI. To fix this, we relocated code in our controller classes that seem like business logic to the
+      appropriate use case classes, and took out the data passing part of UI to the controllers. This way each layer is
+      doing exactly what it needs to do, adhering to the clean architecture.
+* **SOLID**:
+    * A principle we needed to improve on was the interface segregation principle. We fixed this by introducing
+      interfaces to most of the layers such as one for presenter, one for user inputs, one for menu, menu action and
+      more. This way we have decoupled the implementation of the code from where it is used.
+    * For Open-closed principle, by refactoring the code such as implementing the abstract factory design pattern for
+      the menus and menu actions, we can now easily create new menus and menu actions without needing to modify any
+      other menu or menu actions, thus it is very open to expansion and close to modification. The same goes to the use
+      of factory design pattern for the LanguagePresenter.
+    * Dependency inversion was also improved upon by refactoring our code to adher to the clean architecture as
+      mentioned
+      above.
+    * Single responsibility is also significantly improved upon by separating each menu into its own class, which allow
+      each class to be responsible for one menu at a time. We have also made it so that calling and generating menus
+      belong to its own factory class, so every step are well separated into different classes each with a specific
+      responsibility.
 
 ## 3. Design Patterns and Rationale
 
@@ -53,16 +100,31 @@ architecture.
 
 We implemented the following Design Patterns:
 
-1. Abstract Factory for Menu
-2. Abstract Factory for Actions
-3. Singleton for instantiating and passing entity Managers
-4. Dependency Injection
-5. Iterator for Playlist
+1. Abstract Factory / Factory method for Menu and Actions.
+2. Singleton for instantiating and passing entity Managers
+3. Dependency Injection
+4. Iterator for Playlist
 
 Below we will explain how each design pattern works (using specific class and package names), why we implemented it,
 how it improved our code
 
-3. The Singleton design pattern was implemented in VideoManager, UserManager, PlaylistManager,
+1. For the abstract factories, we have two which are the `MenuFactory` in the `menufactories` package, and
+   the `ActionFactory` in the `actionfactories` package. Both of these interfaces
+   are implemented by concrete factories such as `UserMenuFactory` and `UserActionFactory` which are call located in the
+   same package as their corresponding interface, which all utilizes the factory
+   method pattern. For each of the concrete MenuFactory classes, they all have a getter that generates and returns a
+   menu class
+   that are closely related, for example `UserMenuFactory` returns menu such as `AdminMenu` and `NonAdminMenu` which are
+   related to users. For each of the concrete ActionFactory classes, they all have a getter that generates and returns
+   an Action
+   that are closely related, such as `CheckLoginHistory` and `UserLogout` which are actions performed by users. The
+   reason we implemented these patterns is so that we can have an interface for creating these different families of
+   menus and menu actions wthout specifying their concrete classes, as well as creating a hierarchy that encapsulates as
+   much of the construction of the menu as possible, as all we need are only dependent on the interface and not the
+   implementations.
+
+
+2. The Singleton design pattern was implemented in VideoManager, UserManager, PlaylistManager,
    all within the usercase/runtimedatamanager package. Each of these classes define
    a static getInstance() method as well as storing a static instance attribute. When called, if no instance
    of the class yet exists in the program, one will be instantiated and returned. If an instance already exists
@@ -79,7 +141,14 @@ how it improved our code
    eliminating the code smell of long parameter lists.
 
 
-5. The Iterator design pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and
+3. The Dependency Injection pattern was used throughout the program. A concrete example would be in the `LikeVideo`
+   class, where we want to modify the video's rating without concerning ourself with the construction of the video. So
+   we utilized dependency injection design pattern where we pass in a video object through the constructor and uses it
+   to perform the action. This way we do not have to use the new operator to create the video instance in the class,
+   preventing hard dependency.
+
+
+4. The Iterator design pattern was implemented for the class Playlist. Playlist implements the Iterable interface, and
    defines the
    class iterator within, which includes the hasNext() and next() methods.
    There are a variety of methods in PlaylistManager such as for example
@@ -103,12 +172,30 @@ program to be more in line with the principles.
 The Principles:
 
 1. Equitable Use
+    1. Our program is designed to be easy to use with clear and simple interactions that can be picked up easily.
 2. Flexibility in Use
+    1. So far our program only offers English translation, but with our new presenter system, we can easily implement
+       even more languages if we have the time.
 3. Simple and Intuitive Use
+    1. Instructions are written to be short and concise, making it easy to understand regardless of our user's language
+       skills and knowledge.
 4. Perceptible Information
+    1. Each type of text contains a different style of decoration, which was the best we can come up with for a shell
+       based UI. The user can easily tell when the program sends out an error text, alert text, or request text. This
+       allows our program to effectively communicate the information to the user.
 5. Tolerance for Error
+    1. Right now our program does not seem to have much tolerance for error, such as not having a confirmation alert for
+       deleting an admin account and other potential unintended or accidental actions. We could have done better by
+       implementing more safety measure for this sort of actions, such as for extra confirmation from the user or other
+       forms of warnings.
 6. Low Physical Effort
+    1. Since we use a shell based UI, it can be tedious for the user to have to type all the time. We could have
+       improved on this by creating a graphical user interface with buttons and other forms of
+       user inputs that are much less physically demanding.
 7. Size and Space for Approach and Use
+    1. If we were to use a graphical user interface, we can implement features such as being able to adjust the contrast
+       of the information being presented, which can allow the user to be able to use the program efficiently
+       regardless of their viewing angle on their monitor, thus provide more options for user's posture and position.
 
 ## Updating and Extending the program
 
@@ -144,8 +231,26 @@ the same for video and user menu extensions)
 
 ### Presenter
 
-- how to update presenter
-- other languages
+We have two main presenter interfaces that makes up the output system of our program. We have a menuPresenter and a
+language presenter.
+
+- The MenuPresenter is responsible for displaying information base on type of user interface. Right now since we are
+  using only the shell UI, we only have a class called TerminalMenuPresenter which implements the MenuPresenter and is
+  responsible for displaying all the information in a way that works best with the terminal. To expand and use other
+  type of user interface, all that needs to be done is to create another class that implements the MenuPresenter, and
+  make the implementation of the methods base on the type of user interface that is to be implemented, such as
+  a graphical interface created using javaFX.
+- The LanguagePresenter is responsible for handling all the hard coded text. Right now we have an english translation of
+  the program that includes all the english text stored in EnglishPresenter, but future developer may choose to create
+  new classes that implements
+  the languagePresenter and easily add new language translations such as French.
+
+### UserPrompt
+
+We have a UserPrompt interface that is responsible for handling user inputs. So far we only have a TerminalUserPrompt
+which implements this interface and handles all terminal based user inputs. Future developer are free to implement new
+form of user inputs by creating new classes that implement the interface, such as input from a button in a graphical
+user interface created with javaFX.
 
 ## UML Diagram
 
