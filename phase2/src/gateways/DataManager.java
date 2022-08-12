@@ -118,14 +118,16 @@ public class DataManager {
                 HashMap<String, Boolean> ratingsMap = new HashMap<>();
                 for (String ratingString : new ArrayList<>(Arrays.asList(record[6].split("/")))) {
                     ArrayList<String> ratingSplit = new ArrayList<>(Arrays.asList(ratingString.split("=")));
+
+                    // todo fix this
                     ratingsMap.put(ratingSplit.get(0), Boolean.parseBoolean(ratingSplit.get(1)));
                 }
 
                 // Read Comments
 
+                // todo fix this
                 ArrayList<Comments> comments = new ArrayList<>();
                 String[] indComment = record[8].split("/");
-
                 for (String s : indComment) {
                     String[] commentAttributes = s.split(";");
                     Comments comment = new Comments(commentAttributes[0], commentAttributes[1], commentAttributes[2]);
